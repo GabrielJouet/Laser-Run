@@ -13,16 +13,23 @@ public class Laser : MonoBehaviour
     private LineRenderer _lineRenderer;
 
 
-    public void Initialize(float angle, Vector2 newPosition)
+    public void Initialize(float angle, Vector2 newPosition, float renderTime)
     {
         transform.localRotation = Quaternion.Euler(0, 0, angle);
         transform.position = newPosition;
 
         _lineRenderer = GetComponent<LineRenderer>();
+        StartCoroutine(StartCasting(renderTime));
 
+        StartCoroutine(FadeOut());
+    }
+
+
+    private IEnumerator StartCasting(float renderTime)
+    {
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.up, 10);
 
-        foreach(RaycastHit2D hit in hits)
+        foreach (RaycastHit2D hit in hits)
         {
             if (!_fake && hit.collider.TryGetComponent(out Player player))
             {
@@ -37,7 +44,16 @@ public class Laser : MonoBehaviour
             }
         }
 
-        StartCoroutine(FadeOut());
+        for (int i = 0; i < 10; i ++)
+        {
+            hits = Physics2D.RaycastAll(transform.position, transform.up, 10);
+
+            foreach (RaycastHit2D hit in hits)
+                if (!_fake && hit.collider.TryGetComponent(out Player player))
+                    player.GetHit();
+
+            yield return new WaitForSeconds(renderTime / 10);
+        }
     }
 
 

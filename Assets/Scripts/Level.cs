@@ -8,25 +8,16 @@ public class Level : MonoBehaviour
     private List<LaserBlock> _blocks;
 
     [Header("Level difficulty")]
+    [SerializeField]
+    private List<LevelDifficulty> _difficulties;
 
     [SerializeField]
-    [Range(0.5f, 10f)]
-    private float _timeBetweenEachActivation;
+    [Range(50f, 500f)]
+    private float _timeToLive;
 
-    [SerializeField]
-    private float _timeBetweenShots;
-
-    [SerializeField]
-    private float _reactionTime;
-
-    [SerializeField]
-    private float _dispersion;
-
-    [SerializeField]
-    private int _numberOfShots;
-
-    [SerializeField]
-    private bool _randomShots;
+    private bool _finished = false;
+    private LevelDifficulty _loadedDifficulty;
+    private int _index = 0;
 
 
 
@@ -38,16 +29,32 @@ public class Level : MonoBehaviour
 
     public void Initialize()
     {
+        _loadedDifficulty = new LevelDifficulty(_difficulties[0]);
+
         StartCoroutine(StartBlocks());
+        StartCoroutine(FinishLevel());
     }
 
 
     private IEnumerator StartBlocks()
     {
-        while (true)
+        while (!_finished)
         {
-            _blocks[Random.Range(0, _blocks.Count)].WarmUp(_timeBetweenShots, _dispersion, _reactionTime, _numberOfShots, _randomShots);
-            yield return new WaitForSeconds(_timeBetweenEachActivation);
+            _blocks[Random.Range(0, _blocks.Count)].WarmUp(_loadedDifficulty);
+            yield return new WaitForSeconds(_loadedDifficulty.ActivationTime);
         }
+    }
+
+    private IEnumerator FinishLevel()
+    {
+        float timeLoaded = _timeToLive / _difficulties.Count;
+        for (int i = 0; i < _difficulties.Count; i ++)
+        {
+            yield return new WaitForSeconds(timeLoaded);
+            _index++;
+            _loadedDifficulty = new LevelDifficulty(_difficulties[_index]);
+        }
+
+        _finished = true;
     }
 }

@@ -19,24 +19,13 @@ public class LaserBlock : MonoBehaviour
     [SerializeField]
     private List<Transform> _canonPositions;
 
-    private float _timeBetweenShots;
-    private float _reactionTime;
-
-    private float _dispersion;
-
-    private int _numberOfShots;
-
-    private bool _randomShots;
+    private LevelDifficulty _difficulty;
 
 
 
-    public void WarmUp(float timeBetweenShots, float dispersion, float reactionTime, int numberOfShots, bool randomShots)
+    public void WarmUp(LevelDifficulty difficulty)
     {
-        _numberOfShots = numberOfShots;
-        _timeBetweenShots = timeBetweenShots;
-        _reactionTime = reactionTime;
-        _dispersion = dispersion;
-        _randomShots = randomShots;
+        _difficulty = difficulty;
 
         StartCoroutine(DelayShot(false));
     }
@@ -55,7 +44,7 @@ public class LaserBlock : MonoBehaviour
         {
             for (int i = 0; i < _clockLeds.Count; i++)
             {
-                yield return new WaitForSeconds(_timeBetweenShots / _clockLeds.Count);
+                yield return new WaitForSeconds(_difficulty.ShotsTime / _clockLeds.Count);
                 _clockLeds[i].SetActive(true);
             }
         }
@@ -63,11 +52,11 @@ public class LaserBlock : MonoBehaviour
         for (int i = 0; i < _clockLeds.Count; i++)
             _clockLeds[i].SetActive(false);
 
-        for (int i = 0; i < _numberOfShots; i ++)
+        for (int i = 0; i < _difficulty.NumberOfShots; i ++)
         {
-            float angle = Random.Range(-_dispersion, _dispersion);
+            float angle = Random.Range(-_difficulty.Dispersion, _difficulty.Dispersion);
 
-            if (_randomShots)
+            if (_difficulty.RandomShots)
                 angle += _facing * 90;
             else
             {
@@ -77,15 +66,15 @@ public class LaserBlock : MonoBehaviour
             }
 
             Shot(_semiLaser, angle);
-            yield return new WaitForSeconds(_reactionTime);
+            yield return new WaitForSeconds(_difficulty.ReactionTime);
             Shot(_laser, angle);
-            yield return new WaitForSeconds(_reactionTime);
+            yield return new WaitForSeconds(_difficulty.ReactionTime);
         }
     }
 
 
     private void Shot(GameObject laser, float angle)
     {
-        Controller.Instance.PoolController.GiveObject(laser).GetComponent<Laser>().Initialize(angle, _canonPositions[_facing].position);
+        Controller.Instance.PoolController.GiveObject(laser).GetComponent<Laser>().Initialize(angle, _canonPositions[_facing].position, _difficulty.ReactionTime);
     }
 }

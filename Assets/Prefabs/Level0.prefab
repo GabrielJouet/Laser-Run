@@ -51,12 +51,38 @@ MonoBehaviour:
   - {fileID: 5706864272643544811}
   - {fileID: 9044143600182978810}
   - {fileID: 985203477338050673}
-  _timeBetweenEachActivation: 3.5
-  _timeBetweenShots: 2
-  _reactionTime: 0.45
-  _dispersion: 45
-  _numberOfShots: 3
-  _randomShots: 0
+  _difficulties:
+  - _timeBetweenEachActivation: 3.5
+    _timeBetweenShots: 2
+    _reactionTime: 0.35
+    _dispersion: 35
+    _numberOfShots: 2
+    _randomShots: 0
+  - _timeBetweenEachActivation: 3.3
+    _timeBetweenShots: 2
+    _reactionTime: 0.35
+    _dispersion: 32
+    _numberOfShots: 2
+    _randomShots: 0
+  - _timeBetweenEachActivation: 4
+    _timeBetweenShots: 2
+    _reactionTime: 0.35
+    _dispersion: 35
+    _numberOfShots: 3
+    _randomShots: 0
+  - _timeBetweenEachActivation: 4
+    _timeBetweenShots: 2
+    _reactionTime: 0.3
+    _dispersion: 30
+    _numberOfShots: 3
+    _randomShots: 0
+  - _timeBetweenEachActivation: 3.5
+    _timeBetweenShots: 1.75
+    _reactionTime: 0.3
+    _dispersion: 30
+    _numberOfShots: 4
+    _randomShots: 0
+  _timeToLive: 150
 --- !u!1 &5509326622628018341
 GameObject:
   m_ObjectHideFlags: 0
