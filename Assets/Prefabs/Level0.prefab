@@ -53,9 +53,9 @@ MonoBehaviour:
   - {fileID: 985203477338050673}
   _timeBetweenEachActivation: 3.5
   _timeBetweenShots: 2
-  _reactionTime: 0.25
-  _dispersion: 1
-  _numberOfShots: 15
+  _reactionTime: 0.3
+  _dispersion: 25
+  _numberOfShots: 3
   _randomShots: 1
 --- !u!1 &5509326622628018341
 GameObject:

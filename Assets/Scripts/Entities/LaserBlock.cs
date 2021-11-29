@@ -14,9 +14,6 @@ public class LaserBlock : MonoBehaviour
     private List<GameObject> _clockLeds;
 
     [SerializeField]
-    private GameObject _button;
-
-    [SerializeField]
     private int _facing;
 
     [SerializeField]
@@ -31,12 +28,6 @@ public class LaserBlock : MonoBehaviour
 
     private bool _randomShots;
 
-
-    public void Start()
-    {
-        _button.transform.localPosition = _canonPositions[_facing].localPosition;
-        _button.transform.localRotation = Quaternion.Euler(0, 0, _facing * 90);
-    }
 
 
     public void WarmUp(float timeBetweenShots, float dispersion, float reactionTime, int numberOfShots, bool randomShots)
@@ -62,8 +53,6 @@ public class LaserBlock : MonoBehaviour
     {
         if (!skipLoad)
         {
-            ActivateButton();
-
             for (int i = 0; i < _clockLeds.Count; i++)
             {
                 yield return new WaitForSeconds(_timeBetweenShots / _clockLeds.Count);
@@ -71,7 +60,9 @@ public class LaserBlock : MonoBehaviour
             }
         }
 
-        DesactivateButton();
+        for (int i = 0; i < _clockLeds.Count; i++)
+            _clockLeds[i].SetActive(false);
+
         for (int i = 0; i < _numberOfShots; i ++)
         {
             float angle = Random.Range(-_dispersion, _dispersion);
@@ -89,21 +80,6 @@ public class LaserBlock : MonoBehaviour
             yield return new WaitForSeconds(_reactionTime);
             Shot(_laser, angle);
         }
-    }
-
-
-    private void ActivateButton()
-    {
-        _button.SetActive(true);
-    }
-
-
-    private void DesactivateButton()
-    {
-        _button.SetActive(false);
-
-        for (int i = 0; i < _clockLeds.Count; i++)
-            _clockLeds[i].SetActive(false);
     }
 
 
