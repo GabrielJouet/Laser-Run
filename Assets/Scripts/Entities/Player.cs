@@ -13,20 +13,6 @@ public class Player : MonoBehaviour
     [Range(0f, 1.5f)]
     protected float _speed;
 
-    [Header("Components")]
-
-    /// <summary>
-    /// The sprite renderer component that will be updated.
-    /// </summary>
-    [SerializeField]
-    protected SpriteRenderer _shadowSpriteRenderer;
-
-    /// <summary>
-    /// The sprite renderer component that will be updated.
-    /// </summary>
-    [SerializeField]
-    protected Transform _feet;
-
 
     /// <summary>
     /// The sprite renderer component that will be updated.
@@ -62,7 +48,6 @@ public class Player : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
         FlipSprite(Random.Range(0, 2) == 0);
-        ApplySortingOrderOnSprites();
     }
 
 
@@ -73,20 +58,6 @@ public class Player : MonoBehaviour
     protected void FlipSprite(bool side)
     {
         _spriteRenderer.flipX = side;
-    }
-
-
-    /// <summary>
-    /// Change sorting order of hover and sprite renderer.
-    /// </summary>
-    protected void ApplySortingOrderOnSprites()
-    {
-        int sortingOrder = Mathf.FloorToInt(_feet.position.y * -1000);
-
-        _spriteRenderer.sortingOrder = sortingOrder;
-
-        if (_shadowSpriteRenderer != null)
-            _shadowSpriteRenderer.sortingOrder = sortingOrder - 1;
     }
 
 
@@ -124,7 +95,6 @@ public class Player : MonoBehaviour
             FlipSprite(inputs.x >= 0);
 
         _rigidBody.MovePosition(_rigidBody.position + inputs * Time.deltaTime * _speed);
-        ApplySortingOrderOnSprites();
     }
 
 
