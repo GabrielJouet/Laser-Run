@@ -184,6 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.8
+  _timeBetweenShots: 0.25
+  _projectile: {fileID: 3265787726272880086, guid: db1bbee2b13e6c1439208a14dbbfd8ee, type: 3}
   _shadowSpriteRenderer: {fileID: 2344716156488079921}
   _feet: {fileID: 786974982227894678}
 --- !u!1 &7251363349456337661

@@ -7,6 +7,9 @@ public class Laser : MonoBehaviour
     [Range(0.05f, 0.5f)]
     private float _renderTime;
 
+    [SerializeField]
+    private bool _fake;
+
     private LineRenderer _lineRenderer;
 
 
@@ -21,7 +24,7 @@ public class Laser : MonoBehaviour
 
         foreach(RaycastHit2D hit in hits)
         {
-            if (hit.collider.TryGetComponent(out Player player))
+            if (!_fake && hit.collider.TryGetComponent(out Player player))
             {
                 _lineRenderer.SetPosition(0, transform.position);
                 _lineRenderer.SetPosition(1, player.transform.position);
@@ -30,7 +33,7 @@ public class Laser : MonoBehaviour
             else
             {
                 _lineRenderer.SetPosition(0, transform.position);
-                _lineRenderer.SetPosition(1, transform.position + (transform.up * hit.distance));
+                _lineRenderer.SetPosition(1, transform.position + (transform.up * (!_fake ? hit.distance : hit.distance / 2f)));
             }
         }
 
