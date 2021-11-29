@@ -22,6 +22,12 @@ public class Level : MonoBehaviour
     [SerializeField]
     private float _dispersion;
 
+    [SerializeField]
+    private int _numberOfShots;
+
+    [SerializeField]
+    private bool _randomShots;
+
 
 
     private void Start()
@@ -40,7 +46,7 @@ public class Level : MonoBehaviour
     {
         while (true)
         {
-            _blocks[Random.Range(0, _blocks.Count)].WarmUp(_timeBetweenShots, _dispersion, _reactionTime);
+            _blocks[Random.Range(0, _blocks.Count)].WarmUp(_timeBetweenShots, _dispersion, _reactionTime, _numberOfShots, _randomShots);
             yield return new WaitForSeconds(_timeBetweenEachActivation);
         }
     }

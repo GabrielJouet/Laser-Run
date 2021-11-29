@@ -27,6 +27,10 @@ public class LaserBlock : MonoBehaviour
 
     private float _dispersion;
 
+    private int _numberOfShots;
+
+    private bool _randomShots;
+
 
     public void Start()
     {
@@ -35,11 +39,13 @@ public class LaserBlock : MonoBehaviour
     }
 
 
-    public void WarmUp(float timeBetweenShots, float dispersion, float reactionTime)
+    public void WarmUp(float timeBetweenShots, float dispersion, float reactionTime, int numberOfShots, bool randomShots)
     {
+        _numberOfShots = numberOfShots;
         _timeBetweenShots = timeBetweenShots;
         _reactionTime = reactionTime;
         _dispersion = dispersion;
+        _randomShots = randomShots;
 
         StartCoroutine(DelayShot(false));
     }
@@ -65,12 +71,24 @@ public class LaserBlock : MonoBehaviour
             }
         }
 
-        float angle = Random.Range(-_dispersion, _dispersion);
-
         DesactivateButton();
-        Shot(_semiLaser, angle);
-        yield return new WaitForSeconds(_reactionTime);
-        Shot(_laser, angle);
+        for (int i = 0; i < _numberOfShots; i ++)
+        {
+            float angle = Random.Range(-_dispersion, _dispersion);
+
+            if (_randomShots)
+                angle += _facing * 90;
+            else
+            {
+                Transform buffer = FindObjectOfType<Player>().transform;
+                Vector3 vectorToTarget = new Vector3(transform.position.x - buffer.position.x, transform.position.y - buffer.position.y, 0);
+                angle += Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
+            }
+
+            Shot(_semiLaser, angle);
+            yield return new WaitForSeconds(_reactionTime);
+            Shot(_laser, angle);
+        }
     }
 
 
@@ -91,6 +109,6 @@ public class LaserBlock : MonoBehaviour
 
     private void Shot(GameObject laser, float angle)
     {
-        Controller.Instance.PoolController.GiveObject(laser).GetComponent<Laser>().Initialize(_facing * 90 + angle, _canonPositions[_facing].position);
+        Controller.Instance.PoolController.GiveObject(laser).GetComponent<Laser>().Initialize(angle, _canonPositions[_facing].position);
     }
 }

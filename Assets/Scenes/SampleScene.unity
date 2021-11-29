@@ -289,6 +289,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1193579216381159111, guid: faf90db6a483d18459e6eadb899f1793, type: 3}
+      propertyPath: _dispersion
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1193579216381159111, guid: faf90db6a483d18459e6eadb899f1793, type: 3}
+      propertyPath: _reactionTime
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1193579216381159111, guid: faf90db6a483d18459e6eadb899f1793, type: 3}
+      propertyPath: _numberOfShots
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: faf90db6a483d18459e6eadb899f1793, type: 3}
 --- !u!1001 &6042790724317133070
