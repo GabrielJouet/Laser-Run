@@ -81,7 +81,7 @@ public class Level : MonoBehaviour
     private IEnumerator FinishLevel()
     {
         float timeLoaded = _timeToLive / _difficulties.Count;
-        for (int i = 0; i < _difficulties.Count - 1; i ++)
+        for (int i = 0; i < _difficulties.Count; i ++)
         {
             yield return new WaitForSeconds(timeLoaded);
             _index++;
