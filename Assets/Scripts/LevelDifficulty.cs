@@ -20,7 +20,7 @@ public class LevelDifficulty
     public float ReactionTime { get => _reactionTime; }
 
     [SerializeField]
-    [Range(0f, 180f)]
+    [Range(0f, 90f)]
     private float _dispersion;
     public float Dispersion { get => _dispersion; }
 

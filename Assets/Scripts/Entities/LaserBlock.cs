@@ -19,6 +19,8 @@ public class LaserBlock : MonoBehaviour
     [SerializeField]
     private List<Transform> _canonPositions;
 
+    public bool Used;
+
     private LevelDifficulty _difficulty;
 
 
@@ -40,6 +42,7 @@ public class LaserBlock : MonoBehaviour
 
     private IEnumerator DelayShot(bool skipLoad)
     {
+        Used = true;
         if (!skipLoad)
         {
             for (int i = 0; i < _clockLeds.Count; i++)
@@ -70,6 +73,8 @@ public class LaserBlock : MonoBehaviour
             Shot(_laser, angle);
             yield return new WaitForSeconds(_difficulty.ReactionTime);
         }
+
+        Used = false;
     }
 
 

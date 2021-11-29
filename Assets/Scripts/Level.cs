@@ -52,10 +52,31 @@ public class Level : MonoBehaviour
     {
         while (!_finished)
         {
-            _blocks[Random.Range(0, _blocks.Count)].WarmUp(_loadedDifficulty);
+            LaserBlock block = FindOneBlock();
+
+            if (block != null)
+                block.WarmUp(_loadedDifficulty);
+
             yield return new WaitForSeconds(_loadedDifficulty.ActivationTime);
         }
     }
+
+
+    private LaserBlock FindOneBlock()
+    {
+        LaserBlock found = null;
+        foreach(LaserBlock block in _blocks)
+        {
+            if (!block.Used)
+            {
+                found = block;
+                break;
+            }
+        }
+
+        return found;
+    }
+
 
     private IEnumerator FinishLevel()
     {
