@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6042790724714602023}
   - component: {fileID: 1234483653820872587}
-  - component: {fileID: 6804368724718413309}
+  - component: {fileID: 1358167945056770276}
   - component: {fileID: 3998900200340413038}
   - component: {fileID: 2832362917674354156}
   - component: {fileID: 6522056304527247133}
@@ -118,8 +118,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &6804368724718413309
-CircleCollider2D:
+--- !u!70 &1358167945056770276
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -132,8 +132,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.005}
-  serializedVersion: 2
-  m_Radius: 0.065
+  m_Size: {x: 0.08, y: 0.13}
+  m_Direction: 0
 --- !u!70 &3998900200340413038
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d88af4c74656fd4981a89ccfaaf57de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.65
+  _speed: 0.8
   _shadowSpriteRenderer: {fileID: 2344716156488079921}
   _feet: {fileID: 786974982227894678}
 --- !u!1 &7251363349456337661

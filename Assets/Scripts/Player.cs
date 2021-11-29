@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     /// Speed factor while moving.
     /// </summary>
     [SerializeField]
-    [Range(0f, 5f)]
+    [Range(0f, 1.5f)]
     protected float _speed;
 
     [Header("Components")]
@@ -142,6 +142,6 @@ public class Player : MonoBehaviour
     /// </summary>
     public void GetHit()
     {
-
+        Debug.Log("hit");
     }
 }
