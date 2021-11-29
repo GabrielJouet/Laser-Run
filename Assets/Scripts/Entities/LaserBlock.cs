@@ -79,6 +79,7 @@ public class LaserBlock : MonoBehaviour
             Shot(_semiLaser, angle);
             yield return new WaitForSeconds(_reactionTime);
             Shot(_laser, angle);
+            yield return new WaitForSeconds(_reactionTime);
         }
     }
 
