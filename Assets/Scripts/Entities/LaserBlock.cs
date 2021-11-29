@@ -73,14 +73,13 @@ public class LaserBlock : MonoBehaviour
             for (int i = 0; i < _clockLeds.Count; i++)
             {
                 yield return new WaitForSeconds(_difficulty.ShotsTime / _clockLeds.Count);
+                _canonPosition.intensity = 0.25f + i * 0.1f;
                 _clockLeds[i].SetActive(true);
             }
         }
 
         for (int i = 0; i < _clockLeds.Count; i++)
             _clockLeds[i].SetActive(false);
-
-        _canonPosition.intensity = 1;
 
         for (int i = 0; i < _difficulty.NumberOfShots; i ++)
         {
