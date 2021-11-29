@@ -54,37 +54,37 @@ MonoBehaviour:
   _difficulties:
   - _timeBetweenEachActivation: 3.5
     _timeBetweenShots: 2
-    _reactionTime: 0.35
+    _reactionTime: 0.55
     _dispersion: 35
     _numberOfShots: 2
     _randomShots: 1
   - _timeBetweenEachActivation: 3.3
     _timeBetweenShots: 2
-    _reactionTime: 0.35
+    _reactionTime: 0.5
     _dispersion: 32
     _numberOfShots: 2
     _randomShots: 1
   - _timeBetweenEachActivation: 4
     _timeBetweenShots: 2
-    _reactionTime: 0.35
+    _reactionTime: 0.5
     _dispersion: 35
     _numberOfShots: 3
     _randomShots: 1
   - _timeBetweenEachActivation: 4
     _timeBetweenShots: 2
-    _reactionTime: 0.3
+    _reactionTime: 0.45
     _dispersion: 30
     _numberOfShots: 3
     _randomShots: 1
   - _timeBetweenEachActivation: 3.5
     _timeBetweenShots: 1.75
-    _reactionTime: 0.3
+    _reactionTime: 0.45
     _dispersion: 30
     _numberOfShots: 4
     _randomShots: 1
   - _timeBetweenEachActivation: 3
     _timeBetweenShots: 1.75
-    _reactionTime: 0.5
+    _reactionTime: 0.55
     _dispersion: 15
     _numberOfShots: 2
     _randomShots: 0
