@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -13,13 +12,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     [Range(0f, 1.5f)]
     protected float _speed;
-
-    [SerializeField]
-    [Range(0f, 1.5f)]
-    protected float _timeBetweenShots;
-
-    [SerializeField]
-    protected GameObject _projectile;
 
     [Header("Components")]
 
@@ -53,10 +45,6 @@ public class Player : MonoBehaviour
 
     protected Vector2 _inputs;
 
-    protected bool _canAttack = true;
-
-    protected Camera _camera;
-
 
     private void Awake()
     {
@@ -69,7 +57,6 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Initialize()
     {
-        _camera = Camera.main;
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -109,26 +96,6 @@ public class Player : MonoBehaviour
     protected void Update()
     {
         _inputs = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
-        if (Input.GetMouseButtonDown(0) && _canAttack)
-        {
-            Vector3 vectorToTarget = new Vector3(transform.position.x - _camera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y - _camera.ScreenToWorldPoint(Input.mousePosition).y, 0);
-            float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
-
-            Controller.Instance.PoolController.GiveObject(_projectile).GetComponent<Projectile>().ChangeDefaultParameters(angle, transform.position);
-            StartCoroutine(ReloadAttack());
-        }
-    }
-
-
-    /// <summary>
-    /// Coroutine used to reload the attack state.
-    /// </summary>
-    private IEnumerator ReloadAttack()
-    {
-        _canAttack = false;
-        yield return new WaitForSeconds(_timeBetweenShots);
-        _canAttack = true;
     }
 
 
