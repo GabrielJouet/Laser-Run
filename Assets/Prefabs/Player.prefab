@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 6042790724714602023}
   - component: {fileID: 1234483653820872587}
   - component: {fileID: 1358167945056770276}
-  - component: {fileID: 3998900200340413038}
   - component: {fileID: 2832362917674354156}
   - component: {fileID: 6522056304527247133}
   m_Layer: 0
@@ -128,28 +127,12 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.005}
   m_Size: {x: 0.08, y: 0.13}
   m_Direction: 0
---- !u!70 &3998900200340413038
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6042790724714602022}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.05}
-  m_Size: {x: 0.08, y: 0.02}
-  m_Direction: 1
 --- !u!50 &2832362917674354156
 Rigidbody2D:
   serializedVersion: 4
@@ -184,10 +167,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.8
-  _timeBetweenShots: 0.25
-  _projectile: {fileID: 3265787726272880086, guid: db1bbee2b13e6c1439208a14dbbfd8ee, type: 3}
-  _shadowSpriteRenderer: {fileID: 2344716156488079921}
-  _feet: {fileID: 786974982227894678}
 --- !u!1 &7251363349456337661
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +237,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: a02061d1ff749a94d8169bf17589995e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
