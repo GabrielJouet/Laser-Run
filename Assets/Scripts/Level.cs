@@ -19,6 +19,9 @@ public class Level : MonoBehaviour
     private LevelDifficulty _loadedDifficulty;
     private int _index = 0;
 
+    private float _timeElapsed = 0;
+    private UIController _uiController;
+
 
 
     private void Start()
@@ -29,10 +32,19 @@ public class Level : MonoBehaviour
 
     public void Initialize()
     {
+        _uiController = Controller.Instance.UIController;
         _loadedDifficulty = new LevelDifficulty(_difficulties[0]);
+        _uiController.SetTimeMax(_timeToLive);
 
         StartCoroutine(StartBlocks());
         StartCoroutine(FinishLevel());
+    }
+
+
+    private void Update()
+    {
+        _timeElapsed += Time.deltaTime;
+        _uiController.UpdateTimeLeft(_timeElapsed);
     }
 
 
@@ -48,7 +60,7 @@ public class Level : MonoBehaviour
     private IEnumerator FinishLevel()
     {
         float timeLoaded = _timeToLive / _difficulties.Count;
-        for (int i = 0; i < _difficulties.Count; i ++)
+        for (int i = 0; i < _difficulties.Count - 1; i ++)
         {
             yield return new WaitForSeconds(timeLoaded);
             _index++;
@@ -56,5 +68,6 @@ public class Level : MonoBehaviour
         }
 
         _finished = true;
+        enabled = false;
     }
 }

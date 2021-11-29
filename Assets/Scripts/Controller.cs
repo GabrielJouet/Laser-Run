@@ -13,7 +13,12 @@ public class Controller : MonoBehaviour
     /// <summary>
     /// Pool Controller component.
     /// </summary>
-    public PoolController PoolController;
+    public PoolController PoolController { get; private set; }
+
+    /// <summary>
+    /// Pool Controller component.
+    /// </summary>
+    public UIController UIController { get; private set; }
 
 
 
@@ -28,5 +33,8 @@ public class Controller : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         Application.targetFrameRate = 60;
         Instance = this;
+
+        UIController = GetComponent<UIController>();
+        PoolController = GetComponent<PoolController>();
     }
 }
