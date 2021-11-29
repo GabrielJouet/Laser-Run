@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class LaserBlock : MonoBehaviour
 {
@@ -17,12 +18,34 @@ public class LaserBlock : MonoBehaviour
     private int _facing;
 
     [SerializeField]
-    private List<Transform> _canonPositions;
+    private Light2D _canonPosition;
 
     public bool Used;
 
     private LevelDifficulty _difficulty;
 
+
+    private void Awake()
+    {
+        switch(_facing)
+        {
+            case 0:
+                _canonPosition.transform.position = transform.position + new Vector3(0, 0.09f);
+                break;
+
+            case 1:
+                _canonPosition.transform.position = transform.position + new Vector3(-0.09f, 0);
+                break;
+
+            case 2:
+                _canonPosition.transform.position = transform.position + new Vector3(0, -0.09f);
+                break;
+
+            case 3:
+                _canonPosition.transform.position = transform.position + new Vector3(0.09f, 0);
+                break;
+        }
+    }
 
 
     public void WarmUp(LevelDifficulty difficulty)
@@ -43,6 +66,8 @@ public class LaserBlock : MonoBehaviour
     private IEnumerator DelayShot(bool skipLoad)
     {
         Used = true;
+        _canonPosition.enabled = true;
+        _canonPosition.intensity = 0.25f;
         if (!skipLoad)
         {
             for (int i = 0; i < _clockLeds.Count; i++)
@@ -54,6 +79,8 @@ public class LaserBlock : MonoBehaviour
 
         for (int i = 0; i < _clockLeds.Count; i++)
             _clockLeds[i].SetActive(false);
+
+        _canonPosition.intensity = 1;
 
         for (int i = 0; i < _difficulty.NumberOfShots; i ++)
         {
@@ -75,11 +102,12 @@ public class LaserBlock : MonoBehaviour
         }
 
         Used = false;
+        _canonPosition.enabled = false;
     }
 
 
     private void Shot(GameObject laser, float angle)
     {
-        Controller.Instance.PoolController.GiveObject(laser).GetComponent<Laser>().Initialize(angle, _canonPositions[_facing].position, _difficulty.ReactionTime);
+        Controller.Instance.PoolController.GiveObject(laser).GetComponent<Laser>().Initialize(angle, _canonPosition.transform.position, _difficulty.ReactionTime);
     }
 }
