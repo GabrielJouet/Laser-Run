@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
@@ -12,8 +13,16 @@ public class LevelController : MonoBehaviour
 
     private void Start()
     {
-        Controller.Instance.LoadScene();
+        Controller.Instance.LoadScene(this);
         Controller.Instance.PoolController.GiveObject(_playerPrefab);
-        Controller.Instance.PoolController.GiveObject(_levelAvailables[Controller.Instance.ChoiceController.LevelIndex]);
+        Instantiate(_levelAvailables[Controller.Instance.ChoiceController.LevelIndex]).GetComponent<Level>().Initialize();
+    }
+
+
+    public void FinishLevel(GameObject level)
+    {
+        Controller.Instance.PoolController.RetrieveObject(level);
+        Controller.Instance.PoolController.RetrieveObject(FindObjectOfType<Player>().gameObject);
+        SceneManager.LoadScene("LevelSelection");
     }
 }

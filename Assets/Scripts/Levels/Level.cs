@@ -15,19 +15,11 @@ public class Level : MonoBehaviour
     [Range(50f, 500f)]
     private float _timeToLive;
 
-    private bool _finished = false;
     private LevelDifficulty _loadedDifficulty;
     private int _index = 0;
 
     private float _timeElapsed = 0;
     private UIController _uiController;
-
-
-
-    private void Start()
-    {
-        Initialize();
-    }
 
 
     public void Initialize()
@@ -50,7 +42,7 @@ public class Level : MonoBehaviour
 
     private IEnumerator StartBlocks()
     {
-        while (!_finished)
+        while (true)
         {
             LaserBlock block = FindOneBlock();
 
@@ -85,10 +77,11 @@ public class Level : MonoBehaviour
         {
             yield return new WaitForSeconds(timeLoaded);
             _index++;
-            _loadedDifficulty = new LevelDifficulty(_difficulties[_index]);
+
+            if (_index < _difficulties.Count)
+                _loadedDifficulty = new LevelDifficulty(_difficulties[_index]);
         }
 
-        _finished = true;
-        enabled = false;
+        Controller.Instance.LevelController.FinishLevel(gameObject);
     }
 }

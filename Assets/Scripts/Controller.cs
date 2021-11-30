@@ -26,6 +26,11 @@ public class Controller : MonoBehaviour
     /// </summary>
     public UIController UIController { get; private set; }
 
+    /// <summary>
+    /// Level Controller component.
+    /// </summary>
+    public LevelController LevelController { get; private set; }
+
 
 
     /// <summary>
@@ -45,8 +50,9 @@ public class Controller : MonoBehaviour
     }
 
 
-    public void LoadScene()
+    public void LoadScene(LevelController newController)
     {
+        LevelController = newController;
         UIController = FindObjectOfType<UIController>();
     }
 }
