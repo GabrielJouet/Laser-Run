@@ -56,4 +56,12 @@ public class PoolController : MonoBehaviour
             if (buffer.Class.name == given.name.Substring(0, given.name.Length - 7))
                 buffer.In(given);
     }
+
+
+    public void RetrieveAllPools()
+    {
+        foreach(Pool buffer in _pools)
+            for (int i = 0; i < buffer.transform.childCount; i ++)
+                RetrieveObject(buffer.transform.GetChild(i).gameObject);
+    }
 }

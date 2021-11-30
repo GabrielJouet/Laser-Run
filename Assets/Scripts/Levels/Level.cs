@@ -82,6 +82,6 @@ public class Level : MonoBehaviour
                 _loadedDifficulty = new LevelDifficulty(_difficulties[_index]);
         }
 
-        Controller.Instance.LevelController.FinishLevel(gameObject);
+        Controller.Instance.LevelController.FinishLevel();
     }
 }

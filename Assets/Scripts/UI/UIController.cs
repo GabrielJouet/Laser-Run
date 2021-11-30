@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,9 @@ public class UIController : MonoBehaviour
 
     [SerializeField]
     private Text _timeLeft;
+
+    [SerializeField]
+    private GameObject _gameOverScreen;
 
     private float _timeMax;
 
@@ -22,5 +26,18 @@ public class UIController : MonoBehaviour
     {
         _scoreSlider.value = timeElapsed / _timeMax;
         _timeLeft.text = (_timeMax - timeElapsed).ToString();
+    }
+
+
+    public void DisplayGameOverScreen()
+    {
+        StartCoroutine(DelayGameOverScreen());
+    }
+
+
+    private IEnumerator DelayGameOverScreen()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _gameOverScreen.SetActive(true);
     }
 }

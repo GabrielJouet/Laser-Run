@@ -188,6 +188,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.8
+  _destroyedParts:
+  - {fileID: 6368989846170892536, guid: c642b8058af5b0247ae9c143115c5e9c, type: 3}
+  - {fileID: 6368989846170892536, guid: fa0675c8823c1c74d8714633f49c726c, type: 3}
+  - {fileID: 6368989846170892536, guid: b9ea826fea0fae8498a629e8f868b284, type: 3}
+  - {fileID: 6368989846170892536, guid: da41748699d34f34d8dd99662f289e34, type: 3}
+  - {fileID: 6368989846170892536, guid: 5039fb5691311e1429c811126c29f3b5, type: 3}
+  - {fileID: 6368989846170892536, guid: dcf1cae782d4b6f4289c4b1e6f2aada3, type: 3}
+  - {fileID: 6368989846170892536, guid: 0d72e0fbae201c64e933e37c34a14277, type: 3}
+  - {fileID: 6368989846170892536, guid: 482a62aa584d0c44db45a237eda38672, type: 3}
+  - {fileID: 6368989846170892536, guid: 0c9ec094601db6b46a690dfcf3556fa6, type: 3}
+  - {fileID: 6368989846170892536, guid: 3ce5ebe564012d8499f0755dc7c7fcd9, type: 3}
 --- !u!114 &2677134142051637408
 MonoBehaviour:
   m_ObjectHideFlags: 0

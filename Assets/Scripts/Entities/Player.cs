@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -12,6 +13,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     [Range(0f, 1.5f)]
     protected float _speed;
+
+    [SerializeField]
+    private List<GameObject> _destroyedParts;
 
 
     /// <summary>
@@ -31,11 +35,7 @@ public class Player : MonoBehaviour
 
     protected Vector2 _inputs;
 
-
-    private void Awake()
-    {
-        Initialize();
-    }
+    protected bool _dead = false;
 
 
     /// <summary>
@@ -46,6 +46,11 @@ public class Player : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        _dead = false;
+
+        enabled = true;
+        _spriteRenderer.enabled = true;
 
         FlipSprite(Random.Range(0, 2) == 0);
     }
@@ -109,6 +114,23 @@ public class Player : MonoBehaviour
     /// </summary>
     public void GetHit()
     {
-        Debug.Log("hit");
+        if (!_dead)
+        {
+            PoolController poolController = Controller.Instance.PoolController;
+
+            foreach (GameObject part in _destroyedParts)
+            {
+                Vector2 directions = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)).normalized * 25;
+                GameObject buffer = poolController.GiveObject(part);
+                buffer.transform.position = transform.position;
+                buffer.GetComponent<Rigidbody2D>().AddForce(directions);
+            }
+
+            enabled = false;
+            _spriteRenderer.enabled = false;
+            Controller.Instance.UIController.DisplayGameOverScreen();
+
+            _dead = true;
+        }
     }
 }
