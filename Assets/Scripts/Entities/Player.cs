@@ -86,13 +86,13 @@ public class Player : MonoBehaviour
         if (inputs.magnitude > 1)
             inputs = inputs.normalized;
 
-        /*ChangeAnimation("Move", inputs.x != 0 || inputs.y != 0);
+        ChangeAnimation("move", inputs.x != 0 || inputs.y != 0);
 
         if (inputs.y != 0)
-            ChangeAnimation("Back", inputs.y > 0);
-            */
+            ChangeAnimation("back", inputs.y > 0);
+            
         if (inputs.x != 0)
-            FlipSprite(inputs.x >= 0);
+            FlipSprite(inputs.x < 0);
 
         _rigidBody.MovePosition(_rigidBody.position + inputs * Time.deltaTime * _speed);
     }
