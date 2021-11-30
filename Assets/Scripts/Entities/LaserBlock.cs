@@ -78,9 +78,6 @@ public class LaserBlock : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < _clockLeds.Count; i++)
-            _clockLeds[i].SetActive(false);
-
         for (int i = 0; i < _difficulty.NumberOfShots; i ++)
         {
             float angle = Random.Range(-_difficulty.Dispersion, _difficulty.Dispersion);
@@ -97,8 +94,12 @@ public class LaserBlock : MonoBehaviour
             Shot(_semiLaser, angle);
             yield return new WaitForSeconds(_difficulty.ReactionTime);
             Shot(_laser, angle);
+
             yield return new WaitForSeconds(_difficulty.ReactionTime);
         }
+
+        for (int i = 0; i < _clockLeds.Count; i++)
+            _clockLeds[i].SetActive(false);
 
         Used = false;
         _canonPosition.enabled = false;

@@ -44,7 +44,7 @@ public class Laser : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < 10; i ++)
+        for (int i = 0; i < 5; i ++)
         {
             hits = Physics2D.RaycastAll(transform.position, transform.up, 10);
 
@@ -52,7 +52,7 @@ public class Laser : MonoBehaviour
                 if (!_fake && hit.collider.TryGetComponent(out Player player))
                     player.GetHit();
 
-            yield return new WaitForSeconds(renderTime / 10);
+            yield return new WaitForSeconds(renderTime / 5);
         }
     }
 
