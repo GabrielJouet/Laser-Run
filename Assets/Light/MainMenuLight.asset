@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-417102741126433945
+--- !u!114 &-8357608078654607823
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19,12 +19,12 @@ MonoBehaviour:
     m_Value: 9
   intensity:
     m_OverrideState: 1
-    m_Value: 0.695
+    m_Value: 0.73
     min: 0
     max: 1
   response:
     m_OverrideState: 1
-    m_Value: 0.516
+    m_Value: 0
     min: 0
     max: 1
   texture:
@@ -40,12 +40,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Main Camera Profile
+  m_Name: MainMenuLight
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 5661737773651907362}
-  - {fileID: -417102741126433945}
---- !u!114 &5661737773651907362
+  - {fileID: 6045170985742402608}
+  - {fileID: -8357608078654607823}
+--- !u!114 &6045170985742402608
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,13 +54,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
-  m_Name: ChromaticAberration
+  m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
+  m_Name: Bloom
   m_EditorClassIdentifier: 
   active: 1
   m_AdvancedMode: 0
+  threshold:
+    m_OverrideState: 1
+    m_Value: 0.9
+    min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.188
+    m_Value: 3
+    min: 0
+  scatter:
+    m_OverrideState: 1
+    m_Value: 0.7
     min: 0
     max: 1
+  clamp:
+    m_OverrideState: 1
+    m_Value: 65472
+    min: 0
+  tint:
+    m_OverrideState: 1
+    m_Value: {r: 0.6320754, g: 0.3488341, b: 0.3488341, a: 1}
+    hdr: 0
+    showAlpha: 0
+    showEyeDropper: 1
+  highQualityFiltering:
+    m_OverrideState: 0
+    m_Value: 0
+  skipIterations:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 16
+  dirtTexture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+  dirtIntensity:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0

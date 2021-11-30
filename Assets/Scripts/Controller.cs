@@ -3,6 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Class that will handle every other controllers.
 /// </summary>
+[RequireComponent(typeof(PoolController))]
 public class Controller : MonoBehaviour
 {
     /// <summary>
@@ -16,7 +17,12 @@ public class Controller : MonoBehaviour
     public PoolController PoolController { get; private set; }
 
     /// <summary>
-    /// Pool Controller component.
+    /// Choice Controller component.
+    /// </summary>
+    public ChoiceController ChoiceController { get; private set; }
+
+    /// <summary>
+    /// UI Controller component.
     /// </summary>
     public UIController UIController { get; private set; }
 
@@ -34,7 +40,13 @@ public class Controller : MonoBehaviour
         Application.targetFrameRate = 60;
         Instance = this;
 
-        UIController = GetComponent<UIController>();
         PoolController = GetComponent<PoolController>();
+        ChoiceController = GetComponent<ChoiceController>();
+    }
+
+
+    public void LoadScene()
+    {
+        UIController = FindObjectOfType<UIController>();
     }
 }
