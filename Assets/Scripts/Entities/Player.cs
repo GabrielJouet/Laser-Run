@@ -4,9 +4,12 @@ using UnityEngine;
 /// <summary>
 /// Class used to handle player behavior.
 /// </summary>
+/// <remarks>Needs a RigidBody2D, Animator and spriteRenderer components</remarks>
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
-
     /// <summary>
     /// Speed factor while moving.
     /// </summary>
@@ -14,12 +17,15 @@ public class Player : MonoBehaviour
     [Range(0f, 1.5f)]
     protected float _speed;
 
+    /// <summary>
+    /// Destroyed parts prefab, called when destroyed.
+    /// </summary>
     [SerializeField]
     private List<GameObject> _destroyedParts;
 
 
     /// <summary>
-    /// The sprite renderer component that will be updated.
+    /// The animator component that will be updated.
     /// </summary>
     protected Animator _animator;
 
@@ -33,8 +39,14 @@ public class Player : MonoBehaviour
     /// </summary>
     protected SpriteRenderer _spriteRenderer;
 
+    /// <summary>
+    /// Inuts vector.
+    /// </summary>
     protected Vector2 _inputs;
 
+    /// <summary>
+    /// Does the player is dead?
+    /// </summary>
     protected bool _dead = false;
 
 
@@ -75,6 +87,9 @@ public class Player : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Fixed update method, called 50 times a second.
+    /// </summary>
     protected void FixedUpdate()
     {
         Move(_inputs);
@@ -84,8 +99,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Method used to move the entity.
     /// </summary>
-    /// <param name="horizontal">Horizontal force</param>
-    /// <param name="vertical">Vertical force</param>
+    /// <param name="inputs">Player inputs</param>
     protected void Move(Vector2 inputs)
     {
         if (inputs.magnitude > 1)
@@ -103,6 +117,11 @@ public class Player : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method used to change animation based on status.
+    /// </summary>
+    /// <param name="name">Name of the animation</param>
+    /// <param name="status">The new status of this animation</param>
     protected void ChangeAnimation(string name, bool status)
     {
         _animator.SetBool(name, status);

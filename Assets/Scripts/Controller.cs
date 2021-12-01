@@ -50,6 +50,10 @@ public class Controller : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method called when we load a scene, it allows the UI Controller to update.
+    /// </summary>
+    /// <param name="newController">New level controller component</param>
     public void LoadScene(LevelController newController)
     {
         LevelController = newController;

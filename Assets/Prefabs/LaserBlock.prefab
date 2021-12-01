@@ -761,7 +761,7 @@ MonoBehaviour:
   - {fileID: 2149161624366083401}
   - {fileID: 4778515440535658129}
   _facing: 0
-  _canonPosition: {fileID: 2896204023856088544}
+  _canon: {fileID: 2896204023856088544}
   Used: 0
 --- !u!1 &9000405307343215314
 GameObject:

@@ -2,30 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class that will handle every level information.
+/// </summary>
 public class Level : MonoBehaviour
 {
+    /// <summary>
+    /// Available laser blocks in this level.
+    /// </summary>
     [SerializeField]
     private List<LaserBlock> _blocks;
 
-    [Header("Level difficulty")]
+    /// <summary>
+    /// All difficulties in the level.
+    /// </summary>
     [SerializeField]
     private List<LevelDifficulty> _difficulties;
 
+    /// <summary>
+    /// Level goal time.
+    /// </summary>
     [SerializeField]
     [Range(50f, 500f)]
     private float _timeToLive;
 
+
+    /// <summary>
+    /// Current difficulty loaded.
+    /// </summary>
     private LevelDifficulty _loadedDifficulty;
+
+    /// <summary>
+    /// Difficulty index.
+    /// </summary>
     private int _index = 0;
 
+    /// <summary>
+    /// How much time did elapsed from the start of the level?
+    /// </summary>
     private float _timeElapsed = 0;
+
+    /// <summary>
+    /// UI Controller shortcut.
+    /// </summary>
     private UIController _uiController;
 
 
+
+    /// <summary>
+    /// Method called to initialize the object.
+    /// </summary>
     public void Initialize()
     {
         _uiController = Controller.Instance.UIController;
-        _loadedDifficulty = new LevelDifficulty(_difficulties[0]);
+        _loadedDifficulty = _difficulties[0];
         _uiController.SetTimeMax(_timeToLive);
 
         StartCoroutine(StartBlocks());
@@ -33,6 +63,9 @@ public class Level : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Update method, called each frame.
+    /// </summary>
     private void Update()
     {
         _timeElapsed += Time.deltaTime;
@@ -40,6 +73,9 @@ public class Level : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Coroutine used to start and warm up laser blocks.
+    /// </summary>
     private IEnumerator StartBlocks()
     {
         while (true)
@@ -54,6 +90,10 @@ public class Level : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method ysed to find an available block.
+    /// </summary>
+    /// <returns>A non-used block</returns>
     private LaserBlock FindOneBlock()
     {
         LaserBlock found = null;
@@ -70,6 +110,9 @@ public class Level : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Coroutine that will handle the end of the level.
+    /// </summary>
     private IEnumerator FinishLevel()
     {
         float timeLoaded = _timeToLive / _difficulties.Count;
@@ -79,7 +122,7 @@ public class Level : MonoBehaviour
             _index++;
 
             if (_index < _difficulties.Count)
-                _loadedDifficulty = new LevelDifficulty(_difficulties[_index]);
+                _loadedDifficulty = _difficulties[_index];
         }
 
         Controller.Instance.LevelController.FinishLevel();

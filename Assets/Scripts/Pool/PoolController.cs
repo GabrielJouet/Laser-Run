@@ -58,6 +58,9 @@ public class PoolController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method called to retrieve every object inside pools at the end of the level.
+    /// </summary>
     public void RetrieveAllPools()
     {
         foreach(Pool buffer in _pools)
