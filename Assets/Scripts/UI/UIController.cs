@@ -48,7 +48,7 @@ public class UIController : MonoBehaviour
     public void UpdateTimeLeft(float timeElapsed)
     {
         _scoreSlider.value = timeElapsed / _timeMax;
-        _timeLeft.text = (_timeMax - timeElapsed).ToString();
+        _timeLeft.text = string.Format("{0:#.00 sec}", _timeMax - timeElapsed);
     }
 
 
