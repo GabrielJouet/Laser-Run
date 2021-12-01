@@ -40,7 +40,7 @@ public class LevelController : MonoBehaviour
         Controller.Instance.LoadScene(this);
 
         _player = Controller.Instance.PoolController.GiveObject(_playerPrefab);
-        _player.GetComponent<Player>().Initialize();
+        _player.GetComponent<Player>().Initialize(Vector2.zero);
 
         _level = Instantiate(_levelAvailables[Controller.Instance.ChoiceController.LevelIndex]);
         _level.GetComponent<Level>().Initialize();

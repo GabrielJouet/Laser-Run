@@ -50,15 +50,25 @@ public class Player : MonoBehaviour
     protected bool _dead = false;
 
 
+
     /// <summary>
-    /// Initialize method used when object is created.
+    /// Awake method, called at first.
     /// </summary>
-    public void Initialize()
+    private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
+
+    /// <summary>
+    /// Initialize method used when object is created.
+    /// </summary>
+    /// <param name="newPosition">The new position of the player</param>
+    public void Initialize(Vector2 newPosition)
+    {
+        transform.position = newPosition;
         _dead = false;
 
         enabled = true;
@@ -139,7 +149,7 @@ public class Player : MonoBehaviour
 
             foreach (GameObject part in _destroyedParts)
             {
-                Vector2 directions = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)).normalized * 25;
+                Vector2 directions = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 25;
                 GameObject buffer = poolController.GiveObject(part);
                 buffer.transform.position = transform.position;
                 buffer.GetComponent<Rigidbody2D>().AddForce(directions);
