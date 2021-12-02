@@ -21,7 +21,10 @@ public class Player : MonoBehaviour
     /// Destroyed parts prefab, called when destroyed.
     /// </summary>
     [SerializeField]
-    private List<GameObject> _destroyedParts;
+    private List<Sprite> _destroyedParts;
+
+    [SerializeField]
+    private GameObject _destroyedPartPrefab;
 
 
     /// <summary>
@@ -147,12 +150,13 @@ public class Player : MonoBehaviour
         {
             PoolController poolController = Controller.Instance.PoolController;
 
-            foreach (GameObject part in _destroyedParts)
+            for (int i = 0; i < 7; i ++)
             {
                 Vector2 directions = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 25;
-                GameObject buffer = poolController.GiveObject(part);
+                GameObject buffer = poolController.GiveObject(_destroyedPartPrefab);
                 buffer.transform.position = transform.position;
                 buffer.GetComponent<Rigidbody2D>().AddForce(directions);
+                buffer.GetComponent<SpriteRenderer>().sprite = _destroyedParts[Random.Range(0, _destroyedParts.Count)];
             }
 
             enabled = false;
