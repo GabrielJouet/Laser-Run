@@ -96,6 +96,8 @@ public class Level : MonoBehaviour
     /// <returns>A non-used block</returns>
     private LaserBlock FindOneBlock()
     {
+        _blocks.Shuffle();
+
         LaserBlock found = null;
         foreach(LaserBlock block in _blocks)
         {
