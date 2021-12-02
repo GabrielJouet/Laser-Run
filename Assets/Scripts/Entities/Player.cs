@@ -125,6 +125,10 @@ public class Player : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method called when we want to change the state of the player.
+    /// </summary>
+    /// <param name="activated">Does the player is activated or not?</param>
     private void SwitchState(bool activated)
     {
         enabled = activated;
@@ -161,11 +165,14 @@ public class Player : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method called when the player dies, it then explodes in a random number of pieces.
+    /// </summary>
     private void ExplodeIntoPieces()
     {
         PoolController poolController = Controller.Instance.PoolController;
 
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < Random.Range(3, 8); i++)
         {
             Vector2 directions = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 25;
             GameObject buffer = poolController.GiveObject(_destroyedPartPrefab);
