@@ -50,7 +50,19 @@ public class LevelController : MonoBehaviour
     /// <summary>
     /// Method called when a level is finished.
     /// </summary>
-    public void FinishLevel()
+    /// <param name="win">Does the player wins the level?</param>
+    public void FinishLevel(bool win)
+    {
+        _level.GetComponent<Level>().StopLevel();
+
+        Controller.Instance.UIController.DisplayGameOverScreen(win);
+    }
+
+
+    /// <summary>
+    /// Method used to get back to level selection screen.
+    /// </summary>
+    public void GoBackToSelection()
     {
         Controller.Instance.PoolController.RetrieveAllPools();
         SceneManager.LoadScene("LevelSelection");

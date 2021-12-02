@@ -26,6 +26,12 @@ public class UIController : MonoBehaviour
     private GameObject _gameOverScreen;
 
     /// <summary>
+    /// Game ober screen that will be displayed at the end of the level if won.
+    /// </summary>
+    [SerializeField]
+    private GameObject _winScreen;
+
+    /// <summary>
     /// Time max of this level.
     /// </summary>
     private float _timeMax;
@@ -55,18 +61,20 @@ public class UIController : MonoBehaviour
     /// <summary>
     /// Method used to display game over screen.
     /// </summary>
-    public void DisplayGameOverScreen()
+    /// <param name="win">Does the player wins the game?</param>
+    public void DisplayGameOverScreen(bool win)
     {
-        StartCoroutine(DelayGameOverScreen());
+        StartCoroutine(DelayScreenDisplay(win ? _winScreen : _gameOverScreen));
     }
 
 
     /// <summary>
     /// Coroutine used to delay the game over screen displays.
     /// </summary>
-    private IEnumerator DelayGameOverScreen()
+    /// <param name="screen">The screen to display</param>
+    private IEnumerator DelayScreenDisplay(GameObject screen)
     {
         yield return new WaitForSeconds(0.5f);
-        _gameOverScreen.SetActive(true);
+        screen.SetActive(true);
     }
 }

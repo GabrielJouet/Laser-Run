@@ -158,7 +158,7 @@ public class Player : MonoBehaviour
         if (!_dead)
         {
             ExplodeIntoPieces();
-            Controller.Instance.UIController.DisplayGameOverScreen();
+            Controller.Instance.LevelController.FinishLevel(false);
 
             SwitchState(false);
         }

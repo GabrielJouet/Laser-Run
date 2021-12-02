@@ -54,6 +54,8 @@ public class Level : MonoBehaviour
     /// </summary>
     public void Initialize()
     {
+        enabled = true;
+
         _uiController = Controller.Instance.UIController;
         _loadedDifficulty = _difficulties[0];
         _uiController.SetTimeMax(_timeToLive);
@@ -127,6 +129,13 @@ public class Level : MonoBehaviour
                 _loadedDifficulty = _difficulties[_index];
         }
 
-        Controller.Instance.LevelController.FinishLevel();
+        Controller.Instance.LevelController.FinishLevel(true);
+    }
+
+
+    public void StopLevel()
+    {
+        StopAllCoroutines();
+        enabled = false;
     }
 }
