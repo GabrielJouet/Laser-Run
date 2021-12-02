@@ -37,7 +37,7 @@ public class LaserBlock : MonoBehaviour
     /// Canon component.
     /// </summary>
     [SerializeField]
-    private Light2D _canon;
+    private Transform _canon;
 
 
     /// <summary>
@@ -50,28 +50,35 @@ public class LaserBlock : MonoBehaviour
     /// </summary>
     private LevelDifficulty _difficulty;
 
+    private ParticleSystem _particleSystem;
+
+    private Light2D _light;
+
 
     /// <summary>
     /// Awake method, used at first.
     /// </summary>
     private void Awake()
     {
-        switch(_facing)
+        _particleSystem = _canon.GetComponent<ParticleSystem>();
+        _light = _canon.GetComponent<Light2D>();
+
+        switch (_facing)
         {
             case 0:
-                _canon.transform.position = transform.position + new Vector3(0, 0.09f);
+                _canon.position = transform.position + new Vector3(0, 0.09f);
                 break;
 
             case 1:
-                _canon.transform.position = transform.position + new Vector3(-0.09f, 0);
+                _canon.position = transform.position + new Vector3(-0.09f, 0);
                 break;
 
             case 2:
-                _canon.transform.position = transform.position + new Vector3(0, -0.09f);
+                _canon.position = transform.position + new Vector3(0, -0.09f);
                 break;
 
             case 3:
-                _canon.transform.position = transform.position + new Vector3(0.09f, 0);
+                _canon.position = transform.position + new Vector3(0.09f, 0);
                 break;
         }
     }
@@ -95,19 +102,20 @@ public class LaserBlock : MonoBehaviour
     private IEnumerator DelayShot()
     {
         Used = true;
-        _canon.enabled = true;
-        _canon.intensity = 0.25f;
+        _light.enabled = true;
+        _light.intensity = 0.25f;
 
         for (int i = 0; i < _clockLeds.Count; i++)
         {
             yield return new WaitForSeconds(_difficulty.ShotsTime / _clockLeds.Count);
-            _canon.intensity = 0.25f + i * 0.1f;
+            _light.intensity = 0.25f + i * 0.1f;
             _clockLeds[i].SetActive(true);
         }
 
         for (int i = 0; i < _difficulty.NumberOfShots; i ++)
         {
             float angle = Random.Range(-_difficulty.Dispersion, _difficulty.Dispersion);
+            _canon.rotation = Quaternion.Euler(new Vector3(0, 0, _facing * 90 + angle));
 
             if (_difficulty.RandomShots)
                 angle += _facing * 90;
@@ -121,6 +129,7 @@ public class LaserBlock : MonoBehaviour
             Shot(_semiLaser, angle);
             yield return new WaitForSeconds(_difficulty.ReactionTime);
             Shot(_laser, angle);
+            _particleSystem.Play();
 
             yield return new WaitForSeconds(_difficulty.ReactionTime);
         }
@@ -129,7 +138,7 @@ public class LaserBlock : MonoBehaviour
             _clockLeds[i].SetActive(false);
 
         Used = false;
-        _canon.enabled = false;
+        _light.enabled = false;
     }
 
 
@@ -151,7 +160,7 @@ public class LaserBlock : MonoBehaviour
     {
         StopAllCoroutines();
         Used = false;
-        _canon.enabled = false;
+        _light.enabled = false;
 
         for (int i = 0; i < _clockLeds.Count; i++)
             _clockLeds[i].SetActive(false);
