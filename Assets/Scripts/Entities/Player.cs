@@ -18,13 +18,22 @@ public class Player : MonoBehaviour
     protected float _speed;
 
     /// <summary>
-    /// Destroyed parts prefab, called when destroyed.
+    /// All sprites used in destroyed parts.
     /// </summary>
     [SerializeField]
     private List<Sprite> _destroyedParts;
 
+    /// <summary>
+    /// Destroyed parts prefab, called when destroyed.
+    /// </summary>
     [SerializeField]
     private GameObject _destroyedPartPrefab;
+
+    /// <summary>
+    /// Shadow sprite renderer component.
+    /// </summary>
+    [SerializeField]
+    private SpriteRenderer _shadowSpriteRenderer;
 
 
     /// <summary>
@@ -72,22 +81,8 @@ public class Player : MonoBehaviour
     public void Initialize(Vector2 newPosition)
     {
         transform.position = newPosition;
-        _dead = false;
 
-        enabled = true;
-        _spriteRenderer.enabled = true;
-
-        FlipSprite(Random.Range(0, 2) == 0);
-    }
-
-
-    /// <summary>
-    /// Method called when we need to flip the sprite vertically.
-    /// </summary>
-    /// <param name="side">The side we want to flip, true is flipped</param>
-    protected void FlipSprite(bool side)
-    {
-        _spriteRenderer.flipX = side;
+        SwitchState(true);
     }
 
 
@@ -124,9 +119,19 @@ public class Player : MonoBehaviour
             ChangeAnimation("back", inputs.y > 0);
             
         if (inputs.x != 0)
-            FlipSprite(inputs.x < 0);
+            _spriteRenderer.flipX = inputs.x < 0;
 
         _rigidBody.MovePosition(_rigidBody.position + inputs * Time.deltaTime * _speed);
+    }
+
+
+    private void SwitchState(bool activated)
+    {
+        enabled = activated;
+        _spriteRenderer.enabled = activated;
+        _shadowSpriteRenderer.enabled = activated;
+
+        _dead = !activated;
     }
 
 
@@ -148,22 +153,25 @@ public class Player : MonoBehaviour
     {
         if (!_dead)
         {
-            PoolController poolController = Controller.Instance.PoolController;
-
-            for (int i = 0; i < 7; i ++)
-            {
-                Vector2 directions = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 25;
-                GameObject buffer = poolController.GiveObject(_destroyedPartPrefab);
-                buffer.transform.position = transform.position;
-                buffer.GetComponent<Rigidbody2D>().AddForce(directions);
-                buffer.GetComponent<SpriteRenderer>().sprite = _destroyedParts[Random.Range(0, _destroyedParts.Count)];
-            }
-
-            enabled = false;
-            _spriteRenderer.enabled = false;
+            ExplodeIntoPieces();
             Controller.Instance.UIController.DisplayGameOverScreen();
 
-            _dead = true;
+            SwitchState(false);
+        }
+    }
+
+
+    private void ExplodeIntoPieces()
+    {
+        PoolController poolController = Controller.Instance.PoolController;
+
+        for (int i = 0; i < 7; i++)
+        {
+            Vector2 directions = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 25;
+            GameObject buffer = poolController.GiveObject(_destroyedPartPrefab);
+            buffer.transform.position = transform.position;
+            buffer.GetComponent<Rigidbody2D>().AddForce(directions);
+            buffer.GetComponent<SpriteRenderer>().sprite = _destroyedParts[Random.Range(0, _destroyedParts.Count)];
         }
     }
 }
