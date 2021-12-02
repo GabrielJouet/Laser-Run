@@ -23,12 +23,12 @@ public class LevelController : MonoBehaviour
     /// <summary>
     /// Spawned player.
     /// </summary>
-    private GameObject _player;
+    private Player _player;
 
     /// <summary>
     /// Spawned level.
     /// </summary>
-    private GameObject _level;
+    private Level _level;
 
 
 
@@ -39,11 +39,17 @@ public class LevelController : MonoBehaviour
     {
         Controller.Instance.LoadScene(this);
 
-        _player = Controller.Instance.PoolController.GiveObject(_playerPrefab);
-        _player.GetComponent<Player>().Initialize(Vector2.zero);
+        StartLevel(_levelAvailables[Controller.Instance.ChoiceController.LevelIndex]);
+    }
 
-        _level = Instantiate(_levelAvailables[Controller.Instance.ChoiceController.LevelIndex]);
-        _level.GetComponent<Level>().Initialize();
+
+    private void StartLevel(GameObject level)
+    {
+        _player = Controller.Instance.PoolController.GiveObject(_playerPrefab).GetComponent<Player>();
+        _player.Initialize(Vector2.zero);
+
+        _level = Instantiate(level).GetComponent<Level>();
+        _level.Initialize();
     }
 
 
@@ -53,7 +59,7 @@ public class LevelController : MonoBehaviour
     /// <param name="win">Does the player wins the level?</param>
     public void FinishLevel(bool win)
     {
-        _level.GetComponent<Level>().StopLevel();
+        _level.StopLevel();
 
         Controller.Instance.UIController.DisplayGameOverScreen(win);
     }
@@ -66,5 +72,17 @@ public class LevelController : MonoBehaviour
     {
         Controller.Instance.PoolController.RetrieveAllPools();
         SceneManager.LoadScene("LevelSelection");
+    }
+
+
+    /// <summary>
+    /// Method called when we want to restart a level.
+    /// </summary>
+    public void RestartLoadedLevel()
+    {
+        Controller.Instance.PoolController.RetrieveAllPools();
+        Controller.Instance.UIController.HideGameOverScreen();
+
+        StartLevel(_levelAvailables[Controller.Instance.ChoiceController.LevelIndex]);
     }
 }

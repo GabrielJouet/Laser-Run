@@ -58,6 +58,9 @@ public class Level : MonoBehaviour
 
         _uiController = Controller.Instance.UIController;
         _loadedDifficulty = _difficulties[0];
+        _index = 0;
+        _timeElapsed = 0;
+
         _uiController.SetTimeMax(_timeToLive);
 
         StartCoroutine(StartBlocks());
@@ -133,9 +136,27 @@ public class Level : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method called when the level stops.
+    /// </summary>
     public void StopLevel()
     {
         StopAllCoroutines();
+        StartCoroutine(DelayLevelStop(_uiController.ScreenDelayTime));
+    }
+
+
+    /// <summary>
+    /// Coroutine used to delay the level stops.
+    /// </summary>
+    /// <param name="delayTime">How much time before desactivation?</param>
+    private IEnumerator DelayLevelStop(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        foreach (LaserBlock block in _blocks)
+            block.ResetObject();
+
         enabled = false;
     }
 }

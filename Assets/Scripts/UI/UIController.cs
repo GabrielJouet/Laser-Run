@@ -20,16 +20,23 @@ public class UIController : MonoBehaviour
     private Text _timeLeft;
 
     /// <summary>
-    /// Game ober screen that will be displayed at the end of the level.
+    /// Game over screen that will be displayed at the end of the level.
     /// </summary>
     [SerializeField]
     private GameObject _gameOverScreen;
 
     /// <summary>
-    /// Game ober screen that will be displayed at the end of the level if won.
+    /// Game over text component.
     /// </summary>
     [SerializeField]
-    private GameObject _winScreen;
+    private Text _gameOverText;
+
+    /// <summary>
+    /// How much time between activation and display.
+    /// </summary>
+    [SerializeField]
+    private float _screenDelayTime;
+    public float ScreenDelayTime { get => _screenDelayTime; }
 
     /// <summary>
     /// Time max of this level.
@@ -64,17 +71,27 @@ public class UIController : MonoBehaviour
     /// <param name="win">Does the player wins the game?</param>
     public void DisplayGameOverScreen(bool win)
     {
-        StartCoroutine(DelayScreenDisplay(win ? _winScreen : _gameOverScreen));
+        StartCoroutine(DelayScreenDisplay(win ? "Laser won't stop you this time!" : "You've stopped running..."));
+    }
+
+
+    /// <summary>
+    /// Method used to hide the game over screen.
+    /// </summary>
+    public void HideGameOverScreen()
+    {
+        _gameOverScreen.SetActive(false);
     }
 
 
     /// <summary>
     /// Coroutine used to delay the game over screen displays.
     /// </summary>
-    /// <param name="screen">The screen to display</param>
-    private IEnumerator DelayScreenDisplay(GameObject screen)
+    /// <param name="displayText">The text to display</param>
+    private IEnumerator DelayScreenDisplay(string displayText)
     {
-        yield return new WaitForSeconds(0.5f);
-        screen.SetActive(true);
+        yield return new WaitForSeconds(ScreenDelayTime);
+        _gameOverScreen.SetActive(true);
+        _gameOverText.text = displayText;
     }
 }

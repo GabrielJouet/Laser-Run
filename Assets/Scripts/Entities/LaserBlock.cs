@@ -142,4 +142,18 @@ public class LaserBlock : MonoBehaviour
     {
         Controller.Instance.PoolController.GiveObject(laser).GetComponent<Laser>().Initialize(angle, _canon.transform.position, _difficulty.ReactionTime);
     }
+
+
+    /// <summary>
+    /// Method called to reset the object back to its original state.
+    /// </summary>
+    public void ResetObject()
+    {
+        StopAllCoroutines();
+        Used = false;
+        _canon.enabled = false;
+
+        for (int i = 0; i < _clockLeds.Count; i++)
+            _clockLeds[i].SetActive(false);
+    }
 }
