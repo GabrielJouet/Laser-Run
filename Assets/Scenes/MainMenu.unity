@@ -581,6 +581,7 @@ GameObject:
   - component: {fileID: 1042877328}
   - component: {fileID: 1042877326}
   - component: {fileID: 1042877327}
+  - component: {fileID: 1042877329}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -639,6 +640,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolPrefab: {fileID: 5653090237775795565, guid: c42f43fa0842141498a12ff5d01a41ac, type: 3}
+--- !u!114 &1042877329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042877324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20216da4df3daa7478234a6317e8d5a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelAvailables:
+  - {fileID: 777601912504022219, guid: faf90db6a483d18459e6eadb899f1793, type: 3}
+  - {fileID: 777601912504022219, guid: bfe0345154157694387b66dc36d42b4f, type: 3}
 --- !u!1 &1116283390
 GameObject:
   m_ObjectHideFlags: 0

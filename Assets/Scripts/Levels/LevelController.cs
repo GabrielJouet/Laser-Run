@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,12 +11,6 @@ public class LevelController : MonoBehaviour
     /// </summary>
     [SerializeField]
     private GameObject _playerPrefab;
-
-    /// <summary>
-    /// All levels availables in the game.
-    /// </summary>
-    [SerializeField]
-    private List<GameObject> _levelAvailables;
 
 
     /// <summary>
@@ -39,7 +32,7 @@ public class LevelController : MonoBehaviour
     {
         Controller.Instance.LoadScene(this);
 
-        StartLevel(_levelAvailables[Controller.Instance.ChoiceController.LevelIndex]);
+        StartLevel(Controller.Instance.SaveController.Levels[Controller.Instance.ChoiceController.LevelIndex]);
     }
 
 
@@ -83,6 +76,6 @@ public class LevelController : MonoBehaviour
         Controller.Instance.PoolController.RetrieveAllPools();
         Controller.Instance.UIController.HideGameOverScreen();
 
-        StartLevel(_levelAvailables[Controller.Instance.ChoiceController.LevelIndex]);
+        StartLevel(Controller.Instance.SaveController.Levels[Controller.Instance.ChoiceController.LevelIndex]);
     }
 }

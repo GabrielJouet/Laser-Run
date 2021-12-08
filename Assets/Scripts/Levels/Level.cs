@@ -25,6 +25,7 @@ public class Level : MonoBehaviour
     [SerializeField]
     [Range(50f, 500f)]
     private float _timeToLive;
+    public float NeededTime { get => _timeToLive; }
 
 
     /// <summary>

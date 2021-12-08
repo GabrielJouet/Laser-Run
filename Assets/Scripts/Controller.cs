@@ -31,6 +31,11 @@ public class Controller : MonoBehaviour
     /// </summary>
     public LevelController LevelController { get; private set; }
 
+    /// <summary>
+    /// Level Controller component.
+    /// </summary>
+    public SaveController SaveController { get; private set; }
+
 
 
     /// <summary>
@@ -47,6 +52,7 @@ public class Controller : MonoBehaviour
 
         PoolController = GetComponent<PoolController>();
         ChoiceController = GetComponent<ChoiceController>();
+        SaveController = GetComponent<SaveController>();
     }
 
 
