@@ -39,6 +39,9 @@ public class LaserBlock : MonoBehaviour
     [SerializeField]
     private Transform _canon;
 
+    [SerializeField]
+    private ParticleSystem _particleSystem;
+
 
     /// <summary>
     /// Does the laser is used?
@@ -50,8 +53,6 @@ public class LaserBlock : MonoBehaviour
     /// </summary>
     private LevelDifficulty _difficulty;
 
-    private ParticleSystem _particleSystem;
-
     private Light2D _light;
 
 
@@ -60,25 +61,28 @@ public class LaserBlock : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        _particleSystem = _canon.GetComponent<ParticleSystem>();
         _light = _canon.GetComponent<Light2D>();
 
         switch (_facing)
         {
             case 0:
                 _canon.position = transform.position + new Vector3(0, 0.09f);
+                _particleSystem.transform.position = transform.position + new Vector3(0, 0.09f);
                 break;
 
             case 1:
                 _canon.position = transform.position + new Vector3(-0.09f, 0);
+                _particleSystem.transform.position = transform.position + new Vector3(-0.09f, 0);
                 break;
 
             case 2:
                 _canon.position = transform.position + new Vector3(0, -0.09f);
+                _particleSystem.transform.position = transform.position + new Vector3(0, -0.09f);
                 break;
 
             case 3:
                 _canon.position = transform.position + new Vector3(0.09f, 0);
+                _particleSystem.transform.position = transform.position + new Vector3(0.09f, 0);
                 break;
         }
     }
@@ -115,7 +119,7 @@ public class LaserBlock : MonoBehaviour
         for (int i = 0; i < _difficulty.NumberOfShots; i ++)
         {
             float angle = Random.Range(-_difficulty.Dispersion, _difficulty.Dispersion);
-            _canon.rotation = Quaternion.Euler(new Vector3(0, 0, _facing * 90 + angle));
+            _particleSystem.transform.rotation = Quaternion.Euler(new Vector3(0, 0, _facing * 90 + angle));
 
             if (_difficulty.RandomShots)
                 angle += _facing * 90;
