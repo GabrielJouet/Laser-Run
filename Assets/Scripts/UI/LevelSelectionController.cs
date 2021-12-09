@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 /// <summary>
 /// Class that will handle level selection inputs.
@@ -9,17 +8,17 @@ using UnityEngine.UI;
 public class LevelSelectionController : MonoBehaviour
 {
     [SerializeField]
-    private List<Button> _levels;
+    private Transform _levelPanel;
 
 
 
     private void Start()
     {
+        LevelMenu[] levels = _levelPanel.GetComponentsInChildren<LevelMenu>();
         List<LevelSave> saves = Controller.Instance.SaveController.SaveFile.LevelsProgression;
 
-        for(int i = 0; i < _levels.Count; i ++)
-            if (!saves[i].Locked)
-                _levels[i].enabled = true;
+        for(int i = 0; i < levels.Length; i ++)
+            levels[i].Initialize(saves[i].Locked, saves[i].Time);
     }
 
 

@@ -54,6 +54,7 @@ public class LevelController : MonoBehaviour
     {
         _level.StopLevel();
 
+        Controller.Instance.SaveController.SaveLevelData(_level.TimeElapsed, win);
         Controller.Instance.UIController.DisplayGameOverScreen(win);
     }
 

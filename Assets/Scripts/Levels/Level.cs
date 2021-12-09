@@ -23,7 +23,7 @@ public class Level : MonoBehaviour
     /// Level goal time.
     /// </summary>
     [SerializeField]
-    [Range(50f, 500f)]
+    [Range(25f, 500f)]
     private float _timeToLive;
     public float NeededTime { get => _timeToLive; }
 
@@ -41,7 +41,7 @@ public class Level : MonoBehaviour
     /// <summary>
     /// How much time did elapsed from the start of the level?
     /// </summary>
-    private float _timeElapsed = 0;
+    public float TimeElapsed { get; private set; } = 0;
 
     /// <summary>
     /// UI Controller shortcut.
@@ -60,7 +60,7 @@ public class Level : MonoBehaviour
         _uiController = Controller.Instance.UIController;
         _loadedDifficulty = _difficulties[0];
         _index = 0;
-        _timeElapsed = 0;
+        TimeElapsed = 0;
 
         StartCoroutine(StartBlocks());
         StartCoroutine(FinishLevel());
@@ -72,8 +72,8 @@ public class Level : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        _timeElapsed += Time.deltaTime;
-        _uiController.UpdateTimeLeft(_timeToLive - _timeElapsed);
+        TimeElapsed += Time.deltaTime;
+        _uiController.UpdateTimeLeft(_timeToLive - TimeElapsed);
     }
 
 
@@ -142,6 +142,8 @@ public class Level : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(DelayLevelStop(_uiController.ScreenDelayTime));
+
+        enabled = false;
     }
 
 
@@ -155,7 +157,5 @@ public class Level : MonoBehaviour
 
         foreach (LaserBlock block in _blocks)
             block.ResetObject();
-
-        enabled = false;
     }
 }

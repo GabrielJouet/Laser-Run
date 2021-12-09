@@ -138,7 +138,8 @@ public class SaveController : MonoBehaviour
 	/// Method used to save a level data.
 	/// </summary>
 	/// <param name="timeSurvived">Time survived in this level</param>
-	public void SaveLevelData(float timeSurvived)
+	/// <param name="win">Does this level was won</param>
+	public void SaveLevelData(float timeSurvived, bool win)
 	{
 		int levelIndexBuffer = Controller.Instance.ChoiceController.LevelIndex;
 		LevelSave buffer = SaveFile.LevelsProgression[levelIndexBuffer];
@@ -147,7 +148,7 @@ public class SaveController : MonoBehaviour
 		{
 			buffer.Time = timeSurvived;
 
-			if (timeSurvived >= Levels[levelIndexBuffer].GetComponent<Level>().NeededTime && levelIndexBuffer + 1 < Levels.Count && SaveFile.LevelsProgression[levelIndexBuffer + 1].Locked)
+			if (win && levelIndexBuffer + 1 < Levels.Count && SaveFile.LevelsProgression[levelIndexBuffer + 1].Locked)
 				SaveFile.LevelsProgression[levelIndexBuffer + 1] = new LevelSave(false);
 		}
 
