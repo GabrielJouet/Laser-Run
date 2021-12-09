@@ -42,6 +42,11 @@ public class LaserBlock : MonoBehaviour
     [SerializeField]
     private ParticleSystem _particleSystem;
 
+    [SerializeField]
+    private List<AudioClip> _laserSounds;
+
+    private AudioSource _audioSource;
+
 
     /// <summary>
     /// Does the laser is used?
@@ -62,6 +67,7 @@ public class LaserBlock : MonoBehaviour
     private void Awake()
     {
         _light = _canon.GetComponent<Light2D>();
+        _audioSource = GetComponent<AudioSource>();
 
         switch (_facing)
         {
@@ -133,6 +139,9 @@ public class LaserBlock : MonoBehaviour
             Shot(_semiLaser, angle);
             yield return new WaitForSeconds(_difficulty.ReactionTime);
             Shot(_laser, angle);
+
+            _audioSource.clip = _laserSounds[Random.Range(0, _laserSounds.Count)];
+            _audioSource.Play();
             _particleSystem.Play();
 
             yield return new WaitForSeconds(_difficulty.ReactionTime);
