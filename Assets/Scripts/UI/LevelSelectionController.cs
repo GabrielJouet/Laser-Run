@@ -31,4 +31,10 @@ public class LevelSelectionController : MonoBehaviour
         Controller.Instance.ChoiceController.LevelIndex = index;
         SceneManager.LoadScene("PlayScene");
     }
+
+
+    public void GoBackMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
