@@ -45,7 +45,11 @@ public class Controller : MonoBehaviour
     {
         if (FindObjectsOfType<Controller>().Length > 1)
             Destroy(gameObject);
+    }
 
+
+    private void Start()
+    {
         DontDestroyOnLoad(gameObject);
         Application.targetFrameRate = 60;
         Instance = this;
