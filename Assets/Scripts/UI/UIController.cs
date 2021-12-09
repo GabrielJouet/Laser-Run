@@ -8,12 +8,6 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     /// <summary>
-    /// The score slider of remaining time.
-    /// </summary>
-    [SerializeField]
-    private Slider _scoreSlider;
-
-    /// <summary>
     /// How much time is left component?
     /// </summary>
     [SerializeField]
@@ -38,30 +32,14 @@ public class UIController : MonoBehaviour
     private float _screenDelayTime;
     public float ScreenDelayTime { get => _screenDelayTime; }
 
-    /// <summary>
-    /// Time max of this level.
-    /// </summary>
-    private float _timeMax;
-
-
-    /// <summary>
-    /// Method used to set the time max.
-    /// </summary>
-    /// <param name="timeMax">The new value for time max</param>
-    public void SetTimeMax(float timeMax)
-    {
-        _timeMax = timeMax;
-    }
-
 
     /// <summary>
     /// Method called to update the slider and text component.
     /// </summary>
-    /// <param name="timeElapsed">The time elapsed</param>
-    public void UpdateTimeLeft(float timeElapsed)
+    /// <param name="timeLeft">The time left</param>
+    public void UpdateTimeLeft(float timeLeft)
     {
-        _scoreSlider.value = timeElapsed / _timeMax;
-        _timeLeft.text = string.Format("{0:#.00 sec}", _timeMax - timeElapsed);
+        _timeLeft.text = string.Format("{0:#.00 sec}", timeLeft);
     }
 
 

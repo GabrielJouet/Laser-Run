@@ -62,8 +62,6 @@ public class Level : MonoBehaviour
         _index = 0;
         _timeElapsed = 0;
 
-        _uiController.SetTimeMax(_timeToLive);
-
         StartCoroutine(StartBlocks());
         StartCoroutine(FinishLevel());
     }
@@ -75,7 +73,7 @@ public class Level : MonoBehaviour
     private void Update()
     {
         _timeElapsed += Time.deltaTime;
-        _uiController.UpdateTimeLeft(_timeElapsed);
+        _uiController.UpdateTimeLeft(_timeToLive - _timeElapsed);
     }
 
 
