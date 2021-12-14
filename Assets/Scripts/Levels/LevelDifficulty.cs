@@ -12,16 +12,16 @@ public class LevelDifficulty
     /// </summary>
     [SerializeField]
     [Range(0.5f, 10f)]
-    private float _timeBetweenEachActivation;
-    public float ActivationTime { get => _timeBetweenEachActivation; }
+    private float _activationTime;
+    public float ActivationTime { get => _activationTime; }
 
     /// <summary>
     /// Warm up time for block.
     /// </summary>
     [SerializeField]
     [Range(0.1f, 5f)]
-    private float _timeBetweenShots;
-    public float ShotsTime { get => _timeBetweenShots; }
+    private float _loadTime;
+    public float LoadTime { get => _loadTime; }
 
     /// <summary>
     /// Time before and after each laser is fired.
@@ -32,20 +32,28 @@ public class LevelDifficulty
     public float ReactionTime { get => _reactionTime; }
 
     /// <summary>
+    /// Minimum dispersion of laser.
+    /// </summary>
+    [SerializeField]
+    [Range(0f, 90f)]
+    private float _dispersionMin;
+    public float MinDispersion { get => _dispersionMin; }
+
+    /// <summary>
     /// Maximum dispersion of laser.
     /// </summary>
     [SerializeField]
     [Range(0f, 90f)]
-    private float _dispersion;
-    public float Dispersion { get => _dispersion; }
+    private float _dispersionMax;
+    public float MaxDispersion { get => _dispersionMax; }
 
     /// <summary>
     /// How many shots per activation.
     /// </summary>
     [SerializeField]
     [Range(1, 10)]
-    private int _numberOfShots;
-    public int NumberOfShots { get => _numberOfShots; }
+    private int _shots;
+    public int NumberOfShots { get => _shots; }
 
     /// <summary>
     /// Does the shots are random or homes at you?

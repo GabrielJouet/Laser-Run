@@ -117,14 +117,14 @@ public class LaserBlock : MonoBehaviour
 
         for (int i = 0; i < _clockLeds.Count; i++)
         {
-            yield return new WaitForSeconds(_difficulty.ShotsTime / _clockLeds.Count);
+            yield return new WaitForSeconds(_difficulty.LoadTime / _clockLeds.Count);
             _light.intensity = 0.25f + i * 0.1f;
             _clockLeds[i].SetActive(true);
         }
 
         for (int i = 0; i < _difficulty.NumberOfShots; i ++)
         {
-            float angle = Random.Range(-_difficulty.Dispersion, _difficulty.Dispersion);
+            float angle = Random.Range(_difficulty.MinDispersion, _difficulty.MaxDispersion) * (Random.Range(0, 2) == 1 ? -1 : 1);
             _particleSystem.transform.rotation = Quaternion.Euler(new Vector3(0, 0, _facing * 90 + angle));
 
             if (_difficulty.RandomShots)
