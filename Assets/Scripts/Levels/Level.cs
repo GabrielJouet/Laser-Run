@@ -73,7 +73,7 @@ public class Level : MonoBehaviour
     private void Update()
     {
         TimeElapsed += Time.deltaTime;
-        _uiController.UpdateTimeLeft(_timeToLive - TimeElapsed);
+        _uiController.UpdateTimeLeft(_timeToLive - TimeElapsed >= 0 ? _timeToLive - TimeElapsed : 0);
     }
 
 
