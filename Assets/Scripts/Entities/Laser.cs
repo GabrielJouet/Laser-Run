@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 /// <summary>
 /// Class used to emulates a laser behavior.
@@ -13,6 +14,19 @@ public class Laser : MonoBehaviour
     /// </summary>
     [SerializeField]
     private bool _fake;
+
+    /// <summary>
+    /// Particle component used when the laser hits the wall.
+    /// </summary>
+    [SerializeField]
+    private GameObject _particleSystem;
+
+    /// <summary>
+    /// Light component used when the laser hits the wall.
+    /// </summary>
+    [SerializeField]
+    private Light2D _hitLight;
+
 
     /// <summary>
     /// Line renderer component of the laser.
@@ -56,16 +70,26 @@ public class Laser : MonoBehaviour
 
         foreach (RaycastHit2D hit in hits)
         {
+            _lineRenderer.SetPosition(0, transform.position);
+
             if (!_fake && hit.collider.TryGetComponent(out Player player))
             {
-                _lineRenderer.SetPosition(0, transform.position);
                 _lineRenderer.SetPosition(1, player.transform.position);
                 player.GetHit();
             }
             else
             {
-                _lineRenderer.SetPosition(0, transform.position);
                 _lineRenderer.SetPosition(1, transform.position + (transform.up * (!_fake ? hit.distance : hit.distance / 2f)));
+
+                if (!_fake)
+                {
+                    _particleSystem.transform.position = _lineRenderer.GetPosition(1);
+                    _particleSystem.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.localRotation.z + 180));
+                    _particleSystem.GetComponent<ParticleSystem>().Play();
+
+                    _hitLight.transform.position = transform.position + (transform.up * (!_fake ? hit.distance : hit.distance / 2f));
+                    _hitLight.enabled = true;
+                }
             }
         }
 
@@ -79,6 +103,8 @@ public class Laser : MonoBehaviour
 
             yield return new WaitForSeconds(renderTime / 5);
         }
+
+        _hitLight.enabled = false;
     }
 
 

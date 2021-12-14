@@ -31,6 +31,11 @@ public class Controller : MonoBehaviour
     /// </summary>
     public LevelController LevelController { get; private set; }
 
+    /// <summary>
+    /// Level Controller component.
+    /// </summary>
+    public SaveController SaveController { get; private set; }
+
 
 
     /// <summary>
@@ -40,13 +45,18 @@ public class Controller : MonoBehaviour
     {
         if (FindObjectsOfType<Controller>().Length > 1)
             Destroy(gameObject);
+    }
 
+
+    private void Start()
+    {
         DontDestroyOnLoad(gameObject);
         Application.targetFrameRate = 60;
         Instance = this;
 
         PoolController = GetComponent<PoolController>();
         ChoiceController = GetComponent<ChoiceController>();
+        SaveController = GetComponent<SaveController>();
     }
 
 

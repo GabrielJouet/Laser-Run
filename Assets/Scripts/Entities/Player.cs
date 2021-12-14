@@ -18,10 +18,22 @@ public class Player : MonoBehaviour
     protected float _speed;
 
     /// <summary>
+    /// All sprites used in destroyed parts.
+    /// </summary>
+    [SerializeField]
+    private List<Sprite> _destroyedParts;
+
+    /// <summary>
     /// Destroyed parts prefab, called when destroyed.
     /// </summary>
     [SerializeField]
-    private List<GameObject> _destroyedParts;
+    private GameObject _destroyedPartPrefab;
+
+    /// <summary>
+    /// Shadow sprite renderer component.
+    /// </summary>
+    [SerializeField]
+    private SpriteRenderer _shadowSpriteRenderer;
 
 
     /// <summary>
@@ -50,31 +62,27 @@ public class Player : MonoBehaviour
     protected bool _dead = false;
 
 
+
     /// <summary>
-    /// Initialize method used when object is created.
+    /// Awake method, called at first.
     /// </summary>
-    public void Initialize()
+    private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-
-        _dead = false;
-
-        enabled = true;
-        _spriteRenderer.enabled = true;
-
-        FlipSprite(Random.Range(0, 2) == 0);
     }
 
 
     /// <summary>
-    /// Method called when we need to flip the sprite vertically.
+    /// Initialize method used when object is created.
     /// </summary>
-    /// <param name="side">The side we want to flip, true is flipped</param>
-    protected void FlipSprite(bool side)
+    /// <param name="newPosition">The new position of the player</param>
+    public void Initialize(Vector2 newPosition)
     {
-        _spriteRenderer.flipX = side;
+        transform.position = newPosition;
+
+        SwitchState(true);
     }
 
 
@@ -111,9 +119,23 @@ public class Player : MonoBehaviour
             ChangeAnimation("back", inputs.y > 0);
             
         if (inputs.x != 0)
-            FlipSprite(inputs.x < 0);
+            _spriteRenderer.flipX = inputs.x < 0;
 
         _rigidBody.MovePosition(_rigidBody.position + inputs * Time.deltaTime * _speed);
+    }
+
+
+    /// <summary>
+    /// Method called when we want to change the state of the player.
+    /// </summary>
+    /// <param name="activated">Does the player is activated or not?</param>
+    private void SwitchState(bool activated)
+    {
+        enabled = activated;
+        _spriteRenderer.enabled = activated;
+        _shadowSpriteRenderer.enabled = activated;
+
+        _dead = !activated;
     }
 
 
@@ -135,21 +157,28 @@ public class Player : MonoBehaviour
     {
         if (!_dead)
         {
-            PoolController poolController = Controller.Instance.PoolController;
+            ExplodeIntoPieces();
+            Controller.Instance.LevelController.FinishLevel(false);
 
-            foreach (GameObject part in _destroyedParts)
-            {
-                Vector2 directions = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)).normalized * 25;
-                GameObject buffer = poolController.GiveObject(part);
-                buffer.transform.position = transform.position;
-                buffer.GetComponent<Rigidbody2D>().AddForce(directions);
-            }
+            SwitchState(false);
+        }
+    }
 
-            enabled = false;
-            _spriteRenderer.enabled = false;
-            Controller.Instance.UIController.DisplayGameOverScreen();
 
-            _dead = true;
+    /// <summary>
+    /// Method called when the player dies, it then explodes in a random number of pieces.
+    /// </summary>
+    private void ExplodeIntoPieces()
+    {
+        PoolController poolController = Controller.Instance.PoolController;
+
+        for (int i = 0; i < Random.Range(3, 8); i++)
+        {
+            Vector2 directions = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 25;
+            GameObject buffer = poolController.GiveObject(_destroyedPartPrefab);
+            buffer.transform.position = transform.position;
+            buffer.GetComponent<Rigidbody2D>().AddForce(directions);
+            buffer.GetComponent<SpriteRenderer>().sprite = _destroyedParts[Random.Range(0, _destroyedParts.Count)];
         }
     }
 }

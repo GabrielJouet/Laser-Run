@@ -8,65 +8,68 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     /// <summary>
-    /// The score slider of remaining time.
-    /// </summary>
-    [SerializeField]
-    private Slider _scoreSlider;
-
-    /// <summary>
     /// How much time is left component?
     /// </summary>
     [SerializeField]
     private Text _timeLeft;
 
     /// <summary>
-    /// Game ober screen that will be displayed at the end of the level.
+    /// Game over screen that will be displayed at the end of the level.
     /// </summary>
     [SerializeField]
     private GameObject _gameOverScreen;
 
     /// <summary>
-    /// Time max of this level.
+    /// Game over text component.
     /// </summary>
-    private float _timeMax;
-
+    [SerializeField]
+    private Text _gameOverText;
 
     /// <summary>
-    /// Method used to set the time max.
+    /// How much time between activation and display.
     /// </summary>
-    /// <param name="timeMax">The new value for time max</param>
-    public void SetTimeMax(float timeMax)
-    {
-        _timeMax = timeMax;
-    }
+    [SerializeField]
+    private float _screenDelayTime;
+    public float ScreenDelayTime { get => _screenDelayTime; }
 
 
     /// <summary>
     /// Method called to update the slider and text component.
     /// </summary>
-    /// <param name="timeElapsed">The time elapsed</param>
-    public void UpdateTimeLeft(float timeElapsed)
+    /// <param name="timeLeft">The time left</param>
+    public void UpdateTimeLeft(float timeLeft)
     {
-        _scoreSlider.value = timeElapsed / _timeMax;
-        _timeLeft.text = (_timeMax - timeElapsed).ToString();
+        _timeLeft.text = string.Format("{0:#.00 sec}", timeLeft);
     }
 
 
     /// <summary>
     /// Method used to display game over screen.
     /// </summary>
-    public void DisplayGameOverScreen()
+    /// <param name="win">Does the player wins the game?</param>
+    public void DisplayGameOverScreen(bool win)
     {
-        StartCoroutine(DelayGameOverScreen());
+        StartCoroutine(DelayScreenDisplay(win ? "Laser won't stop you this time!" : "You've stopped running..."));
+    }
+
+
+    /// <summary>
+    /// Method used to hide the game over screen.
+    /// </summary>
+    public void HideGameOverScreen()
+    {
+        _gameOverScreen.SetActive(false);
     }
 
 
     /// <summary>
     /// Coroutine used to delay the game over screen displays.
     /// </summary>
-    private IEnumerator DelayGameOverScreen()
+    /// <param name="displayText">The text to display</param>
+    private IEnumerator DelayScreenDisplay(string displayText)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(ScreenDelayTime);
         _gameOverScreen.SetActive(true);
+        _gameOverText.text = displayText;
     }
 }

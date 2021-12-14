@@ -23,8 +23,9 @@ public class Level : MonoBehaviour
     /// Level goal time.
     /// </summary>
     [SerializeField]
-    [Range(50f, 500f)]
+    [Range(25f, 500f)]
     private float _timeToLive;
+    public float NeededTime { get => _timeToLive; }
 
 
     /// <summary>
@@ -40,7 +41,7 @@ public class Level : MonoBehaviour
     /// <summary>
     /// How much time did elapsed from the start of the level?
     /// </summary>
-    private float _timeElapsed = 0;
+    public float TimeElapsed { get; private set; } = 0;
 
     /// <summary>
     /// UI Controller shortcut.
@@ -54,9 +55,12 @@ public class Level : MonoBehaviour
     /// </summary>
     public void Initialize()
     {
+        enabled = true;
+
         _uiController = Controller.Instance.UIController;
         _loadedDifficulty = _difficulties[0];
-        _uiController.SetTimeMax(_timeToLive);
+        _index = 0;
+        TimeElapsed = 0;
 
         StartCoroutine(StartBlocks());
         StartCoroutine(FinishLevel());
@@ -68,8 +72,8 @@ public class Level : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        _timeElapsed += Time.deltaTime;
-        _uiController.UpdateTimeLeft(_timeElapsed);
+        TimeElapsed += Time.deltaTime;
+        _uiController.UpdateTimeLeft(_timeToLive - TimeElapsed >= 0 ? _timeToLive - TimeElapsed : 0);
     }
 
 
@@ -96,6 +100,8 @@ public class Level : MonoBehaviour
     /// <returns>A non-used block</returns>
     private LaserBlock FindOneBlock()
     {
+        _blocks.Shuffle();
+
         LaserBlock found = null;
         foreach(LaserBlock block in _blocks)
         {
@@ -125,6 +131,31 @@ public class Level : MonoBehaviour
                 _loadedDifficulty = _difficulties[_index];
         }
 
-        Controller.Instance.LevelController.FinishLevel();
+        Controller.Instance.LevelController.FinishLevel(true);
+    }
+
+
+    /// <summary>
+    /// Method called when the level stops.
+    /// </summary>
+    public void StopLevel()
+    {
+        StopAllCoroutines();
+        StartCoroutine(DelayLevelStop(_uiController.ScreenDelayTime));
+
+        enabled = false;
+    }
+
+
+    /// <summary>
+    /// Coroutine used to delay the level stops.
+    /// </summary>
+    /// <param name="delayTime">How much time before desactivation?</param>
+    private IEnumerator DelayLevelStop(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        foreach (LaserBlock block in _blocks)
+            block.ResetObject();
     }
 }

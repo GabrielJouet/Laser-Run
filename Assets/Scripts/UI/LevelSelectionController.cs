@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,21 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class LevelSelectionController : MonoBehaviour
 {
+    [SerializeField]
+    private Transform _levelPanel;
+
+
+
+    private void Start()
+    {
+        LevelMenu[] levels = _levelPanel.GetComponentsInChildren<LevelMenu>();
+        List<LevelSave> saves = Controller.Instance.SaveController.SaveFile.LevelsProgression;
+
+        for(int i = 0; i < levels.Length; i ++)
+            levels[i].Initialize(saves[i].Locked, saves[i].Time);
+    }
+
+
     /// <summary>
     /// Method called by level buttons when chosen.
     /// </summary>
@@ -14,5 +30,11 @@ public class LevelSelectionController : MonoBehaviour
     {
         Controller.Instance.ChoiceController.LevelIndex = index;
         SceneManager.LoadScene("PlayScene");
+    }
+
+
+    public void GoBackMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
