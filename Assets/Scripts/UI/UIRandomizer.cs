@@ -4,7 +4,7 @@ using UnityEngine;
 public class UIRandomizer : MonoBehaviour
 {
     [SerializeField]
-    private List<RectTransform> _objects;
+    private List<UIHover> _objects;
 
 
     [SerializeField]
@@ -14,7 +14,10 @@ public class UIRandomizer : MonoBehaviour
 
     private void Start()
     {
-        foreach (RectTransform newObject in _objects)
-            newObject.localRotation = Quaternion.Euler(0, 0, Random.Range(-_maxAngle, _maxAngle));
+        foreach (UIHover newObject in _objects)
+        {
+            float angle = Random.Range(-_maxAngle, _maxAngle);
+            newObject.Initialize(angle, -angle);
+        }
     }
 }

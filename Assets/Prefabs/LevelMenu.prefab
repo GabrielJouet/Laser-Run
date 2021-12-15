@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 3544711147418193312}
   - component: {fileID: 3544711147418193313}
   - component: {fileID: 2932352521123818926}
+  - component: {fileID: 6542987427341524721}
   m_Layer: 5
   m_Name: LevelMenu
   m_TagString: Untagged
@@ -249,6 +250,18 @@ MonoBehaviour:
   _timeText: {fileID: 5117525142825760634}
   _startButton: {fileID: 3253205869132887952}
   _lockedImage: {fileID: 1847275372236206686}
+--- !u!114 &6542987427341524721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3544711147418193319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa064674e7e4054f97cf54a206bea8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3544711149253158166
 GameObject:
   m_ObjectHideFlags: 0
