@@ -122,6 +122,8 @@ public class Player : MonoBehaviour
             _spriteRenderer.flipX = inputs.x < 0;
 
         _rigidBody.MovePosition(_rigidBody.position + inputs * Time.deltaTime * _speed);
+        _spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(transform.position).y * -1;
+        _shadowSpriteRenderer.sortingOrder = _spriteRenderer.sortingOrder - 1;
     }
 
 
