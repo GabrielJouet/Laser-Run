@@ -64,7 +64,7 @@ public class LaserBlock : MonoBehaviour
     /// <summary>
     /// Awake method, used at first.
     /// </summary>
-    private void Awake()
+    protected virtual void Awake()
     {
         _light = _canon.GetComponent<Light2D>();
         _audioSource = GetComponent<AudioSource>();
@@ -162,7 +162,9 @@ public class LaserBlock : MonoBehaviour
     /// <param name="angle">The new angle for this laser</param>
     private void Shot(GameObject laser, float angle)
     {
-        Controller.Instance.PoolController.GiveObject(laser).GetComponent<Laser>().Initialize(angle, _canon.transform.position, _difficulty.ReactionTime);
+        GameObject buffer = Controller.Instance.PoolController.GiveObject(laser);
+        buffer.GetComponent<Laser>().Initialize(angle, _canon.transform.position, _difficulty.ReactionTime);
+        buffer.transform.SetParent(transform);
     }
 
 
