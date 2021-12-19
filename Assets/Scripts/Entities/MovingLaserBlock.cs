@@ -19,7 +19,7 @@ public class MovingLaserBlock : LaserBlock
     protected override void Awake()
     {
         base.Awake();
-        _goal = _minPosition;
+        _goal = Random.Range(0, 2) == 1 ? _minPosition : _maxPosition;
     }
 
 

@@ -19,7 +19,7 @@ public class Laser : MonoBehaviour
     /// Particle component used when the laser hits the wall.
     /// </summary>
     [SerializeField]
-    private GameObject _particleSystem;
+    private Transform _particleSystem;
 
     /// <summary>
     /// Light component used when the laser hits the wall.
@@ -55,8 +55,7 @@ public class Laser : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0, 0, angle);
         transform.position = newPosition;
 
-        StartCoroutine(StartCasting(renderTime));
-        StartCoroutine(FadeOut(renderTime));
+        StartCoroutine(ShootLaser(renderTime));
     }
 
 
@@ -64,57 +63,47 @@ public class Laser : MonoBehaviour
     /// Coroutine used to cast a laser and checks collision with player.
     /// </summary>
     /// <param name="renderTime">The render time of this laser</param>
-    private IEnumerator StartCasting(float renderTime)
+    private IEnumerator ShootLaser(float renderTime)
     {
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.up, 10);
+        RaycastHit2D hittedObject = hits[hits.Length - 1];
 
-        foreach (RaycastHit2D hit in hits)
+        _lineRenderer.SetPosition(0, transform.position);
+        _lineRenderer.SetPosition(1, transform.position + (transform.up * hittedObject.distance * (!_fake ? 1 : 0.5f)));
+
+        if (!_fake)
+            StartCoroutine(CheckObjectCollision(hittedObject, renderTime));
+
+        yield return new WaitForSeconds(renderTime);
+
+        Controller.Instance.PoolController.RetrieveObject(gameObject);
+    }
+
+
+    private IEnumerator CheckObjectCollision(RaycastHit2D hittedObject, float renderTime)
+    {
+        if (hittedObject.collider.TryGetComponent(out Player player))
+            player.GetHit();
+        else
         {
-            _lineRenderer.SetPosition(0, transform.position);
+            _particleSystem.position = _lineRenderer.GetPosition(1);
+            _particleSystem.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.localRotation.z + 180));
+            _particleSystem.GetComponent<ParticleSystem>().Play();
 
-            if (!_fake && hit.collider.TryGetComponent(out Player player))
-            {
-                _lineRenderer.SetPosition(1, player.transform.position);
-                player.GetHit();
-            }
-            else
-            {
-                _lineRenderer.SetPosition(1, transform.position + (transform.up * (!_fake ? hit.distance : hit.distance / 2f)));
-
-                if (!_fake)
-                {
-                    _particleSystem.transform.position = _lineRenderer.GetPosition(1);
-                    _particleSystem.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.localRotation.z + 180));
-                    _particleSystem.GetComponent<ParticleSystem>().Play();
-
-                    _hitLight.transform.position = transform.position + (transform.up * (!_fake ? hit.distance : hit.distance / 2f));
-                    _hitLight.enabled = true;
-                }
-            }
+            _hitLight.transform.position = transform.position + (transform.up * hittedObject.distance);
+            _hitLight.enabled = true;
         }
 
-        for (int i = 0; i < 5; i ++)
+        for (int i = 0; i < 5; i++)
         {
-            hits = Physics2D.RaycastAll(transform.position, transform.up, 10);
+            hittedObject = Physics2D.RaycastAll(transform.position, transform.up, 10)[0];
 
-            foreach (RaycastHit2D hit in hits)
-                if (!_fake && hit.collider.TryGetComponent(out Player player))
-                    player.GetHit();
+            if (hittedObject.collider.TryGetComponent(out player))
+                player.GetHit();
 
             yield return new WaitForSeconds(renderTime / 5);
         }
 
         _hitLight.enabled = false;
-    }
-
-
-    /// <summary>
-    /// Coroutine method used to fade the laser out.
-    /// </summary>
-    /// <param name="renderTime">The render time max of this laser</param>
-    private IEnumerator FadeOut(float renderTime)
-    {
-        yield return new WaitForSeconds(renderTime);
-        Controller.Instance.PoolController.RetrieveObject(gameObject);
     }
 }

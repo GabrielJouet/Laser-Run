@@ -71,7 +71,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -614295433
-  m_SortingLayer: 3
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -153,7 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fake: 1
-  _particleSystem: {fileID: 6084037676812248770}
+  _particleSystem: {fileID: 6636414618133265293}
+  _hitLight: {fileID: 0}
 --- !u!1001 &6113661552469866136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -211,11 +212,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b26acdafcd2f5f241b3007d024e92009, type: 3}
---- !u!1 &6084037676812248770 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 51455778809270362, guid: b26acdafcd2f5f241b3007d024e92009, type: 3}
-  m_PrefabInstance: {fileID: 6113661552469866136}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6636414618133265293 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 630874643504762133, guid: b26acdafcd2f5f241b3007d024e92009, type: 3}
