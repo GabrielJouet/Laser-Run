@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Class used to handle level and player inside a level.
 /// </summary>
+[RequireComponent(typeof(UIController))]
 public class LevelController : MonoBehaviour
 {
     /// <summary>
@@ -30,18 +31,12 @@ public class LevelController : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        Controller.Instance.LoadScene(this);
+        Controller.Instance.AddReferencesWhenLoaded(this, GetComponent<UIController>());
 
-        StartLevel(Controller.Instance.SaveController.Levels[Controller.Instance.ChoiceController.LevelIndex]);
-    }
-
-
-    private void StartLevel(GameObject level)
-    {
         _player = Controller.Instance.PoolController.GiveObject(_playerPrefab).GetComponent<Player>();
         _player.Initialize(Vector2.zero);
 
-        _level = Instantiate(Controller.Instance.SaveController.Levels[Controller.Instance.SaveController.LevelIndex]).GetComponent<Level>();
+        _level = Instantiate(Controller.Instance.SaveController.CurrentLevel).GetComponent<Level>();
         _level.Initialize();
     }
 
@@ -77,6 +72,9 @@ public class LevelController : MonoBehaviour
         Controller.Instance.PoolController.RetrieveAllPools();
         Controller.Instance.UIController.HideGameOverScreen();
 
-        StartLevel(Controller.Instance.SaveController.Levels[Controller.Instance.ChoiceController.LevelIndex]);
+        _player = Controller.Instance.PoolController.GiveObject(_playerPrefab).GetComponent<Player>();
+        _player.Initialize(Vector2.zero);
+
+        _level.Initialize();
     }
 }

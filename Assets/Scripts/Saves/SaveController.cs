@@ -44,6 +44,9 @@ public class SaveController : MonoBehaviour
 	public int LevelIndex { get; set; }
 
 
+	public GameObject CurrentLevel { get => Levels[LevelIndex]; }
+
+
 	/// <summary>
 	/// Awake method, used for initialization.
 	/// </summary>

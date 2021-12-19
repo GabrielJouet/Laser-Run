@@ -62,8 +62,8 @@ public class Level : MonoBehaviour
         _index = 0;
         TimeElapsed = 0;
 
-        StartCoroutine(StartBlocks());
-        StartCoroutine(FinishLevel());
+        StartCoroutine(LoadTraps());
+        StartCoroutine(LevelCountDown());
     }
 
 
@@ -80,7 +80,7 @@ public class Level : MonoBehaviour
     /// <summary>
     /// Coroutine used to start and warm up laser blocks.
     /// </summary>
-    private IEnumerator StartBlocks()
+    private IEnumerator LoadTraps()
     {
         while (true)
         {
@@ -119,7 +119,7 @@ public class Level : MonoBehaviour
     /// <summary>
     /// Coroutine that will handle the end of the level.
     /// </summary>
-    private IEnumerator FinishLevel()
+    private IEnumerator LevelCountDown()
     {
         float timeLoaded = _timeToLive / _difficulties.Count;
         for (int i = 0; i < _difficulties.Count; i ++)
@@ -141,21 +141,10 @@ public class Level : MonoBehaviour
     public void StopLevel()
     {
         StopAllCoroutines();
-        StartCoroutine(DelayLevelStop(_uiController.ScreenDelayTime));
-
-        enabled = false;
-    }
-
-
-    /// <summary>
-    /// Coroutine used to delay the level stops.
-    /// </summary>
-    /// <param name="delayTime">How much time before desactivation?</param>
-    private IEnumerator DelayLevelStop(float delayTime)
-    {
-        yield return new WaitForSeconds(delayTime);
 
         foreach (LaserBlock block in _blocks)
             block.ResetObject();
+
+        enabled = false;
     }
 }
