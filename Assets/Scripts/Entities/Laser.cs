@@ -33,8 +33,6 @@ public class Laser : MonoBehaviour
     /// </summary>
     private LineRenderer _lineRenderer;
 
-    private Transform _parentLaserBlock;
-
 
 
     /// <summary>
@@ -49,15 +47,10 @@ public class Laser : MonoBehaviour
     /// <summary>
     /// Initialize method, called when restarting the entity.
     /// </summary>
-    /// <param name="angle">The new laser angle</param>
-    /// <param name="newPosition">The new position of this laser</param>
     /// <param name="renderTime">The render time of this laser</param>
-    public void Initialize(float angle, Vector2 newPosition, float renderTime, Transform parentLaserBlock)
+    public void Initialize(float renderTime)
     {
-        _parentLaserBlock = parentLaserBlock;
         _lineRenderer.enabled = false;
-        transform.localRotation = Quaternion.Euler(0, 0, angle);
-        transform.position = newPosition;
 
         StartCoroutine(ShootLaser(renderTime));
     }
@@ -65,8 +58,9 @@ public class Laser : MonoBehaviour
 
     private void Update()
     {
-        _lineRenderer.SetPosition(0, _parentLaserBlock.position);
-        _lineRenderer.SetPosition(1, _parentLaserBlock.position + (transform.up * CheckDistance()));
+        _lineRenderer.SetPosition(0, transform.parent.position);
+        _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * CheckDistance()));
+        _hitLight.transform.position = _lineRenderer.GetPosition(1);
     }
 
 
@@ -91,27 +85,29 @@ public class Laser : MonoBehaviour
 
     private IEnumerator CheckObjectCollision(float renderTime)
     {
-        _hitLight.transform.position = _parentLaserBlock.position + (transform.up * CheckDistance());
         _hitLight.enabled = true;
 
-        _particleSystem.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.localRotation.z + 180));
+        _hitLight.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.parent.localRotation.eulerAngles.z + 180));
         _particleSystem.GetComponent<ParticleSystem>().Play();
 
-        for (int i = 0; i < 5; i++)
+        float timeLeft = renderTime;
+        while (timeLeft > 0)
         {
-            if (Physics2D.RaycastAll(_parentLaserBlock.position, transform.up, 10)[0].collider.TryGetComponent(out Player player))
+            if (Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[0].collider.TryGetComponent(out Player player))
                 player.GetHit();
 
-            yield return new WaitForSeconds(renderTime / 5);
+            yield return new WaitForFixedUpdate();
+            timeLeft -= Time.fixedDeltaTime;
         }
 
         _hitLight.enabled = false;
+        _particleSystem.GetComponent<ParticleSystem>().Stop();
     }
 
 
     private float CheckDistance()
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(_parentLaserBlock.position, transform.up, 10);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10);
 
         return hits[hits.Length - 1].distance * (!_fake ? 1 : 0.5f);
     }

@@ -9,19 +9,19 @@ public class LaserBlock : MonoBehaviour
     /// Laser prefab, used in shooting laser.
     /// </summary>
     [SerializeField]
-    private GameObject _laser;
+    protected GameObject _laser;
 
     /// <summary>
     /// Fake laser, used to show where the laser will strike.
     /// </summary>
     [SerializeField]
-    private GameObject _semiLaser;
+    protected GameObject _semiLaser;
 
     /// <summary>
     /// Clock leds, used to announce next shot.
     /// </summary>
     [SerializeField]
-    private List<GameObject> _clockLeds;
+    protected List<GameObject> _clockLeds;
 
     /// <summary>
     /// Which way the block is facing?
@@ -31,21 +31,21 @@ public class LaserBlock : MonoBehaviour
     /// 2 => Bottom
     /// 3 => Right
     [SerializeField]
-    private int _facing;
+    protected int _facing;
 
     /// <summary>
     /// Canon component.
     /// </summary>
     [SerializeField]
-    private Transform _canon;
+    protected Transform _canon;
 
     [SerializeField]
-    private ParticleSystem _particleSystem;
+    protected ParticleSystem _particleSystem;
 
     [SerializeField]
-    private List<AudioClip> _laserSounds;
+    protected List<AudioClip> _laserSounds;
 
-    private AudioSource _audioSource;
+    protected AudioSource _audioSource;
 
 
     /// <summary>
@@ -56,9 +56,9 @@ public class LaserBlock : MonoBehaviour
     /// <summary>
     /// Difficulty loaded in the laser.
     /// </summary>
-    private LevelDifficulty _difficulty;
+    protected LevelDifficulty _difficulty;
 
-    private Light2D _light;
+    protected Light2D _light;
 
 
     /// <summary>
@@ -109,7 +109,7 @@ public class LaserBlock : MonoBehaviour
     /// <summary>
     /// Coroutine used to delay next shot.
     /// </summary>
-    private IEnumerator DelayShot()
+    protected virtual IEnumerator DelayShot()
     {
         Used = true;
         _light.enabled = true;
@@ -135,17 +135,18 @@ public class LaserBlock : MonoBehaviour
                 angle += Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
             }
 
-            _particleSystem.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            _canon.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-            Shot(_semiLaser, angle);
+            Shot(_semiLaser, _difficulty.ReactionTime);
             yield return new WaitForSeconds(_difficulty.ReactionTime);
-            Shot(_laser, angle);
+            Shot(_laser, _difficulty.ReactionTime);
 
             _audioSource.clip = _laserSounds[Random.Range(0, _laserSounds.Count)];
             _audioSource.Play();
             _particleSystem.Play();
 
             yield return new WaitForSeconds(_difficulty.ReactionTime);
+            _particleSystem.Stop();
         }
 
         for (int i = 0; i < _clockLeds.Count; i++)
@@ -160,18 +161,18 @@ public class LaserBlock : MonoBehaviour
     /// Method called when the block shoots a laser.
     /// </summary>
     /// <param name="laser">What laser will be fired?</param>
-    /// <param name="angle">The new angle for this laser</param>
-    private void Shot(GameObject laser, float angle)
+    protected void Shot(GameObject laser, float reactionTime)
     {
         GameObject buffer = Controller.Instance.PoolController.GiveObject(laser);
-        buffer.GetComponent<Laser>().Initialize(angle, _canon.position, _difficulty.ReactionTime, _canon);
+        buffer.GetComponent<Laser>().Initialize(reactionTime);
+        buffer.transform.SetParent(_canon);
     }
 
 
     /// <summary>
     /// Method called to reset the object back to its original state.
     /// </summary>
-    public void ResetObject()
+    public virtual void ResetObject()
     {
         StopAllCoroutines();
         Used = false;
@@ -179,5 +180,7 @@ public class LaserBlock : MonoBehaviour
 
         for (int i = 0; i < _clockLeds.Count; i++)
             _clockLeds[i].SetActive(false);
+
+        _particleSystem.Stop();
     }
 }
