@@ -28,7 +28,7 @@ public class LevelSelectionController : MonoBehaviour
     /// <param name="index">The index of the level</param>
     public void LoadLevel(int index)
     {
-        Controller.Instance.ChoiceController.LevelIndex = index;
+        Controller.Instance.SaveController.LevelIndex = index;
         SceneManager.LoadScene("PlayScene");
     }
 

@@ -17,11 +17,6 @@ public class Controller : MonoBehaviour
     public PoolController PoolController { get; private set; }
 
     /// <summary>
-    /// Choice Controller component.
-    /// </summary>
-    public ChoiceController ChoiceController { get; private set; }
-
-    /// <summary>
     /// UI Controller component.
     /// </summary>
     public UIController UIController { get; private set; }
@@ -55,7 +50,6 @@ public class Controller : MonoBehaviour
         Instance = this;
 
         PoolController = GetComponent<PoolController>();
-        ChoiceController = GetComponent<ChoiceController>();
         SaveController = GetComponent<SaveController>();
     }
 
