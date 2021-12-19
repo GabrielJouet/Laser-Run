@@ -125,7 +125,6 @@ public class LaserBlock : MonoBehaviour
         for (int i = 0; i < _difficulty.NumberOfShots; i ++)
         {
             float angle = Random.Range(_difficulty.MinDispersion, _difficulty.MaxDispersion) * (Random.Range(0, 2) == 1 ? -1 : 1);
-            _particleSystem.transform.rotation = Quaternion.Euler(new Vector3(0, 0, _facing * 90 + angle));
 
             if (_difficulty.RandomShots)
                 angle += _facing * 90;
@@ -135,6 +134,8 @@ public class LaserBlock : MonoBehaviour
                 Vector3 vectorToTarget = new Vector3(transform.position.x - buffer.position.x, transform.position.y - buffer.position.y, 0);
                 angle += Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
             }
+
+            _particleSystem.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
             Shot(_semiLaser, angle);
             yield return new WaitForSeconds(_difficulty.ReactionTime);
@@ -163,8 +164,7 @@ public class LaserBlock : MonoBehaviour
     private void Shot(GameObject laser, float angle)
     {
         GameObject buffer = Controller.Instance.PoolController.GiveObject(laser);
-        buffer.GetComponent<Laser>().Initialize(angle, _canon.transform.position, _difficulty.ReactionTime);
-        buffer.transform.SetParent(transform);
+        buffer.GetComponent<Laser>().Initialize(angle, _canon.position, _difficulty.ReactionTime, _canon);
     }
 
 
