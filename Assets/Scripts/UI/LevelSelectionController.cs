@@ -10,6 +10,9 @@ public class LevelSelectionController : MonoBehaviour
     [SerializeField]
     private Transform _levelPanel;
 
+    [SerializeField]
+    private bool _debugMode;
+
 
 
     private void Start()
@@ -18,7 +21,7 @@ public class LevelSelectionController : MonoBehaviour
         List<LevelSave> saves = Controller.Instance.SaveController.SaveFile.LevelsProgression;
 
         for(int i = 0; i < levels.Length; i ++)
-            levels[i].Initialize(saves[i].Locked, saves[i].Time);
+            levels[i].Initialize(_debugMode ? false : saves[i].Locked, saves[i].Time);
     }
 
 
