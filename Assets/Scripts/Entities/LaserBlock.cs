@@ -102,6 +102,23 @@ public class LaserBlock : MonoBehaviour
     {
         _difficulty = difficulty;
 
+        Used = true;
+        _light.enabled = true;
+        _light.intensity = 0.25f;
+
+        StartCoroutine(ChargeUpLaser());
+    }
+
+
+    protected IEnumerator ChargeUpLaser()
+    {
+        for (int i = 0; i < _clockLeds.Count; i++)
+        {
+            yield return new WaitForSeconds(_difficulty.LoadTime / _clockLeds.Count);
+            _light.intensity = 0.25f + i * 0.1f;
+            _clockLeds[i].SetActive(true);
+        }
+
         StartCoroutine(DelayShot());
     }
 
@@ -111,31 +128,9 @@ public class LaserBlock : MonoBehaviour
     /// </summary>
     protected virtual IEnumerator DelayShot()
     {
-        Used = true;
-        _light.enabled = true;
-        _light.intensity = 0.25f;
-
-        for (int i = 0; i < _clockLeds.Count; i++)
-        {
-            yield return new WaitForSeconds(_difficulty.LoadTime / _clockLeds.Count);
-            _light.intensity = 0.25f + i * 0.1f;
-            _clockLeds[i].SetActive(true);
-        }
-
         for (int i = 0; i < _difficulty.NumberOfShots; i ++)
         {
-            float angle = Random.Range(_difficulty.MinDispersion, _difficulty.MaxDispersion) * (Random.Range(0, 2) == 1 ? -1 : 1);
-
-            if (_difficulty.RandomShots)
-                angle += _facing * 90;
-            else
-            {
-                Transform buffer = FindObjectOfType<Player>().transform;
-                Vector3 vectorToTarget = new Vector3(transform.position.x - buffer.position.x, transform.position.y - buffer.position.y, 0);
-                angle += Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
-            }
-
-            _canon.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            _canon.localRotation = Quaternion.Euler(new Vector3(0, 0, ComputeAngle()));
 
             Shot(_semiLaser, _difficulty.ReactionTime);
             yield return new WaitForSeconds(_difficulty.ReactionTime);
@@ -149,11 +144,24 @@ public class LaserBlock : MonoBehaviour
             _particleSystem.Stop();
         }
 
-        for (int i = 0; i < _clockLeds.Count; i++)
-            _clockLeds[i].SetActive(false);
+        ResetObject();
+    }
 
-        Used = false;
-        _light.enabled = false;
+
+    protected float ComputeAngle()
+    {
+        float angle = Random.Range(_difficulty.MinDispersion, _difficulty.MaxDispersion) * (Random.Range(0, 2) == 1 ? -1 : 1);
+
+        if (_difficulty.RandomShots)
+            angle += _facing * 90;
+        else
+        {
+            Transform buffer = FindObjectOfType<Player>().transform;
+            Vector3 vectorToTarget = new Vector3(transform.position.x - buffer.position.x, transform.position.y - buffer.position.y, 0);
+            angle += Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
+        }
+
+        return angle;
     }
 
 

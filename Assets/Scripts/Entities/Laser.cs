@@ -33,6 +33,11 @@ public class Laser : MonoBehaviour
     /// </summary>
     private LineRenderer _lineRenderer;
 
+    /// <summary>
+    /// Does you need to render laser?
+    /// </summary>
+    private bool _renderer = false;
+
 
 
     /// <summary>
@@ -51,16 +56,23 @@ public class Laser : MonoBehaviour
     public void Initialize(float renderTime)
     {
         _lineRenderer.enabled = false;
+        _renderer = false;
 
         StartCoroutine(ShootLaser(renderTime));
     }
 
 
+    /// <summary>
+    /// Update method called every frame.
+    /// </summary>
     private void Update()
     {
-        _lineRenderer.SetPosition(0, transform.parent.position);
-        _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * CheckDistance()));
-        _hitLight.transform.position = _lineRenderer.GetPosition(1);
+        if (_renderer)
+        {
+            _lineRenderer.SetPosition(0, transform.parent.position);
+            _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * CheckDistance()));
+            _hitLight.transform.position = _lineRenderer.GetPosition(1);
+        }
     }
 
 
@@ -71,7 +83,9 @@ public class Laser : MonoBehaviour
     private IEnumerator ShootLaser(float renderTime)
     {
         yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
 
+        _renderer = true;
         _lineRenderer.enabled = true;
 
         if (!_fake)
@@ -83,6 +97,10 @@ public class Laser : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Coroutine used to check the collision with player.
+    /// </summary>
+    /// <param name="renderTime">The render time of the laser</param>
     private IEnumerator CheckObjectCollision(float renderTime)
     {
         _hitLight.enabled = true;
@@ -105,6 +123,10 @@ public class Laser : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method used to compute the distance from the impact.
+    /// </summary>
+    /// <returns>The distance from the object</returns>
     private float CheckDistance()
     {
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10);
