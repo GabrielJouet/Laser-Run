@@ -55,6 +55,9 @@ public class Level : MonoBehaviour
     /// </summary>
     public void Initialize()
     {
+        foreach (LaserBlock block in _blocks)
+            block.ResetObject();
+
         enabled = true;
 
         _uiController = Controller.Instance.UIController;
@@ -141,9 +144,6 @@ public class Level : MonoBehaviour
     public void StopLevel()
     {
         StopAllCoroutines();
-
-        foreach (LaserBlock block in _blocks)
-            block.ResetObject();
 
         enabled = false;
     }
