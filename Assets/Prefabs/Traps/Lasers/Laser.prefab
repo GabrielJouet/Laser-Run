@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fake: 0
-  _particleSystem: {fileID: 507405542714670488}
+  _particleSystem: {fileID: 2993352986550116804}
   _hitLight: {fileID: 2933919599940008805}
 --- !u!1 &5524825852614892261
 GameObject:
@@ -279,5 +279,10 @@ PrefabInstance:
 --- !u!4 &507405542714670488 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 630874643504762133, guid: b26acdafcd2f5f241b3007d024e92009, type: 3}
+  m_PrefabInstance: {fileID: 1138279868039262349}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2993352986550116804 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2756622078615081289, guid: b26acdafcd2f5f241b3007d024e92009, type: 3}
   m_PrefabInstance: {fileID: 1138279868039262349}
   m_PrefabAsset: {fileID: 0}

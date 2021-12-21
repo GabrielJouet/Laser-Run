@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fake: 1
-  _particleSystem: {fileID: 9021536749164310339}
+  _particleSystem: {fileID: 6031098259151057695}
   _hitLight: {fileID: 1425850406637243193}
 --- !u!1001 &8499346676202676822
 PrefabInstance:
@@ -288,5 +288,10 @@ PrefabInstance:
 --- !u!4 &9021536749164310339 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 630874643504762133, guid: b26acdafcd2f5f241b3007d024e92009, type: 3}
+  m_PrefabInstance: {fileID: 8499346676202676822}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6031098259151057695 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2756622078615081289, guid: b26acdafcd2f5f241b3007d024e92009, type: 3}
   m_PrefabInstance: {fileID: 8499346676202676822}
   m_PrefabAsset: {fileID: 0}

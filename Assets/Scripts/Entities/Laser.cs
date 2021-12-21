@@ -19,7 +19,7 @@ public class Laser : MonoBehaviour
     /// Particle component used when the laser hits the wall.
     /// </summary>
     [SerializeField]
-    private Transform _particleSystem;
+    private ParticleSystem _particleSystem;
 
     /// <summary>
     /// Light component used when the laser hits the wall.
@@ -91,11 +91,11 @@ public class Laser : MonoBehaviour
             _hitLight.enabled = true;
 
             _hitLight.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.parent.localRotation.eulerAngles.z + 180));
-            _particleSystem.GetComponent<ParticleSystem>().Play();
+            _particleSystem.Play();
 
             yield return new WaitForSeconds(renderTime);
 
-            _particleSystem.GetComponent<ParticleSystem>().Stop();
+            _particleSystem.Stop();
             _hitLight.enabled = false;
 
             _laserBlockParent.ActiveLaser = false;
