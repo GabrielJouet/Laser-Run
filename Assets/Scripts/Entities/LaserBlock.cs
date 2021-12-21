@@ -176,7 +176,7 @@ public class LaserBlock : MonoBehaviour
     protected void Shot(GameObject laser, float reactionTime)
     {
         GameObject buffer = Controller.Instance.PoolController.GiveObject(laser);
-        buffer.GetComponent<Laser>().Initialize(reactionTime);
+        buffer.GetComponent<Laser>().Initialize(reactionTime, this);
         buffer.transform.SetParent(_canon);
     }
 

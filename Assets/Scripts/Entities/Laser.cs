@@ -33,7 +33,10 @@ public class Laser : MonoBehaviour
     /// </summary>
     private LineRenderer _lineRenderer;
 
-    private bool _casting = false;
+    /// <summary>
+    /// Parent laser block.
+    /// </summary>
+    private LaserBlock _laserBlockParent;
 
 
 
@@ -50,9 +53,10 @@ public class Laser : MonoBehaviour
     /// Initialize method, called when restarting the entity.
     /// </summary>
     /// <param name="renderTime">The render time of this laser</param>
-    public void Initialize(float renderTime)
+    /// <param name="parent">The parent laser block used</param>
+    public void Initialize(float renderTime, LaserBlock parent)
     {
-        _casting = false;
+        _laserBlockParent = parent;
 
         StartCoroutine(ShootLaser(renderTime));
     }
@@ -66,12 +70,8 @@ public class Laser : MonoBehaviour
         _lineRenderer.SetPosition(0, transform.parent.position);
         _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * CheckDistance()));
         _hitLight.transform.position = _lineRenderer.GetPosition(1);
-    }
 
-
-    private void FixedUpdate()
-    {
-        if (!_fake && _casting && Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[0].collider.TryGetComponent(out Player player))
+        if (!_fake && Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[0].collider.TryGetComponent(out Player player))
             player.GetHit();
     }
 
@@ -88,7 +88,6 @@ public class Laser : MonoBehaviour
 
         if (!_fake)
         {
-            _casting = true;
             _hitLight.enabled = true;
 
             _hitLight.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.parent.localRotation.eulerAngles.z + 180));
@@ -96,11 +95,10 @@ public class Laser : MonoBehaviour
 
             yield return new WaitForSeconds(renderTime);
 
-            _casting = false;
             _particleSystem.GetComponent<ParticleSystem>().Stop();
             _hitLight.enabled = false;
 
-            transform.parent.parent.GetComponent<LaserBlock>().ActiveLaser = false;
+            _laserBlockParent.ActiveLaser = false;
         }
         else 
             yield return new WaitForSeconds(renderTime);
