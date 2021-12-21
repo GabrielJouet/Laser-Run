@@ -60,6 +60,8 @@ public class LaserBlock : MonoBehaviour
 
     protected Light2D _light;
 
+    public bool ActiveLaser;
+
 
     /// <summary>
     /// Awake method, used at first.
@@ -102,6 +104,7 @@ public class LaserBlock : MonoBehaviour
     {
         _difficulty = difficulty;
 
+        ActiveLaser = false;
         Used = true;
         _light.enabled = true;
         _light.intensity = 0.25f;
@@ -130,6 +133,7 @@ public class LaserBlock : MonoBehaviour
     {
         for (int i = 0; i < _difficulty.NumberOfShots; i ++)
         {
+            ActiveLaser = true;
             _canon.localRotation = Quaternion.Euler(new Vector3(0, 0, ComputeAngle()));
 
             Shot(_semiLaser, _difficulty.ReactionTime);
@@ -140,7 +144,7 @@ public class LaserBlock : MonoBehaviour
             _audioSource.Play();
             _particleSystem.Play();
 
-            yield return new WaitForSeconds(_difficulty.ReactionTime);
+            yield return new WaitUntil(() => !ActiveLaser);
             _particleSystem.Stop();
         }
 

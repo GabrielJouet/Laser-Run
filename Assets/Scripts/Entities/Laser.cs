@@ -33,10 +33,7 @@ public class Laser : MonoBehaviour
     /// </summary>
     private LineRenderer _lineRenderer;
 
-    /// <summary>
-    /// Does you need to render laser?
-    /// </summary>
-    private bool _renderer = false;
+    private bool _casting = false;
 
 
 
@@ -55,8 +52,7 @@ public class Laser : MonoBehaviour
     /// <param name="renderTime">The render time of this laser</param>
     public void Initialize(float renderTime)
     {
-        _lineRenderer.enabled = false;
-        _renderer = false;
+        _casting = false;
 
         StartCoroutine(ShootLaser(renderTime));
     }
@@ -67,12 +63,16 @@ public class Laser : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (_renderer)
-        {
-            _lineRenderer.SetPosition(0, transform.parent.position);
-            _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * CheckDistance()));
-            _hitLight.transform.position = _lineRenderer.GetPosition(1);
-        }
+        _lineRenderer.SetPosition(0, transform.parent.position);
+        _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * CheckDistance()));
+        _hitLight.transform.position = _lineRenderer.GetPosition(1);
+    }
+
+
+    private void FixedUpdate()
+    {
+        if (!_fake && _casting && Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[0].collider.TryGetComponent(out Player player))
+            player.GetHit();
     }
 
 
@@ -82,44 +82,32 @@ public class Laser : MonoBehaviour
     /// <param name="renderTime">The render time of this laser</param>
     private IEnumerator ShootLaser(float renderTime)
     {
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForFixedUpdate();
 
-        _renderer = true;
         _lineRenderer.enabled = true;
 
         if (!_fake)
-            StartCoroutine(CheckObjectCollision(renderTime));
+        {
+            _casting = true;
+            _hitLight.enabled = true;
 
-        yield return new WaitForSeconds(renderTime);
+            _hitLight.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.parent.localRotation.eulerAngles.z + 180));
+            _particleSystem.GetComponent<ParticleSystem>().Play();
+
+            yield return new WaitForSeconds(renderTime);
+
+            _casting = false;
+            _particleSystem.GetComponent<ParticleSystem>().Stop();
+            _hitLight.enabled = false;
+
+            transform.parent.parent.GetComponent<LaserBlock>().ActiveLaser = false;
+        }
+        else 
+            yield return new WaitForSeconds(renderTime);
+
+        _lineRenderer.enabled = false;
 
         Controller.Instance.PoolController.RetrieveObject(gameObject);
-    }
-
-
-    /// <summary>
-    /// Coroutine used to check the collision with player.
-    /// </summary>
-    /// <param name="renderTime">The render time of the laser</param>
-    private IEnumerator CheckObjectCollision(float renderTime)
-    {
-        _hitLight.enabled = true;
-
-        _hitLight.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.parent.localRotation.eulerAngles.z + 180));
-        _particleSystem.GetComponent<ParticleSystem>().Play();
-
-        float timeLeft = renderTime;
-        while (timeLeft > 0)
-        {
-            if (Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[0].collider.TryGetComponent(out Player player))
-                player.GetHit();
-
-            yield return new WaitForFixedUpdate();
-            timeLeft -= Time.fixedDeltaTime;
-        }
-
-        _hitLight.enabled = false;
-        _particleSystem.GetComponent<ParticleSystem>().Stop();
     }
 
 
