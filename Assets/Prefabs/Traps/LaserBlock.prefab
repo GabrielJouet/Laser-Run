@@ -861,11 +861,13 @@ MonoBehaviour:
   _facing: 0
   _canon: {fileID: 5607517046857423289}
   _particleSystem: {fileID: 8846983643835576605}
+  _laserColor: {r: 1, g: 0, b: 0, a: 1}
   _laserSounds:
   - {fileID: 8300000, guid: 9ad834689fcb3614a91ad3ac5e30ca55, type: 3}
   - {fileID: 8300000, guid: 076fb5ec399bf024fbcb53c09d76ed13, type: 3}
   - {fileID: 8300000, guid: 181f3584e349be14eae7d91a82ba9424, type: 3}
   Used: 0
+  ActiveLaser: 0
 --- !u!1 &9000405307343215314
 GameObject:
   m_ObjectHideFlags: 0

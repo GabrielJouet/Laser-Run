@@ -54,9 +54,19 @@ public class Laser : MonoBehaviour
     /// </summary>
     /// <param name="renderTime">The render time of this laser</param>
     /// <param name="parent">The parent laser block used</param>
-    public void Initialize(float renderTime, LaserBlock parent)
+    /// <param name="newColor">The new color of this laser</param>
+    public void Initialize(float renderTime, LaserBlock parent, Color newColor)
     {
         _laserBlockParent = parent;
+
+        if (!_fake)
+        {
+            _lineRenderer.startColor = newColor;
+            _lineRenderer.endColor = newColor;
+
+            _particleSystem.startColor = newColor;
+            _hitLight.color = newColor;
+        }
 
         StartCoroutine(ShootLaser(renderTime));
     }

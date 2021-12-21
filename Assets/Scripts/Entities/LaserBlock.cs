@@ -43,6 +43,9 @@ public class LaserBlock : MonoBehaviour
     protected ParticleSystem _particleSystem;
 
     [SerializeField]
+    protected Color _laserColor;
+
+    [SerializeField]
     protected List<AudioClip> _laserSounds;
 
     protected AudioSource _audioSource;
@@ -93,6 +96,9 @@ public class LaserBlock : MonoBehaviour
                 _particleSystem.transform.position = transform.position + new Vector3(0.09f, 0);
                 break;
         }
+
+        _particleSystem.startColor = _laserColor;
+        _light.color = _laserColor;
     }
 
 
@@ -176,7 +182,7 @@ public class LaserBlock : MonoBehaviour
     protected void Shot(GameObject laser, float reactionTime)
     {
         GameObject buffer = Controller.Instance.PoolController.GiveObject(laser);
-        buffer.GetComponent<Laser>().Initialize(reactionTime, this);
+        buffer.GetComponent<Laser>().Initialize(reactionTime, this, _laserColor);
         buffer.transform.SetParent(_canon);
     }
 
