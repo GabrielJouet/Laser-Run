@@ -1494,7 +1494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelPanel: {fileID: 1327284500}
-  _debugMode: 1
+  _debugMode: 0
 --- !u!114 &2114007447
 MonoBehaviour:
   m_ObjectHideFlags: 0
