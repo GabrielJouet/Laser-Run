@@ -7,11 +7,17 @@ public class LevelSave
 
     public bool Locked;
 
+    public bool Hard;
+
+    public bool Win;
+
 
 
     public LevelSave(bool locked)
     {
         Time = 0;
         Locked = locked;
+        Hard = false;
+        Win = false;
     }
 }

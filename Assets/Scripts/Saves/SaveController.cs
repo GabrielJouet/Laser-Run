@@ -43,6 +43,8 @@ public class SaveController : MonoBehaviour
 	/// </summary>
 	public int LevelIndex { get; set; }
 
+	public bool Hard { get; set; }
+
 
 	public GameObject CurrentLevel { get => Levels[LevelIndex]; }
 
@@ -150,10 +152,12 @@ public class SaveController : MonoBehaviour
 	public void SaveLevelData(float timeSurvived, bool win)
 	{
 		LevelSave buffer = SaveFile.LevelsProgression[LevelIndex];
+		buffer.Win = win;
 
 		if (timeSurvived > buffer.Time)
 		{
 			buffer.Time = timeSurvived;
+			buffer.Hard = Hard;
 
 			if (win && LevelIndex + 1 < Levels.Count && SaveFile.LevelsProgression[LevelIndex + 1].Locked)
 				SaveFile.LevelsProgression[LevelIndex + 1] = new LevelSave(false);
