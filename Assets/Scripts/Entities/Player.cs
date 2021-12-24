@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     [Range(0f, 1.5f)]
     protected float _speed;
+    protected float _speedMax;
 
     /// <summary>
     /// All sprites used in destroyed parts.
@@ -77,6 +78,8 @@ public class Player : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        _speedMax = _speed;
     }
 
 
@@ -84,12 +87,14 @@ public class Player : MonoBehaviour
     /// Initialize method used when object is created.
     /// </summary>
     /// <param name="newPosition">The new position of the player</param>
-    public void Initialize(Vector2 newPosition)
+    public void Initialize(Vector2 newPosition, bool hard)
     {
         Dead = false;
         Invicible = false;
 
         transform.position = newPosition;
+
+        _speed = (hard ? 0.75f : 1) * _speedMax;
 
         SwitchState(true);
     }

@@ -32,12 +32,13 @@ public class LevelController : MonoBehaviour
     private void Start()
     {
         Controller.Instance.AddReferencesWhenLoaded(this, GetComponent<UIController>());
+        bool hard = Controller.Instance.SaveController.Hard;
 
         _player = Controller.Instance.PoolController.GiveObject(_playerPrefab).GetComponent<Player>();
-        _player.Initialize(Vector2.zero);
+        _player.Initialize(Vector2.zero, hard);
 
         _level = Instantiate(Controller.Instance.SaveController.CurrentLevel).GetComponent<Level>();
-        _level.Initialize();
+        _level.Initialize(hard);
     }
 
 
@@ -75,10 +76,11 @@ public class LevelController : MonoBehaviour
     {
         Controller.Instance.PoolController.RetrieveAllPools();
         Controller.Instance.UIController.HideGameOverScreen();
+        bool hard = Controller.Instance.SaveController.Hard;
 
         _player = Controller.Instance.PoolController.GiveObject(_playerPrefab).GetComponent<Player>();
-        _player.Initialize(Vector2.zero);
+        _player.Initialize(Vector2.zero, hard);
 
-        _level.Initialize();
+        _level.Initialize(hard);
     }
 }
