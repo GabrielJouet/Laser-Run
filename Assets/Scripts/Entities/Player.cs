@@ -59,7 +59,13 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Does the player is dead?
     /// </summary>
-    protected bool _dead = false;
+    public bool Dead { get; private set; }
+
+
+    /// <summary>
+    /// Does the player is invicible?
+    /// </summary>
+    public bool Invicible { get; private set; }
 
 
 
@@ -80,6 +86,9 @@ public class Player : MonoBehaviour
     /// <param name="newPosition">The new position of the player</param>
     public void Initialize(Vector2 newPosition)
     {
+        Dead = false;
+        Invicible = false;
+
         transform.position = newPosition;
 
         SwitchState(true);
@@ -137,7 +146,7 @@ public class Player : MonoBehaviour
         _spriteRenderer.enabled = activated;
         _shadowSpriteRenderer.enabled = activated;
 
-        _dead = !activated;
+        Dead = !activated;
     }
 
 
@@ -157,13 +166,19 @@ public class Player : MonoBehaviour
     /// </summary>
     public void GetHit()
     {
-        if (!_dead)
-        {
-            ExplodeIntoPieces();
-            Controller.Instance.LevelController.FinishLevel(false);
+        ExplodeIntoPieces();
+        Controller.Instance.LevelController.FinishLevel(false);
 
-            SwitchState(false);
-        }
+        SwitchState(false);
+    }
+
+
+    /// <summary>
+    /// Method called when the level is finished.
+    /// </summary>
+    public void BecameInvicible()
+    {
+        Invicible = true;
     }
 
 

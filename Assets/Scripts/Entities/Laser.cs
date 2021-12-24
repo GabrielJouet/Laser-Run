@@ -81,7 +81,7 @@ public class Laser : MonoBehaviour
         _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * CheckDistance()));
         _hitLight.transform.position = _lineRenderer.GetPosition(1);
 
-        if (!_fake && Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[0].collider.TryGetComponent(out Player player))
+        if (!_fake && Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[0].collider.TryGetComponent(out Player player) && !player.Invicible)
             player.GetHit();
     }
 

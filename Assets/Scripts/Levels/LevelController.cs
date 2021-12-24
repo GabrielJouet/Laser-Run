@@ -48,6 +48,10 @@ public class LevelController : MonoBehaviour
     public void FinishLevel(bool win)
     {
         _level.StopLevel();
+        _player.BecameInvicible();
+
+        if (_level.TimeElapsed >= _level.NeededTime)
+            win = true;
 
         Controller.Instance.SaveController.SaveLevelData(win ? _level.NeededTime : _level.TimeElapsed, win);
         Controller.Instance.UIController.DisplayGameOverScreen(win);
