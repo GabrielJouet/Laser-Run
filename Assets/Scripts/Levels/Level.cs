@@ -13,6 +13,9 @@ public class Level : MonoBehaviour
     [SerializeField]
     private List<LaserBlock> _blocks;
 
+    [SerializeField]
+    private List<ThreatLights> _lights;
+
     /// <summary>
     /// All difficulties in the level.
     /// </summary>
@@ -61,8 +64,10 @@ public class Level : MonoBehaviour
         enabled = true;
 
         _uiController = Controller.Instance.UIController;
-        _loadedDifficulty = _difficulties[0];
-        _index = 0;
+
+        LoadDifficulty(_difficulties[0]);
+
+         _index = 0;
         TimeElapsed = 0;
 
         StartCoroutine(LoadTraps());
@@ -131,10 +136,32 @@ public class Level : MonoBehaviour
             _index++;
 
             if (_index < _difficulties.Count)
-                _loadedDifficulty = _difficulties[_index];
+                LoadDifficulty(_difficulties[_index]);
         }
 
         Controller.Instance.LevelController.FinishLevel(true);
+    }
+
+
+    private void LoadDifficulty(LevelDifficulty level)
+    {
+        _loadedDifficulty = level;
+        _uiController.UpdateThreatLevel(_loadedDifficulty.ThreatLevel, _loadedDifficulty.ThreatDescription);
+
+        if (_loadedDifficulty.Warning)
+            StartCoroutine(LightWarning());
+    }
+
+
+    private IEnumerator LightWarning()
+    {
+        foreach (ThreatLights light in _lights)
+            light.LightUp();
+
+        yield return new WaitForSeconds(5f);
+
+        foreach (ThreatLights light in _lights)
+            light.CutOff();
     }
 
 

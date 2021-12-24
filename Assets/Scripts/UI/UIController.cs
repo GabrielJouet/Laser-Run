@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,12 @@ public class UIController : MonoBehaviour
     /// </summary>
     [SerializeField]
     private Text _timeLeft;
+
+    [SerializeField]
+    private Text _threatLevel;
+
+    [SerializeField]
+    private Text _threatDescription;
 
     /// <summary>
     /// Game over screen that will be displayed at the end of the level.
@@ -40,6 +47,18 @@ public class UIController : MonoBehaviour
     public void UpdateTimeLeft(float timeLeft)
     {
         _timeLeft.text = string.Format("{0:#.00 sec}", timeLeft);
+    }
+
+
+    public void UpdateThreatLevel(int threatLevel, string description)
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.Append("Threat Level: ");
+        stringBuilder.Append(threatLevel);
+
+        _threatLevel.text = stringBuilder.ToString();
+
+        _threatDescription.text = description;
     }
 
 
