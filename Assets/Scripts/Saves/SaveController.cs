@@ -152,7 +152,7 @@ public class SaveController : MonoBehaviour
 	public void SaveLevelData(float timeSurvived, bool win)
 	{
 		LevelSave buffer = SaveFile.LevelsProgression[LevelIndex];
-		buffer.Win = win;
+		buffer.Win = buffer.Win || win;
 
 		if (timeSurvived > buffer.Time)
 		{
