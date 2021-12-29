@@ -7,6 +7,7 @@ using UnityEngine;
 [Serializable]
 public class LevelDifficulty
 {
+    [Header("Activation")]
     /// <summary>
     /// Time between each laser block activation.
     /// </summary>
@@ -14,6 +15,14 @@ public class LevelDifficulty
     [Range(0.5f, 10f)]
     private float _activationTime;
     public float ActivationTime { get => _activationTime; }
+    
+    /// <summary>
+    /// How many traps activated at once.
+    /// </summary>
+    [SerializeField]
+    [Range(1, 5)]
+    private int _activationNumber;
+    public int ActivationCount { get => _activationNumber; }
 
     /// <summary>
     /// Warm up time for block.
@@ -22,6 +31,9 @@ public class LevelDifficulty
     [Range(0.1f, 5f)]
     private float _loadTime;
     public float LoadTime { get => _loadTime; }
+
+
+    [Header("Laser")]
 
     /// <summary>
     /// Time before and after each laser is fired.
@@ -39,6 +51,9 @@ public class LevelDifficulty
     private float _displayTime;
     public float DisplayTime { get => _displayTime; }
 
+
+    [Header("Acurracy")]
+
     /// <summary>
     /// Minimum dispersion of laser.
     /// </summary>
@@ -54,6 +69,9 @@ public class LevelDifficulty
     [Range(0f, 90f)]
     private float _dispersionMax;
     public float MaxDispersion { get => _dispersionMax; }
+
+
+    [Header("Difficulty")]
 
     /// <summary>
     /// How many shots per activation.

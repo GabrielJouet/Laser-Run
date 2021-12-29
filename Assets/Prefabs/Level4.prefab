@@ -57,6 +57,7 @@ MonoBehaviour:
   - {fileID: 5751328555671630052}
   _difficulties:
   - _activationTime: 3
+    _activationNumber: 1
     _loadTime: 0.7
     _reactionTime: 0.6
     _displayTime: 0.8
@@ -67,6 +68,7 @@ MonoBehaviour:
     _warning: 0
     _threatDescription: Two lasers, slow
   - _activationTime: 2.9
+    _activationNumber: 1
     _loadTime: 0.65
     _reactionTime: 0.5
     _displayTime: 0.6
@@ -77,6 +79,7 @@ MonoBehaviour:
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 3.5
+    _activationNumber: 1
     _loadTime: 0.65
     _reactionTime: 0.5
     _displayTime: 0.7
@@ -87,6 +90,7 @@ MonoBehaviour:
     _warning: 1
     _threatDescription: Three lasers
   - _activationTime: 2.9
+    _activationNumber: 1
     _loadTime: 0.4
     _reactionTime: 0.48
     _displayTime: 0.6
@@ -97,6 +101,7 @@ MonoBehaviour:
     _warning: 1
     _threatDescription: Five lasers
   - _activationTime: 2.5
+    _activationNumber: 1
     _loadTime: 0.4
     _reactionTime: 0.55
     _displayTime: 0.65

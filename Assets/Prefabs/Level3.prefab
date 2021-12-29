@@ -720,6 +720,7 @@ MonoBehaviour:
   - {fileID: 8416822421916695440}
   _difficulties:
   - _activationTime: 4
+    _activationNumber: 1
     _loadTime: 1
     _reactionTime: 0.65
     _displayTime: 0.85
@@ -730,6 +731,7 @@ MonoBehaviour:
     _warning: 0
     _threatDescription: Three lasers, slow, moving
   - _activationTime: 3
+    _activationNumber: 1
     _loadTime: 1.75
     _reactionTime: 0.75
     _displayTime: 0.9
@@ -740,6 +742,7 @@ MonoBehaviour:
     _warning: 0
     _threatDescription: Two lasers
   - _activationTime: 2.2
+    _activationNumber: 1
     _loadTime: 1.5
     _reactionTime: 0.72
     _displayTime: 1
@@ -750,6 +753,7 @@ MonoBehaviour:
     _warning: 1
     _threatDescription: Three lasers
   - _activationTime: 1.8
+    _activationNumber: 1
     _loadTime: 1.4
     _reactionTime: 0.68
     _displayTime: 1.2

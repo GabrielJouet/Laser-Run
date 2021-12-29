@@ -89,10 +89,13 @@ public class Level : MonoBehaviour
     {
         while (true)
         {
-            LaserBlock block = FindOneBlock();
+            for(int i = 0; i < _loadedDifficulty.ActivationCount; i ++)
+            {
+                LaserBlock block = FindOneBlock();
 
-            if (block != null)
-                block.WarmUp(_loadedDifficulty);
+                if (block != null)
+                    block.WarmUp(_loadedDifficulty);
+            }
 
             yield return new WaitForSeconds(_loadedDifficulty.ActivationTime);
         }

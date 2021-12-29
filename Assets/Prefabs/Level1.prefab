@@ -722,6 +722,7 @@ MonoBehaviour:
   - {fileID: 3427216024458549023}
   _difficulties:
   - _activationTime: 2.9
+    _activationNumber: 1
     _loadTime: 1.5
     _reactionTime: 0.33
     _displayTime: 0.4
@@ -732,6 +733,7 @@ MonoBehaviour:
     _warning: 0
     _threatDescription: Two lasers, quick
   - _activationTime: 3.1
+    _activationNumber: 1
     _loadTime: 2
     _reactionTime: 0.45
     _displayTime: 0.5

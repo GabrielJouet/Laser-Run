@@ -720,6 +720,7 @@ MonoBehaviour:
   - {fileID: 6994542216862099864}
   _difficulties:
   - _activationTime: 3
+    _activationNumber: 1
     _loadTime: 1.5
     _reactionTime: 0.6
     _displayTime: 1
@@ -730,6 +731,7 @@ MonoBehaviour:
     _warning: 0
     _threatDescription: One laser, moving
   - _activationTime: 2.2
+    _activationNumber: 2
     _loadTime: 1.2
     _reactionTime: 0.6
     _displayTime: 1
@@ -737,9 +739,10 @@ MonoBehaviour:
     _dispersionMax: 12
     _shots: 1
     _randomShots: 0
-    _warning: 0
-    _threatDescription: Faster
+    _warning: 1
+    _threatDescription: Two together
   - _activationTime: 2
+    _activationNumber: 1
     _loadTime: 1.2
     _reactionTime: 0.7
     _displayTime: 1.1
@@ -750,6 +753,7 @@ MonoBehaviour:
     _warning: 0
     _threatDescription: Two lasers
   - _activationTime: 2.2
+    _activationNumber: 1
     _loadTime: 1.5
     _reactionTime: 0.65
     _displayTime: 0.95
@@ -760,6 +764,7 @@ MonoBehaviour:
     _warning: 1
     _threatDescription: Three lasers
   - _activationTime: 2
+    _activationNumber: 2
     _loadTime: 1
     _reactionTime: 0.6
     _displayTime: 1
@@ -768,7 +773,7 @@ MonoBehaviour:
     _shots: 3
     _randomShots: 0
     _warning: 1
-    _threatDescription: Faster
+    _threatDescription: Two together
   _timeToLive: 75
 --- !u!1 &2629893778646583845
 GameObject:
