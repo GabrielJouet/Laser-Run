@@ -70,7 +70,7 @@ MonoBehaviour:
     _shots: 1
     _randomShots: 0
     _warning: 0
-    _threatDescription: One laser, slow
+    _threatDescription: One laser, quick
   _timeToLive: 65
 --- !u!1 &4142884126631200976
 GameObject:
