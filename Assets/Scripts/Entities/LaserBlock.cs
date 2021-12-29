@@ -166,9 +166,14 @@ public class LaserBlock : MonoBehaviour
             angle += _facing * 90;
         else
         {
-            Transform buffer = FindObjectOfType<Player>().transform;
-            Vector3 vectorToTarget = new Vector3(transform.position.x - buffer.position.x, transform.position.y - buffer.position.y, 0);
-            angle += Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
+            Player player = FindObjectOfType<Player>();
+
+            if (player != null)
+            {
+                Transform buffer = player.transform;
+                Vector3 vectorToTarget = new Vector3(transform.position.x - buffer.position.x, transform.position.y - buffer.position.y, 0);
+                angle += Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
+            }
         }
 
         return angle;
