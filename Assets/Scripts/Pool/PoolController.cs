@@ -54,7 +54,7 @@ public class PoolController : MonoBehaviour
     {
         foreach (Pool buffer in _pools)
             if (buffer.Class.name == given.name.Substring(0, given.name.Length - 7))
-                buffer.In(given);
+                buffer.In(given, false);
     }
 
 
@@ -63,8 +63,7 @@ public class PoolController : MonoBehaviour
     /// </summary>
     public void RetrieveAllPools()
     {
-        foreach(Pool buffer in _pools)
-            for (int i = 0; i < buffer.transform.childCount; i ++)
-                RetrieveObject(buffer.transform.GetChild(i).gameObject);
+        foreach (Pool buffer in _pools)
+            buffer.RetrieveObjects();
     }
 }

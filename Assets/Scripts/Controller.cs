@@ -4,6 +4,7 @@ using UnityEngine;
 /// Class that will handle every other controllers.
 /// </summary>
 [RequireComponent(typeof(PoolController))]
+[RequireComponent(typeof(SaveController))]
 public class Controller : MonoBehaviour
 {
     /// <summary>
@@ -15,11 +16,6 @@ public class Controller : MonoBehaviour
     /// Pool Controller component.
     /// </summary>
     public PoolController PoolController { get; private set; }
-
-    /// <summary>
-    /// Choice Controller component.
-    /// </summary>
-    public ChoiceController ChoiceController { get; private set; }
 
     /// <summary>
     /// UI Controller component.
@@ -55,7 +51,6 @@ public class Controller : MonoBehaviour
         Instance = this;
 
         PoolController = GetComponent<PoolController>();
-        ChoiceController = GetComponent<ChoiceController>();
         SaveController = GetComponent<SaveController>();
     }
 
@@ -64,9 +59,10 @@ public class Controller : MonoBehaviour
     /// Method called when we load a scene, it allows the UI Controller to update.
     /// </summary>
     /// <param name="newController">New level controller component</param>
-    public void LoadScene(LevelController newController)
+    /// <param name="uiController">New UI controller component</param>
+    public void AddReferencesWhenLoaded(LevelController newController, UIController uiController)
     {
         LevelController = newController;
-        UIController = FindObjectOfType<UIController>();
+        UIController = uiController;
     }
 }

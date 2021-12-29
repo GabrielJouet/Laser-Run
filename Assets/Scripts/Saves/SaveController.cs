@@ -37,6 +37,16 @@ public class SaveController : MonoBehaviour
 	/// Does this component is initialized?
 	/// </summary>
 	public bool Initialized { get; private set; } = false;
+	
+	/// <summary>
+	/// Level chosen.
+	/// </summary>
+	public int LevelIndex { get; set; }
+
+	public bool Hard { get; set; }
+
+
+	public GameObject CurrentLevel { get => Levels[LevelIndex]; }
 
 
 	/// <summary>
@@ -141,15 +151,16 @@ public class SaveController : MonoBehaviour
 	/// <param name="win">Does this level was won</param>
 	public void SaveLevelData(float timeSurvived, bool win)
 	{
-		int levelIndexBuffer = Controller.Instance.ChoiceController.LevelIndex;
-		LevelSave buffer = SaveFile.LevelsProgression[levelIndexBuffer];
+		LevelSave buffer = SaveFile.LevelsProgression[LevelIndex];
+		buffer.Win = buffer.Win || win;
 
 		if (timeSurvived > buffer.Time)
 		{
 			buffer.Time = timeSurvived;
+			buffer.Hard = Hard;
 
-			if (win && levelIndexBuffer + 1 < Levels.Count && SaveFile.LevelsProgression[levelIndexBuffer + 1].Locked)
-				SaveFile.LevelsProgression[levelIndexBuffer + 1] = new LevelSave(false);
+			if (win && LevelIndex + 1 < Levels.Count && SaveFile.LevelsProgression[LevelIndex + 1].Locked)
+				SaveFile.LevelsProgression[LevelIndex + 1] = new LevelSave(false);
 		}
 
 		SaveData();

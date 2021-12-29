@@ -57,47 +57,71 @@ MonoBehaviour:
   - {fileID: 5751328555671630052}
   _difficulties:
   - _activationTime: 3
+    _activationNumber: 1
     _loadTime: 1.5
     _reactionTime: 0.7
+    _displayTime: 0.7
     _dispersionMin: 5
     _dispersionMax: 15
     _shots: 1
     _randomShots: 0
+    _warning: 0
+    _threatDescription: One laser, slow
   - _activationTime: 2.7
+    _activationNumber: 1
     _loadTime: 1.5
     _reactionTime: 0.7
+    _displayTime: 0.7
     _dispersionMin: 4
     _dispersionMax: 14
     _shots: 1
     _randomShots: 0
+    _warning: 0
+    _threatDescription: Faster
   - _activationTime: 2.5
+    _activationNumber: 1
     _loadTime: 1.4
     _reactionTime: 0.7
+    _displayTime: 0.7
     _dispersionMin: 3
     _dispersionMax: 12
     _shots: 1
     _randomShots: 0
+    _warning: 0
+    _threatDescription: Faster
   - _activationTime: 2.8
+    _activationNumber: 1
     _loadTime: 1.5
     _reactionTime: 0.7
+    _displayTime: 0.7
     _dispersionMin: 2
     _dispersionMax: 10
     _shots: 2
     _randomShots: 0
+    _warning: 1
+    _threatDescription: Two lasers
   - _activationTime: 2
+    _activationNumber: 1
     _loadTime: 1.2
     _reactionTime: 0.65
+    _displayTime: 0.65
     _dispersionMin: 0
     _dispersionMax: 7
     _shots: 2
     _randomShots: 0
+    _warning: 0
+    _threatDescription: Faster
   - _activationTime: 2
+    _activationNumber: 1
     _loadTime: 1
     _reactionTime: 0.65
+    _displayTime: 0.65
     _dispersionMin: 2
     _dispersionMax: 4
     _shots: 2
     _randomShots: 0
+    _warning: 0
+    _threatDescription: Faster
   _timeToLive: 50
 --- !u!1 &4142884126631200976
 GameObject:
@@ -1455,7 +1479,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1847044617
-  m_SortingLayer: -1
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -2102,7 +2126,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1140645509
-  m_SortingLayer: 1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

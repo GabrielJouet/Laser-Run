@@ -13,6 +13,12 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Text _timeLeft;
 
+    [SerializeField]
+    private Text _threatDescription;
+
+    [SerializeField]
+    private Text _cautionText;
+
     /// <summary>
     /// Game over screen that will be displayed at the end of the level.
     /// </summary>
@@ -40,6 +46,33 @@ public class UIController : MonoBehaviour
     public void UpdateTimeLeft(float timeLeft)
     {
         _timeLeft.text = string.Format("{0:#.00 sec}", timeLeft);
+    }
+
+
+    public void UpdateThreatLevel(string description, bool warning)
+    {
+        _threatDescription.text = description;
+
+        if (warning)
+            StartCoroutine(DelayCautionText());
+
+        StartCoroutine(DelayThreatLevel());
+    }
+
+
+    private IEnumerator DelayCautionText()
+    {
+        _cautionText.enabled = true;
+        yield return new WaitForSeconds(1);
+        _cautionText.enabled = false;
+    }
+
+
+    private IEnumerator DelayThreatLevel()
+    {
+        _threatDescription.enabled = true;
+        yield return new WaitForSeconds(1);
+        _threatDescription.enabled = false;
     }
 
 

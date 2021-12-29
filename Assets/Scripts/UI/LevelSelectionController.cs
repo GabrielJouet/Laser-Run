@@ -10,6 +10,9 @@ public class LevelSelectionController : MonoBehaviour
     [SerializeField]
     private Transform _levelPanel;
 
+    [SerializeField]
+    private bool _debugMode;
+
 
 
     private void Start()
@@ -18,7 +21,7 @@ public class LevelSelectionController : MonoBehaviour
         List<LevelSave> saves = Controller.Instance.SaveController.SaveFile.LevelsProgression;
 
         for(int i = 0; i < levels.Length; i ++)
-            levels[i].Initialize(saves[i].Locked, saves[i].Time);
+            levels[i].Initialize(_debugMode ? false : saves[i].Locked, saves[i].Time, saves[i].Hard, saves[i].Win);
     }
 
 
@@ -28,7 +31,20 @@ public class LevelSelectionController : MonoBehaviour
     /// <param name="index">The index of the level</param>
     public void LoadLevel(int index)
     {
-        Controller.Instance.ChoiceController.LevelIndex = index;
+        Controller.Instance.SaveController.LevelIndex = index;
+        Controller.Instance.SaveController.Hard = false;
+        SceneManager.LoadScene("PlayScene");
+    }
+
+
+    /// <summary>
+    /// Method called by level buttons when chosen.
+    /// </summary>
+    /// <param name="index">The index of the level</param>
+    public void LoadHardLevel(int index)
+    {
+        Controller.Instance.SaveController.LevelIndex = index;
+        Controller.Instance.SaveController.Hard = true;
         SceneManager.LoadScene("PlayScene");
     }
 

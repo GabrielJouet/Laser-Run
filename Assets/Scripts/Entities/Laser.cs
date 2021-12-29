@@ -19,7 +19,7 @@ public class Laser : MonoBehaviour
     /// Particle component used when the laser hits the wall.
     /// </summary>
     [SerializeField]
-    private GameObject _particleSystem;
+    private ParticleSystem _particleSystem;
 
     /// <summary>
     /// Light component used when the laser hits the wall.
@@ -32,6 +32,11 @@ public class Laser : MonoBehaviour
     /// Line renderer component of the laser.
     /// </summary>
     private LineRenderer _lineRenderer;
+
+    /// <summary>
+    /// Parent laser block.
+    /// </summary>
+    private LaserBlock _laserBlockParent;
 
 
 
@@ -47,16 +52,37 @@ public class Laser : MonoBehaviour
     /// <summary>
     /// Initialize method, called when restarting the entity.
     /// </summary>
-    /// <param name="angle">The new laser angle</param>
-    /// <param name="newPosition">The new position of this laser</param>
     /// <param name="renderTime">The render time of this laser</param>
-    public void Initialize(float angle, Vector2 newPosition, float renderTime)
+    /// <param name="parent">The parent laser block used</param>
+    /// <param name="newColor">The new color of this laser</param>
+    public void Initialize(float renderTime, LaserBlock parent, Color newColor)
     {
-        transform.localRotation = Quaternion.Euler(0, 0, angle);
-        transform.position = newPosition;
+        _laserBlockParent = parent;
 
-        StartCoroutine(StartCasting(renderTime));
-        StartCoroutine(FadeOut(renderTime));
+        if (!_fake)
+        {
+            _lineRenderer.startColor = newColor;
+            _lineRenderer.endColor = newColor;
+
+            _particleSystem.startColor = newColor;
+            _hitLight.color = newColor;
+        }
+
+        StartCoroutine(ShootLaser(renderTime));
+    }
+
+
+    /// <summary>
+    /// Update method called every frame.
+    /// </summary>
+    private void Update()
+    {
+        _lineRenderer.SetPosition(0, transform.parent.position);
+        _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * CheckDistance()));
+        _hitLight.transform.position = _lineRenderer.GetPosition(1);
+
+        if (!_fake && Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[0].collider.TryGetComponent(out Player player) && !player.Invicible)
+            player.GetHit();
     }
 
 
@@ -64,57 +90,43 @@ public class Laser : MonoBehaviour
     /// Coroutine used to cast a laser and checks collision with player.
     /// </summary>
     /// <param name="renderTime">The render time of this laser</param>
-    private IEnumerator StartCasting(float renderTime)
+    private IEnumerator ShootLaser(float renderTime)
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.up, 10);
+        yield return new WaitForFixedUpdate();
 
-        foreach (RaycastHit2D hit in hits)
+        _lineRenderer.enabled = true;
+
+        if (!_fake)
         {
-            _lineRenderer.SetPosition(0, transform.position);
+            _hitLight.enabled = true;
 
-            if (!_fake && hit.collider.TryGetComponent(out Player player))
-            {
-                _lineRenderer.SetPosition(1, player.transform.position);
-                player.GetHit();
-            }
-            else
-            {
-                _lineRenderer.SetPosition(1, transform.position + (transform.up * (!_fake ? hit.distance : hit.distance / 2f)));
+            _hitLight.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.parent.localRotation.eulerAngles.z + 180));
+            _particleSystem.Play();
 
-                if (!_fake)
-                {
-                    _particleSystem.transform.position = _lineRenderer.GetPosition(1);
-                    _particleSystem.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.localRotation.z + 180));
-                    _particleSystem.GetComponent<ParticleSystem>().Play();
+            yield return new WaitForSeconds(renderTime);
 
-                    _hitLight.transform.position = transform.position + (transform.up * (!_fake ? hit.distance : hit.distance / 2f));
-                    _hitLight.enabled = true;
-                }
-            }
+            _particleSystem.Stop();
+            _hitLight.enabled = false;
+
+            _laserBlockParent.ActiveLaser = false;
         }
+        else 
+            yield return new WaitForSeconds(renderTime);
 
-        for (int i = 0; i < 5; i ++)
-        {
-            hits = Physics2D.RaycastAll(transform.position, transform.up, 10);
+        _lineRenderer.enabled = false;
 
-            foreach (RaycastHit2D hit in hits)
-                if (!_fake && hit.collider.TryGetComponent(out Player player))
-                    player.GetHit();
-
-            yield return new WaitForSeconds(renderTime / 5);
-        }
-
-        _hitLight.enabled = false;
+        Controller.Instance.PoolController.RetrieveObject(gameObject);
     }
 
 
     /// <summary>
-    /// Coroutine method used to fade the laser out.
+    /// Method used to compute the distance from the impact.
     /// </summary>
-    /// <param name="renderTime">The render time max of this laser</param>
-    private IEnumerator FadeOut(float renderTime)
+    /// <returns>The distance from the object</returns>
+    private float CheckDistance()
     {
-        yield return new WaitForSeconds(renderTime);
-        Controller.Instance.PoolController.RetrieveObject(gameObject);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10);
+
+        return hits[hits.Length - 1].distance * (!_fake ? 1 : 0.5f);
     }
 }

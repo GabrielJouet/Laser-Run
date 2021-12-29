@@ -12,9 +12,14 @@ public class Pool : MonoBehaviour
     public GameObject Class { get; set; }
 
     /// <summary>
-    /// The current stack of item.
+    /// The current stack of items.
     /// </summary>
     private readonly Stack<GameObject> _itemPool = new Stack<GameObject>();
+
+    /// <summary>
+    /// The current stack of activated items.
+    /// </summary>
+    private readonly List<GameObject> _activePool = new List<GameObject>();
 
 
 
@@ -24,14 +29,18 @@ public class Pool : MonoBehaviour
     /// <returns>The item found or instantiated</returns>
     public GameObject Out()
     {
+        GameObject buffer;
+
         if (_itemPool.Count > 0)
         {
-            GameObject buffer = _itemPool.Pop();
+            buffer = _itemPool.Pop();
             buffer.SetActive(true);
-            return buffer;
         }
         else
-            return Instantiate(Class, transform);
+            buffer = Instantiate(Class, transform);
+
+        _activePool.Add(buffer);
+        return buffer;
     }
 
 
@@ -39,10 +48,26 @@ public class Pool : MonoBehaviour
     /// Method used to get an item in the stack.
     /// </summary>
     /// <param name="newObject">The item wanted</param>
-    public void In(GameObject newObject)
+    /// <param name="reset">Does the object is resetted or not?</param>
+    public void In(GameObject newObject, bool reset)
     {
+        if (!reset)
+            _activePool.Remove(newObject);
+
         newObject.SetActive(false);
         newObject.transform.parent = transform;
         _itemPool.Push(newObject);
+    }
+
+
+    /// <summary>
+    /// Method called to retrieve every active object.
+    /// </summary>
+    public void RetrieveObjects()
+    {
+        foreach(GameObject active in _activePool)
+            In(active, true);
+
+        _activePool.Clear();
     }
 }

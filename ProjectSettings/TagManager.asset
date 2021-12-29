@@ -41,14 +41,14 @@ TagManager:
   - name: Floor
     uniqueID: 1847044617
     locked: 0
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Walls
     uniqueID: 1140645509
     locked: 0
   - name: LaserBlock
     uniqueID: 3027618565
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Laser
     uniqueID: 3680671863

@@ -637,7 +637,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1140645509
-  m_SortingLayer: 1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -721,21 +721,29 @@ MonoBehaviour:
   - {fileID: 5379945245703140232}
   - {fileID: 3427216024458549023}
   _difficulties:
-  - _activationTime: 3
+  - _activationTime: 2.9
+    _activationNumber: 1
     _loadTime: 1.5
-    _reactionTime: 0.3
-    _dispersionMin: 0
-    _dispersionMax: 2
-    _shots: 3
+    _reactionTime: 0.33
+    _displayTime: 0.4
+    _dispersionMin: 1
+    _dispersionMax: 3
+    _shots: 2
     _randomShots: 0
-  - _activationTime: 3
+    _warning: 0
+    _threatDescription: Two lasers, quick
+  - _activationTime: 3.1
+    _activationNumber: 1
     _loadTime: 2
     _reactionTime: 0.45
-    _dispersionMin: 5
-    _dispersionMax: 25
-    _shots: 4
+    _displayTime: 0.5
+    _dispersionMin: 4
+    _dispersionMax: 7
+    _shots: 3
     _randomShots: 0
-  _timeToLive: 60
+    _warning: 1
+    _threatDescription: Three lasers
+  _timeToLive: 55
 --- !u!1 &2629893778646583845
 GameObject:
   m_ObjectHideFlags: 0
@@ -2137,7 +2145,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1847044617
-  m_SortingLayer: -1
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

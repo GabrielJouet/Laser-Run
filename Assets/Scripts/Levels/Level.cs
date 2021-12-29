@@ -53,17 +53,22 @@ public class Level : MonoBehaviour
     /// <summary>
     /// Method called to initialize the object.
     /// </summary>
-    public void Initialize()
+    public void Initialize(bool hard)
     {
+        foreach (LaserBlock block in _blocks)
+            block.ResetObject();
+
         enabled = true;
 
         _uiController = Controller.Instance.UIController;
-        _loadedDifficulty = _difficulties[0];
-        _index = 0;
+
+        LoadDifficulty(_difficulties[0]);
+
+         _index = 0;
         TimeElapsed = 0;
 
-        StartCoroutine(StartBlocks());
-        StartCoroutine(FinishLevel());
+        StartCoroutine(LoadTraps());
+        StartCoroutine(LevelCountDown());
     }
 
 
@@ -80,14 +85,17 @@ public class Level : MonoBehaviour
     /// <summary>
     /// Coroutine used to start and warm up laser blocks.
     /// </summary>
-    private IEnumerator StartBlocks()
+    private IEnumerator LoadTraps()
     {
         while (true)
         {
-            LaserBlock block = FindOneBlock();
+            for(int i = 0; i < _loadedDifficulty.ActivationCount; i ++)
+            {
+                LaserBlock block = FindOneBlock();
 
-            if (block != null)
-                block.WarmUp(_loadedDifficulty);
+                if (block != null)
+                    block.WarmUp(_loadedDifficulty);
+            }
 
             yield return new WaitForSeconds(_loadedDifficulty.ActivationTime);
         }
@@ -119,7 +127,7 @@ public class Level : MonoBehaviour
     /// <summary>
     /// Coroutine that will handle the end of the level.
     /// </summary>
-    private IEnumerator FinishLevel()
+    private IEnumerator LevelCountDown()
     {
         float timeLoaded = _timeToLive / _difficulties.Count;
         for (int i = 0; i < _difficulties.Count; i ++)
@@ -128,10 +136,17 @@ public class Level : MonoBehaviour
             _index++;
 
             if (_index < _difficulties.Count)
-                _loadedDifficulty = _difficulties[_index];
+                LoadDifficulty(_difficulties[_index]);
         }
 
         Controller.Instance.LevelController.FinishLevel(true);
+    }
+
+
+    private void LoadDifficulty(LevelDifficulty level)
+    {
+        _loadedDifficulty = level;
+        _uiController.UpdateThreatLevel(_loadedDifficulty.ThreatDescription, _loadedDifficulty.Warning);
     }
 
 
@@ -141,21 +156,7 @@ public class Level : MonoBehaviour
     public void StopLevel()
     {
         StopAllCoroutines();
-        StartCoroutine(DelayLevelStop(_uiController.ScreenDelayTime));
 
         enabled = false;
-    }
-
-
-    /// <summary>
-    /// Coroutine used to delay the level stops.
-    /// </summary>
-    /// <param name="delayTime">How much time before desactivation?</param>
-    private IEnumerator DelayLevelStop(float delayTime)
-    {
-        yield return new WaitForSeconds(delayTime);
-
-        foreach (LaserBlock block in _blocks)
-            block.ResetObject();
     }
 }

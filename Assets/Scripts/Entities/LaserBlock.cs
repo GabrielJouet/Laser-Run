@@ -9,19 +9,19 @@ public class LaserBlock : MonoBehaviour
     /// Laser prefab, used in shooting laser.
     /// </summary>
     [SerializeField]
-    private GameObject _laser;
+    protected GameObject _laser;
 
     /// <summary>
     /// Fake laser, used to show where the laser will strike.
     /// </summary>
     [SerializeField]
-    private GameObject _semiLaser;
+    protected GameObject _semiLaser;
 
     /// <summary>
     /// Clock leds, used to announce next shot.
     /// </summary>
     [SerializeField]
-    private List<GameObject> _clockLeds;
+    protected List<GameObject> _clockLeds;
 
     /// <summary>
     /// Which way the block is facing?
@@ -31,21 +31,24 @@ public class LaserBlock : MonoBehaviour
     /// 2 => Bottom
     /// 3 => Right
     [SerializeField]
-    private int _facing;
+    protected int _facing;
 
     /// <summary>
     /// Canon component.
     /// </summary>
     [SerializeField]
-    private Transform _canon;
+    protected Transform _canon;
 
     [SerializeField]
-    private ParticleSystem _particleSystem;
+    protected ParticleSystem _particleSystem;
 
     [SerializeField]
-    private List<AudioClip> _laserSounds;
+    protected Color _laserColor;
 
-    private AudioSource _audioSource;
+    [SerializeField]
+    protected List<AudioClip> _laserSounds;
+
+    protected AudioSource _audioSource;
 
 
     /// <summary>
@@ -56,15 +59,17 @@ public class LaserBlock : MonoBehaviour
     /// <summary>
     /// Difficulty loaded in the laser.
     /// </summary>
-    private LevelDifficulty _difficulty;
+    protected LevelDifficulty _difficulty;
 
-    private Light2D _light;
+    protected Light2D _light;
+
+    public bool ActiveLaser;
 
 
     /// <summary>
     /// Awake method, used at first.
     /// </summary>
-    private void Awake()
+    protected virtual void Awake()
     {
         _light = _canon.GetComponent<Light2D>();
         _audioSource = GetComponent<AudioSource>();
@@ -91,6 +96,9 @@ public class LaserBlock : MonoBehaviour
                 _particleSystem.transform.position = transform.position + new Vector3(0.09f, 0);
                 break;
         }
+
+        _particleSystem.startColor = _laserColor;
+        _light.color = _laserColor;
     }
 
 
@@ -102,19 +110,17 @@ public class LaserBlock : MonoBehaviour
     {
         _difficulty = difficulty;
 
-        StartCoroutine(DelayShot());
-    }
-
-
-    /// <summary>
-    /// Coroutine used to delay next shot.
-    /// </summary>
-    private IEnumerator DelayShot()
-    {
+        ActiveLaser = false;
         Used = true;
         _light.enabled = true;
         _light.intensity = 0.25f;
 
+        StartCoroutine(ChargeUpLaser());
+    }
+
+
+    protected IEnumerator ChargeUpLaser()
+    {
         for (int i = 0; i < _clockLeds.Count; i++)
         {
             yield return new WaitForSeconds(_difficulty.LoadTime / _clockLeds.Count);
@@ -122,36 +128,55 @@ public class LaserBlock : MonoBehaviour
             _clockLeds[i].SetActive(true);
         }
 
+        StartCoroutine(DelayShot());
+    }
+
+
+    /// <summary>
+    /// Coroutine used to delay next shot.
+    /// </summary>
+    protected virtual IEnumerator DelayShot()
+    {
         for (int i = 0; i < _difficulty.NumberOfShots; i ++)
         {
-            float angle = Random.Range(_difficulty.MinDispersion, _difficulty.MaxDispersion) * (Random.Range(0, 2) == 1 ? -1 : 1);
-            _particleSystem.transform.rotation = Quaternion.Euler(new Vector3(0, 0, _facing * 90 + angle));
+            ActiveLaser = true;
+            _canon.localRotation = Quaternion.Euler(new Vector3(0, 0, ComputeAngle()));
 
-            if (_difficulty.RandomShots)
-                angle += _facing * 90;
-            else
-            {
-                Transform buffer = FindObjectOfType<Player>().transform;
-                Vector3 vectorToTarget = new Vector3(transform.position.x - buffer.position.x, transform.position.y - buffer.position.y, 0);
-                angle += Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
-            }
-
-            Shot(_semiLaser, angle);
+            Shot(_semiLaser, _difficulty.ReactionTime);
             yield return new WaitForSeconds(_difficulty.ReactionTime);
-            Shot(_laser, angle);
+            Shot(_laser, _difficulty.DisplayTime);
 
             _audioSource.clip = _laserSounds[Random.Range(0, _laserSounds.Count)];
             _audioSource.Play();
             _particleSystem.Play();
 
-            yield return new WaitForSeconds(_difficulty.ReactionTime);
+            yield return new WaitUntil(() => !ActiveLaser);
+            _particleSystem.Stop();
         }
 
-        for (int i = 0; i < _clockLeds.Count; i++)
-            _clockLeds[i].SetActive(false);
+        ResetObject();
+    }
 
-        Used = false;
-        _light.enabled = false;
+
+    protected float ComputeAngle()
+    {
+        float angle = Random.Range(_difficulty.MinDispersion, _difficulty.MaxDispersion) * (Random.Range(0, 2) == 1 ? -1 : 1);
+
+        if (_difficulty.RandomShots)
+            angle += _facing * 90;
+        else
+        {
+            Player player = FindObjectOfType<Player>();
+
+            if (player != null)
+            {
+                Transform buffer = player.transform;
+                Vector3 vectorToTarget = new Vector3(transform.position.x - buffer.position.x, transform.position.y - buffer.position.y, 0);
+                angle += Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
+            }
+        }
+
+        return angle;
     }
 
 
@@ -159,17 +184,19 @@ public class LaserBlock : MonoBehaviour
     /// Method called when the block shoots a laser.
     /// </summary>
     /// <param name="laser">What laser will be fired?</param>
-    /// <param name="angle">The new angle for this laser</param>
-    private void Shot(GameObject laser, float angle)
+    /// <param name="displayTime">How much time the laser will be rendered?</param>
+    protected void Shot(GameObject laser, float displayTime)
     {
-        Controller.Instance.PoolController.GiveObject(laser).GetComponent<Laser>().Initialize(angle, _canon.transform.position, _difficulty.ReactionTime);
+        GameObject buffer = Controller.Instance.PoolController.GiveObject(laser);
+        buffer.GetComponent<Laser>().Initialize(displayTime, this, _laserColor);
+        buffer.transform.SetParent(_canon);
     }
 
 
     /// <summary>
     /// Method called to reset the object back to its original state.
     /// </summary>
-    public void ResetObject()
+    public virtual void ResetObject()
     {
         StopAllCoroutines();
         Used = false;
@@ -177,5 +204,7 @@ public class LaserBlock : MonoBehaviour
 
         for (int i = 0; i < _clockLeds.Count; i++)
             _clockLeds[i].SetActive(false);
+
+        _particleSystem.Stop();
     }
 }

@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     [Range(0f, 1.5f)]
     protected float _speed;
+    protected float _speedMax;
 
     /// <summary>
     /// All sprites used in destroyed parts.
@@ -59,7 +60,13 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Does the player is dead?
     /// </summary>
-    protected bool _dead = false;
+    public bool Dead { get; private set; }
+
+
+    /// <summary>
+    /// Does the player is invicible?
+    /// </summary>
+    public bool Invicible { get; private set; }
 
 
 
@@ -71,6 +78,8 @@ public class Player : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        _speedMax = _speed;
     }
 
 
@@ -78,9 +87,14 @@ public class Player : MonoBehaviour
     /// Initialize method used when object is created.
     /// </summary>
     /// <param name="newPosition">The new position of the player</param>
-    public void Initialize(Vector2 newPosition)
+    public void Initialize(Vector2 newPosition, bool hard)
     {
+        Dead = false;
+        Invicible = false;
+
         transform.position = newPosition;
+
+        _speed = (hard ? 0.75f : 1) * _speedMax;
 
         SwitchState(true);
     }
@@ -122,6 +136,8 @@ public class Player : MonoBehaviour
             _spriteRenderer.flipX = inputs.x < 0;
 
         _rigidBody.MovePosition(_rigidBody.position + inputs * Time.deltaTime * _speed);
+        _spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(transform.position).y * -1;
+        _shadowSpriteRenderer.sortingOrder = _spriteRenderer.sortingOrder - 1;
     }
 
 
@@ -135,7 +151,7 @@ public class Player : MonoBehaviour
         _spriteRenderer.enabled = activated;
         _shadowSpriteRenderer.enabled = activated;
 
-        _dead = !activated;
+        Dead = !activated;
     }
 
 
@@ -155,13 +171,19 @@ public class Player : MonoBehaviour
     /// </summary>
     public void GetHit()
     {
-        if (!_dead)
-        {
-            ExplodeIntoPieces();
-            Controller.Instance.LevelController.FinishLevel(false);
+        ExplodeIntoPieces();
+        Controller.Instance.LevelController.FinishLevel(false);
 
-            SwitchState(false);
-        }
+        SwitchState(false);
+    }
+
+
+    /// <summary>
+    /// Method called when the level is finished.
+    /// </summary>
+    public void BecameInvicible()
+    {
+        Invicible = true;
     }
 
 

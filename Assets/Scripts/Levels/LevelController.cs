@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Class used to handle level and player inside a level.
 /// </summary>
+[RequireComponent(typeof(UIController))]
 public class LevelController : MonoBehaviour
 {
     /// <summary>
@@ -30,19 +31,14 @@ public class LevelController : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        Controller.Instance.LoadScene(this);
+        Controller.Instance.AddReferencesWhenLoaded(this, GetComponent<UIController>());
+        bool hard = Controller.Instance.SaveController.Hard;
 
-        StartLevel(Controller.Instance.SaveController.Levels[Controller.Instance.ChoiceController.LevelIndex]);
-    }
-
-
-    private void StartLevel(GameObject level)
-    {
         _player = Controller.Instance.PoolController.GiveObject(_playerPrefab).GetComponent<Player>();
-        _player.Initialize(Vector2.zero);
+        _player.Initialize(Vector2.zero, hard);
 
-        _level = Instantiate(level).GetComponent<Level>();
-        _level.Initialize();
+        _level = Instantiate(Controller.Instance.SaveController.CurrentLevel).GetComponent<Level>();
+        _level.Initialize(hard);
     }
 
 
@@ -53,6 +49,10 @@ public class LevelController : MonoBehaviour
     public void FinishLevel(bool win)
     {
         _level.StopLevel();
+        _player.BecameInvicible();
+
+        if (_level.TimeElapsed >= _level.NeededTime)
+            win = true;
 
         Controller.Instance.SaveController.SaveLevelData(win ? _level.NeededTime : _level.TimeElapsed, win);
         Controller.Instance.UIController.DisplayGameOverScreen(win);
@@ -76,7 +76,11 @@ public class LevelController : MonoBehaviour
     {
         Controller.Instance.PoolController.RetrieveAllPools();
         Controller.Instance.UIController.HideGameOverScreen();
+        bool hard = Controller.Instance.SaveController.Hard;
 
-        StartLevel(Controller.Instance.SaveController.Levels[Controller.Instance.ChoiceController.LevelIndex]);
+        _player = Controller.Instance.PoolController.GiveObject(_playerPrefab).GetComponent<Player>();
+        _player.Initialize(Vector2.zero, hard);
+
+        _level.Initialize(hard);
     }
 }
