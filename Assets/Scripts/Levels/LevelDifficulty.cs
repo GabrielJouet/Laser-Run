@@ -32,6 +32,14 @@ public class LevelDifficulty
     public float ReactionTime { get => _reactionTime; }
 
     /// <summary>
+    /// Amount of time the laser goes.
+    /// </summary>
+    [SerializeField]
+    [Range(0.05f, 3f)]
+    private float _displayTime;
+    public float DisplayTime { get => _displayTime; }
+
+    /// <summary>
     /// Minimum dispersion of laser.
     /// </summary>
     [SerializeField]

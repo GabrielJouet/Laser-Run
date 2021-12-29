@@ -144,7 +144,7 @@ public class LaserBlock : MonoBehaviour
 
             Shot(_semiLaser, _difficulty.ReactionTime);
             yield return new WaitForSeconds(_difficulty.ReactionTime);
-            Shot(_laser, _difficulty.ReactionTime);
+            Shot(_laser, _difficulty.DisplayTime);
 
             _audioSource.clip = _laserSounds[Random.Range(0, _laserSounds.Count)];
             _audioSource.Play();
@@ -184,10 +184,11 @@ public class LaserBlock : MonoBehaviour
     /// Method called when the block shoots a laser.
     /// </summary>
     /// <param name="laser">What laser will be fired?</param>
-    protected void Shot(GameObject laser, float reactionTime)
+    /// <param name="displayTime">How much time the laser will be rendered?</param>
+    protected void Shot(GameObject laser, float displayTime)
     {
         GameObject buffer = Controller.Instance.PoolController.GiveObject(laser);
-        buffer.GetComponent<Laser>().Initialize(reactionTime, this, _laserColor);
+        buffer.GetComponent<Laser>().Initialize(displayTime, this, _laserColor);
         buffer.transform.SetParent(_canon);
     }
 

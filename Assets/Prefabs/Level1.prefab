@@ -724,6 +724,7 @@ MonoBehaviour:
   - _activationTime: 2.9
     _loadTime: 1.5
     _reactionTime: 0.33
+    _displayTime: 0.4
     _dispersionMin: 1
     _dispersionMax: 3
     _shots: 2
@@ -733,6 +734,7 @@ MonoBehaviour:
   - _activationTime: 3.1
     _loadTime: 2
     _reactionTime: 0.45
+    _displayTime: 0.5
     _dispersionMin: 4
     _dispersionMax: 7
     _shots: 3

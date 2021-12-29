@@ -59,6 +59,7 @@ MonoBehaviour:
   - _activationTime: 3
     _loadTime: 0.7
     _reactionTime: 0.6
+    _displayTime: 0.8
     _dispersionMin: 5
     _dispersionMax: 15
     _shots: 2
@@ -68,6 +69,7 @@ MonoBehaviour:
   - _activationTime: 2.9
     _loadTime: 0.65
     _reactionTime: 0.5
+    _displayTime: 0.6
     _dispersionMin: 4
     _dispersionMax: 12
     _shots: 2
@@ -77,6 +79,7 @@ MonoBehaviour:
   - _activationTime: 3.5
     _loadTime: 0.65
     _reactionTime: 0.5
+    _displayTime: 0.7
     _dispersionMin: 3
     _dispersionMax: 11
     _shots: 3
@@ -86,6 +89,7 @@ MonoBehaviour:
   - _activationTime: 2.9
     _loadTime: 0.4
     _reactionTime: 0.48
+    _displayTime: 0.6
     _dispersionMin: 2
     _dispersionMax: 9
     _shots: 5
@@ -95,6 +99,7 @@ MonoBehaviour:
   - _activationTime: 2.5
     _loadTime: 0.4
     _reactionTime: 0.55
+    _displayTime: 0.65
     _dispersionMin: 0
     _dispersionMax: 4
     _shots: 4
