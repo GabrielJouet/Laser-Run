@@ -49,6 +49,16 @@ public class UIController : MonoBehaviour
     public void UpdateThreatLevel(string description)
     {
         _threatDescription.text = description;
+
+        StartCoroutine(DelayThreatLevel());
+    }
+
+
+    private IEnumerator DelayThreatLevel()
+    {
+        _threatDescription.enabled = true;
+        yield return new WaitForSeconds(1);
+        _threatDescription.enabled = false;
     }
 
 

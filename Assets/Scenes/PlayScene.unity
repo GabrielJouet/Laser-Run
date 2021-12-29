@@ -411,7 +411,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeLeft: {fileID: 1517998386}
-  _threatLevel: {fileID: 0}
   _threatDescription: {fileID: 922436871}
   _gameOverScreen: {fileID: 1017885695}
   _gameOverText: {fileID: 238333141}
@@ -476,6 +475,7 @@ GameObject:
   - component: {fileID: 922436870}
   - component: {fileID: 922436872}
   - component: {fileID: 922436871}
+  - component: {fileID: 922436873}
   m_Layer: 5
   m_Name: ThreatDescription
   m_TagString: Untagged
@@ -544,6 +544,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922436869}
   m_CullTransparentMesh: 1
+--- !u!95 &922436873
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922436869}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1616e504bc6d3f144b72c038e7772e8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1017885695
 GameObject:
   m_ObjectHideFlags: 0
