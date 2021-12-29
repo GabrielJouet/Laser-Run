@@ -146,7 +146,7 @@ public class Level : MonoBehaviour
     private void LoadDifficulty(LevelDifficulty level)
     {
         _loadedDifficulty = level;
-        _uiController.UpdateThreatLevel(_loadedDifficulty.ThreatLevel, _loadedDifficulty.ThreatDescription);
+        _uiController.UpdateThreatLevel(_loadedDifficulty.ThreatDescription);
 
         if (_loadedDifficulty.Warning)
             StartCoroutine(LightWarning());

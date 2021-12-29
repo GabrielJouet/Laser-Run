@@ -71,7 +71,6 @@ MonoBehaviour:
     _randomShots: 0
     _warning: 0
     _threatDescription: One laser, slow
-    _threatLevel: 1
   - _activationTime: 2.7
     _loadTime: 1.5
     _reactionTime: 0.7
@@ -81,7 +80,6 @@ MonoBehaviour:
     _randomShots: 0
     _warning: 0
     _threatDescription: Faster
-    _threatLevel: 1
   - _activationTime: 2.5
     _loadTime: 1.4
     _reactionTime: 0.7
@@ -91,7 +89,6 @@ MonoBehaviour:
     _randomShots: 0
     _warning: 0
     _threatDescription: Faster
-    _threatLevel: 1
   - _activationTime: 2.8
     _loadTime: 1.5
     _reactionTime: 0.7
@@ -101,7 +98,6 @@ MonoBehaviour:
     _randomShots: 0
     _warning: 1
     _threatDescription: Two lasers
-    _threatLevel: 2
   - _activationTime: 2
     _loadTime: 1.2
     _reactionTime: 0.65
@@ -111,7 +107,6 @@ MonoBehaviour:
     _randomShots: 0
     _warning: 0
     _threatDescription: Faster
-    _threatLevel: 2
   - _activationTime: 2
     _loadTime: 1
     _reactionTime: 0.65
@@ -121,7 +116,6 @@ MonoBehaviour:
     _randomShots: 0
     _warning: 0
     _threatDescription: Faster
-    _threatLevel: 2
   _timeToLive: 50
 --- !u!1 &1077064983604101198
 GameObject:

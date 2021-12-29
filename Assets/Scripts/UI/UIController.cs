@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,9 +12,6 @@ public class UIController : MonoBehaviour
     /// </summary>
     [SerializeField]
     private Text _timeLeft;
-
-    [SerializeField]
-    private Text _threatLevel;
 
     [SerializeField]
     private Text _threatDescription;
@@ -50,14 +46,8 @@ public class UIController : MonoBehaviour
     }
 
 
-    public void UpdateThreatLevel(int threatLevel, string description)
+    public void UpdateThreatLevel(string description)
     {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.Append("Threat Level: ");
-        stringBuilder.Append(threatLevel);
-
-        _threatLevel.text = stringBuilder.ToString();
-
         _threatDescription.text = description;
     }
 

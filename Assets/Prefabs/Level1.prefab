@@ -736,7 +736,6 @@ MonoBehaviour:
     _randomShots: 0
     _warning: 0
     _threatDescription: Two lasers, quick
-    _threatLevel: 2
   - _activationTime: 3.1
     _loadTime: 2
     _reactionTime: 0.45
@@ -746,7 +745,6 @@ MonoBehaviour:
     _randomShots: 0
     _warning: 1
     _threatDescription: Three lasers
-    _threatLevel: 3
   _timeToLive: 55
 --- !u!1 &2629893778646583845
 GameObject:

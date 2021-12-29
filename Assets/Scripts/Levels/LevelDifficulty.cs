@@ -78,11 +78,4 @@ public class LevelDifficulty
     [SerializeField]
     private string _threatDescription;
     public string ThreatDescription { get => _threatDescription; }
-
-    /// <summary>
-    /// Does the shots are random or homes at you?
-    /// </summary>
-    [SerializeField]
-    private int _threatLevel;
-    public int ThreatLevel { get => _threatLevel; }
 }
