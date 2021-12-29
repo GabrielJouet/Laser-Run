@@ -16,6 +16,9 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Text _threatDescription;
 
+    [SerializeField]
+    private Text _cautionText;
+
     /// <summary>
     /// Game over screen that will be displayed at the end of the level.
     /// </summary>
@@ -46,11 +49,22 @@ public class UIController : MonoBehaviour
     }
 
 
-    public void UpdateThreatLevel(string description)
+    public void UpdateThreatLevel(string description, bool warning)
     {
         _threatDescription.text = description;
 
+        if (warning)
+            StartCoroutine(DelayCautionText());
+
         StartCoroutine(DelayThreatLevel());
+    }
+
+
+    private IEnumerator DelayCautionText()
+    {
+        _cautionText.enabled = true;
+        yield return new WaitForSeconds(1);
+        _cautionText.enabled = false;
     }
 
 

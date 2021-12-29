@@ -66,14 +66,14 @@ public class LevelDifficulty
     [Header("Display")]
 
     /// <summary>
-    /// Does the shots are random or homes at you?
+    /// Did we need to show a warning for players?
     /// </summary>
     [SerializeField]
     private bool _warning;
     public bool Warning { get => _warning; }
 
     /// <summary>
-    /// Does the shots are random or homes at you?
+    /// What threat comes next?
     /// </summary>
     [SerializeField]
     private string _threatDescription;
