@@ -38,7 +38,7 @@ public class LevelController : MonoBehaviour
         _player.Initialize(Vector2.zero, hard);
 
         _level = Instantiate(Controller.Instance.SaveController.CurrentLevel).GetComponent<Level>();
-        _level.Initialize(hard);
+        _level.Initialize();
     }
 
 
@@ -81,6 +81,6 @@ public class LevelController : MonoBehaviour
         _player = Controller.Instance.PoolController.GiveObject(_playerPrefab).GetComponent<Player>();
         _player.Initialize(Vector2.zero, hard);
 
-        _level.Initialize(hard);
+        _level.Initialize();
     }
 }

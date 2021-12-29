@@ -53,7 +53,7 @@ public class Level : MonoBehaviour
     /// <summary>
     /// Method called to initialize the object.
     /// </summary>
-    public void Initialize(bool hard)
+    public void Initialize()
     {
         foreach (LaserBlock block in _blocks)
             block.ResetObject();
