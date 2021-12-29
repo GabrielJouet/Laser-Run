@@ -30,6 +30,22 @@ public class SaveFile
 
 
     /// <summary>
+    /// Does the music is muted?
+    /// </summary>
+    public bool Bloom { get; set; }
+
+    /// <summary>
+    /// Does the music is muted?
+    /// </summary>
+    public bool ChromaticAberration { get; set; }
+
+    /// <summary>
+    /// Does the music is muted?
+    /// </summary>
+    public bool FilmGrain { get; set; }
+
+
+    /// <summary>
     /// Level progression.
     /// </summary>
     public List<LevelSave> LevelsProgression { get; private set; }
@@ -53,5 +69,9 @@ public class SaveFile
 
         Music = musicLevel;
         MusicMuted = false;
+
+        FilmGrain = true;
+        Bloom = true;
+        ChromaticAberration = true;
     }
 }

@@ -145,6 +145,39 @@ public class SaveController : MonoBehaviour
 
 
 	/// <summary>
+	/// Method used to save music mute.
+	/// </summary>
+	public void SaveBloom(bool bloom)
+	{
+		SaveFile.Bloom = bloom;
+
+		SaveData();
+	}
+
+
+	/// <summary>
+	/// Method used to save music mute.
+	/// </summary>
+	public void SaveGrain(bool filmgrain)
+	{
+		SaveFile.FilmGrain = filmgrain;
+
+		SaveData();
+	}
+
+
+	/// <summary>
+	/// Method used to save music mute.
+	/// </summary>
+	public void SaveChromatic(bool chromatic)
+	{
+		SaveFile.ChromaticAberration = chromatic;
+
+		SaveData();
+	}
+
+
+	/// <summary>
 	/// Method used to save a level data.
 	/// </summary>
 	/// <param name="timeSurvived">Time survived in this level</param>
