@@ -67,13 +67,14 @@ public class MusicController : MonoBehaviour
     /// <param name="title">What music changes?</param>
     private IEnumerator ChangeMusic(bool title)
     {
+        SaveController saveController = GetComponent<SaveController>();
         (title ? _title : _play).Play();
 
         for(int i = 0; i < 50; i ++)
         {
             yield return new WaitForFixedUpdate();
-            _title.volume += title ? 0.02f : -0.02f;
-            _play.volume += title ? -0.02f : 0.02f;
+            _title.volume = Mathf.Clamp(_title.volume + (title ? 0.02f : -0.02f), 0, saveController.SaveFile.Music);
+            _play.volume = Mathf.Clamp(_play.volume + (title ? -0.02f : 0.02f), 0, saveController.SaveFile.Music);
         }
 
         (title ? _play : _title).Stop();
