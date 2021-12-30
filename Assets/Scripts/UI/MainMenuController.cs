@@ -310,5 +310,21 @@ public class MainMenuController : MonoBehaviour
         Controller.Instance.SaveController.ResetData();
         _confirmationText.text = "Done";
         _confirmationButton.enabled = false;
+
+        Screen.fullScreen = _saveController.SaveFile.FullScreen;
+
+        _chromaticStatus.sprite = _saveController.SaveFile.ChromaticAberration ? _yes : _no;
+        _filmGrainStatus.sprite = _saveController.SaveFile.FilmGrain ? _yes : _no;
+        _bloomStatus.sprite = _saveController.SaveFile.Bloom ? _yes : _no;
+
+        _soundStatus.sprite = !_saveController.SaveFile.SoundMuted ? _yes : _no;
+        _soundSlider.value = _saveController.SaveFile.Sound;
+
+        _musicStatus.sprite = !_saveController.SaveFile.MusicMuted ? _yes : _no;
+        _musicSlider.value = _saveController.SaveFile.Music;
+
+        _fullScreenStatus.sprite = _saveController.SaveFile.FullScreen ? _yes : _no;
+
+        Controller.Instance.MusicController.UpdateVolume(1);
     }
 }
