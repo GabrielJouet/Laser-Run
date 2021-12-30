@@ -73,6 +73,7 @@ public class LaserBlock : MonoBehaviour
     {
         _light = _canon.GetComponent<Light2D>();
         _audioSource = GetComponent<AudioSource>();
+        _audioSource.volume = !Controller.Instance.SaveController.SaveFile.SoundMuted ? Controller.Instance.SaveController.SaveFile.Sound : 0;
 
         switch (_facing)
         {

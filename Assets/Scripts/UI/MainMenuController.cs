@@ -86,10 +86,10 @@ public class MainMenuController : MonoBehaviour
         _filmGrainStatus.sprite = _saveController.SaveFile.FilmGrain ? _yes : _no;
         _bloomStatus.sprite = _saveController.SaveFile.Bloom ? _yes : _no;
 
-        _soundStatus.sprite = _saveController.SaveFile.SoundMuted ? _yes : _no;
+        _soundStatus.sprite = !_saveController.SaveFile.SoundMuted ? _yes : _no;
         _soundSlider.value = _saveController.SaveFile.Sound;
 
-        _musicStatus.sprite = _saveController.SaveFile.MusicMuted ? _yes : _no;
+        _musicStatus.sprite = !_saveController.SaveFile.MusicMuted ? _yes : _no;
         _musicSlider.value = _saveController.SaveFile.Music;
 
         _fullScreenStatus.sprite = _saveController.SaveFile.FullScreen ? _yes : _no;
@@ -161,7 +161,7 @@ public class MainMenuController : MonoBehaviour
     public void ChangeSoundStatus()
     {
         bool state = !_saveController.SaveFile.SoundMuted;
-        _soundStatus.sprite = state ? _yes : _no;
+        _soundStatus.sprite = state ? _no : _yes;
 
         _saveController.SaveSoundMute(state);
     }
@@ -176,7 +176,7 @@ public class MainMenuController : MonoBehaviour
     public void ChangeMusicStatus()
     {
         bool state = !_saveController.SaveFile.MusicMuted;
-        _musicStatus.sprite = state ? _yes : _no;
+        _musicStatus.sprite = state ? _no : _yes;
 
         _saveController.SaveMusicMute(state);
     }
