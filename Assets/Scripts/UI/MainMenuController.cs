@@ -244,6 +244,7 @@ public class MainMenuController : MonoBehaviour
         _musicStatus.sprite = state ? _no : _yes;
 
         _saveController.SaveMusicMute(state);
+        Controller.Instance.MusicController.UpdateVolume(state ? 0 : _saveController.SaveFile.Music);
     }
 
 
@@ -253,6 +254,7 @@ public class MainMenuController : MonoBehaviour
     public void UpdateMusicValue()
     {
         _saveController.SaveMusicLevel(_musicSlider.value);
+        Controller.Instance.MusicController.UpdateVolume(_saveController.SaveFile.MusicMuted ? 0 : _musicSlider.value);
     }
 
 

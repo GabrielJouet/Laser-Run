@@ -36,6 +36,7 @@ public class LevelSelectionController : MonoBehaviour
     {
         Controller.Instance.SaveController.LevelIndex = index;
         Controller.Instance.SaveController.Hard = false;
+        Controller.Instance.MusicController.LoadPlay();
         SceneManager.LoadScene("PlayScene");
     }
 
@@ -48,6 +49,7 @@ public class LevelSelectionController : MonoBehaviour
     {
         Controller.Instance.SaveController.LevelIndex = index;
         Controller.Instance.SaveController.Hard = true;
+        Controller.Instance.MusicController.LoadPlay();
         SceneManager.LoadScene("PlayScene");
     }
 

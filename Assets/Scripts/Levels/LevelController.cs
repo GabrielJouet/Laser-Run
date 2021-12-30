@@ -86,6 +86,7 @@ public class LevelController : MonoBehaviour
     public void GoBackToSelection()
     {
         Controller.Instance.PoolController.RetrieveAllPools();
+        Controller.Instance.MusicController.LoadTitle();
         SceneManager.LoadScene("LevelSelection");
     }
 
