@@ -76,6 +76,6 @@ public class MusicController : MonoBehaviour
             _play.volume += title ? -0.02f : 0.02f;
         }
 
-        (title ? _play : _title).Play();
+        (title ? _play : _title).Stop();
     }
 }
