@@ -7,21 +7,24 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class LevelSelectionController : MonoBehaviour
 {
+    /// <summary>
+    /// Every levels.
+    /// </summary>
     [SerializeField]
     private Transform _levelPanel;
 
-    [SerializeField]
-    private bool _debugMode;
 
 
-
+    /// <summary>
+    /// Start method, used after Awake.
+    /// </summary>
     private void Start()
     {
         LevelMenu[] levels = _levelPanel.GetComponentsInChildren<LevelMenu>();
         List<LevelSave> saves = Controller.Instance.SaveController.SaveFile.LevelsProgression;
 
         for(int i = 0; i < levels.Length; i ++)
-            levels[i].Initialize(_debugMode ? false : saves[i].Locked, saves[i].Time, saves[i].Hard, saves[i].Win);
+            levels[i].Initialize(saves[i].Locked, saves[i].Time, saves[i].Hard, saves[i].Win);
     }
 
 
@@ -33,6 +36,7 @@ public class LevelSelectionController : MonoBehaviour
     {
         Controller.Instance.SaveController.LevelIndex = index;
         Controller.Instance.SaveController.Hard = false;
+        Controller.Instance.MusicController.LoadPlay();
         SceneManager.LoadScene("PlayScene");
     }
 
@@ -45,10 +49,14 @@ public class LevelSelectionController : MonoBehaviour
     {
         Controller.Instance.SaveController.LevelIndex = index;
         Controller.Instance.SaveController.Hard = true;
+        Controller.Instance.MusicController.LoadPlay();
         SceneManager.LoadScene("PlayScene");
     }
 
 
+    /// <summary>
+    /// Method called to go back to main menu.
+    /// </summary>
     public void GoBackMainMenu()
     {
         SceneManager.LoadScene("MainMenu");

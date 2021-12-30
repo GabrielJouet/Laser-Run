@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(PoolController))]
 [RequireComponent(typeof(SaveController))]
+[RequireComponent(typeof(MusicController))]
 public class Controller : MonoBehaviour
 {
     /// <summary>
@@ -28,9 +29,14 @@ public class Controller : MonoBehaviour
     public LevelController LevelController { get; private set; }
 
     /// <summary>
-    /// Level Controller component.
+    /// Save Controller component.
     /// </summary>
     public SaveController SaveController { get; private set; }
+
+    /// <summary>
+    /// Music Controller component.
+    /// </summary>
+    public MusicController MusicController { get; private set; }
 
 
 
@@ -44,12 +50,16 @@ public class Controller : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Start method, called after Awake.
+    /// </summary>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
         Application.targetFrameRate = 60;
         Instance = this;
 
+        MusicController = GetComponent<MusicController>();
         PoolController = GetComponent<PoolController>();
         SaveController = GetComponent<SaveController>();
     }

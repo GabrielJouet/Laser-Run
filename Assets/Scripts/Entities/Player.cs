@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 
         transform.position = newPosition;
 
-        _speed = (hard ? 0.75f : 1) * _speedMax;
+        _speed = (hard ? 0.55f : 1) * _speedMax;
 
         SwitchState(true);
     }

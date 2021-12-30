@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 519420036}
   - component: {fileID: 519420035}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420037}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -424,6 +425,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 6042790724714602022, guid: b603f22efec00fb49a8707b226f0265a, type: 3}
+  _thingPrefab: {fileID: 6541510516018691726, guid: 4cb8a664546710c429080b0f6c0723cb, type: 3}
+  _thingSprites:
+  - {fileID: -5425943794297490157, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: -5294178002952207976, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 8665134196411419756, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: -9222459223486235064, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 6260191411142346326, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 3658347772343308625, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 2166339870440278549, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 5878090103876915966, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 4165376735020460750, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 7820540255967630328, guid: 7644eccc371088547a3d9a7182ed519e, type: 3}
+  - {fileID: 5224979451904782105, guid: 7644eccc371088547a3d9a7182ed519e, type: 3}
+  - {fileID: 2954907409714420702, guid: 7644eccc371088547a3d9a7182ed519e, type: 3}
+  - {fileID: -3724855957254468775, guid: 7644eccc371088547a3d9a7182ed519e, type: 3}
+  - {fileID: 8524796770390449646, guid: 7644eccc371088547a3d9a7182ed519e, type: 3}
+  - {fileID: -8891801159525572158, guid: 7644eccc371088547a3d9a7182ed519e, type: 3}
+  - {fileID: 1152880430610030020, guid: 7644eccc371088547a3d9a7182ed519e, type: 3}
+  - {fileID: 831558193659820681, guid: 7644eccc371088547a3d9a7182ed519e, type: 3}
+  - {fileID: 5502333268719121097, guid: 7644eccc371088547a3d9a7182ed519e, type: 3}
+  - {fileID: 7103951892576289403, guid: 7644eccc371088547a3d9a7182ed519e, type: 3}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -564,6 +589,18 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &519420037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c508c6ff1bfecf4e8ae203d08c08458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &922436869
 GameObject:
   m_ObjectHideFlags: 0

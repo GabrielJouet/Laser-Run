@@ -30,6 +30,27 @@ public class SaveFile
 
 
     /// <summary>
+    /// Does the bloom is active?
+    /// </summary>
+    public bool Bloom { get; set; }
+
+    /// <summary>
+    /// Does the chromatic aberration is active?
+    /// </summary>
+    public bool ChromaticAberration { get; set; }
+
+    /// <summary>
+    /// Does the film grain is active?
+    /// </summary>
+    public bool FilmGrain { get; set; }
+
+    /// <summary>
+    /// Does the full screen is active?
+    /// </summary>
+    public bool FullScreen { get; set; }
+
+
+    /// <summary>
     /// Level progression.
     /// </summary>
     public List<LevelSave> LevelsProgression { get; private set; }
@@ -53,5 +74,11 @@ public class SaveFile
 
         Music = musicLevel;
         MusicMuted = false;
+
+        FilmGrain = true;
+        Bloom = true;
+        ChromaticAberration = true;
+
+        FullScreen = true;
     }
 }
