@@ -11,20 +11,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Volume))]
 public class MainMenuController : MonoBehaviour
 {
-    /// <summary>
-    /// Confirmation game object.
-    /// </summary>
-    [SerializeField]
-    private Text _confirmationText;
+    [Header("Main components")]
 
     /// <summary>
-    /// Confirmation game object.
-    /// </summary>
-    [SerializeField]
-    private Button _confirmationButton;
-
-    /// <summary>
-    /// Confirmation game object.
+    /// Main menu.
     /// </summary>
     [SerializeField]
     private GameObject _menuObject;
@@ -35,45 +25,102 @@ public class MainMenuController : MonoBehaviour
     [SerializeField]
     private GameObject _title;
 
+
+    [Header("Confirmation")]
+
+    /// <summary>
+    /// Confirmation game object.
+    /// </summary>
+    [SerializeField]
+    private Text _confirmationText;
+
+    /// <summary>
+    /// Confirmation button object.
+    /// </summary>
+    [SerializeField]
+    private Button _confirmationButton;
+
+
+    [Header("Post processing values")]
+
+    /// <summary>
+    /// Bloom component.
+    /// </summary>
     [SerializeField]
     private Image _bloomStatus;
 
+    /// <summary>
+    /// Chromatic aberration status component.
+    /// </summary>
     [SerializeField]
     private Image _chromaticStatus;
 
+    /// <summary>
+    /// Film grain status component.
+    /// </summary>
     [SerializeField]
     private Image _filmGrainStatus;
 
-
-    [SerializeField]
-    private Sprite _yes;
-
-    [SerializeField]
-    private Sprite _no;
-
-
-    [SerializeField]
-    private Image _soundStatus;
-
-    [SerializeField]
-    private Slider _soundSlider;
-
-
-    [SerializeField]
-    private Image _musicStatus;
-
-    [SerializeField]
-    private Slider _musicSlider;
-
-
+    /// <summary>
+    /// Fullscreen status component.
+    /// </summary>
     [SerializeField]
     private Image _fullScreenStatus;
 
 
+    [Header("Sound and Music")]
+
+    /// <summary>
+    /// Sound status component.
+    /// </summary>
+    [SerializeField]
+    private Image _soundStatus;
+
+    /// <summary>
+    /// Sound slider value component.
+    /// </summary>
+    [SerializeField]
+    private Slider _soundSlider;
+
+
+    /// <summary>
+    /// Music status component.
+    /// </summary>
+    [SerializeField]
+    private Image _musicStatus;
+
+    /// <summary>
+    /// Music slider value component.
+    /// </summary>
+    [SerializeField]
+    private Slider _musicSlider;
+
+
+    [Header("UI Sprites")]
+
+    /// <summary>
+    /// True sprite.
+    /// </summary>
+    [SerializeField]
+    private Sprite _yes;
+
+    /// <summary>
+    /// False sprite.
+    /// </summary>
+    [SerializeField]
+    private Sprite _no;
+
+
+    /// <summary>
+    /// Components shortcuts.
+    /// </summary>
     private Volume _postProcessingVolume;
     private SaveController _saveController;
 
 
+    /// <summary>
+    /// Coroutine used at start.
+    /// </summary>
     protected IEnumerator Start()
     {
         _postProcessingVolume = GetComponent<Volume>();
@@ -125,6 +172,9 @@ public class MainMenuController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method called to invert chromatic aberration.
+    /// </summary>
     public void ChangeCromathicAberration()
     {
         _postProcessingVolume.profile.TryGet(out ChromaticAberration chroma);
@@ -136,6 +186,9 @@ public class MainMenuController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method called to invert film grain.
+    /// </summary>
     public void ChangeFilmGrain()
     {
         _postProcessingVolume.profile.TryGet(out FilmGrain filmGrain);
@@ -147,6 +200,9 @@ public class MainMenuController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method called to invert bloom.
+    /// </summary>
     public void ChangeBloom()
     {
         _postProcessingVolume.profile.TryGet(out Bloom bloom);
@@ -158,6 +214,9 @@ public class MainMenuController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method called to invert sound.
+    /// </summary>
     public void ChangeSoundStatus()
     {
         bool state = !_saveController.SaveFile.SoundMuted;
@@ -167,12 +226,18 @@ public class MainMenuController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method called to change sound value.
+    /// </summary>
     public void UpdateSoundValue()
     {
         _saveController.SaveSoundLevel(_soundSlider.value);
     }
 
 
+    /// <summary>
+    /// Method called to invert music status.
+    /// </summary>
     public void ChangeMusicStatus()
     {
         bool state = !_saveController.SaveFile.MusicMuted;
@@ -182,12 +247,18 @@ public class MainMenuController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method called to change music value.
+    /// </summary>
     public void UpdateMusicValue()
     {
         _saveController.SaveMusicLevel(_musicSlider.value);
     }
 
 
+    /// <summary>
+    /// Method called to invert fullscreen.
+    /// </summary>
     public void ChangeFullScreen()
     {
         bool state = !_saveController.SaveFile.FullScreen;

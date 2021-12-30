@@ -8,6 +8,9 @@ using UnityEngine;
 /// </summary>
 public class SaveController : MonoBehaviour
 {
+	/// <summary>
+	/// All levels availables.
+	/// </summary>
 	[SerializeField]
 	private List<GameObject> _levelAvailables;
 	public List<GameObject> Levels { get => _levelAvailables; }
@@ -38,15 +41,22 @@ public class SaveController : MonoBehaviour
 	/// </summary>
 	public bool Initialized { get; private set; } = false;
 	
+
 	/// <summary>
 	/// Level chosen.
 	/// </summary>
 	public int LevelIndex { get; set; }
 
+	/// <summary>
+	/// Difficulty chosen.
+	/// </summary>
 	public bool Hard { get; set; }
 
-
+	/// <summary>
+	/// Level chosen.
+	/// </summary>
 	public GameObject CurrentLevel { get => Levels[LevelIndex]; }
+
 
 
 	/// <summary>
@@ -145,8 +155,9 @@ public class SaveController : MonoBehaviour
 
 
 	/// <summary>
-	/// Method used to save music mute.
+	/// Method used to save bloom state.
 	/// </summary>
+	/// <param name="bloom">Bloom state</param>
 	public void SaveBloom(bool bloom)
 	{
 		SaveFile.Bloom = bloom;
@@ -156,8 +167,9 @@ public class SaveController : MonoBehaviour
 
 
 	/// <summary>
-	/// Method used to save music mute.
+	/// Method used to save film grain state.
 	/// </summary>
+	/// <param name="filmgrain">Film grain state</param>
 	public void SaveGrain(bool filmgrain)
 	{
 		SaveFile.FilmGrain = filmgrain;
@@ -167,8 +179,9 @@ public class SaveController : MonoBehaviour
 
 
 	/// <summary>
-	/// Method used to save music mute.
+	/// Method used to save chromatic aberration state.
 	/// </summary>
+	/// <param name="chromatic">Chromatic aberration state</param>
 	public void SaveChromatic(bool chromatic)
 	{
 		SaveFile.ChromaticAberration = chromatic;
@@ -178,8 +191,9 @@ public class SaveController : MonoBehaviour
 
 
 	/// <summary>
-	/// Method used to save music mute.
+	/// Method used to save fullscreen state.
 	/// </summary>
+	/// <param name="fullScreen">Fullscreen state</param>
 	public void SaveFullScreen(bool fullScreen)
 	{
 		SaveFile.FullScreen = fullScreen;

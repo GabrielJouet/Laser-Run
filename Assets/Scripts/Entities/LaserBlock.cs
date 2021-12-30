@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
+/// <summary>
+/// Class used to handle every laser block behavior.
+/// </summary>
+/// <remarks>Needs to have an audio source and light 2D components attached</remarks>
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Light2D))]
 public class LaserBlock : MonoBehaviour
 {
     /// <summary>
@@ -39,16 +45,34 @@ public class LaserBlock : MonoBehaviour
     [SerializeField]
     protected Transform _canon;
 
+    /// <summary>
+    /// Particle system used in display.
+    /// </summary>
     [SerializeField]
     protected ParticleSystem _particleSystem;
 
+    /// <summary>
+    /// Color of the laser shot (and particles).
+    /// </summary>
     [SerializeField]
     protected Color _laserColor;
 
+    /// <summary>
+    /// Every sound available for this block.
+    /// </summary>
     [SerializeField]
     protected List<AudioClip> _laserSounds;
 
+
+    /// <summary>
+    /// Audio source component.
+    /// </summary>
     protected AudioSource _audioSource;
+
+    /// <summary>
+    /// Light component of this block.
+    /// </summary>
+    protected Light2D _light;
 
 
     /// <summary>
@@ -57,13 +81,16 @@ public class LaserBlock : MonoBehaviour
     public bool Used;
 
     /// <summary>
+    /// Does a laser is being shot?
+    /// </summary>
+    public bool ActiveLaser;
+
+
+    /// <summary>
     /// Difficulty loaded in the laser.
     /// </summary>
     protected LevelDifficulty _difficulty;
 
-    protected Light2D _light;
-
-    public bool ActiveLaser;
 
 
     /// <summary>
@@ -120,6 +147,9 @@ public class LaserBlock : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Coroutine used to charge up visually the laser block.
+    /// </summary>
     protected IEnumerator ChargeUpLaser()
     {
         for (int i = 0; i < _clockLeds.Count; i++)
@@ -159,6 +189,10 @@ public class LaserBlock : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method used to compute the next shot angle.
+    /// </summary>
+    /// <returns>The angle found</returns>
     protected float ComputeAngle()
     {
         float angle = Random.Range(_difficulty.MinDispersion, _difficulty.MaxDispersion) * (Random.Range(0, 2) == 1 ? -1 : 1);

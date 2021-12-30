@@ -30,22 +30,22 @@ public class SaveFile
 
 
     /// <summary>
-    /// Does the music is muted?
+    /// Does the bloom is active?
     /// </summary>
     public bool Bloom { get; set; }
 
     /// <summary>
-    /// Does the music is muted?
+    /// Does the chromatic aberration is active?
     /// </summary>
     public bool ChromaticAberration { get; set; }
 
     /// <summary>
-    /// Does the music is muted?
+    /// Does the film grain is active?
     /// </summary>
     public bool FilmGrain { get; set; }
 
     /// <summary>
-    /// Does the music is muted?
+    /// Does the full screen is active?
     /// </summary>
     public bool FullScreen { get; set; }
 

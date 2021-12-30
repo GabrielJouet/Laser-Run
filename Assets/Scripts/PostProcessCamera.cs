@@ -3,8 +3,14 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
+/// <summary>
+/// Class used for camera when postprocessing is activated.
+/// </summary>
 public class PostProcessCamera : MonoBehaviour
 {
+    /// <summary>
+    /// Coroutine used to start the object.
+    /// </summary>
     protected IEnumerator Start()
     {
         SaveController saveController = Controller.Instance.SaveController;

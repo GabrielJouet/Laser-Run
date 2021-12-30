@@ -143,6 +143,10 @@ public class Level : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method used to load a new difficulty into the level.
+    /// </summary>
+    /// <param name="level">The new difficulty</param>
     private void LoadDifficulty(LevelDifficulty level)
     {
         _loadedDifficulty = level;

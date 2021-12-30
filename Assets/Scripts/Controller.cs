@@ -44,6 +44,9 @@ public class Controller : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Start method, called after Awake.
+    /// </summary>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);

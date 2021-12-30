@@ -8,14 +8,20 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     /// <summary>
-    /// How much time is left component?
+    /// How much time is left text component?
     /// </summary>
     [SerializeField]
     private Text _timeLeft;
 
+    /// <summary>
+    /// Threat description text component?
+    /// </summary>
     [SerializeField]
     private Text _threatDescription;
 
+    /// <summary>
+    /// Caution text component?
+    /// </summary>
     [SerializeField]
     private Text _cautionText;
 
@@ -39,6 +45,7 @@ public class UIController : MonoBehaviour
     public float ScreenDelayTime { get => _screenDelayTime; }
 
 
+
     /// <summary>
     /// Method called to update the slider and text component.
     /// </summary>
@@ -49,6 +56,11 @@ public class UIController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Method called when the level has an extra threat level?
+    /// </summary>
+    /// <param name="description">The description of this threat</param>
+    /// <param name="warning">Does this threat requires a warning?</param>
     public void UpdateThreatLevel(string description, bool warning)
     {
         _threatDescription.text = description;
@@ -60,6 +72,9 @@ public class UIController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Coroutine used to delay caution text.
+    /// </summary>
     private IEnumerator DelayCautionText()
     {
         _cautionText.enabled = true;
@@ -68,6 +83,9 @@ public class UIController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Coroutine used to delay threat text.
+    /// </summary>
     private IEnumerator DelayThreatLevel()
     {
         _threatDescription.enabled = true;

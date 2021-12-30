@@ -14,9 +14,15 @@ public class LevelController : MonoBehaviour
     [SerializeField]
     private GameObject _playerPrefab;
 
+    /// <summary>
+    /// Detritus prefab.
+    /// </summary>
     [SerializeField]
     private GameObject _thingPrefab;
 
+    /// <summary>
+    /// All detritus sprites available.
+    /// </summary>
     [SerializeField]
     private List<Sprite> _thingSprites;
 
