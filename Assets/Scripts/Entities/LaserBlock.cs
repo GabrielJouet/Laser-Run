@@ -6,9 +6,8 @@ using UnityEngine.Experimental.Rendering.Universal;
 /// <summary>
 /// Class used to handle every laser block behavior.
 /// </summary>
-/// <remarks>Needs to have an audio source and light 2D components attached</remarks>
+/// <remarks>Needs to have an audio source component attached</remarks>
 [RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(Light2D))]
 public class LaserBlock : MonoBehaviour
 {
     /// <summary>
