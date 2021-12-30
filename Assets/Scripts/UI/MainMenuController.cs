@@ -8,6 +8,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Class that will handle every inputs in main menu.
 /// </summary>
+[RequireComponent(typeof(Volume))]
 public class MainMenuController : MonoBehaviour
 {
     /// <summary>
@@ -51,16 +52,47 @@ public class MainMenuController : MonoBehaviour
     private Sprite _no;
 
 
+    [SerializeField]
+    private Image _soundStatus;
+
+    [SerializeField]
+    private Slider _soundSlider;
+
+
+    [SerializeField]
+    private Image _musicStatus;
+
+    [SerializeField]
+    private Slider _musicSlider;
+
+
+    [SerializeField]
+    private Image _fullScreenStatus;
+
+
+    private Volume _postProcessingVolume;
+    private SaveController _saveController;
+
+
     protected IEnumerator Start()
     {
-        SaveController saveController = Controller.Instance.SaveController;
-        yield return new WaitUntil(() => saveController.Initialized);
+        _postProcessingVolume = GetComponent<Volume>();
+        _saveController = Controller.Instance.SaveController;
+        yield return new WaitUntil(() => _saveController.Initialized);
 
-        _chromaticStatus.sprite = saveController.SaveFile.ChromaticAberration ? _yes : _no;
+        Screen.fullScreen = _saveController.SaveFile.FullScreen;
 
-        _filmGrainStatus.sprite = saveController.SaveFile.FilmGrain ? _yes : _no;
+        _chromaticStatus.sprite = _saveController.SaveFile.ChromaticAberration ? _yes : _no;
+        _filmGrainStatus.sprite = _saveController.SaveFile.FilmGrain ? _yes : _no;
+        _bloomStatus.sprite = _saveController.SaveFile.Bloom ? _yes : _no;
 
-        _bloomStatus.sprite = saveController.SaveFile.Bloom ? _yes : _no;
+        _soundStatus.sprite = _saveController.SaveFile.SoundMuted ? _yes : _no;
+        _soundSlider.value = _saveController.SaveFile.Sound;
+
+        _musicStatus.sprite = _saveController.SaveFile.MusicMuted ? _yes : _no;
+        _musicSlider.value = _saveController.SaveFile.Music;
+
+        _fullScreenStatus.sprite = _saveController.SaveFile.FullScreen ? _yes : _no;
     }
 
 
@@ -95,34 +127,74 @@ public class MainMenuController : MonoBehaviour
 
     public void ChangeCromathicAberration()
     {
-        GetComponent<Volume>().profile.TryGet(out ChromaticAberration chroma);
+        _postProcessingVolume.profile.TryGet(out ChromaticAberration chroma);
         chroma.active = !chroma.active;
 
         _chromaticStatus.sprite = chroma.active ? _yes : _no;
 
-        Controller.Instance.SaveController.SaveChromatic(chroma.active);
+        _saveController.SaveChromatic(chroma.active);
     }
 
 
     public void ChangeFilmGrain()
     {
-        GetComponent<Volume>().profile.TryGet(out FilmGrain filmGrain);
+        _postProcessingVolume.profile.TryGet(out FilmGrain filmGrain);
         filmGrain.active = !filmGrain.active;
 
         _filmGrainStatus.sprite = filmGrain.active ? _yes : _no;
 
-        Controller.Instance.SaveController.SaveGrain(filmGrain.active);
+        _saveController.SaveGrain(filmGrain.active);
     }
 
 
     public void ChangeBloom()
     {
-        GetComponent<Volume>().profile.TryGet(out Bloom bloom);
+        _postProcessingVolume.profile.TryGet(out Bloom bloom);
         bloom.active = !bloom.active;
 
         _bloomStatus.sprite = bloom.active ? _yes : _no;
 
-        Controller.Instance.SaveController.SaveBloom(bloom.active);
+        _saveController.SaveBloom(bloom.active);
+    }
+
+
+    public void ChangeSoundStatus()
+    {
+        bool state = !_saveController.SaveFile.SoundMuted;
+        _soundStatus.sprite = state ? _yes : _no;
+
+        _saveController.SaveSoundMute(state);
+    }
+
+
+    public void UpdateSoundValue()
+    {
+        _saveController.SaveSoundLevel(_soundSlider.value);
+    }
+
+
+    public void ChangeMusicStatus()
+    {
+        bool state = !_saveController.SaveFile.MusicMuted;
+        _musicStatus.sprite = state ? _yes : _no;
+
+        _saveController.SaveMusicMute(state);
+    }
+
+
+    public void UpdateMusicValue()
+    {
+        _saveController.SaveMusicLevel(_musicSlider.value);
+    }
+
+
+    public void ChangeFullScreen()
+    {
+        bool state = !_saveController.SaveFile.FullScreen;
+        _fullScreenStatus.sprite = state ? _yes : _no;
+
+        _saveController.SaveFullScreen(state);
+        Screen.fullScreen = state;
     }
 
 

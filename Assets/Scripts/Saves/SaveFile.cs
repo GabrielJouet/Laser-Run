@@ -44,6 +44,11 @@ public class SaveFile
     /// </summary>
     public bool FilmGrain { get; set; }
 
+    /// <summary>
+    /// Does the music is muted?
+    /// </summary>
+    public bool FullScreen { get; set; }
+
 
     /// <summary>
     /// Level progression.
@@ -73,5 +78,7 @@ public class SaveFile
         FilmGrain = true;
         Bloom = true;
         ChromaticAberration = true;
+
+        FullScreen = true;
     }
 }

@@ -178,6 +178,17 @@ public class SaveController : MonoBehaviour
 
 
 	/// <summary>
+	/// Method used to save music mute.
+	/// </summary>
+	public void SaveFullScreen(bool fullScreen)
+	{
+		SaveFile.FullScreen = fullScreen;
+
+		SaveData();
+	}
+
+
+	/// <summary>
 	/// Method used to save a level data.
 	/// </summary>
 	/// <param name="timeSurvived">Time survived in this level</param>
