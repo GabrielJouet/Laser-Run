@@ -1954,7 +1954,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Wild Box Studio - Gabriel Jouet
+  m_Text: A running game by Gabriel Jouet
 --- !u!222 &754524837
 CanvasRenderer:
   m_ObjectHideFlags: 0
