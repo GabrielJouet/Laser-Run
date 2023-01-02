@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 /// <summary>
 /// Class used to handle every laser block behavior.
@@ -71,7 +71,7 @@ public class LaserBlock : MonoBehaviour
     /// <summary>
     /// Light component of this block.
     /// </summary>
-    protected Light2D _light;
+    protected UnityEngine.Rendering.Universal.Light2D _light;
 
 
     /// <summary>
@@ -97,7 +97,7 @@ public class LaserBlock : MonoBehaviour
     /// </summary>
     protected virtual void Awake()
     {
-        _light = _canon.GetComponent<Light2D>();
+        _light = _canon.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = !Controller.Instance.SaveController.SaveFile.SoundMuted ? Controller.Instance.SaveController.SaveFile.Sound : 0;
 

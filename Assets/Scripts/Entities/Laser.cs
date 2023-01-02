@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 /// <summary>
 /// Class used to emulates a laser behavior.
@@ -25,7 +25,7 @@ public class Laser : MonoBehaviour
     /// Light component used when the laser hits the wall.
     /// </summary>
     [SerializeField]
-    private Light2D _hitLight;
+    private UnityEngine.Rendering.Universal.Light2D _hitLight;
 
 
     /// <summary>
