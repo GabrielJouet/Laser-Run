@@ -115,7 +115,7 @@ public class Laser : MonoBehaviour
 
         _lineRenderer.enabled = false;
 
-        Controller.Instance.PoolController.RetrieveObject(gameObject);
+        Controller.Instance.PoolController.In(gameObject);
     }
 
 

@@ -37,7 +37,10 @@ public class Pool : MonoBehaviour
             buffer.SetActive(true);
         }
         else
+        {
             buffer = Instantiate(Class, transform);
+            buffer.name = Class.name;
+        }
 
         _activePool.Add(buffer);
         return buffer;

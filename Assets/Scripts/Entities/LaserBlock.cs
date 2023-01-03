@@ -221,7 +221,7 @@ public class LaserBlock : MonoBehaviour
     /// <param name="displayTime">How much time the laser will be rendered?</param>
     protected void Shot(GameObject laser, float displayTime)
     {
-        GameObject buffer = Controller.Instance.PoolController.GiveObject(laser);
+        GameObject buffer = Controller.Instance.PoolController.Out(laser);
         buffer.GetComponent<Laser>().Initialize(displayTime, this, _laserColor);
         buffer.transform.SetParent(_canon);
     }

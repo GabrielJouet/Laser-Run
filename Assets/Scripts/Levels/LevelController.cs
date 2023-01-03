@@ -46,14 +46,14 @@ public class LevelController : MonoBehaviour
     {
         Controller.Instance.AddReferencesWhenLoaded(this, GetComponent<UIController>());
 
-        _player = Controller.Instance.PoolController.GiveObject(_playerPrefab).GetComponent<Player>();
+        _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
         _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);
 
         _level = Instantiate(Controller.Instance.SaveController.CurrentLevel).GetComponent<Level>();
 
         for(int i = 0; i < Random.Range(3, 15); i ++)
         {
-            GameObject thingBuffer = Controller.Instance.PoolController.GiveObject(_thingPrefab);
+            GameObject thingBuffer = Controller.Instance.PoolController.Out(_thingPrefab);
             thingBuffer.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
             thingBuffer.transform.localPosition = new Vector2(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f));
             thingBuffer.GetComponent<SpriteRenderer>().sprite = _thingSprites[Random.Range(0, _thingSprites.Count)];
@@ -100,12 +100,12 @@ public class LevelController : MonoBehaviour
         Controller.Instance.UIController.HideGameOverScreen();
         bool hard = Controller.Instance.SaveController.Hard;
 
-        _player = Controller.Instance.PoolController.GiveObject(_playerPrefab).GetComponent<Player>();
+        _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
         _player.Initialize(Vector2.zero, hard);
 
         for (int i = 0; i < Random.Range(3, 15); i++)
         {
-            GameObject thingBuffer = Controller.Instance.PoolController.GiveObject(_thingPrefab);
+            GameObject thingBuffer = Controller.Instance.PoolController.Out(_thingPrefab);
             thingBuffer.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
             thingBuffer.transform.localPosition = new Vector2(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f));
             thingBuffer.GetComponent<SpriteRenderer>().sprite = _thingSprites[Random.Range(0, _thingSprites.Count)];

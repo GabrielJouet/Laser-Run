@@ -197,7 +197,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < Random.Range(3, 8); i++)
         {
             Vector2 directions = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 25;
-            GameObject buffer = poolController.GiveObject(_destroyedPartPrefab);
+            GameObject buffer = poolController.Out(_destroyedPartPrefab);
             buffer.transform.position = transform.position;
             buffer.GetComponent<Rigidbody2D>().AddForce(directions);
             buffer.GetComponent<SpriteRenderer>().sprite = _destroyedParts[Random.Range(0, _destroyedParts.Count)];
