@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.Rendering.Universal;
 
 /// <summary>
 /// Class used to emulates a laser behavior.
@@ -25,18 +25,13 @@ public class Laser : MonoBehaviour
     /// Light component used when the laser hits the wall.
     /// </summary>
     [SerializeField]
-    private UnityEngine.Rendering.Universal.Light2D _hitLight;
+    private Light2D _hitLight;
 
 
     /// <summary>
     /// Line renderer component of the laser.
     /// </summary>
     private LineRenderer _lineRenderer;
-
-    /// <summary>
-    /// Parent laser block.
-    /// </summary>
-    private LaserBlock _laserBlockParent;
 
 
 
@@ -53,12 +48,9 @@ public class Laser : MonoBehaviour
     /// Initialize method, called when restarting the entity.
     /// </summary>
     /// <param name="renderTime">The render time of this laser</param>
-    /// <param name="parent">The parent laser block used</param>
     /// <param name="newColor">The new color of this laser</param>
-    public void Initialize(float renderTime, LaserBlock parent, Color newColor)
+    public void Initialize(float renderTime, Color newColor)
     {
-        _laserBlockParent = parent;
-
         if (!_fake)
         {
             _lineRenderer.startColor = newColor;
@@ -107,8 +99,6 @@ public class Laser : MonoBehaviour
 
             _particleSystem.Stop();
             _hitLight.enabled = false;
-
-            _laserBlockParent.ActiveLaser = false;
         }
         else 
             yield return new WaitForSeconds(renderTime);
@@ -125,8 +115,6 @@ public class Laser : MonoBehaviour
     /// <returns>The distance from the object</returns>
     private float CheckDistance()
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10);
-
-        return hits[hits.Length - 1].distance * (!_fake ? 1 : 0.5f);
+        return Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[^1].distance * (!_fake ? 1 : 0.5f);
     }
 }
