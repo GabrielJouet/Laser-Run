@@ -165,7 +165,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c5eca9c4a3f318147947c0fdee0870f4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6c4253abd252f65428f5a64e7885f43b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
@@ -3623,7 +3623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e314c94fc818a934b80a32f6a394a886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolPrefab: {fileID: 5653090237775795565, guid: c42f43fa0842141498a12ff5d01a41ac, type: 3}
 --- !u!114 &1042877329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5144,7 +5143,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 312dca89d10747e4a99099f0735f2740, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 05099d4fdd10e4f4eacc26e4e286c929, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1
