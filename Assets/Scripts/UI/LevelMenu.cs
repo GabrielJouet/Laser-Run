@@ -1,5 +1,5 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Class used to handle a UI level state.
@@ -10,7 +10,7 @@ public class LevelMenu : MonoBehaviour
     /// Time reached text component.
     /// </summary>
     [SerializeField]
-    private Text _timeText;
+    private TextMeshProUGUI _timeText;
 
     /// <summary>
     /// Image locked, disabled if unlocked.
