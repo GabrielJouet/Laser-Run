@@ -1,6 +1,6 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Class that will handle every UI interaction in game.
@@ -11,19 +11,19 @@ public class UIController : MonoBehaviour
     /// How much time is left text component?
     /// </summary>
     [SerializeField]
-    private Text _timeLeft;
+    private TextMeshProUGUI _timeLeft;
 
     /// <summary>
     /// Threat description text component?
     /// </summary>
     [SerializeField]
-    private Text _threatDescription;
+    private TextMeshProUGUI _threatDescription;
 
     /// <summary>
     /// Caution text component?
     /// </summary>
     [SerializeField]
-    private Text _cautionText;
+    private TextMeshProUGUI _cautionText;
 
     /// <summary>
     /// Game over screen that will be displayed at the end of the level.
@@ -35,7 +35,7 @@ public class UIController : MonoBehaviour
     /// Game over text component.
     /// </summary>
     [SerializeField]
-    private Text _gameOverText;
+    private TextMeshProUGUI _gameOverText;
 
     /// <summary>
     /// How much time between activation and display.
