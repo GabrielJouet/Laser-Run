@@ -60,6 +60,9 @@ public class Level : MonoBehaviour
     private float _timeToLive;
     public float NeededTime { get => _timeToLive; }
 
+
+    [Header("Misc")]
+
     /// <summary>
     /// Detritus prefab.
     /// </summary>
@@ -113,7 +116,7 @@ public class Level : MonoBehaviour
         _index = 0;
         TimeElapsed = 0;
 
-        for (int i = 0; i < Random.Range(3, 15); i++)
+        for (int i = 0; i < Random.Range(3, 15) * (Controller.Instance.SaveController.Hard ? 3 : 1); i++)
         {
             GameObject thingBuffer = Controller.Instance.PoolController.Out(_thingPrefab);
             thingBuffer.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
