@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 /// <summary>
 /// Class used to handle player behavior.
@@ -35,6 +36,19 @@ public class Player : MonoBehaviour
     /// </summary>
     [SerializeField]
     private SpriteRenderer _shadowSpriteRenderer;
+
+
+    /// <summary>
+    /// Color used when in normal difficulty.
+    /// </summary>
+    [SerializeField]
+    private Color _normalColor;
+
+    /// <summary>
+    /// Color used when in hard difficulty.
+    /// </summary>
+    [SerializeField]
+    private Color _hardColor;
 
 
     /// <summary>
@@ -89,6 +103,8 @@ public class Player : MonoBehaviour
     /// <param name="newPosition">The new position of the player</param>
     public void Initialize(Vector2 newPosition, bool hard)
     {
+        GetComponent<Light2D>().color = Controller.Instance.SaveController.Hard ? _hardColor : _normalColor;
+
         Dead = false;
         Invicible = false;
 

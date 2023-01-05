@@ -123,6 +123,18 @@ MonoBehaviour:
     _randomShots: 0
     _warning: 0
     _threatDescription: Faster
+  _hardDifficultyBonus:
+    _activationTime: 3
+    _activationNumber: 2
+    _loadTime: 1
+    _reactionTime: 0.7
+    _displayTime: 0.7
+    _dispersionMin: 0
+    _dispersionMax: 1
+    _shots: 2
+    _randomShots: 0
+    _warning: 1
+    _threatDescription: Two for two
   _timeToLive: 50
   _thingPrefab: {fileID: 6541510516018691726, guid: 4cb8a664546710c429080b0f6c0723cb, type: 3}
   _thingSprites:

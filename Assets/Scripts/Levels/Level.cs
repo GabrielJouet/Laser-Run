@@ -20,6 +20,12 @@ public class Level : MonoBehaviour
     private List<LevelDifficulty> _difficulties;
 
     /// <summary>
+    /// Last level, only accessible on hard mode.
+    /// </summary>
+    [SerializeField]
+    private LevelDifficulty _hardDifficultyBonus;
+
+    /// <summary>
     /// Level goal time.
     /// </summary>
     [SerializeField]
@@ -72,9 +78,12 @@ public class Level : MonoBehaviour
 
         _uiController = Controller.Instance.UIController;
 
+        if (Controller.Instance.SaveController.Hard)
+            _difficulties.Add(_hardDifficultyBonus);
+
         LoadDifficulty(_difficulties[0]);
 
-         _index = 0;
+        _index = 0;
         TimeElapsed = 0;
 
         for (int i = 0; i < Random.Range(3, 15); i++)
