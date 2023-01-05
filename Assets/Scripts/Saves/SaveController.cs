@@ -205,7 +205,7 @@ public class SaveController : MonoBehaviour
 			if (win && LevelIndex + 1 < Levels.Count && SaveFile.LevelsProgression[LevelIndex + 1].Locked)
 				SaveFile.LevelsProgression[LevelIndex + 1] = new LevelSave(false);
 		}
-		else if (buffer.Win && Hard)
+		else if (win && Hard)
 			buffer.Hard = Hard;
 
 		SaveData();
