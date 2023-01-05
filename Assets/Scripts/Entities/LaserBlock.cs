@@ -174,8 +174,10 @@ public class LaserBlock : MonoBehaviour
             _particleSystem.Play();
 
             yield return new WaitForSeconds(_difficulty.DisplayTime);
-            ResetObject();
+            _particleSystem.Stop();
         }
+
+        ResetObject();
     }
 
 

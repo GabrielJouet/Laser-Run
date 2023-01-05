@@ -71,10 +71,14 @@ public class Laser : MonoBehaviour
     {
         _lineRenderer.SetPosition(0, transform.parent.position);
         _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * CheckDistance()));
-        _hitLight.transform.position = _lineRenderer.GetPosition(1);
 
-        if (!_fake && Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[0].collider.TryGetComponent(out Player player) && !player.Invicible)
-            player.GetHit();
+        if (!_fake)
+        {
+            _hitLight.transform.position = _lineRenderer.GetPosition(1);
+
+            if (Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[0].collider.TryGetComponent(out Player player) && !player.Invicible)
+                player.GetHit();
+        }
     }
 
 
@@ -84,7 +88,7 @@ public class Laser : MonoBehaviour
     /// <param name="renderTime">The render time of this laser</param>
     private IEnumerator ShootLaser(float renderTime)
     {
-        yield return new WaitForFixedUpdate();
+        yield return new WaitForEndOfFrame();
 
         _lineRenderer.enabled = true;
 
