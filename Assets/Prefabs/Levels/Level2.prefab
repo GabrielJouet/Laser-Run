@@ -777,6 +777,18 @@ MonoBehaviour:
     _randomShots: 0
     _warning: 1
     _threatDescription: Two together
+  _hardDifficultyBonus:
+    _activationTime: 2.5
+    _activationNumber: 3
+    _loadTime: 0.9
+    _reactionTime: 0.65
+    _displayTime: 1
+    _dispersionMin: 1
+    _dispersionMax: 2
+    _shots: 1
+    _randomShots: 0
+    _warning: 1
+    _threatDescription: Three together
   _timeToLive: 75
   _thingPrefab: {fileID: 6541510516018691726, guid: 4cb8a664546710c429080b0f6c0723cb, type: 3}
   _thingSprites:
