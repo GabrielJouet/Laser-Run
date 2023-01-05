@@ -39,6 +39,11 @@ public class Level : MonoBehaviour
     [SerializeField]
     private LevelCategory _category;
 
+    /// <summary>
+    /// Which category is this level? Accesor.
+    /// </summary>
+    public LevelCategory Category { get => _category; }
+
 
     [Header("Level complexity")]
     /// <summary>

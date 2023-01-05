@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Flashy blocks
   _required: 1
-  _category: 0
+  _category: 1
   _blocks:
   - {fileID: 5706864272643544811}
   - {fileID: 9044143600182978810}

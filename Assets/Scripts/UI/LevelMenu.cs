@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,6 +50,12 @@ public class LevelMenu : MonoBehaviour
     [SerializeField]
     private Button _hardButton;
 
+    /// <summary>
+    /// Colors used depending of the category.
+    /// </summary>
+    [SerializeField]
+    private List<Color> _bordersColors;
+
 
 
     /// <summary>
@@ -56,8 +63,13 @@ public class LevelMenu : MonoBehaviour
     /// </summary>
     /// <param name="state">The saved level state</param>
     /// <param name="maxTime">Max time reached in this level</param>
-    public void Initialize(LevelState state, float maxTime, string levelName, LevelSelectionController controller, int index)
+    /// <param name="levelName">The level name used</param>
+    /// <param name="controller">Parent controller of this button</param>
+    /// <param name="index">Index of this level</param>
+    /// <param name="category">Category of this level</param>
+    public void Initialize(LevelState state, float maxTime, string levelName, LevelSelectionController controller, int index, LevelCategory category)
     {
+        GetComponent<Image>().color = _bordersColors[(int)category];
         _nameLevel.text = levelName;
         _timeText.text = (maxTime < 1 ? "0" : "") + string.Format("{0:#.00 sec}", maxTime);
 

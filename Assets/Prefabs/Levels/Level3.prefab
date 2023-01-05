@@ -717,7 +717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Beam me down
   _required: 1
-  _category: 0
+  _category: 1
   _blocks:
   - {fileID: 4825043281033273986}
   - {fileID: 8733210227180298676}
