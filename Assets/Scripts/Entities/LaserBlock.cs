@@ -187,7 +187,7 @@ public class LaserBlock : MonoBehaviour
     /// <returns>The angle found</returns>
     protected float ComputeAngle()
     {
-        float angle = Random.Range(_difficulty.MinDispersion, _difficulty.MaxDispersion) * (Random.Range(0, 2) == 1 ? -1 : 1);
+        float angle = (Controller.Instance.SaveController.Hard ? 0 : Random.Range(_difficulty.MinDispersion, _difficulty.MaxDispersion)) * (Random.Range(0, 2) == 1 ? -1 : 1);
 
         if (_difficulty.RandomShots)
             angle += _facing * 90;
