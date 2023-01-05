@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Class that will handle level selection inputs.
@@ -20,6 +21,18 @@ public class LevelSelectionController : MonoBehaviour
     [SerializeField]
     private LevelMenu _levelMenuPrefab;
 
+    /// <summary>
+    /// Slider used to move levels.
+    /// </summary>
+    [SerializeField]
+    private Slider _slider;
+
+
+    /// <summary>
+    /// What is the maximum size of the panel?
+    /// </summary>
+    private int _maxLevelPanelSize;
+
 
 
     /// <summary>
@@ -30,8 +43,16 @@ public class LevelSelectionController : MonoBehaviour
         List<LevelSave> saves = Controller.Instance.SaveController.SaveFile.LevelsProgression;
         List<Level> levels = Controller.Instance.SaveController.Levels;
 
+        int spawnedLevels = 0;
         for (int i = 0; i < levels.Count; i ++)
+        {
+            spawnedLevels += (saves[i].State != LevelState.LOCKED ? 1 : 0);
             Instantiate(_levelMenuPrefab, _levelPanel).Initialize(saves[i].State, saves[i].Time, levels[i].Name, this, i);
+        }
+
+        _maxLevelPanelSize = levels.Count * 300 + (levels.Count - 1) * 35 + 125 - Screen.width;
+
+        _slider.gameObject.SetActive(spawnedLevels > 5);
     }
 
 
@@ -67,5 +88,14 @@ public class LevelSelectionController : MonoBehaviour
     public void GoBackMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+
+    /// <summary>
+    /// Method called when a change is made to the slider.
+    /// </summary>
+    public void MoveSlider()
+    {
+        _levelPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(_maxLevelPanelSize * -_slider.value, 0);
     }
 }
