@@ -12,8 +12,8 @@ public class SaveController : MonoBehaviour
 	/// All levels availables.
 	/// </summary>
 	[SerializeField]
-	private List<GameObject> _levelAvailables;
-	public List<GameObject> Levels { get => _levelAvailables; }
+	private List<Level> _levelAvailables;
+	public List<Level> Levels { get => _levelAvailables; }
 
 	/// <summary>
 	/// Loaded save file.
@@ -50,7 +50,7 @@ public class SaveController : MonoBehaviour
 	/// <summary>
 	/// Level chosen.
 	/// </summary>
-	public GameObject CurrentLevel { get => Levels[LevelIndex]; }
+	public Level CurrentLevel { get => Levels[LevelIndex]; }
 
 
 
@@ -195,18 +195,28 @@ public class SaveController : MonoBehaviour
 	/// <param name="win">Does this level was won</param>
 	public void SaveLevelData(float timeSurvived, bool win)
 	{
-		LevelSave buffer = SaveFile.LevelsProgression[LevelIndex];
-		buffer.Win = buffer.Win || win;
+		LevelSave savedLevel = SaveFile.LevelsProgression[LevelIndex];
 
-		if (timeSurvived > buffer.Time)
+		if (win)
 		{
-			buffer.Time = timeSurvived;
+			if (savedLevel.State == LevelState.OPENED)
+			{
+				savedLevel.Time = timeSurvived;
+				savedLevel.State = LevelState.WON;
 
-			if (win && LevelIndex + 1 < Levels.Count && SaveFile.LevelsProgression[LevelIndex + 1].Locked)
-				SaveFile.LevelsProgression[LevelIndex + 1] = new LevelSave(false);
+				if (LevelIndex + 1 < Levels.Count)
+				{
+					SaveFile.LevelsProgression[LevelIndex + 1] = new LevelSave(false);
+
+					if (LevelIndex + 2 < Levels.Count && !Levels[LevelIndex + 2].GetComponent<Level>().Required)
+						SaveFile.LevelsProgression[LevelIndex + 2] = new LevelSave(false);
+				}
+			}
+			else if (savedLevel.State == LevelState.WON && Hard)
+				savedLevel.State = LevelState.WONHARD;
 		}
-		else if (win && Hard)
-			buffer.Hard = Hard;
+		else if (timeSurvived > savedLevel.Time)
+			savedLevel.Time = timeSurvived;
 
 		SaveData();
 	}

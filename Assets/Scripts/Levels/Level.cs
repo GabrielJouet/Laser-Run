@@ -7,6 +7,45 @@ using UnityEngine;
 /// </summary>
 public class Level : MonoBehaviour
 {
+    [Header("Level Data")]
+
+    /// <summary>
+    /// Name of this level.
+    /// </summary>
+    [SerializeField]
+    private string _name;
+
+    /// <summary>
+    /// Name of this level, accessor.
+    /// </summary>
+    public string Name { get => _name; }
+
+
+    /// <summary>
+    /// Does this level is required to continue?
+    /// </summary>
+    [SerializeField]
+    private bool _required;
+
+    /// <summary>
+    /// Does this level is required to continue? Accessor.
+    /// </summary>
+    public bool Required { get => _required; }
+
+
+    /// <summary>
+    /// Which category is this level?
+    /// </summary>
+    [SerializeField]
+    private LevelCategory _category;
+
+    /// <summary>
+    /// Which category is this level? Accesor.
+    /// </summary>
+    public LevelCategory Category { get => _category; }
+
+
+    [Header("Level complexity")]
     /// <summary>
     /// Available laser blocks in this level.
     /// </summary>
@@ -32,6 +71,9 @@ public class Level : MonoBehaviour
     [Range(25f, 500f)]
     private float _timeToLive;
     public float NeededTime { get => _timeToLive; }
+
+
+    [Header("Misc")]
 
     /// <summary>
     /// Detritus prefab.
@@ -86,7 +128,7 @@ public class Level : MonoBehaviour
         _index = 0;
         TimeElapsed = 0;
 
-        for (int i = 0; i < Random.Range(3, 15); i++)
+        for (int i = 0; i < Random.Range(3, 15) * (Controller.Instance.SaveController.Hard ? 3 : 1); i++)
         {
             GameObject thingBuffer = Controller.Instance.PoolController.Out(_thingPrefab);
             thingBuffer.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));

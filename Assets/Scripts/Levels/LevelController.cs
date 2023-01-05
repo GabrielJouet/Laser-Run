@@ -36,7 +36,7 @@ public class LevelController : MonoBehaviour
         _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
         _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);
 
-        _level = Instantiate(Controller.Instance.SaveController.CurrentLevel).GetComponent<Level>();
+        _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
 
         _level.Initialize();
     }
