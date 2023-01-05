@@ -16,11 +16,6 @@ public class SaveController : MonoBehaviour
 	public List<GameObject> Levels { get => _levelAvailables; }
 
 	/// <summary>
-	/// Loaded level.
-	/// </summary>
-	public Level LoadedLevel { get; set; }
-
-	/// <summary>
 	/// Loaded save file.
 	/// </summary>
 	public SaveFile SaveFile { get; private set; }
@@ -67,15 +62,6 @@ public class SaveController : MonoBehaviour
 		_gameSavePath = Application.persistentDataPath + "/player.dat";
 		_binaryFormatter = new BinaryFormatter();
 
-		RecoverSave();
-	}
-
-
-	/// <summary>
-	/// Method used to recover save.
-	/// </summary>
-	private void RecoverSave()
-	{
 		if (File.Exists(_gameSavePath))
 		{
 			try
