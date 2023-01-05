@@ -7,6 +7,33 @@ using UnityEngine;
 /// </summary>
 public class Level : MonoBehaviour
 {
+    [Header("Level Data")]
+
+    /// <summary>
+    /// Name of this level.
+    /// </summary>
+    [SerializeField]
+    private string _name;
+
+    /// <summary>
+    /// Name of this level, accessor.
+    /// </summary>
+    public string Name { get => _name; }
+
+
+    /// <summary>
+    /// Does this level is required to continue?
+    /// </summary>
+    [SerializeField]
+    private bool _required;
+
+    /// <summary>
+    /// Does this level is required to continue? Accessor.
+    /// </summary>
+    public bool Required { get => _required; }
+
+
+    [Header("Level complexity")]
     /// <summary>
     /// Available laser blocks in this level.
     /// </summary>

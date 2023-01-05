@@ -14,6 +14,13 @@ public class LevelSelectionController : MonoBehaviour
     private Transform _levelPanel;
 
 
+    /// <summary>
+    /// Level menu prefab used to display available levels.
+    /// </summary>
+    [SerializeField]
+    private LevelMenu _levelMenuPrefab;
+
+
 
     /// <summary>
     /// Start method, used after Awake.
@@ -24,7 +31,7 @@ public class LevelSelectionController : MonoBehaviour
         List<LevelSave> saves = Controller.Instance.SaveController.SaveFile.LevelsProgression;
 
         for(int i = 0; i < levels.Length; i ++)
-            levels[i].Initialize(saves[i].Locked, saves[i].Time, saves[i].Hard, saves[i].Win);
+            levels[i].Initialize(saves[i].State, saves[i].Time);
     }
 
 

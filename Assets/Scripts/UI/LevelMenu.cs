@@ -41,19 +41,17 @@ public class LevelMenu : MonoBehaviour
     /// <summary>
     /// Initialize method, called to start the object.
     /// </summary>
-    /// <param name="locked">Does this level is locked?</param>
+    /// <param name="state">The saved level state</param>
     /// <param name="maxTime">Max time reached in this level</param>
-    /// <param name="hard">Does the level was hard finished?</param>
-    /// <param name="win">Does the level was finished?</param>
-    public void Initialize(bool locked, float maxTime, bool hard, bool win)
+    public void Initialize(LevelState state, float maxTime)
     {
         _timeText.text = (maxTime < 1 ? "0" : "") + string.Format("{0:#.00 sec}", maxTime);
 
-        _lockedImage.SetActive(locked);
+        _lockedImage.SetActive(state == LevelState.LOCKED);
 
-        _finishedImage.SetActive(win);
-        _finishedHardImage.SetActive(hard);
+        _finishedImage.SetActive(state == LevelState.WON);
+        _finishedHardImage.SetActive(state == LevelState.WONHARD);
 
-        _hardButton.SetActive(win);
+        _hardButton.SetActive(state == LevelState.WON);
     }
 }
