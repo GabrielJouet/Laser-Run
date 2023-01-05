@@ -1122,6 +1122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa064674e7e4054f97cf54a206bea8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxAngle: 3
 --- !u!1 &1283285232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1399,6 +1400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa064674e7e4054f97cf54a206bea8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxAngle: 4
 --- !u!114 &1628247440
 MonoBehaviour:
   m_ObjectHideFlags: 0

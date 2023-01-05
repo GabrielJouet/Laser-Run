@@ -7,6 +7,14 @@ using UnityEngine.EventSystems;
 public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     /// <summary>
+    /// Maximum angle of the object allowed.
+    /// </summary>
+    [SerializeField]
+    [Range(0, 10)]
+    private float _maxAngle;
+
+
+    /// <summary>
     /// Base angle.
     /// </summary>
     private float _angle;
@@ -19,13 +27,12 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 
     /// <summary>
-    /// Method called at initialization.
+    /// Start method, called at initialization.
     /// </summary>
-    /// <param name="angle">The angle randomly chosen</param>
-    public void Initialize(float angle)
+    private void Start ()
     {
-        _angle = angle;
-        _altAngle = -angle;
+        _angle = Random.Range(-_maxAngle, _maxAngle);
+        _altAngle = -_angle;
 
         ChangeRotation(_angle);
     }

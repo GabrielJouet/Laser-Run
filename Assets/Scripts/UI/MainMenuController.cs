@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -32,7 +33,7 @@ public class MainMenuController : MonoBehaviour
     /// Confirmation game object.
     /// </summary>
     [SerializeField]
-    private Text _confirmationText;
+    private TextMeshProUGUI _confirmationText;
 
     /// <summary>
     /// Confirmation button object.

@@ -27,6 +27,18 @@ public class Level : MonoBehaviour
     private float _timeToLive;
     public float NeededTime { get => _timeToLive; }
 
+    /// <summary>
+    /// Detritus prefab.
+    /// </summary>
+    [SerializeField]
+    private GameObject _thingPrefab;
+
+    /// <summary>
+    /// All detritus sprites available.
+    /// </summary>
+    [SerializeField]
+    private List<Sprite> _thingSprites;
+
 
     /// <summary>
     /// Current difficulty loaded.
@@ -58,14 +70,20 @@ public class Level : MonoBehaviour
         foreach (LaserBlock block in _blocks)
             block.ResetObject();
 
-        enabled = true;
-
         _uiController = Controller.Instance.UIController;
 
         LoadDifficulty(_difficulties[0]);
 
          _index = 0;
         TimeElapsed = 0;
+
+        for (int i = 0; i < Random.Range(3, 15); i++)
+        {
+            GameObject thingBuffer = Controller.Instance.PoolController.Out(_thingPrefab);
+            thingBuffer.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+            thingBuffer.transform.localPosition = new Vector2(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f));
+            thingBuffer.GetComponent<SpriteRenderer>().sprite = _thingSprites[Random.Range(0, _thingSprites.Count)];
+        }
 
         StartCoroutine(LoadTraps());
         StartCoroutine(LevelCountDown());
@@ -90,12 +108,7 @@ public class Level : MonoBehaviour
         while (true)
         {
             for(int i = 0; i < _loadedDifficulty.ActivationCount; i ++)
-            {
-                LaserBlock block = FindOneBlock();
-
-                if (block != null)
-                    block.WarmUp(_loadedDifficulty);
-            }
+                FindOneBlock()?.WarmUp(_loadedDifficulty);
 
             yield return new WaitForSeconds(_loadedDifficulty.ActivationTime);
         }
@@ -160,7 +173,5 @@ public class Level : MonoBehaviour
     public void StopLevel()
     {
         StopAllCoroutines();
-
-        enabled = false;
     }
 }

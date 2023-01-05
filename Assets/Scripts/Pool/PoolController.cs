@@ -7,15 +7,9 @@ using UnityEngine;
 public class PoolController : MonoBehaviour
 {
     /// <summary>
-    /// Pool prefab used in storage.
+    /// All pools available.
     /// </summary>
-    [SerializeField]
-    private GameObject _poolPrefab;
-
-    /// <summary>
-    /// Pools used, each type of item has its own pool.
-    /// </summary>
-    private readonly List<Pool> _pools = new List<Pool>();
+    private readonly Dictionary<string, Pool> _pools = new Dictionary<string, Pool>();
 
 
 
@@ -25,24 +19,17 @@ public class PoolController : MonoBehaviour
     /// <param name="wanted">Wanted item</param>
     /// 
     /// <returns>The found item (or instantiated)</returns>
-    public GameObject GiveObject(GameObject wanted)
+    public GameObject Out(GameObject wanted)
     {
-        GameObject newObject = null;
-        foreach (Pool buffer in _pools)
-            if (buffer.Class == wanted)
-                newObject = buffer.Out();
+        if (_pools.ContainsKey(wanted.name))
+            return _pools[wanted.name].Out();
 
-        if (newObject == null)
-        {
-            Pool buffer = Instantiate(_poolPrefab, transform).GetComponent<Pool>();
-            buffer.Class = wanted;
-            buffer.name = wanted.name + "Pool";
-            _pools.Add(buffer);
+        Pool newPool = new GameObject(wanted.name + " Pool").AddComponent<Pool>();
+        newPool.transform.parent = transform;
+        newPool.Class = wanted;
+        _pools.Add(wanted.name, newPool);
 
-            newObject = buffer.Out();
-        }
-
-        return newObject;
+        return newPool.Out();
     }
 
 
@@ -50,11 +37,9 @@ public class PoolController : MonoBehaviour
     /// Retrieve an object to pools.
     /// </summary>
     /// <param name="given">The object given back</param>
-    public void RetrieveObject(GameObject given)
+    public void In(GameObject given)
     {
-        foreach (Pool buffer in _pools)
-            if (buffer.Class.name == given.name.Substring(0, given.name.Length - 7))
-                buffer.In(given, false);
+        _pools[given.name].In(given, false);
     }
 
 
@@ -63,7 +48,7 @@ public class PoolController : MonoBehaviour
     /// </summary>
     public void RetrieveAllPools()
     {
-        foreach (Pool buffer in _pools)
+        foreach (Pool buffer in _pools.Values)
             buffer.RetrieveObjects();
     }
 }

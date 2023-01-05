@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Rendering.Universal;
 
 /// <summary>
 /// Class used to handle every laser block behavior.
@@ -71,18 +71,13 @@ public class LaserBlock : MonoBehaviour
     /// <summary>
     /// Light component of this block.
     /// </summary>
-    protected UnityEngine.Rendering.Universal.Light2D _light;
+    protected Light2D _light;
 
 
     /// <summary>
     /// Does the laser is used?
     /// </summary>
-    public bool Used;
-
-    /// <summary>
-    /// Does a laser is being shot?
-    /// </summary>
-    public bool ActiveLaser;
+    public bool Used { get; protected set; }
 
 
     /// <summary>
@@ -97,7 +92,7 @@ public class LaserBlock : MonoBehaviour
     /// </summary>
     protected virtual void Awake()
     {
-        _light = _canon.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+        _light = _canon.GetComponent<Light2D>();
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = !Controller.Instance.SaveController.SaveFile.SoundMuted ? Controller.Instance.SaveController.SaveFile.Sound : 0;
 
@@ -137,7 +132,6 @@ public class LaserBlock : MonoBehaviour
     {
         _difficulty = difficulty;
 
-        ActiveLaser = false;
         Used = true;
         _light.enabled = true;
         _light.intensity = 0.25f;
@@ -158,18 +152,17 @@ public class LaserBlock : MonoBehaviour
             _clockLeds[i].SetActive(true);
         }
 
-        StartCoroutine(DelayShot());
+        StartCoroutine(Shot());
     }
 
 
     /// <summary>
     /// Coroutine used to delay next shot.
     /// </summary>
-    protected virtual IEnumerator DelayShot()
+    protected IEnumerator Shot()
     {
         for (int i = 0; i < _difficulty.NumberOfShots; i ++)
         {
-            ActiveLaser = true;
             _canon.localRotation = Quaternion.Euler(new Vector3(0, 0, ComputeAngle()));
 
             Shot(_semiLaser, _difficulty.ReactionTime);
@@ -180,7 +173,7 @@ public class LaserBlock : MonoBehaviour
             _audioSource.Play();
             _particleSystem.Play();
 
-            yield return new WaitUntil(() => !ActiveLaser);
+            yield return new WaitForSeconds(_difficulty.DisplayTime);
             _particleSystem.Stop();
         }
 
@@ -221,8 +214,8 @@ public class LaserBlock : MonoBehaviour
     /// <param name="displayTime">How much time the laser will be rendered?</param>
     protected void Shot(GameObject laser, float displayTime)
     {
-        GameObject buffer = Controller.Instance.PoolController.GiveObject(laser);
-        buffer.GetComponent<Laser>().Initialize(displayTime, this, _laserColor);
+        GameObject buffer = Controller.Instance.PoolController.Out(laser);
+        buffer.GetComponent<Laser>().Initialize(displayTime, _laserColor);
         buffer.transform.SetParent(_canon);
     }
 
@@ -230,7 +223,7 @@ public class LaserBlock : MonoBehaviour
     /// <summary>
     /// Method called to reset the object back to its original state.
     /// </summary>
-    public virtual void ResetObject()
+    public void ResetObject()
     {
         StopAllCoroutines();
         Used = false;

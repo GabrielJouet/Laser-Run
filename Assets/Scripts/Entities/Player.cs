@@ -114,28 +114,18 @@ public class Player : MonoBehaviour
     /// </summary>
     protected void FixedUpdate()
     {
-        Move(_inputs);
-    }
+        if (_inputs.magnitude > 1)
+            _inputs = _inputs.normalized;
 
+        _animator.SetBool("move", _inputs.x != 0 || _inputs.y != 0);
 
-    /// <summary>
-    /// Method used to move the entity.
-    /// </summary>
-    /// <param name="inputs">Player inputs</param>
-    protected void Move(Vector2 inputs)
-    {
-        if (inputs.magnitude > 1)
-            inputs = inputs.normalized;
+        if (_inputs.y != 0)
+            _animator.SetBool("back", _inputs.y > 0);
 
-        ChangeAnimation("move", inputs.x != 0 || inputs.y != 0);
+        if (_inputs.x != 0)
+            _spriteRenderer.flipX = _inputs.x < 0;
 
-        if (inputs.y != 0)
-            ChangeAnimation("back", inputs.y > 0);
-            
-        if (inputs.x != 0)
-            _spriteRenderer.flipX = inputs.x < 0;
-
-        _rigidBody.MovePosition(_rigidBody.position + inputs * Time.deltaTime * _speed);
+        _rigidBody.MovePosition(_rigidBody.position + _inputs * Time.fixedDeltaTime * _speed);
         _spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(transform.position).y * -1;
         _shadowSpriteRenderer.sortingOrder = _spriteRenderer.sortingOrder - 1;
     }
@@ -156,22 +146,21 @@ public class Player : MonoBehaviour
 
 
     /// <summary>
-    /// Method used to change animation based on status.
-    /// </summary>
-    /// <param name="name">Name of the animation</param>
-    /// <param name="status">The new status of this animation</param>
-    protected void ChangeAnimation(string name, bool status)
-    {
-        _animator.SetBool(name, status);
-    }
-
-
-    /// <summary>
     /// Method called when an entity gets hit.
     /// </summary>
     public void GetHit()
     {
-        ExplodeIntoPieces();
+        PoolController poolController = Controller.Instance.PoolController;
+
+        for (int i = 0; i < Random.Range(3, 8); i++)
+        {
+            GameObject buffer = poolController.Out(_destroyedPartPrefab);
+            buffer.transform.position = transform.position;
+
+            buffer.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 25);
+            buffer.GetComponent<SpriteRenderer>().sprite = _destroyedParts[Random.Range(0, _destroyedParts.Count)];
+        }
+
         Controller.Instance.LevelController.FinishLevel(false);
 
         SwitchState(false);
@@ -184,23 +173,5 @@ public class Player : MonoBehaviour
     public void BecameInvicible()
     {
         Invicible = true;
-    }
-
-
-    /// <summary>
-    /// Method called when the player dies, it then explodes in a random number of pieces.
-    /// </summary>
-    private void ExplodeIntoPieces()
-    {
-        PoolController poolController = Controller.Instance.PoolController;
-
-        for (int i = 0; i < Random.Range(3, 8); i++)
-        {
-            Vector2 directions = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 25;
-            GameObject buffer = poolController.GiveObject(_destroyedPartPrefab);
-            buffer.transform.position = transform.position;
-            buffer.GetComponent<Rigidbody2D>().AddForce(directions);
-            buffer.GetComponent<SpriteRenderer>().sprite = _destroyedParts[Random.Range(0, _destroyedParts.Count)];
-        }
     }
 }
