@@ -201,21 +201,18 @@ public class SaveController : MonoBehaviour
 		{
 			if (savedLevel.State == LevelState.OPENED)
 			{
-				savedLevel.Time = timeSurvived;
 				savedLevel.State = LevelState.WON;
 
 				if (LevelIndex + 1 < Levels.Count)
-				{
 					SaveFile.LevelsProgression[LevelIndex + 1] = new LevelSave(false);
-
-					if (LevelIndex + 2 < Levels.Count && !Levels[LevelIndex + 2].GetComponent<Level>().Required)
-						SaveFile.LevelsProgression[LevelIndex + 2] = new LevelSave(false);
-				}
 			}
 			else if (savedLevel.State == LevelState.WON && Hard)
 				savedLevel.State = LevelState.WONHARD;
 		}
-		else if (timeSurvived > savedLevel.Time)
+
+		if (Hard)
+			savedLevel.HardTime = timeSurvived;
+		else
 			savedLevel.Time = timeSurvived;
 
 		SaveData();
