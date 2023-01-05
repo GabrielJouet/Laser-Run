@@ -716,8 +716,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd30504cec2aa7e4d8caf893729b3f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
+  _name: Heat up
   _required: 1
+  _category: 0
   _blocks:
   - {fileID: 5706864272643544811}
   - {fileID: 9044143600182978810}

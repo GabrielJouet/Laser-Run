@@ -715,8 +715,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd30504cec2aa7e4d8caf893729b3f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
+  _name: Beam me down
   _required: 1
+  _category: 0
   _blocks:
   - {fileID: 4825043281033273986}
   - {fileID: 8733210227180298676}

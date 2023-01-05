@@ -308,11 +308,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fbce579bc28a5640ab57866e5ddfb3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _nameLevel: {fileID: 2662219360818755363}
   _timeText: {fileID: 455436789114231460}
   _lockedImage: {fileID: 1847275372236206686}
   _finishedImage: {fileID: 6180980285525612108}
   _finishedHardImage: {fileID: 5067709885868496149}
-  _hardButton: {fileID: 5806740768110192615}
+  _normalButton: {fileID: 3253205869132887952}
+  _hardButton: {fileID: 3908110254832852575}
 --- !u!114 &6542987427341524721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,7 +1094,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1109,8 +1111,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

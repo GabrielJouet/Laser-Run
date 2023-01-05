@@ -33,6 +33,13 @@ public class Level : MonoBehaviour
     public bool Required { get => _required; }
 
 
+    /// <summary>
+    /// Which category is this level?
+    /// </summary>
+    [SerializeField]
+    private LevelCategory _category;
+
+
     [Header("Level complexity")]
     /// <summary>
     /// Available laser blocks in this level.

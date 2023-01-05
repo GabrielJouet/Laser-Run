@@ -52,8 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd30504cec2aa7e4d8caf893729b3f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
+  _name: End of sight
   _required: 1
+  _category: 0
   _blocks:
   - {fileID: 2856464656014264025}
   - {fileID: 2262127785062583876}

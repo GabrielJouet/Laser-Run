@@ -12,8 +12,8 @@ public class SaveController : MonoBehaviour
 	/// All levels availables.
 	/// </summary>
 	[SerializeField]
-	private List<GameObject> _levelAvailables;
-	public List<GameObject> Levels { get => _levelAvailables; }
+	private List<Level> _levelAvailables;
+	public List<Level> Levels { get => _levelAvailables; }
 
 	/// <summary>
 	/// Loaded save file.
@@ -50,7 +50,7 @@ public class SaveController : MonoBehaviour
 	/// <summary>
 	/// Level chosen.
 	/// </summary>
-	public GameObject CurrentLevel { get => Levels[LevelIndex]; }
+	public Level CurrentLevel { get => Levels[LevelIndex]; }
 
 
 

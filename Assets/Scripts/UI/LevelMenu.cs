@@ -1,11 +1,18 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Class used to handle a UI level state.
 /// </summary>
 public class LevelMenu : MonoBehaviour
 {
+    /// <summary>
+    /// Name text component.
+    /// </summary>
+    [SerializeField]
+    private TextMeshProUGUI _nameLevel;
+
     /// <summary>
     /// Time reached text component.
     /// </summary>
@@ -31,10 +38,16 @@ public class LevelMenu : MonoBehaviour
     private GameObject _finishedHardImage;
 
     /// <summary>
+    /// Normal button component.
+    /// </summary>
+    [SerializeField]
+    private Button _normalButton;
+
+    /// <summary>
     /// Hard button component.
     /// </summary>
     [SerializeField]
-    private GameObject _hardButton;
+    private Button _hardButton;
 
 
 
@@ -43,8 +56,9 @@ public class LevelMenu : MonoBehaviour
     /// </summary>
     /// <param name="state">The saved level state</param>
     /// <param name="maxTime">Max time reached in this level</param>
-    public void Initialize(LevelState state, float maxTime)
+    public void Initialize(LevelState state, float maxTime, string levelName, LevelSelectionController controller, int index)
     {
+        _nameLevel.text = levelName;
         _timeText.text = (maxTime < 1 ? "0" : "") + string.Format("{0:#.00 sec}", maxTime);
 
         _lockedImage.SetActive(state == LevelState.LOCKED);
@@ -52,6 +66,9 @@ public class LevelMenu : MonoBehaviour
         _finishedImage.SetActive(state == LevelState.WON);
         _finishedHardImage.SetActive(state == LevelState.WONHARD);
 
-        _hardButton.SetActive(state == LevelState.WON);
+        _hardButton.gameObject.SetActive(state == LevelState.WON);
+
+        _normalButton.onClick.AddListener(() => controller.LoadLevel(index));
+        _hardButton.onClick.AddListener(() => controller.LoadHardLevel(index));
     }
 }

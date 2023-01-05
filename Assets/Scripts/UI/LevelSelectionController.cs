@@ -27,11 +27,11 @@ public class LevelSelectionController : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        LevelMenu[] levels = _levelPanel.GetComponentsInChildren<LevelMenu>();
         List<LevelSave> saves = Controller.Instance.SaveController.SaveFile.LevelsProgression;
+        List<Level> levels = Controller.Instance.SaveController.Levels;
 
-        for(int i = 0; i < levels.Length; i ++)
-            levels[i].Initialize(saves[i].State, saves[i].Time);
+        for (int i = 0; i < levels.Count; i ++)
+            Instantiate(_levelMenuPrefab, _levelPanel).Initialize(saves[i].State, saves[i].Time, levels[i].Name, this, i);
     }
 
 
