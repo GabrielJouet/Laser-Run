@@ -47,7 +47,7 @@ public class LevelMenu : MonoBehaviour
     /// <param name="win">Does the level was finished?</param>
     public void Initialize(bool locked, float maxTime, bool hard, bool win)
     {
-        _timeText.text = string.Format("{0:#.00 sec}", maxTime);
+        _timeText.text = (maxTime < 1 ? "0" : "") + string.Format("{0:#.00 sec}", maxTime);
 
         _lockedImage.SetActive(locked);
 

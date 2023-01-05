@@ -52,7 +52,7 @@ public class UIController : MonoBehaviour
     /// <param name="timeLeft">The time left</param>
     public void UpdateTimeLeft(float timeLeft)
     {
-        _timeLeft.text = string.Format("{0:#.00 sec}", timeLeft);
+        _timeLeft.text = (timeLeft < 1 ? "0" : "") + string.Format("{0:#.00 sec}", timeLeft);
     }
 
 
