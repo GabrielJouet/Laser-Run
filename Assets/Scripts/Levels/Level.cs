@@ -79,10 +79,7 @@ public class Level : MonoBehaviour
         _uiController = Controller.Instance.UIController;
 
         if (Controller.Instance.SaveController.Hard)
-        {
             _difficulties.Add(_hardDifficultyBonus);
-            _difficulties.Shuffle();
-        }
 
         LoadDifficulty(_difficulties[0]);
 
