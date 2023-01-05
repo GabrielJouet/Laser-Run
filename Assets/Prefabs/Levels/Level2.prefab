@@ -757,7 +757,7 @@ MonoBehaviour:
     _randomShots: 0
     _warning: 0
     _threatDescription: Two lasers
-  - _activationTime: 2.2
+  - _activationTime: 2.8
     _activationNumber: 1
     _loadTime: 1.5
     _reactionTime: 0.65
@@ -780,13 +780,13 @@ MonoBehaviour:
     _warning: 1
     _threatDescription: Two together
   _hardDifficultyBonus:
-    _activationTime: 2.5
+    _activationTime: 1.8
     _activationNumber: 3
-    _loadTime: 0.9
-    _reactionTime: 0.65
+    _loadTime: 0.85
+    _reactionTime: 0.6
     _displayTime: 1
     _dispersionMin: 1
-    _dispersionMax: 2
+    _dispersionMax: 8
     _shots: 1
     _randomShots: 0
     _warning: 1
@@ -2241,7 +2241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: _maxPosition.y
-      value: 0.35
+      value: -0.72
       objectReference: {fileID: 0}
     - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: _minPosition.x
@@ -2249,7 +2249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: _minPosition.y
-      value: 0.2
+      value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 8809634551697773556, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: m_RootOrder
@@ -2325,12 +2325,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 777601912504022228}
     m_Modifications:
     - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _speed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: _facing
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: _maxPosition.x
-      value: -0.2
+      value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: _maxPosition.y
@@ -2338,7 +2342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: _minPosition.x
-      value: 0.25
+      value: -0.72
       objectReference: {fileID: 0}
     - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: _minPosition.y
@@ -2565,7 +2569,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: _speed
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: _facing
@@ -2577,7 +2581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: _maxPosition.y
-      value: -0.2
+      value: -0.72
       objectReference: {fileID: 0}
     - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: _minPosition.x
@@ -2585,7 +2589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: _minPosition.y
-      value: 0.5
+      value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 8809634551697773556, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: m_RootOrder
