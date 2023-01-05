@@ -12,9 +12,14 @@ public class LevelSave
     public float Time;
 
     /// <summary>
+    /// Reached time of this level in hard mode.
+    /// </summary>
+    public float HardTime;
+
+    /// <summary>
     /// State of this level.
     /// </summary>
-    public LevelState State { get; set; }
+    public LevelState State;
 
 
 
@@ -25,6 +30,7 @@ public class LevelSave
     public LevelSave(bool locked)
     {
         Time = 0;
+        HardTime = 0;
         State = locked ? LevelState.LOCKED : LevelState.OPENED;
     }
 }

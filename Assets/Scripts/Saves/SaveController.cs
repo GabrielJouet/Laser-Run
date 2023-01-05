@@ -201,7 +201,6 @@ public class SaveController : MonoBehaviour
 		{
 			if (savedLevel.State == LevelState.OPENED)
 			{
-				savedLevel.Time = timeSurvived;
 				savedLevel.State = LevelState.WON;
 
 				if (LevelIndex + 1 < Levels.Count)
@@ -210,7 +209,10 @@ public class SaveController : MonoBehaviour
 			else if (savedLevel.State == LevelState.WON && Hard)
 				savedLevel.State = LevelState.WONHARD;
 		}
-		else if (timeSurvived > savedLevel.Time)
+
+		if (Hard)
+			savedLevel.HardTime = timeSurvived;
+		else
 			savedLevel.Time = timeSurvived;
 
 		SaveData();
