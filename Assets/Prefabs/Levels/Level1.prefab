@@ -717,7 +717,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Heat up
-  _required: 1
   _category: 0
   _blocks:
   - {fileID: 5706864272643544811}

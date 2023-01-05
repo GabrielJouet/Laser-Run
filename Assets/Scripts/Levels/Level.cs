@@ -22,18 +22,6 @@ public class Level : MonoBehaviour
 
 
     /// <summary>
-    /// Does this level is required to continue?
-    /// </summary>
-    [SerializeField]
-    private bool _required;
-
-    /// <summary>
-    /// Does this level is required to continue? Accessor.
-    /// </summary>
-    public bool Required { get => _required; }
-
-
-    /// <summary>
     /// Which category is this level?
     /// </summary>
     [SerializeField]
