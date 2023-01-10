@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(PoolController))]
 [RequireComponent(typeof(SaveController))]
 [RequireComponent(typeof(MusicController))]
+[RequireComponent(typeof(AchievementController))]
 public class Controller : MonoBehaviour
 {
     /// <summary>
@@ -38,6 +39,11 @@ public class Controller : MonoBehaviour
     /// </summary>
     public MusicController MusicController { get; private set; }
 
+    /// <summary>
+    /// Achievement Controller component.
+    /// </summary>
+    public AchievementController AchievementController { get; private set; }
+
 
 
     /// <summary>
@@ -62,6 +68,7 @@ public class Controller : MonoBehaviour
         MusicController = GetComponent<MusicController>();
         PoolController = GetComponent<PoolController>();
         SaveController = GetComponent<SaveController>();
+        AchievementController = GetComponent<AchievementController>();
     }
 
 

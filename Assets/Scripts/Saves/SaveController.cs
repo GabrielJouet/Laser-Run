@@ -189,6 +189,21 @@ public class SaveController : MonoBehaviour
 
 
 	/// <summary>
+	/// Method used to save a new achievement unlocked.
+	/// </summary>
+	/// <param name="newAchievement">The new achievement unique id</param>
+	public void SaveAchievement(string newAchievement)
+	{
+		if (!SaveFile.Achievements.Contains(newAchievement))
+		{
+			SaveFile.Achievements.Add(newAchievement);
+
+			SaveData();
+		}
+	}
+
+
+	/// <summary>
 	/// Method used to save a level data.
 	/// </summary>
 	/// <param name="timeSurvived">Time survived in this level</param>
