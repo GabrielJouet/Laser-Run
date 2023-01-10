@@ -210,9 +210,9 @@ public class SaveController : MonoBehaviour
 				savedLevel.State = LevelState.WONHARD;
 		}
 
-		if (Hard)
+		if (Hard && savedLevel.HardTime < timeSurvived)
 			savedLevel.HardTime = timeSurvived;
-		else
+		else if (!Hard && savedLevel.Time < timeSurvived)
 			savedLevel.Time = timeSurvived;
 
 		SaveData();
