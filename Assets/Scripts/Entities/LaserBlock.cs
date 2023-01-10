@@ -189,18 +189,13 @@ public class LaserBlock : MonoBehaviour
     {
         float angle = (Controller.Instance.SaveController.Hard ? 0 : Random.Range(_difficulty.MinDispersion, _difficulty.MaxDispersion)) * (Random.Range(0, 2) == 1 ? -1 : 1);
 
-        if (_difficulty.RandomShots)
-            angle += _facing * 90;
-        else
-        {
-            Player player = FindObjectOfType<Player>();
+        Player player = FindObjectOfType<Player>();
 
-            if (player != null)
-            {
-                Transform buffer = player.transform;
-                Vector3 vectorToTarget = new Vector3(transform.position.x - buffer.position.x, transform.position.y - buffer.position.y, 0);
-                angle += Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
-            }
+        if (player != null)
+        {
+            Transform buffer = player.transform;
+            Vector3 vectorToTarget = new Vector3(transform.position.x - buffer.position.x, transform.position.y - buffer.position.y, 0);
+            angle += Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
         }
 
         return angle;
