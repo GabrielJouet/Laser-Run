@@ -29,6 +29,13 @@ public class LevelDifficulty
     private float _loadTime;
     public float LoadTime { get => _loadTime; }
 
+    /// <summary>
+    /// How many shots per activation.
+    /// </summary>
+    [SerializeField, Range(1, 10), Tooltip("Numbers of shots")]
+    private int _shots;
+    public int NumberOfShots { get => _shots; }
+
 
     [Header("Laser")]
 
@@ -62,16 +69,6 @@ public class LevelDifficulty
     [SerializeField, Range(0f, 45f), Tooltip("Maximum dispersion angle")]
     private float _dispersionMax;
     public float MaxDispersion { get => _dispersionMax; }
-
-
-    [Header("Difficulty")]
-
-    /// <summary>
-    /// How many shots per activation.
-    /// </summary>
-    [SerializeField, Range(1, 10), Tooltip("Numbers of shots")]
-    private int _shots;
-    public int NumberOfShots { get => _shots; }
 
 
     [Header("Display")]
