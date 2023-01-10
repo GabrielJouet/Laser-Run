@@ -81,13 +81,6 @@ public class LevelDifficulty
     private int _shots;
     public int NumberOfShots { get => _shots; }
 
-    /// <summary>
-    /// Does the shots are random or homes at you?
-    /// </summary>
-    [SerializeField]
-    private bool _randomShots;
-    public bool RandomShots { get => _randomShots; }
-
 
     [Header("Display")]
 

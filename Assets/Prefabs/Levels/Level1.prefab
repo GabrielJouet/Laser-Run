@@ -734,7 +734,6 @@ MonoBehaviour:
     _dispersionMin: 1
     _dispersionMax: 3
     _shots: 2
-    _randomShots: 0
     _warning: 0
     _threatDescription: Two lasers, quick
   - _activationTime: 3.1
@@ -745,7 +744,6 @@ MonoBehaviour:
     _dispersionMin: 4
     _dispersionMax: 7
     _shots: 3
-    _randomShots: 0
     _warning: 1
     _threatDescription: Three lasers
   - _activationTime: 2.8
@@ -756,7 +754,6 @@ MonoBehaviour:
     _dispersionMin: 2
     _dispersionMax: 4
     _shots: 3
-    _randomShots: 0
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
@@ -768,7 +765,6 @@ MonoBehaviour:
     _dispersionMin: 4
     _dispersionMax: 8
     _shots: 4
-    _randomShots: 0
     _warning: 1
     _threatDescription: Four lasers, quick
   _timeToLive: 55

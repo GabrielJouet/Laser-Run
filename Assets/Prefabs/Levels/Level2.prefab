@@ -732,7 +732,6 @@ MonoBehaviour:
     _dispersionMin: 5
     _dispersionMax: 15
     _shots: 1
-    _randomShots: 0
     _warning: 0
     _threatDescription: One laser, moving
   - _activationTime: 2.2
@@ -743,7 +742,6 @@ MonoBehaviour:
     _dispersionMin: 3
     _dispersionMax: 12
     _shots: 1
-    _randomShots: 0
     _warning: 1
     _threatDescription: Two together
   - _activationTime: 2
@@ -754,7 +752,6 @@ MonoBehaviour:
     _dispersionMin: 5
     _dispersionMax: 15
     _shots: 2
-    _randomShots: 0
     _warning: 0
     _threatDescription: Two lasers
   - _activationTime: 2.8
@@ -765,7 +762,6 @@ MonoBehaviour:
     _dispersionMin: 10
     _dispersionMax: 25
     _shots: 3
-    _randomShots: 0
     _warning: 1
     _threatDescription: Three lasers
   - _activationTime: 2
@@ -776,7 +772,7 @@ MonoBehaviour:
     _dispersionMin: 2
     _dispersionMax: 15
     _shots: 3
-    _randomShots: 0
+    _warning: 0
     _warning: 1
     _threatDescription: Two together
   _hardDifficultyBonus:
@@ -788,7 +784,6 @@ MonoBehaviour:
     _dispersionMin: 1
     _dispersionMax: 8
     _shots: 1
-    _randomShots: 0
     _warning: 1
     _threatDescription: Three together
   _timeToLive: 75
