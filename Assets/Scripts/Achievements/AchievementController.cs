@@ -26,13 +26,16 @@ public class AchievementController : MonoBehaviour
 
 
 
+
+
+
     /// <summary>
     /// Method used to trigger an achievement on completion.
     /// </summary>
     /// <param name="achievement">The achievement triggered</param>
     private void TriggerAchievement(Achievement achievement)
     {
-        GetComponent<SaveController>().SaveAchievement(achievement.ID);
+        GetComponent<SaveController>().SaveAchievement(achievement);
 
         _achievementPopup.PopupAchievement(achievement);
     }

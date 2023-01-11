@@ -77,4 +77,16 @@ public class Achievement : ScriptableObject
     /// Does this achievement is hintted when not found?
     /// </summary>
     public bool Hintable { get => _showHints; }
+
+
+    /// <summary>
+    /// Goal of this achievement, if one.
+    /// </summary>
+    [SerializeField]
+    private int _goal;
+
+    /// <summary>
+    /// Goal of this achievement, if one.
+    /// </summary>
+    public int Goal { get => _goal; }
 }

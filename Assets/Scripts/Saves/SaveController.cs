@@ -191,12 +191,34 @@ public class SaveController : MonoBehaviour
 	/// <summary>
 	/// Method used to save a new achievement unlocked.
 	/// </summary>
-	/// <param name="newAchievement">The new achievement unique id</param>
-	public void SaveAchievement(string newAchievement)
+	/// <param name="achievement">The achievement unique id</param>
+	public void SaveAchievementProgress(string achievement, int progress, bool increase)
 	{
-		if (!SaveFile.Achievements.Contains(newAchievement))
+		AchievementProgress achievementProgress = SaveFile.Achievements.Find(x => x.ID == achievement);
+
+		if (achievementProgress != null)
 		{
-			SaveFile.Achievements.Add(newAchievement);
+			if (increase)
+				achievementProgress.IncreaseProgress(progress);
+			else
+				achievementProgress.UpdateProgress(progress);
+
+			SaveData();
+		}
+	}
+
+
+	/// <summary>
+	/// Method used to save a new achievement unlocked.
+	/// </summary>
+	/// <param name="newAchievement">The new achievement unique id</param>
+	public void SaveAchievement(Achievement newAchievement)
+	{
+		AchievementProgress achievementProgress = SaveFile.Achievements.Find(x => x.ID == newAchievement.ID);
+
+		if (achievementProgress == null)
+		{
+			SaveFile.Achievements.Add(new AchievementProgress(newAchievement.ID, newAchievement.Goal));
 
 			SaveData();
 		}
