@@ -109,6 +109,7 @@ public class LevelController : MonoBehaviour
     {
         _tutorialScreen.SetActive(false);
         Controller.Instance.SaveController.SaveTutorial();
+        Controller.Instance.AchievementController.TriggerAchievement("A-12");
 
         _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
         _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);

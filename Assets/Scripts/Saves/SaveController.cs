@@ -102,6 +102,7 @@ public class SaveController : MonoBehaviour
 	public void SaveTutorial()
 	{
 		SaveFile.Tutorial = true;
+
 		SaveData();
 	}
 
