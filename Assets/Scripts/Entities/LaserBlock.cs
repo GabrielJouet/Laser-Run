@@ -168,6 +168,7 @@ public class LaserBlock : MonoBehaviour
             Shot(_semiLaser, _difficulty.ReactionTime);
             yield return new WaitForSeconds(_difficulty.ReactionTime);
             Shot(_laser, _difficulty.DisplayTime);
+            FindObjectOfType<ShakingCamera>().ShakeCamera(0.01f);
 
             _audioSource.clip = _laserSounds[Random.Range(0, _laserSounds.Count)];
             _audioSource.Play();
