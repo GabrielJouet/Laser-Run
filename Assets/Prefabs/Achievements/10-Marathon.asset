@@ -18,3 +18,4 @@ MonoBehaviour:
   _icon: {fileID: -6201867020075669757, guid: 11509e74ff60ba04e82f32cedfe66e6a, type: 3}
   _lockedIcon: {fileID: -2426609307981891939, guid: 11509e74ff60ba04e82f32cedfe66e6a, type: 3}
   _showHints: 0
+  _goal: 42195
