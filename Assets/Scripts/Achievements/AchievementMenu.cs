@@ -37,11 +37,11 @@ public class AchievementMenu : MonoBehaviour
         SaveFile saveFile = Controller.Instance.SaveController.SaveFile;
 
         for (int i = 0; i < achievements.Count; i ++)
-            Instantiate(_achievementPrefab, transform).Initialize(achievements[i], saveFile.Achievements.Find(x => x.ID == achievements[i].ID) == null);
+            Instantiate(_achievementPrefab, transform).Initialize(achievements[i], !saveFile.AchievementsUnlocked.Contains(achievements[i].ID));
 
         _achievementSlider.maxValue = achievements.Count;
-        _achievementSlider.value = saveFile.Achievements.Count;
+        _achievementSlider.value = saveFile.AchievementsUnlocked.Count;
 
-        _achievementCount.text = saveFile.Achievements.Count + " / " + achievements.Count + " achievements";
+        _achievementCount.text = saveFile.AchievementsUnlocked.Count + " / " + achievements.Count + " achievements";
     }
 }

@@ -57,9 +57,15 @@ public class SaveFile
 
 
     /// <summary>
+    /// All achievements in progress.
+    /// </summary>
+    public List<AchievementProgress> AchievementsProgress { get; private set; }
+
+    /// <summary>
     /// All achievements unlocked.
     /// </summary>
-    public List<AchievementProgress> Achievements { get; private set; }
+    public List<string> AchievementsUnlocked { get; private set; }
+
 
 
     /// <summary>
@@ -70,7 +76,8 @@ public class SaveFile
     /// <param name="numberOfLevels">How much levels in the game</param>
     public SaveFile(float soundLevel, float musicLevel, int numberOfLevels)
     {
-        Achievements = new List<AchievementProgress>();
+        AchievementsProgress = new List<AchievementProgress>();
+        AchievementsUnlocked = new List<string>();
 
         LevelsProgression = new List<LevelSave> { new LevelSave(false) };
 

@@ -83,6 +83,17 @@ public class Player : MonoBehaviour
     public bool Invicible { get; private set; }
 
 
+    /// <summary>
+    /// Total distance runned this time.
+    /// </summary>
+    private float _distanceRunned = 0;
+
+    /// <summary>
+    /// Total time runned this time.
+    /// </summary>
+    private float _timeRunned = 0;
+
+
 
     /// <summary>
     /// Awake method, called at first.
@@ -141,6 +152,12 @@ public class Player : MonoBehaviour
         if (_inputs.x != 0)
             _spriteRenderer.flipX = _inputs.x < 0;
 
+        if (_inputs.x != 0 || _inputs.y != 0)
+        {
+            _timeRunned += Time.fixedDeltaTime;
+            _distanceRunned += _inputs.magnitude * Time.fixedDeltaTime;
+        }
+
         _rigidBody.MovePosition(_rigidBody.position + _inputs * Time.fixedDeltaTime * _speed);
         _spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(transform.position).y * -1;
         _shadowSpriteRenderer.sortingOrder = _spriteRenderer.sortingOrder - 1;
@@ -166,6 +183,9 @@ public class Player : MonoBehaviour
     /// </summary>
     public void GetHit()
     {
+        Controller.Instance.SaveController.SaveAchievementProgress("A-11", Mathf.FloorToInt(_timeRunned), true);
+        Controller.Instance.SaveController.SaveAchievementProgress("A-10", Mathf.FloorToInt(_distanceRunned), true);
+
         PoolController poolController = Controller.Instance.PoolController;
 
         for (int i = 0; i < Random.Range(3, 8); i++)
@@ -189,5 +209,8 @@ public class Player : MonoBehaviour
     public void BecameInvicible()
     {
         Invicible = true;
+
+        Controller.Instance.SaveController.SaveAchievementProgress("A-11", Mathf.FloorToInt(_timeRunned), true);
+        Controller.Instance.SaveController.SaveAchievementProgress("A-10", Mathf.FloorToInt(_distanceRunned), true);
     }
 }

@@ -25,6 +25,9 @@ public class LevelController : MonoBehaviour
     private Level _level;
 
 
+    private int _deathInARow = 0;
+
+
 
     /// <summary>
     /// Start method, called after Awake.
@@ -53,6 +56,18 @@ public class LevelController : MonoBehaviour
 
         if (_level.TimeElapsed >= _level.NeededTime)
             win = true;
+        else
+        {
+            _deathInARow++;
+
+            if (_deathInARow >= 10)
+                Controller.Instance.AchievementController.TriggerAchievement("A-2");
+
+            if (_level.TimeElapsed - _level.NeededTime <= 1 && Controller.Instance.SaveController.Hard)
+                Controller.Instance.AchievementController.TriggerAchievement("A-9");
+            else if (_level.TimeElapsed - _level.NeededTime <= 3 && !Controller.Instance.SaveController.Hard)
+                Controller.Instance.AchievementController.TriggerAchievement("A-8");
+        }
 
         Controller.Instance.SaveController.SaveLevelData(win ? _level.NeededTime : _level.TimeElapsed, win);
         Controller.Instance.UIController.DisplayGameOverScreen(win);

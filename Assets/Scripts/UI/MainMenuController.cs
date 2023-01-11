@@ -308,6 +308,9 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void ResetSave()
     {
+        if (Controller.Instance.SaveController.SaveFile.AchievementsUnlocked != null && Controller.Instance.SaveController.SaveFile.AchievementsUnlocked.Count == 29)
+            Controller.Instance.AchievementController.TriggerAchievement("A-6");
+
         Controller.Instance.SaveController.ResetData();
         _confirmationText.text = "Done";
         _confirmationButton.enabled = false;

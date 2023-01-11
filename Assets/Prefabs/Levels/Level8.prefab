@@ -661,7 +661,6 @@ MonoBehaviour:
   - {fileID: 8733210227180298676}
   - {fileID: 8819636774474341510}
   - {fileID: 7673848559669240102}
-  - {fileID: 0}
   _difficulties:
   - _activationTime: 4
     _activationNumber: 1
