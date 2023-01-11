@@ -27,12 +27,19 @@ public class AchievementPopup : MonoBehaviour
     private Animator _animator;
 
 
+    /// <summary>
+    /// Audio Source component used to add emphasis on achievement unlock.
+    /// </summary>
+    private AudioSource _audioSource;
+
+
 
     /// <summary>
     /// Awake method, called at initialization before Start.
     /// </summary>
     private void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();    
     }
 
@@ -47,6 +54,7 @@ public class AchievementPopup : MonoBehaviour
         _title.text = achievement.Name;
 
         _animator.SetTrigger("popup");
+        _audioSource.Play();
 
         StartCoroutine(PopOutAchievement());
     }
