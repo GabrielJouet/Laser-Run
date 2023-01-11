@@ -63,9 +63,9 @@ public class LevelController : MonoBehaviour
             if (_deathInARow >= 10)
                 Controller.Instance.AchievementController.TriggerAchievement("A-2");
 
-            if (_level.TimeElapsed - _level.NeededTime <= 1 && Controller.Instance.SaveController.Hard)
+            if (_level.NeededTime - _level.TimeElapsed <= 1 && Controller.Instance.SaveController.Hard)
                 Controller.Instance.AchievementController.TriggerAchievement("A-9");
-            else if (_level.TimeElapsed - _level.NeededTime <= 3 && !Controller.Instance.SaveController.Hard)
+            else if (_level.NeededTime - _level.TimeElapsed <= 3 && !Controller.Instance.SaveController.Hard)
                 Controller.Instance.AchievementController.TriggerAchievement("A-8");
         }
 
