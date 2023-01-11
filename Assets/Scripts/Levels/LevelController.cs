@@ -25,6 +25,9 @@ public class LevelController : MonoBehaviour
     private Level _level;
 
 
+    /// <summary>
+    /// How much time the player dies in a row?
+    /// </summary>
     private int _deathInARow = 0;
 
 

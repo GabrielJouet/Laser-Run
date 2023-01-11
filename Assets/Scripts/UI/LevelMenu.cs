@@ -74,6 +74,9 @@ public class LevelMenu : MonoBehaviour
     /// <param name="category">Category of this level</param>
     public void Initialize(LevelSave save, string levelName, LevelSelectionController controller, int index, LevelCategory category)
     {
+        bool won = save.State == LevelState.WON;
+        bool harded = save.State == LevelState.WONHARD;
+
         GetComponent<Image>().color = _bordersColors[(int)category];
         _nameLevel.text = levelName;
 
@@ -82,11 +85,11 @@ public class LevelMenu : MonoBehaviour
 
         _lockedImage.SetActive(save.State == LevelState.LOCKED);
 
-        _finishedImage.SetActive(save.State == LevelState.WON);
-        _finishedHardImage.SetActive(save.State == LevelState.WONHARD);
+        _finishedImage.SetActive(won || harded);
+        _finishedHardImage.SetActive(harded);
 
-        _hardButton.gameObject.SetActive(save.State == LevelState.WON);
-        _hardTimeText.gameObject.SetActive(save.State == LevelState.WON);
+        _hardButton.gameObject.SetActive(won || harded);
+        _hardTimeText.gameObject.SetActive(won || harded);
 
         _normalButton.onClick.AddListener(() => controller.LoadLevel(index));
         _hardButton.onClick.AddListener(() => controller.LoadHardLevel(index));
