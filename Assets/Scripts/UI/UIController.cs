@@ -38,6 +38,12 @@ public class UIController : MonoBehaviour
     private TextMeshProUGUI _gameOverText;
 
     /// <summary>
+    /// Animator component used to display cut out and fade.
+    /// </summary>
+    [SerializeField]
+    private Animator _deathCutOut;
+
+    /// <summary>
     /// How much time between activation and display.
     /// </summary>
     [SerializeField]
@@ -100,7 +106,10 @@ public class UIController : MonoBehaviour
     /// <param name="win">Does the player wins the game?</param>
     public void DisplayGameOverScreen(bool win)
     {
-        StartCoroutine(DelayScreenDisplay(win ? "Laser won't stop you this time!" : "You've stopped running..."));
+        if (win)
+            StartCoroutine(DelayScreenDisplay("Laser won't stop you this time!"));
+        else
+            _deathCutOut.SetTrigger("die");
     }
 
 
