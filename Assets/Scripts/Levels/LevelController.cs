@@ -14,6 +14,12 @@ public class LevelController : MonoBehaviour
     [SerializeField]
     private GameObject _playerPrefab;
 
+    /// <summary>
+    /// Tutorial screen, used the first time.
+    /// </summary>
+    [SerializeField]
+    private GameObject _tutorialScreen;
+
 
     /// <summary>
     /// Spawned player.
@@ -40,12 +46,16 @@ public class LevelController : MonoBehaviour
     {
         Controller.Instance.AddReferencesWhenLoaded(this, GetComponent<UIController>());
 
-        _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
-        _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);
+        if (!Controller.Instance.SaveController.SaveFile.Tutorial)
+            _tutorialScreen.SetActive(true);
+        else
+        {
+            _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
+            _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);
 
-        _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
-
-        _level.Initialize();
+            _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
+            _level.Initialize();
+        }
     }
 
 
@@ -89,6 +99,23 @@ public class LevelController : MonoBehaviour
         Controller.Instance.PoolController.RetrieveAllPools();
         Controller.Instance.MusicController.LoadTitle();
         SceneManager.LoadScene("LevelSelection");
+    }
+
+
+    /// <summary>
+    /// Method called when the tutorial is set to done.
+    /// </summary>
+    public void SetTutorialDone()
+    {
+        _tutorialScreen.SetActive(false);
+        Controller.Instance.SaveController.SaveTutorial();
+        Controller.Instance.AchievementController.TriggerAchievement("A-12");
+
+        _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
+        _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);
+
+        _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
+        _level.Initialize();
     }
 
 
