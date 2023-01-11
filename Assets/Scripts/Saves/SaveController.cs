@@ -97,6 +97,16 @@ public class SaveController : MonoBehaviour
 
 
 	/// <summary>
+	/// Method used to save that the tutorial has been completed.
+	/// </summary>
+	public void SaveTutorial()
+	{
+		SaveFile.Tutorial = true;
+		SaveData();
+	}
+
+
+	/// <summary>
 	/// Method used to save music level.
 	/// </summary>
 	/// <param name="newMusicLevel">The new music level</param>

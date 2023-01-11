@@ -49,6 +49,11 @@ public class SaveFile
     /// </summary>
     public bool FullScreen { get; set; }
 
+    /// <summary>
+    /// Does the tutorial has been completed?
+    /// </summary>
+    public bool Tutorial { get; set; }
+
 
     /// <summary>
     /// Level progression.
@@ -86,6 +91,8 @@ public class SaveFile
 
         Sound = soundLevel;
         SoundMuted = false;
+
+        Tutorial = false;
 
         Music = musicLevel;
         MusicMuted = false;
