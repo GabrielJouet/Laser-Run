@@ -4755,6 +4755,16 @@ MonoBehaviour:
   _achievementPopup: {fileID: 1932226828}
   _achievements:
   - {fileID: 11400000, guid: 3cdf6149f90f3a14eb1bb760b1205e3e, type: 2}
+  - {fileID: 11400000, guid: b34fb135b64307d4785683a3fa747814, type: 2}
+  - {fileID: 11400000, guid: 12eea7eff6bf7da4b84329fc3385ec46, type: 2}
+  - {fileID: 11400000, guid: 1e2f0a61acc7edb46ab2ca94dd07798b, type: 2}
+  - {fileID: 11400000, guid: 608ebad3fde6a8b429ffc41862d23e34, type: 2}
+  - {fileID: 11400000, guid: 496640ca9b01e0b40bd41d251218544f, type: 2}
+  - {fileID: 11400000, guid: d575c1067e8448048a419632ae03a553, type: 2}
+  - {fileID: 11400000, guid: bda642875a5958649af8c5a1d7e2b2b3, type: 2}
+  - {fileID: 11400000, guid: 5a8e74c5296f073489e39406b471342b, type: 2}
+  - {fileID: 11400000, guid: a0810939da1b3474dacf50d7b7bc1405, type: 2}
+  - {fileID: 11400000, guid: 3dfaba39e475a744d98bc0968c8ec176, type: 2}
 --- !u!1 &1052905727
 GameObject:
   m_ObjectHideFlags: 0

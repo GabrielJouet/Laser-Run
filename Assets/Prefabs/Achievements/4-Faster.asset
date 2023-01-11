@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 992b2c845facade48a1ea750f3383596, type: 3}
-  m_Name: Runner
+  m_Name: 4-Faster
   m_EditorClassIdentifier: 
-  _name: Runner
-  _id: A-1
-  _description: Unlock new running skills.
+  _name: Faster
+  _id: A-4
+  _description: Finish the first type of levels
   _icon: {fileID: -6201867020075669757, guid: 11509e74ff60ba04e82f32cedfe66e6a, type: 3}
   _lockedIcon: {fileID: -2426609307981891939, guid: 11509e74ff60ba04e82f32cedfe66e6a, type: 3}
   _showHints: 1
