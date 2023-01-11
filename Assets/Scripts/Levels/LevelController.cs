@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -74,6 +75,9 @@ public class LevelController : MonoBehaviour
 
         Controller.Instance.SaveController.SaveLevelData(win ? _level.NeededTime : _level.TimeElapsed, win);
         Controller.Instance.UIController.DisplayGameOverScreen(win);
+
+        if (!win)
+            StartCoroutine(RestartLoadedLevel());
     }
 
 
@@ -91,8 +95,9 @@ public class LevelController : MonoBehaviour
     /// <summary>
     /// Method called when we want to restart a level.
     /// </summary>
-    public void RestartLoadedLevel()
+    private IEnumerator RestartLoadedLevel()
     {
+        yield return new WaitForSeconds(0.7f);
         Controller.Instance.PoolController.RetrieveAllPools();
         Controller.Instance.UIController.HideGameOverScreen();
         bool hard = Controller.Instance.SaveController.Hard;
