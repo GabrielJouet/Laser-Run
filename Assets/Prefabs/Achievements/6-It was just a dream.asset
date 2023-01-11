@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992b2c845facade48a1ea750f3383596, type: 3}
+  m_Name: 6-It was just a dream
+  m_EditorClassIdentifier: 
+  _name: It was just a dream
+  _id: A-6
+  _description: Delete a save with all levels done normal and hard
+  _icon: {fileID: -6201867020075669757, guid: 11509e74ff60ba04e82f32cedfe66e6a, type: 3}
+  _lockedIcon: {fileID: -2426609307981891939, guid: 11509e74ff60ba04e82f32cedfe66e6a, type: 3}
+  _showHints: 0
+  _goal: 0

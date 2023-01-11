@@ -189,6 +189,41 @@ public class SaveController : MonoBehaviour
 
 
 	/// <summary>
+	/// Method used to save a new achievement unlocked.
+	/// </summary>
+	/// <param name="achievement">The achievement unique id</param>
+	public void SaveAchievementProgress(string achievement, int progress, bool increase)
+	{
+		AchievementProgress achievementProgress = SaveFile.AchievementsProgress.Find(x => x.ID == achievement);
+
+		if (achievementProgress != null)
+		{
+			if (increase)
+				achievementProgress.IncreaseProgress(progress);
+			else
+				achievementProgress.UpdateProgress(progress);
+
+			SaveData();
+		}
+	}
+
+
+	/// <summary>
+	/// Method used to save a new achievement unlocked.
+	/// </summary>
+	/// <param name="achievementID">The new achievement unique id</param>
+	public void SaveAchievement(string achievementID)
+	{
+		if (!SaveFile.AchievementsUnlocked.Contains(achievementID))
+		{
+			SaveFile.AchievementsUnlocked.Add(achievementID);
+
+			SaveData();
+		}
+	}
+
+
+	/// <summary>
 	/// Method used to save a level data.
 	/// </summary>
 	/// <param name="timeSurvived">Time survived in this level</param>
@@ -208,11 +243,37 @@ public class SaveController : MonoBehaviour
 			}
 			else if (savedLevel.State == LevelState.WON && Hard)
 				savedLevel.State = LevelState.WONHARD;
+
+			if (LevelIndex == 5 && !Hard)
+				Controller.Instance.AchievementController.TriggerAchievement("A-4");
+			else if (LevelIndex == 9 && !Hard)
+				Controller.Instance.AchievementController.TriggerAchievement("A-5");
+
+			if (Hard)
+			{
+				Controller.Instance.AchievementController.TriggerAchievement("A-3");
+
+				bool allHardDone = true;
+
+				foreach(LevelSave levelSave in SaveFile.LevelsProgression)
+				{
+					if (levelSave.State == LevelState.LOCKED || levelSave.State == LevelState.OPENED || levelSave.State == LevelState.WON)
+					{
+						allHardDone = false;
+						break;
+					}
+				}
+
+				if (allHardDone)
+					Controller.Instance.AchievementController.TriggerAchievement("A-7");
+			}
+			else
+				Controller.Instance.AchievementController.TriggerAchievement("A-1");
 		}
 
-		if (Hard)
+		if (Hard && savedLevel.HardTime < timeSurvived)
 			savedLevel.HardTime = timeSurvived;
-		else
+		else if (!Hard && savedLevel.Time < timeSurvived)
 			savedLevel.Time = timeSurvived;
 
 		SaveData();
