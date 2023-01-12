@@ -4,5 +4,6 @@
 public enum LevelCategory
 {
     LINE,
-    MOVING
+    MOVING,
+    LENGTH
 }
