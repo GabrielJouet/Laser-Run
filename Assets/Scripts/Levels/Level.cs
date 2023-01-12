@@ -38,7 +38,13 @@ public class Level : MonoBehaviour
     /// Available laser blocks in this level.
     /// </summary>
     [SerializeField]
-    private List<LaserBlock> _blocks;
+    private List<Emitter> _blocks;
+
+    /// <summary>
+    /// Additionnal laser blocks in this level.
+    /// </summary>
+    [SerializeField]
+    private List<Emitter> _additionnalBlocks;
 
     /// <summary>
     /// All difficulties in the level.
@@ -103,7 +109,10 @@ public class Level : MonoBehaviour
     /// </summary>
     public void Initialize()
     {
-        foreach (LaserBlock block in _blocks)
+        foreach (Emitter block in _blocks)
+            block.ResetObject();
+
+        foreach (Emitter block in _additionnalBlocks)
             block.ResetObject();
 
         _uiController = Controller.Instance.UIController;
