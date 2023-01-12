@@ -72,7 +72,7 @@ public class Laser : MonoBehaviour
         _lineRenderer.SetPosition(0, transform.parent.position);
         _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * CheckDistance()));
 
-        if (!_fake)
+        if (!_fake && _lineRenderer.enabled)
         {
             _hitLight.transform.position = _lineRenderer.GetPosition(1);
 
@@ -88,6 +88,9 @@ public class Laser : MonoBehaviour
     /// <param name="renderTime">The render time of this laser</param>
     private IEnumerator ShootLaser(float renderTime)
     {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
 
         _lineRenderer.enabled = true;
