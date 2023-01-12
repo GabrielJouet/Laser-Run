@@ -5,6 +5,8 @@ using UnityEngine;
 /// </summary>
 public class MovingLaserBlock : LaserBlock
 {
+    [Header("Moving parameters")]
+
     /// <summary>
     /// Minimal position of this block.
     /// </summary>
@@ -38,6 +40,7 @@ public class MovingLaserBlock : LaserBlock
     protected override void Awake()
     {
         base.Awake();
+
         _goal = Random.Range(0, 2) == 1 ? _minPosition : _maxPosition;
     }
 
