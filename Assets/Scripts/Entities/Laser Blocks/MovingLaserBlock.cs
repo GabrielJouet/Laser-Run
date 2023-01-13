@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -19,18 +20,17 @@ public class MovingLaserBlock : LaserBlock
     [SerializeField]
     private Vector2 _maxPosition;
 
-    /// <summary>
-    /// Speed of the block.
-    /// </summary>
-    [SerializeField]
-    [Range(0.01f, 0.35f)]
-    private float _speed;
-
 
     /// <summary>
     /// Next goal of this block.
     /// </summary>
     private Vector2 _goal;
+
+
+    /// <summary>
+    /// Does this laser block is processing a new direction?
+    /// </summary>
+    private bool _processingNewDirection = false;
 
 
 
@@ -50,9 +50,26 @@ public class MovingLaserBlock : LaserBlock
     /// </summary>
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _goal, Time.deltaTime * _speed);
+        if (!_processingNewDirection)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _goal, Time.deltaTime * _difficulty.Speed);
 
-        if ((Vector2)transform.position == _goal)
-            _goal = _goal == _minPosition ? _maxPosition : _minPosition;
+            if ((Vector2)transform.position == _goal)
+                StartCoroutine(ChangeDirection());
+        }
+    }
+
+
+    /// <summary>
+    /// Coroutine used to delay the direction change.
+    /// </summary>
+    private IEnumerator ChangeDirection()
+    {
+        _processingNewDirection = true;
+
+        yield return new WaitForSeconds(_difficulty.TimeBeforeDirectionChange);
+
+        _goal = _goal == _minPosition ? _maxPosition : _minPosition;
+        _processingNewDirection = false;
     }
 }

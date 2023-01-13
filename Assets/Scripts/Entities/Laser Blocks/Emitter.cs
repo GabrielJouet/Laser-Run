@@ -10,21 +10,6 @@ using UnityEngine.Rendering.Universal;
 [RequireComponent(typeof(AudioSource))]
 public abstract class Emitter : MonoBehaviour
 {
-    [Header("Difficulties")]
-
-    /// <summary>
-    /// All difficulties loaded in this laser.
-    /// </summary>
-    [SerializeField]
-    protected List<EmitterDifficulty> _difficulties;
-
-    /// <summary>
-    /// Hard difficulty loaded.
-    /// </summary>
-    [SerializeField]
-    protected EmitterDifficulty _hardDifficulty;
-
-
     [Header("Laser")]
 
     /// <summary>
@@ -98,9 +83,14 @@ public abstract class Emitter : MonoBehaviour
 
 
     /// <summary>
+    /// All difficulties loaded in this laser.
+    /// </summary>
+    protected List<LevelDifficulty> _difficulties;
+
+    /// <summary>
     /// Difficulty loaded in the laser.
     /// </summary>
-    protected EmitterDifficulty _difficulty;
+    protected LevelDifficulty _difficulty;
 
 
     /// <summary>
@@ -158,13 +148,11 @@ public abstract class Emitter : MonoBehaviour
     /// <summary>
     /// Method called to initialize an emitter.
     /// </summary>
-    /// <param name="hard">Does this level is hard based?</param>
-    public void Initialize(bool hard)
+    /// <param name="difficulties">All level difficulties</param>
+    public void Initialize(List<LevelDifficulty> difficulties)
     {
+        _difficulties = new List<LevelDifficulty>(difficulties);
         ResetObject();
-
-        if (hard)
-            _difficulties.Add(_hardDifficulty);
 
         UpdateDifficulty(0);
     }

@@ -105,7 +105,7 @@ public class Level : MonoBehaviour
     /// <summary>
     /// All blocks in this level.
     /// </summary>
-    private List<Emitter> _allBlocks = new List<Emitter>();
+    private readonly List<Emitter> _allBlocks = new List<Emitter>();
 
 
 
@@ -119,11 +119,11 @@ public class Level : MonoBehaviour
 
         bool hard = Controller.Instance.SaveController.Hard;
 
-        foreach (Emitter block in _allBlocks)
-            block.Initialize(hard);
-
         if (hard)
             _difficulties.Add(_hardDifficultyBonus);
+
+        foreach (Emitter block in _allBlocks)
+            block.Initialize(_difficulties);
 
         _uiController = Controller.Instance.UIController;
 
