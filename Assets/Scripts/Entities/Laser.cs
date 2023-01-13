@@ -88,11 +88,6 @@ public class Laser : MonoBehaviour
     /// <param name="renderTime">The render time of this laser</param>
     private IEnumerator ShootLaser(float renderTime)
     {
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-
         _lineRenderer.enabled = true;
 
         if (!_fake)
@@ -105,12 +100,13 @@ public class Laser : MonoBehaviour
             yield return new WaitForSeconds(renderTime);
 
             _particleSystem.Stop();
-            _hitLight.enabled = false;
         }
         else 
             yield return new WaitForSeconds(renderTime);
 
-        _lineRenderer.enabled = false;
+        _lineRenderer.SetPosition(0, Vector3.zero);
+        _lineRenderer.SetPosition(1, Vector3.zero);
+        _hitLight.transform.position = Vector3.one * 10;
 
         Controller.Instance.PoolController.In(gameObject);
     }
