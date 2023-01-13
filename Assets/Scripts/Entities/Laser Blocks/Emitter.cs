@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 /// <summary>
 /// Class that will handle emitter behavior.
 /// </summary>
-public class Emitter : MonoBehaviour
+public abstract class Emitter : MonoBehaviour
 {
     [Header("Laser")]
 
