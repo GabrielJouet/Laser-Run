@@ -9,18 +9,6 @@ public class ForeverLaserBlock : Emitter
     [Header("Rotation parameters")]
 
     /// <summary>
-    /// Reaction time before a laser pops up.
-    /// </summary>
-    [SerializeField]
-    private float _reactionTime;
-
-    /// <summary>
-    /// Loading time before the first laser pops up.
-    /// </summary>
-    [SerializeField]
-    private float _loadTime;
-
-    /// <summary>
     /// Rotation angle speed of this laser.
     /// </summary>
     [SerializeField, Range(2f, 15f)]
@@ -66,7 +54,7 @@ public class ForeverLaserBlock : Emitter
         base.Start();
 
         _isEmitting = false;
-        StartCoroutine(ChargeUpLaser(_loadTime));
+        StartCoroutine(ChargeUpLaser());
     }
 
 
@@ -80,9 +68,9 @@ public class ForeverLaserBlock : Emitter
 
         _canon.localRotation = Quaternion.Euler(Vector3.forward * (_facing * 90 + (_side ? _positiveShiftAngle : _minusShiftAngle)));
 
-        ShotProjectile(_semiLaser, _reactionTime);
+        ShotProjectile(_semiLaser, _difficulty.ReactionTime);
 
-        yield return new WaitForSeconds(_reactionTime);
+        yield return new WaitForSeconds(_difficulty.ReactionTime);
 
         _isEmitting = true;
         StartEmitting(999, 0.01f);
@@ -127,6 +115,6 @@ public class ForeverLaserBlock : Emitter
     {
         base.ResetObject();
 
-        StartCoroutine(ChargeUpLaser(_loadTime));
+        StartCoroutine(ChargeUpLaser());
     }
 }

@@ -6,8 +6,25 @@ using UnityEngine.Rendering.Universal;
 /// <summary>
 /// Class that will handle emitter behavior.
 /// </summary>
+/// <remarks>Needs to have an audio source component attached</remarks>
+[RequireComponent(typeof(AudioSource))]
 public abstract class Emitter : MonoBehaviour
 {
+    [Header("Difficulties")]
+
+    /// <summary>
+    /// All difficulties loaded in this laser.
+    /// </summary>
+    [SerializeField]
+    protected List<EmitterDifficulty> _difficulties;
+
+    /// <summary>
+    /// Hard difficulty loaded.
+    /// </summary>
+    [SerializeField]
+    protected EmitterDifficulty _hardDifficulty;
+
+
     [Header("Laser")]
 
     /// <summary>
@@ -83,7 +100,7 @@ public abstract class Emitter : MonoBehaviour
     /// <summary>
     /// Difficulty loaded in the laser.
     /// </summary>
-    protected LevelDifficulty _difficulty;
+    protected EmitterDifficulty _difficulty;
 
 
     /// <summary>
@@ -133,21 +150,47 @@ public abstract class Emitter : MonoBehaviour
     protected virtual void Start()
     {
         _shakingCamera = FindObjectOfType<ShakingCamera>();
+        _difficulty = _difficulties[0];
+    }
+
+
+
+    /// <summary>
+    /// Method called to initialize an emitter.
+    /// </summary>
+    /// <param name="hard">Does this level is hard based?</param>
+    public void Initialize(bool hard)
+    {
+        ResetObject();
+
+        if (hard)
+            _difficulties.Add(_hardDifficulty);
+
+        UpdateDifficulty(0);
+    }
+
+
+    /// <summary>
+    /// Method called to update the difficulty of this laser block.
+    /// </summary>
+    /// <param name="index">New index loaded</param>
+    public void UpdateDifficulty(int index)
+    {
+        _difficulty = _difficulties[index];
     }
 
 
     /// <summary>
     /// Coroutine used to charge up visually the laser block.
     /// </summary>
-    /// <param name="loadTime">Load time total of the laser</param>
-    protected IEnumerator ChargeUpLaser(float loadTime)
+    protected IEnumerator ChargeUpLaser()
     {
         _light.enabled = true;
         _light.intensity = 0.25f;
 
         for (int i = 0; i < _clockLeds.Count; i++)
         {
-            yield return new WaitForSeconds(loadTime / _clockLeds.Count);
+            yield return new WaitForSeconds(_difficulty.LoadTime / _clockLeds.Count);
             _light.intensity = 0.25f + i * 0.1f;
             _clockLeds[i].SetActive(true);
         }

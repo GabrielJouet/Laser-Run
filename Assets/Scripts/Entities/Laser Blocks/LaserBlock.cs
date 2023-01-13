@@ -1,10 +1,6 @@
-using UnityEngine;
-
 /// <summary>
 /// Class used to handle every laser block behavior.
 /// </summary>
-/// <remarks>Needs to have an audio source component attached</remarks>
-[RequireComponent(typeof(AudioSource))]
 public class LaserBlock : Emitter
 {
     /// <summary>
@@ -17,14 +13,11 @@ public class LaserBlock : Emitter
     /// <summary>
     /// Method used to load a new difficulty and start the laser.
     /// </summary>
-    /// <param name="difficulty">The difficulty wanted</param>
-    public void WarmUp(LevelDifficulty difficulty)
+    public void WarmUp()
     {
-        _difficulty = difficulty;
-
         Used = true;
 
-        StartCoroutine(ChargeUpLaser(_difficulty.LoadTime));
+        StartCoroutine(ChargeUpLaser());
     }
 
 
