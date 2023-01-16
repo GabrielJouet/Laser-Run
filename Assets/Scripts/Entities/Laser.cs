@@ -34,6 +34,12 @@ public class Laser : MonoBehaviour
     private LineRenderer _lineRenderer;
 
 
+    /// <summary>
+    /// Nearest hit stored.
+    /// </summary>
+    private RaycastHit2D _nearestHit;
+
+
 
     /// <summary>
     /// Awake method called at first.
@@ -69,16 +75,16 @@ public class Laser : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        RaycastHit2D nearestHit = NearestHit();
+        _nearestHit = NearestHit();
 
         _lineRenderer.SetPosition(0, transform.parent.position);
-        _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * nearestHit.distance * (!_fake ? 1 : 0.5f)));
+        _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * _nearestHit.distance * (!_fake ? 1 : 0.5f)));
 
         if (!_fake && _lineRenderer.enabled)
         {
             _hitLight.transform.position = _lineRenderer.GetPosition(1);
 
-            if (nearestHit.collider.TryGetComponent(out Player player) && !player.Invicible)
+            if (_nearestHit.collider.TryGetComponent(out Player player) && !player.Invicible)
                 player.GetHit();
         }
     }
