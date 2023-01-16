@@ -37,10 +37,8 @@ public class MovingLaserBlock : LaserBlock
     /// <summary>
     /// Awake method, called at initialization.
     /// </summary>
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
-
         _goal = Random.Range(0, 2) == 1 ? _minPosition : _maxPosition;
     }
 

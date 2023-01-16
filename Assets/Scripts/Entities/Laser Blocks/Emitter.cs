@@ -101,10 +101,12 @@ public abstract class Emitter : MonoBehaviour
 
 
     /// <summary>
-    /// Awake method, used at first.
+    /// Method called to initialize an emitter.
     /// </summary>
-    protected virtual void Awake()
+    /// <param name="difficulties">All level difficulties</param>
+    public virtual void Initialize(List<LevelDifficulty> difficulties)
     {
+        _shakingCamera = FindObjectOfType<ShakingCamera>();
         _light = _canon.GetComponent<Light2D>();
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = !Controller.Instance.SaveController.SaveFile.SoundMuted ? Controller.Instance.SaveController.SaveFile.Sound : 0;
@@ -131,25 +133,6 @@ public abstract class Emitter : MonoBehaviour
                 _particleSystem.transform.position = transform.position + new Vector3(0.09f, 0);
                 break;
         }
-    }
-
-
-    /// <summary>
-    /// Start method, called after Awake.
-    /// </summary>
-    protected virtual void Start()
-    {
-        _shakingCamera = FindObjectOfType<ShakingCamera>();
-    }
-
-
-
-    /// <summary>
-    /// Method called to initialize an emitter.
-    /// </summary>
-    /// <param name="difficulties">All level difficulties</param>
-    public virtual void Initialize(List<LevelDifficulty> difficulties)
-    {
         _difficulties = new List<LevelDifficulty>(difficulties);
         ResetObject();
 
