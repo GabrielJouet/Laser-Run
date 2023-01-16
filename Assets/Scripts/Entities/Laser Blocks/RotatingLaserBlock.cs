@@ -34,6 +34,7 @@ public class RotatingLaserBlock : Emitter
     /// </summary>
     protected override IEnumerator Shot()
     {
+        _canon.localRotation = Quaternion.Euler(new Vector3(0, 0, 180));
         ShotProjectile(_semiLaser, _difficulty.ReactionTime);
 
         yield return new WaitForSeconds(_difficulty.ReactionTime);
