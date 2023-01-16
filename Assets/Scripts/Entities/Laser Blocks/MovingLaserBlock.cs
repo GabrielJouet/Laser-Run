@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -32,6 +33,18 @@ public class MovingLaserBlock : LaserBlock
     /// </summary>
     private bool _processingNewDirection = false;
 
+
+
+    /// <summary>
+    /// Method called to initialize an emitter.
+    /// </summary>
+    /// <param name="difficulties">All level difficulties</param>
+    public override void Initialize(List<LevelDifficulty> difficulties)
+    {
+        base.Initialize(difficulties);
+
+        StartCoroutine(ChangeDirection());
+    }
 
 
     /// <summary>

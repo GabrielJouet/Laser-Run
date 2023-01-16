@@ -142,6 +142,7 @@ public abstract class Emitter : MonoBehaviour
 
         _difficulties = new List<LevelDifficulty>(difficulties);
         ResetObject();
+        StopAllCoroutines();
 
         UpdateDifficulty(0);
     }

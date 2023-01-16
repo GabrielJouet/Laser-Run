@@ -32,8 +32,6 @@ public class ForeverLaserBlock : Emitter
     {
         base.Initialize(difficulties);
 
-        StopAllCoroutines();
-
         _isEmitting = false;
         _side = true;
 
