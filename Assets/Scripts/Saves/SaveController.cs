@@ -213,9 +213,11 @@ public class SaveController : MonoBehaviour
 				achievementProgress.IncreaseProgress(progress);
 			else
 				achievementProgress.UpdateProgress(progress);
-
-			SaveData();
 		}
+		else
+			SaveFile.AchievementsProgress.Add(new AchievementProgress(achievement, Controller.Instance.AchievementController.Achievements.Find(x => x.ID == achievement).Goal));
+
+		SaveData();
 	}
 
 
