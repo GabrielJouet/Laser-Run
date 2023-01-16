@@ -213,6 +213,9 @@ public class SaveController : MonoBehaviour
 				achievementProgress.IncreaseProgress(progress);
 			else
 				achievementProgress.UpdateProgress(progress);
+
+			if (achievementProgress.Progress >= achievementProgress.ProgressGoal)
+				Controller.Instance.AchievementController.TriggerAchievement(achievement);
 		}
 		else
 			SaveFile.AchievementsProgress.Add(new AchievementProgress(achievement, Controller.Instance.AchievementController.Achievements.Find(x => x.ID == achievement).Goal));
