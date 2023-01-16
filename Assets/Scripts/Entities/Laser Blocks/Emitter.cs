@@ -120,25 +120,26 @@ public abstract class Emitter : MonoBehaviour
         switch (_facing)
         {
             case 0:
-                _canon.position = transform.position + new Vector3(0, 0.09f);
-                _particleSystem.transform.position = transform.position + new Vector3(0, 0.09f);
+                _canon.localPosition = new Vector3(0, 0.09f);
+                _particleSystem.transform.localPosition = new Vector3(0, 0.09f);
                 break;
 
             case 1:
-                _canon.position = transform.position + new Vector3(-0.09f, 0);
-                _particleSystem.transform.position = transform.position + new Vector3(-0.09f, 0);
+                _canon.localPosition = new Vector3(-0.09f, 0);
+                _particleSystem.transform.localPosition = new Vector3(-0.09f, 0);
                 break;
 
             case 2:
-                _canon.position = transform.position + new Vector3(0, -0.09f);
-                _particleSystem.transform.position = transform.position + new Vector3(0, -0.09f);
+                _canon.localPosition = new Vector3(0, -0.09f);
+                _particleSystem.transform.localPosition = new Vector3(0, -0.09f);
                 break;
 
             case 3:
-                _canon.position = transform.position + new Vector3(0.09f, 0);
-                _particleSystem.transform.position = transform.position + new Vector3(0.09f, 0);
+                _canon.localPosition = new Vector3(0.09f, 0);
+                _particleSystem.transform.localPosition = new Vector3(0.09f, 0);
                 break;
         }
+
         _difficulties = new List<LevelDifficulty>(difficulties);
         ResetObject();
 
