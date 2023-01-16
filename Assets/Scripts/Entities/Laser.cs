@@ -96,7 +96,7 @@ public class Laser : MonoBehaviour
         {
             _hitLight.enabled = true;
 
-            _hitLight.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.parent.localRotation.eulerAngles.z + 180));
+            _hitLight.transform.localEulerAngles = Vector3.forward * (transform.parent.localEulerAngles.z + 180);
             _particleSystem.Play();
         }
 

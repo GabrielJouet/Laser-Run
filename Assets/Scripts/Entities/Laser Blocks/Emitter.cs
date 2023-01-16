@@ -243,8 +243,8 @@ public abstract class Emitter : MonoBehaviour
     {
         _currentLaser = Controller.Instance.PoolController.Out(laser).GetComponent<Laser>();
 
-        _currentLaser.Initialize(displayTime, _laserColor);
         _currentLaser.transform.SetParent(_canon);
+        _currentLaser.Initialize(displayTime, _laserColor);
     }
 
 
