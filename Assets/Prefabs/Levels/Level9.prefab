@@ -736,8 +736,8 @@ MonoBehaviour:
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 5
-    _minusShiftAngle: -40
-    _positiveShiftAngle: -20
+    _minusShiftAngle: -80
+    _positiveShiftAngle: -70
     _timeBeforeRotationChange: 0.5
     _warning: 1
     _threatDescription: Lengthy, slow
@@ -752,8 +752,8 @@ MonoBehaviour:
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 5.5
-    _minusShiftAngle: -42
-    _positiveShiftAngle: -18
+    _minusShiftAngle: -70
+    _positiveShiftAngle: -55
     _timeBeforeRotationChange: 0.45
     _warning: 0
     _threatDescription: Faster
@@ -768,8 +768,8 @@ MonoBehaviour:
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 6.5
-    _minusShiftAngle: -45
-    _positiveShiftAngle: -15
+    _minusShiftAngle: -60
+    _positiveShiftAngle: -40
     _timeBeforeRotationChange: 0.4
     _warning: 0
     _threatDescription: Faster
@@ -786,7 +786,7 @@ MonoBehaviour:
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 7.5
     _minusShiftAngle: -50
-    _positiveShiftAngle: -10
+    _positiveShiftAngle: -25
     _timeBeforeRotationChange: 0.1
     _warning: 1
     _threatDescription: Five lasers

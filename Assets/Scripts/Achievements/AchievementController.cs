@@ -26,32 +26,17 @@ public class AchievementController : MonoBehaviour
 
 
 
-
-
-
-    /// <summary>
-    /// Method used to trigger an achievement on completion.
-    /// </summary>
-    /// <param name="achievement">The achievement triggered</param>
-    public void TriggerAchievement(Achievement achievement)
-    {
-        if (!GetComponent<SaveController>().SaveFile.AchievementsUnlocked.Contains(achievement.ID))
-        {
-            GetComponent<SaveController>().SaveAchievement(achievement.ID);
-
-            _achievementPopup.PopupAchievement(achievement);
-        }
-    }
-
-
     /// <summary>
     /// Method used to trigger an achievement on completion.
     /// </summary>
     /// <param name="achievementID">The achievement triggered id</param>
     public void TriggerAchievement(string achievementID)
     {
-        Achievement achievement = Achievements.Find(x => x.ID == achievementID);
+        if (!GetComponent<SaveController>().SaveFile.AchievementsUnlocked.Contains(achievementID))
+        {
+            GetComponent<SaveController>().SaveAchievement(achievementID);
 
-        TriggerAchievement(Achievements.Find(x => x.ID == achievementID));
+            _achievementPopup.PopupAchievement(Achievements.Find(x => x.ID == achievementID));
+        }
     }
 }

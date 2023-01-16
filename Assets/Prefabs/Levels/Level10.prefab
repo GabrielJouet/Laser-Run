@@ -753,8 +753,8 @@ MonoBehaviour:
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 11
-    _minusShiftAngle: -70
-    _positiveShiftAngle: -12
+    _minusShiftAngle: -65
+    _positiveShiftAngle: -6
     _timeBeforeRotationChange: 0.15
     _warning: 0
     _threatDescription: Faster
@@ -769,8 +769,8 @@ MonoBehaviour:
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 12
-    _minusShiftAngle: -80
-    _positiveShiftAngle: -15
+    _minusShiftAngle: -50
+    _positiveShiftAngle: -3
     _timeBeforeRotationChange: 0.1
     _warning: 1
     _threatDescription: Two shots
@@ -785,8 +785,8 @@ MonoBehaviour:
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 12.5
-    _minusShiftAngle: -85
-    _positiveShiftAngle: -18
+    _minusShiftAngle: -35
+    _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0.05
     _warning: 0
     _threatDescription: Faster
@@ -801,8 +801,8 @@ MonoBehaviour:
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 13
-    _minusShiftAngle: -88
-    _positiveShiftAngle: -20
+    _minusShiftAngle: -30
+    _positiveShiftAngle: 1
     _timeBeforeRotationChange: 0
     _warning: 0
     _threatDescription: Faster
@@ -817,8 +817,8 @@ MonoBehaviour:
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 14
-    _minusShiftAngle: -88
-    _positiveShiftAngle: -20
+    _minusShiftAngle: -40
+    _positiveShiftAngle: 3
     _timeBeforeRotationChange: 0
     _warning: 1
     _threatDescription: Three shots
@@ -834,8 +834,8 @@ MonoBehaviour:
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 15
-    _minusShiftAngle: -89
-    _positiveShiftAngle: -15
+    _minusShiftAngle: -35
+    _positiveShiftAngle: 5
     _timeBeforeRotationChange: 0.5
     _warning: 1
     _threatDescription: Five lasers
@@ -2285,7 +2285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8809634551697773556, guid: 6627d654c029fd94c90dd33b01620c83, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 8809634551697773556, guid: 6627d654c029fd94c90dd33b01620c83, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2648,7 +2648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8809634551697773556, guid: 6627d654c029fd94c90dd33b01620c83, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.16
       objectReference: {fileID: 0}
     - target: {fileID: 8809634551697773556, guid: 6627d654c029fd94c90dd33b01620c83, type: 3}
       propertyPath: m_LocalPosition.z
