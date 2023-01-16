@@ -42,10 +42,10 @@ public class ForeverLaserBlock : Emitter
     /// </summary>
     protected override IEnumerator Shot()
     {
-        _side = Random.Range(0, 2) == 1;
-        _angleGoal = _facing * 90 + (_side ? _difficulty.MinusAngle : _difficulty.PositiveAngle);
+        _side = true;
+        _angleGoal = Quaternion.Euler(Vector3.forward * (_facing * 90 + _difficulty.MinusAngle)).eulerAngles.z;
 
-        _canon.localRotation = Quaternion.Euler(Vector3.forward * (_facing * 90 + (_side ? _difficulty.PositiveAngle : _difficulty.MinusAngle)));
+        _canon.localRotation = Quaternion.Euler(Vector3.forward * (_facing * 90 + _difficulty.PositiveAngle));
 
         ShotProjectile(_semiLaser, _difficulty.ReactionTime);
 
@@ -66,9 +66,17 @@ public class ForeverLaserBlock : Emitter
             _shakingCamera.ShakeCamera(0.002f);
 
             _canon.Rotate(Vector3.forward * ((_side ? -1 : 1) * _difficulty.RotationSpeed) * Time.deltaTime);
-
-            if (_side && _canon.localEulerAngles.z <= _angleGoal || !_side && _canon.localEulerAngles.z >= _angleGoal)
-                StartCoroutine(ChangeDirection());
+            
+            if (_side)
+            {
+                if (_canon.localEulerAngles.z <= _angleGoal && Mathf.Abs(_canon.localEulerAngles.z - _angleGoal) < 180)
+                    StartCoroutine(ChangeDirection());
+            }
+            else
+            {
+                if (_canon.localEulerAngles.z >= _angleGoal && Mathf.Abs(_canon.localEulerAngles.z - _angleGoal) < 180)
+                    StartCoroutine(ChangeDirection());
+            }
         }
     }
 
@@ -82,7 +90,7 @@ public class ForeverLaserBlock : Emitter
         yield return new WaitForSeconds(_difficulty.TimeBeforeRotationChange);
 
         _side = !_side;
-        _angleGoal = _facing * 90 + (_side ? _difficulty.MinusAngle : _difficulty.PositiveAngle);
+        _angleGoal = Quaternion.Euler(Vector3.forward * (_facing * 90 + (_side ? _difficulty.MinusAngle : _difficulty.PositiveAngle))).eulerAngles.z;
         _isEmitting = true;
     }
 }
