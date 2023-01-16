@@ -140,7 +140,6 @@ public abstract class Emitter : MonoBehaviour
     protected virtual void Start()
     {
         _shakingCamera = FindObjectOfType<ShakingCamera>();
-        _difficulty = _difficulties[0];
     }
 
 
@@ -149,7 +148,7 @@ public abstract class Emitter : MonoBehaviour
     /// Method called to initialize an emitter.
     /// </summary>
     /// <param name="difficulties">All level difficulties</param>
-    public void Initialize(List<LevelDifficulty> difficulties)
+    public virtual void Initialize(List<LevelDifficulty> difficulties)
     {
         _difficulties = new List<LevelDifficulty>(difficulties);
         ResetObject();

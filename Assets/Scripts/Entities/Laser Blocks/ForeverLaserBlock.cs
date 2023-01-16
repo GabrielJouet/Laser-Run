@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -24,11 +25,12 @@ public class ForeverLaserBlock : Emitter
 
 
     /// <summary>
-    /// Start method, called after Awake, overriden from Emitter.
+    /// Method called to initialize an emitter.
     /// </summary>
-    protected override void Start()
+    /// <param name="difficulties">All level difficulties</param>
+    public override void Initialize(List<LevelDifficulty> difficulties)
     {
-        base.Start();
+        base.Initialize(difficulties);
 
         _isEmitting = false;
         StartCoroutine(ChargeUpLaser());
@@ -82,16 +84,5 @@ public class ForeverLaserBlock : Emitter
         _side = !_side;
         _angleGoal = _facing * 90 + (_side ? _difficulty.MinusAngle : _difficulty.PositiveAngle);
         _isEmitting = true;
-    }
-
-
-    /// <summary>
-    /// Method called to reset the object back to its original state.
-    /// </summary>
-    public override void ResetObject()
-    {
-        base.ResetObject();
-
-        StartCoroutine(ChargeUpLaser());
     }
 }
