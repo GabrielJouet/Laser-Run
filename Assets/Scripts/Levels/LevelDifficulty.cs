@@ -199,6 +199,20 @@ public class LevelDifficulty
     public bool StopWhenNotMoving { get => _stopWhenNotMoving; }
 
 
+    [Header("Rotater related")]
+
+    /// <summary>
+    /// Rotation speed of the laser block.
+    /// </summary>
+    [SerializeField]
+    private float _blockRotationSpeed;
+
+    /// <summary>
+    /// Rotation speed of the laser block.
+    /// </summary>
+    public float BlockRotationSpeed { get => _blockRotationSpeed; }
+
+
     [Header("Display")]
 
     /// <summary>

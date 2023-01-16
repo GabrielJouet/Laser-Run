@@ -73,6 +73,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: One laser, slow
   - _activationTime: 2.7
@@ -90,6 +91,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 2.5
@@ -107,6 +109,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 2.2
@@ -124,6 +127,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Quick charge
   - _activationTime: 2
@@ -141,6 +145,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 1.7
@@ -158,6 +163,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
@@ -176,6 +182,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Two lasers
   _timeToLive: 40

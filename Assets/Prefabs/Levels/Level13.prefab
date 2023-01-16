@@ -750,6 +750,7 @@ MonoBehaviour:
     _positiveShiftAngle: -45
     _timeBeforeRotationChange: 0.25
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Two lasers
   - _activationTime: 1.95
@@ -767,6 +768,7 @@ MonoBehaviour:
     _positiveShiftAngle: -25
     _timeBeforeRotationChange: 0.18
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Longer
   - _activationTime: 1.8
@@ -784,6 +786,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0.15
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Longer
   - _activationTime: 2.1
@@ -801,6 +804,7 @@ MonoBehaviour:
     _positiveShiftAngle: 10
     _timeBeforeRotationChange: 0.1
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Three lasers
   - _activationTime: 2
@@ -818,6 +822,7 @@ MonoBehaviour:
     _positiveShiftAngle: 15
     _timeBeforeRotationChange: 0.1
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
@@ -836,6 +841,7 @@ MonoBehaviour:
     _positiveShiftAngle: 25
     _timeBeforeRotationChange: 0.05
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Cramped!
   _timeToLive: 65

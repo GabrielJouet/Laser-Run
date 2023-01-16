@@ -741,6 +741,7 @@ MonoBehaviour:
     _positiveShiftAngle: -10
     _timeBeforeRotationChange: 0.2
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Lengthy, quick
   - _activationTime: 1.7
@@ -758,6 +759,7 @@ MonoBehaviour:
     _positiveShiftAngle: -6
     _timeBeforeRotationChange: 0.15
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 2
@@ -775,6 +777,7 @@ MonoBehaviour:
     _positiveShiftAngle: -3
     _timeBeforeRotationChange: 0.1
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Two shots
   - _activationTime: 1.8
@@ -792,6 +795,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0.05
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 1.5
@@ -809,6 +813,7 @@ MonoBehaviour:
     _positiveShiftAngle: 1
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 1.8
@@ -826,6 +831,7 @@ MonoBehaviour:
     _positiveShiftAngle: 3
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Three shots
   _hardDifficultyBonus:
@@ -844,6 +850,7 @@ MonoBehaviour:
     _positiveShiftAngle: 5
     _timeBeforeRotationChange: 0.5
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Five lasers
   _timeToLive: 95

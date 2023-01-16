@@ -740,6 +740,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Three lasers, slow
   - _activationTime: 3
@@ -757,6 +758,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 2.8
@@ -774,6 +776,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 2.5
@@ -791,6 +794,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Fours lasers
   _hardDifficultyBonus:
@@ -809,6 +813,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Five lasers
   _timeToLive: 65
