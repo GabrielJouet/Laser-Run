@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Not moving anymore
   _id: A-13
-  _description: Finish the second type of levels
+  _description: Finish the moving levels
   _icon: {fileID: -6201867020075669757, guid: 11509e74ff60ba04e82f32cedfe66e6a, type: 3}
   _lockedIcon: {fileID: -2426609307981891939, guid: 11509e74ff60ba04e82f32cedfe66e6a, type: 3}
   _showHints: 1
