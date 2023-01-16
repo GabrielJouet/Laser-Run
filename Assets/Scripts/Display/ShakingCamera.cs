@@ -17,6 +17,11 @@ public class ShakingCamera : MonoBehaviour
     /// </summary>
     private bool _isShaking = false;
 
+    /// <summary>
+    /// Initial position of this camera.
+    /// </summary>
+    private Vector3 _initialPosition;
+
 
 
     /// <summary>
@@ -25,6 +30,7 @@ public class ShakingCamera : MonoBehaviour
     private void Awake()
     {
         _camera = GetComponent<Camera>();
+        _initialPosition = transform.position;
     }
 
 
@@ -56,6 +62,7 @@ public class ShakingCamera : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
+        _camera.transform.position = _initialPosition;
         _isShaking = false;
     }
 }
