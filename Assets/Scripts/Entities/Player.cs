@@ -114,6 +114,8 @@ public class Player : MonoBehaviour
     /// <param name="newPosition">The new position of the player</param>
     public void Initialize(Vector2 newPosition, bool hard)
     {
+        _timeRunned = 0;
+        _distanceRunned = 0;
         GetComponent<Light2D>().color = Controller.Instance.SaveController.Hard ? _hardColor : _normalColor;
 
         Dead = false;
