@@ -213,6 +213,6 @@ public class Player : MonoBehaviour
         Invicible = true;
 
         Controller.Instance.SaveController.SaveAchievementProgress("A-11", Mathf.FloorToInt(_timeRunned), true);
-        Controller.Instance.SaveController.SaveAchievementProgress("A-10", Mathf.FloorToInt(_distanceRunned), true);
+        Controller.Instance.SaveController.SaveAchievementProgress("A-10", Mathf.FloorToInt(_distanceRunned) * 10, true);
     }
 }
