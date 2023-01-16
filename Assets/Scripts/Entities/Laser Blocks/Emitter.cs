@@ -99,6 +99,12 @@ public abstract class Emitter : MonoBehaviour
     protected ShakingCamera _shakingCamera;
 
 
+    /// <summary>
+    /// Current shot laser.
+    /// </summary>
+    protected Laser _currentLaser;
+
+
 
     /// <summary>
     /// Method called to initialize an emitter.
@@ -235,9 +241,10 @@ public abstract class Emitter : MonoBehaviour
     /// <param name="displayTime">How much time the laser will be rendered?</param>
     protected void ShotProjectile(GameObject laser, float displayTime)
     {
-        GameObject buffer = Controller.Instance.PoolController.Out(laser);
-        buffer.GetComponent<Laser>().Initialize(displayTime, _laserColor);
-        buffer.transform.SetParent(_canon);
+        _currentLaser = Controller.Instance.PoolController.Out(laser).GetComponent<Laser>();
+
+        _currentLaser.Initialize(displayTime, _laserColor);
+        _currentLaser.transform.SetParent(_canon);
     }
 
 
@@ -246,7 +253,6 @@ public abstract class Emitter : MonoBehaviour
     /// </summary>
     public virtual void ResetObject()
     {
-        StopAllCoroutines();
         _light.enabled = false;
 
         for (int i = 0; i < _clockLeds.Count; i++)

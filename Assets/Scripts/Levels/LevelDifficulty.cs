@@ -178,7 +178,7 @@ public class LevelDifficulty
     /// <summary>
     /// How much time before rotation change?
     /// </summary>
-    [SerializeField, Range(0f, 1f), Tooltip("How much time before rotation change of rotating laser blocks")]
+    [SerializeField, Range(0f, 5f), Tooltip("How much time before rotation change of rotating laser blocks")]
     private float _timeBeforeRotationChange;
 
     /// <summary>

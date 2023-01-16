@@ -32,7 +32,11 @@ public class ForeverLaserBlock : Emitter
     {
         base.Initialize(difficulties);
 
+        StopAllCoroutines();
+
         _isEmitting = false;
+        _side = true;
+
         StartCoroutine(ChargeUpLaser());
     }
 
@@ -42,10 +46,9 @@ public class ForeverLaserBlock : Emitter
     /// </summary>
     protected override IEnumerator Shot()
     {
-        _side = true;
-        _angleGoal = Quaternion.Euler(Vector3.forward * (_facing * 90 + _difficulty.MinusAngle)).eulerAngles.z;
+        _angleGoal = Quaternion.Euler(Vector3.forward * (_facing * 90 + (_side ? _difficulty.MinusAngle : _difficulty.PositiveAngle))).eulerAngles.z;
 
-        _canon.localRotation = Quaternion.Euler(Vector3.forward * (_facing * 90 + _difficulty.PositiveAngle));
+        _canon.localRotation = Quaternion.Euler(Vector3.forward * (_facing * 90 + (_side ? _difficulty.PositiveAngle : _difficulty.MinusAngle)));
 
         ShotProjectile(_semiLaser, _difficulty.ReactionTime);
 
@@ -66,17 +69,13 @@ public class ForeverLaserBlock : Emitter
             _shakingCamera.ShakeCamera(0.002f);
 
             _canon.Rotate(Vector3.forward * ((_side ? -1 : 1) * _difficulty.RotationSpeed) * Time.deltaTime);
-            
-            if (_side)
-            {
-                if (_canon.localEulerAngles.z <= _angleGoal && Mathf.Abs(_canon.localEulerAngles.z - _angleGoal) < 180)
-                    StartCoroutine(ChangeDirection());
-            }
-            else
-            {
-                if (_canon.localEulerAngles.z >= _angleGoal && Mathf.Abs(_canon.localEulerAngles.z - _angleGoal) < 180)
-                    StartCoroutine(ChangeDirection());
-            }
+
+            if (_side && _canon.localEulerAngles.z <= _angleGoal && Mathf.Abs(_canon.localEulerAngles.z - _angleGoal) < 180)
+                StartCoroutine(ChangeDirection());
+            else if (!_side && _canon.localEulerAngles.z >= _angleGoal && Mathf.Abs(_canon.localEulerAngles.z - _angleGoal) < 180)
+                StartCoroutine(ChangeDirection());
+            else if (_angleGoal == 0 && (_side && _canon.localEulerAngles.z > 355 || !_side && _canon.localEulerAngles.z < 5))
+                StartCoroutine(ChangeDirection());
         }
     }
 
@@ -87,7 +86,17 @@ public class ForeverLaserBlock : Emitter
     private IEnumerator ChangeDirection()
     {
         _isEmitting = false;
+
+        if (_difficulty.StopWhenNotMoving)
+        {
+            _currentLaser.StopLaser();
+            ResetObject();
+        }
+
         yield return new WaitForSeconds(_difficulty.TimeBeforeRotationChange);
+
+        if (_difficulty.StopWhenNotMoving)
+            StartCoroutine(ChargeUpLaser());
 
         _side = !_side;
         _angleGoal = Quaternion.Euler(Vector3.forward * (_facing * 90 + (_side ? _difficulty.MinusAngle : _difficulty.PositiveAngle))).eulerAngles.z;
