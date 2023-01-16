@@ -83,6 +83,18 @@ public class Level : MonoBehaviour
 
 
     /// <summary>
+    /// Player position when spawning.
+    /// </summary>
+    [SerializeField]
+    private Vector2 _playerPosition;
+
+    /// <summary>
+    /// Player position when spawning.
+    /// </summary>
+    public Vector2 PlayerPostion { get => _playerPosition; }
+
+
+    /// <summary>
     /// Current difficulty loaded.
     /// </summary>
     private LevelDifficulty _loadedDifficulty;

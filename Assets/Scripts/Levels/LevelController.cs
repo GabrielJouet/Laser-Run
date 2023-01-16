@@ -50,11 +50,11 @@ public class LevelController : MonoBehaviour
             _tutorialScreen.SetActive(true);
         else
         {
-            _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
-            _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);
-
             _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
             _level.Initialize();
+
+            _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
+            _player.Initialize(_level.PlayerPostion, Controller.Instance.SaveController.Hard);
         }
     }
 
@@ -132,7 +132,7 @@ public class LevelController : MonoBehaviour
         bool hard = Controller.Instance.SaveController.Hard;
 
         _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
-        _player.Initialize(Vector2.zero, hard);
+        _player.Initialize(_level.PlayerPostion, hard);
 
         _level.Initialize();
     }

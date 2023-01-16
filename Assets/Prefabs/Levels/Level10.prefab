@@ -739,6 +739,7 @@ MonoBehaviour:
     _minusShiftAngle: -80
     _positiveShiftAngle: -70
     _timeBeforeRotationChange: 0.5
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Lengthy, slow
   - _activationTime: 2
@@ -755,6 +756,7 @@ MonoBehaviour:
     _minusShiftAngle: -70
     _positiveShiftAngle: -55
     _timeBeforeRotationChange: 0.45
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 1.8
@@ -771,6 +773,7 @@ MonoBehaviour:
     _minusShiftAngle: -60
     _positiveShiftAngle: -40
     _timeBeforeRotationChange: 0.4
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
@@ -788,6 +791,7 @@ MonoBehaviour:
     _minusShiftAngle: -50
     _positiveShiftAngle: -25
     _timeBeforeRotationChange: 0.1
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Five lasers
   _timeToLive: 95
@@ -805,6 +809,7 @@ MonoBehaviour:
   - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  _playerPosition: {x: 0, y: 0}
 --- !u!1 &2629893778646583845
 GameObject:
   m_ObjectHideFlags: 0

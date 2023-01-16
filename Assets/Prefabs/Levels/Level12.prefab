@@ -749,6 +749,7 @@ MonoBehaviour:
     _minusShiftAngle: -75
     _positiveShiftAngle: -45
     _timeBeforeRotationChange: 0.25
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Two lasers
   - _activationTime: 1.95
@@ -765,6 +766,7 @@ MonoBehaviour:
     _minusShiftAngle: -55
     _positiveShiftAngle: -25
     _timeBeforeRotationChange: 0.18
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Longer
   - _activationTime: 1.8
@@ -781,6 +783,7 @@ MonoBehaviour:
     _minusShiftAngle: -45
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0.15
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Longer
   - _activationTime: 2.1
@@ -797,6 +800,7 @@ MonoBehaviour:
     _minusShiftAngle: -25
     _positiveShiftAngle: 10
     _timeBeforeRotationChange: 0.1
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Three lasers
   - _activationTime: 2
@@ -813,6 +817,7 @@ MonoBehaviour:
     _minusShiftAngle: -15
     _positiveShiftAngle: 15
     _timeBeforeRotationChange: 0.1
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
@@ -830,6 +835,7 @@ MonoBehaviour:
     _minusShiftAngle: 0
     _positiveShiftAngle: 25
     _timeBeforeRotationChange: 0.05
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Cramped!
   _timeToLive: 65
@@ -847,6 +853,7 @@ MonoBehaviour:
   - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  _playerPosition: {x: 0, y: 0}
 --- !u!1 &2629893778646583845
 GameObject:
   m_ObjectHideFlags: 0

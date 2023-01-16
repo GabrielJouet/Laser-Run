@@ -737,6 +737,11 @@ MonoBehaviour:
     _dispersionMax: 3
     _speed: 0.01
     _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Two lasers, quick
   - _activationTime: 2.7
@@ -749,6 +754,11 @@ MonoBehaviour:
     _dispersionMax: 1
     _speed: 0.01
     _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 2.4
@@ -761,6 +771,11 @@ MonoBehaviour:
     _dispersionMax: 1
     _speed: 0.01
     _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 3.1
@@ -773,6 +788,11 @@ MonoBehaviour:
     _dispersionMax: 7
     _speed: 0.01
     _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Three lasers
   - _activationTime: 2.8
@@ -785,6 +805,11 @@ MonoBehaviour:
     _dispersionMax: 4
     _speed: 0.01
     _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
@@ -798,6 +823,11 @@ MonoBehaviour:
     _dispersionMax: 1
     _speed: 0.01
     _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Four lasers, quick
   _timeToLive: 55
@@ -815,6 +845,7 @@ MonoBehaviour:
   - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  _playerPosition: {x: 0, y: 0}
 --- !u!1 &2629893778646583845
 GameObject:
   m_ObjectHideFlags: 0

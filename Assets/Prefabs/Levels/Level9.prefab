@@ -740,6 +740,7 @@ MonoBehaviour:
     _minusShiftAngle: -85
     _positiveShiftAngle: -65
     _timeBeforeRotationChange: 0.75
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Forever, quick
   - _activationTime: 1.1
@@ -756,6 +757,7 @@ MonoBehaviour:
     _minusShiftAngle: -85
     _positiveShiftAngle: -45
     _timeBeforeRotationChange: 0.7
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 1.75
@@ -772,6 +774,7 @@ MonoBehaviour:
     _minusShiftAngle: -85
     _positiveShiftAngle: -35
     _timeBeforeRotationChange: 0.65
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Two together
   - _activationTime: 1.65
@@ -788,6 +791,7 @@ MonoBehaviour:
     _minusShiftAngle: -85
     _positiveShiftAngle: -20
     _timeBeforeRotationChange: 0.55
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 1.85
@@ -804,6 +808,7 @@ MonoBehaviour:
     _minusShiftAngle: -85
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0.45
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Three together
   _hardDifficultyBonus:
@@ -821,6 +826,7 @@ MonoBehaviour:
     _minusShiftAngle: -85
     _positiveShiftAngle: 25
     _timeBeforeRotationChange: 0.25
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Four together!
   _timeToLive: 65
@@ -838,6 +844,7 @@ MonoBehaviour:
   - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  _playerPosition: {x: 0, y: 0}
 --- !u!1 &2629893778646583845
 GameObject:
   m_ObjectHideFlags: 0

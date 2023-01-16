@@ -731,6 +731,11 @@ MonoBehaviour:
     _dispersionMax: 15
     _speed: 0.01
     _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: One laser, quick
   - _activationTime: 1
@@ -743,6 +748,11 @@ MonoBehaviour:
     _dispersionMax: 13
     _speed: 0.01
     _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 0.98
@@ -755,6 +765,11 @@ MonoBehaviour:
     _dispersionMax: 5
     _speed: 0.01
     _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Aiming activated
   - _activationTime: 0.89
@@ -767,6 +782,11 @@ MonoBehaviour:
     _dispersionMax: 1
     _speed: 0.01
     _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
@@ -780,6 +800,11 @@ MonoBehaviour:
     _dispersionMax: 1
     _speed: 0.01
     _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Even faster!
   _timeToLive: 65
@@ -797,6 +822,7 @@ MonoBehaviour:
   - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  _playerPosition: {x: 0, y: 0}
 --- !u!1 &2629893778646583845
 GameObject:
   m_ObjectHideFlags: 0

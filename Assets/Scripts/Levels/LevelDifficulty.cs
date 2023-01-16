@@ -187,6 +187,18 @@ public class LevelDifficulty
     public float TimeBeforeRotationChange { get => _timeBeforeRotationChange; }
 
 
+    /// <summary>
+    /// Does the emitter stops when not moving?
+    /// </summary>
+    [SerializeField, Tooltip("Does the emitter stops when not moving?")]
+    private bool _stopWhenNotMoving;
+
+    /// <summary>
+    /// Does the emitter stops when not moving?
+    /// </summary>
+    public bool StopWhenNotMoving { get => _stopWhenNotMoving; }
+
+
     [Header("Display")]
 
     /// <summary>

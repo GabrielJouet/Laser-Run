@@ -673,6 +673,11 @@ MonoBehaviour:
     _dispersionMax: 10
     _speed: 0.15
     _timeBeforeDirectionChange: 0.1
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Three lasers, slow
   - _activationTime: 3
@@ -685,6 +690,11 @@ MonoBehaviour:
     _dispersionMax: 8
     _speed: 0.17
     _timeBeforeDirectionChange: 0.08
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 2.8
@@ -697,6 +707,11 @@ MonoBehaviour:
     _dispersionMax: 5
     _speed: 0.19
     _timeBeforeDirectionChange: 0.06
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 2.5
@@ -709,6 +724,11 @@ MonoBehaviour:
     _dispersionMax: 3
     _speed: 0.21
     _timeBeforeDirectionChange: 0.04
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Fours lasers
   _hardDifficultyBonus:
@@ -722,6 +742,11 @@ MonoBehaviour:
     _dispersionMax: 1
     _speed: 0.25
     _timeBeforeDirectionChange: 0.01
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
     _warning: 1
     _threatDescription: Five lasers
   _timeToLive: 65
@@ -739,6 +764,7 @@ MonoBehaviour:
   - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  _playerPosition: {x: 0, y: 0}
 --- !u!1 &2629893778646583845
 GameObject:
   m_ObjectHideFlags: 0
