@@ -720,7 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd30504cec2aa7e4d8caf893729b3f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Still rotating
+  _name: Drawing shapes
   _category: 2
   _blocks:
   - {fileID: 2479391846771186827}
