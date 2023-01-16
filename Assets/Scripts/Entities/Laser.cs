@@ -34,6 +34,12 @@ public class Laser : MonoBehaviour
     private LineRenderer _lineRenderer;
 
 
+    /// <summary>
+    /// Nearest hit stored.
+    /// </summary>
+    private RaycastHit2D _nearestHit;
+
+
 
     /// <summary>
     /// Awake method called at first.
@@ -69,14 +75,16 @@ public class Laser : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        _lineRenderer.SetPosition(0, transform.parent.position);
-        _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * CheckDistance()));
+        _nearestHit = NearestHit();
 
-        if (!_fake)
+        _lineRenderer.SetPosition(0, transform.parent.position);
+        _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * _nearestHit.distance * (!_fake ? 1 : 0.5f)));
+
+        if (!_fake && _lineRenderer.enabled)
         {
             _hitLight.transform.position = _lineRenderer.GetPosition(1);
 
-            if (Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[0].collider.TryGetComponent(out Player player) && !player.Invicible)
+            if (_nearestHit.collider.TryGetComponent(out Player player) && !player.Invicible)
                 player.GetHit();
         }
     }
@@ -88,37 +96,55 @@ public class Laser : MonoBehaviour
     /// <param name="renderTime">The render time of this laser</param>
     private IEnumerator ShootLaser(float renderTime)
     {
-        yield return new WaitForEndOfFrame();
-
         _lineRenderer.enabled = true;
 
         if (!_fake)
         {
             _hitLight.enabled = true;
 
-            _hitLight.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.parent.localRotation.eulerAngles.z + 180));
+            _hitLight.transform.localEulerAngles = Vector3.forward * (transform.parent.localEulerAngles.z + 180);
             _particleSystem.Play();
-
-            yield return new WaitForSeconds(renderTime);
-
-            _particleSystem.Stop();
-            _hitLight.enabled = false;
         }
-        else 
-            yield return new WaitForSeconds(renderTime);
 
-        _lineRenderer.enabled = false;
-
-        Controller.Instance.PoolController.In(gameObject);
+        yield return new WaitForSeconds(renderTime);
+        StopLaser();
     }
 
 
     /// <summary>
-    /// Method used to compute the distance from the impact.
+    /// Method called to find the nearest hittable object.
     /// </summary>
-    /// <returns>The distance from the object</returns>
-    private float CheckDistance()
+    /// <returns>The nearest hittable object</returns>
+    private RaycastHit2D NearestHit()
     {
-        return Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[^1].distance * (!_fake ? 1 : 0.5f);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10);
+        float nearestDistance = Mathf.Infinity;
+        RaycastHit2D nearestHit = new RaycastHit2D();
+
+        foreach(RaycastHit2D hit in hits)
+        {
+            if (hit.distance < nearestDistance)
+            {
+                nearestDistance = hit.distance;
+                nearestHit = hit;
+            }
+        }
+
+        return nearestHit;
+    }
+
+
+    /// <summary>
+    /// Method called when we need to stop the laser earlier.
+    /// </summary>
+    public void StopLaser()
+    {
+        _particleSystem.Stop();
+
+        _lineRenderer.SetPosition(0, Vector3.zero);
+        _lineRenderer.SetPosition(1, Vector3.zero);
+        _hitLight.transform.position = Vector3.one * 10;
+
+        Controller.Instance.PoolController.In(gameObject);
     }
 }

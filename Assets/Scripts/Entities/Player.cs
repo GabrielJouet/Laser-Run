@@ -114,6 +114,8 @@ public class Player : MonoBehaviour
     /// <param name="newPosition">The new position of the player</param>
     public void Initialize(Vector2 newPosition, bool hard)
     {
+        _timeRunned = 0;
+        _distanceRunned = 0;
         GetComponent<Light2D>().color = Controller.Instance.SaveController.Hard ? _hardColor : _normalColor;
 
         Dead = false;
@@ -186,7 +188,7 @@ public class Player : MonoBehaviour
         FindObjectOfType<ShakingCamera>().ShakeCamera(0.05f);
 
         Controller.Instance.SaveController.SaveAchievementProgress("A-11", Mathf.FloorToInt(_timeRunned), true);
-        Controller.Instance.SaveController.SaveAchievementProgress("A-10", Mathf.FloorToInt(_distanceRunned), true);
+        Controller.Instance.SaveController.SaveAchievementProgress("A-10", Mathf.FloorToInt(_distanceRunned) * 10, true);
 
         PoolController poolController = Controller.Instance.PoolController;
 
@@ -213,6 +215,6 @@ public class Player : MonoBehaviour
         Invicible = true;
 
         Controller.Instance.SaveController.SaveAchievementProgress("A-11", Mathf.FloorToInt(_timeRunned), true);
-        Controller.Instance.SaveController.SaveAchievementProgress("A-10", Mathf.FloorToInt(_distanceRunned), true);
+        Controller.Instance.SaveController.SaveAchievementProgress("A-10", Mathf.FloorToInt(_distanceRunned) * 10, true);
     }
 }

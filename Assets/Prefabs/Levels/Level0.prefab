@@ -56,76 +56,133 @@ MonoBehaviour:
   - {fileID: 9044143600182978810}
   - {fileID: 985203477338050673}
   - {fileID: 482150048691534127}
+  _additionnalBlocks: []
   _difficulties:
   - _activationTime: 3
     _activationNumber: 1
     _loadTime: 1.5
+    _shots: 1
     _reactionTime: 0.7
     _displayTime: 0.7
     _dispersionMin: 2
     _dispersionMax: 15
-    _shots: 1
+    _speed: 0.01
+    _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: One laser, slow
   - _activationTime: 2.7
     _activationNumber: 1
     _loadTime: 1.5
+    _shots: 1
     _reactionTime: 0.7
     _displayTime: 0.7
     _dispersionMin: 1
     _dispersionMax: 14
-    _shots: 1
+    _speed: 0.01
+    _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 2.5
     _activationNumber: 1
     _loadTime: 1.4
+    _shots: 1
     _reactionTime: 0.7
     _displayTime: 0.7
     _dispersionMin: 3
     _dispersionMax: 12
-    _shots: 1
+    _speed: 0.01
+    _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 2.2
     _activationNumber: 1
     _loadTime: 1.1
+    _shots: 1
     _reactionTime: 0.51
     _displayTime: 0.8
     _dispersionMin: 1
     _dispersionMax: 10
-    _shots: 1
+    _speed: 0.01
+    _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Quick charge
   - _activationTime: 2
     _activationNumber: 1
     _loadTime: 0.8
+    _shots: 1
     _reactionTime: 0.55
     _displayTime: 0.8
     _dispersionMin: 1
     _dispersionMax: 7
-    _shots: 1
+    _speed: 0.01
+    _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 1.7
     _activationNumber: 1
     _loadTime: 0.9
+    _shots: 1
     _reactionTime: 0.6
     _displayTime: 0.8
     _dispersionMin: 1
     _dispersionMax: 4
-    _shots: 1
+    _speed: 0.01
+    _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
     _activationTime: 1.5
     _activationNumber: 1
     _loadTime: 0.8
+    _shots: 2
     _reactionTime: 0.6
     _displayTime: 0.85
     _dispersionMin: 0
     _dispersionMax: 1
-    _shots: 2
+    _speed: 0.01
+    _timeBeforeDirectionChange: 0
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Two lasers
   _timeToLive: 40
@@ -143,6 +200,7 @@ MonoBehaviour:
   - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  _playerPosition: {x: 0, y: 0}
 --- !u!1 &4142884126631200976
 GameObject:
   m_ObjectHideFlags: 0
@@ -2233,6 +2291,42 @@ PrefabInstance:
       propertyPath: _facing
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _hardDifficulty
+      value: 
+      objectReference: {fileID: 11400000, guid: 438bf0c7f29ee7f48aa30a6e6377a9de, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: af48ff731ae8af64cb94cab861a01298, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f17169917822224a9b3768b7b5e4f79, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7adb9921b93b50c4ca2945f3c8d5a9e9, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 76f6ba36e541f3c4492ed1c682618c56, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 35d9d79f54352ec49b8ac9fc80243385, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 92bf31dea8eef4743bf183fcdb0dc769, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c2c5c0d99316344995cf7cb54b0f71d, type: 2}
     - target: {fileID: 8809634551697773556, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2310,6 +2404,42 @@ PrefabInstance:
       propertyPath: _facing
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _hardDifficulty
+      value: 
+      objectReference: {fileID: 11400000, guid: 438bf0c7f29ee7f48aa30a6e6377a9de, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: af48ff731ae8af64cb94cab861a01298, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f17169917822224a9b3768b7b5e4f79, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7adb9921b93b50c4ca2945f3c8d5a9e9, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 76f6ba36e541f3c4492ed1c682618c56, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 35d9d79f54352ec49b8ac9fc80243385, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 92bf31dea8eef4743bf183fcdb0dc769, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c2c5c0d99316344995cf7cb54b0f71d, type: 2}
     - target: {fileID: 8809634551697773556, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2387,6 +2517,42 @@ PrefabInstance:
       propertyPath: _facing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _hardDifficulty
+      value: 
+      objectReference: {fileID: 11400000, guid: 438bf0c7f29ee7f48aa30a6e6377a9de, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: af48ff731ae8af64cb94cab861a01298, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f17169917822224a9b3768b7b5e4f79, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7adb9921b93b50c4ca2945f3c8d5a9e9, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 76f6ba36e541f3c4492ed1c682618c56, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 35d9d79f54352ec49b8ac9fc80243385, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 92bf31dea8eef4743bf183fcdb0dc769, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c2c5c0d99316344995cf7cb54b0f71d, type: 2}
     - target: {fileID: 8809634551697773556, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2460,6 +2626,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 777601912504022228}
     m_Modifications:
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _hardDifficulty
+      value: 
+      objectReference: {fileID: 11400000, guid: 438bf0c7f29ee7f48aa30a6e6377a9de, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: af48ff731ae8af64cb94cab861a01298, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f17169917822224a9b3768b7b5e4f79, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7adb9921b93b50c4ca2945f3c8d5a9e9, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 76f6ba36e541f3c4492ed1c682618c56, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 35d9d79f54352ec49b8ac9fc80243385, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 92bf31dea8eef4743bf183fcdb0dc769, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _difficulties.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c2c5c0d99316344995cf7cb54b0f71d, type: 2}
     - target: {fileID: 8809634551697773556, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
       propertyPath: m_RootOrder
       value: 1

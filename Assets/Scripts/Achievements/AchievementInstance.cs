@@ -26,13 +26,21 @@ public class AchievementInstance : MonoBehaviour
     private TextMeshProUGUI _description;
 
 
+    /// <summary>
+    /// Slider used to show achievement progress in a progress achievement.
+    /// </summary>
+    [SerializeField]
+    private Slider _achievementProgress;
+
+
 
     /// <summary>
     /// Method called at initialization.
     /// </summary>
     /// <param name="achievement">The achievement initialized</param>
     /// <param name="locked">Does this achievement is locked?</param>
-    public void Initialize(Achievement achievement, bool locked)
+    /// <param name="progress">Does this achievement has a progress attached?</param>
+    public void Initialize(Achievement achievement, bool locked, AchievementProgress progress)
     {
         if (locked && !achievement.Hintable)
         {
@@ -45,6 +53,14 @@ public class AchievementInstance : MonoBehaviour
             _icon.sprite = locked ? achievement.LockedIcon : achievement.Icon;
             _title.text = achievement.Name;
             _description.text = locked ? "???" : achievement.Description;
+        }
+
+        if (achievement.Goal != 0)
+        {
+            _achievementProgress.gameObject.SetActive(true);
+            _achievementProgress.maxValue = achievement.Goal;
+
+            _achievementProgress.value = progress != null ? progress.Progress : 0;
         }
     }
 }

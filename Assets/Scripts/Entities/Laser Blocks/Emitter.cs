@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 /// <summary>
-/// Class used to handle every laser block behavior.
+/// Class that will handle emitter behavior.
 /// </summary>
 /// <remarks>Needs to have an audio source component attached</remarks>
 [RequireComponent(typeof(AudioSource))]
-public class LaserBlock : MonoBehaviour
+public abstract class Emitter : MonoBehaviour
 {
+    [Header("Laser")]
+
     /// <summary>
     /// Laser prefab, used in shooting laser.
     /// </summary>
@@ -21,12 +23,6 @@ public class LaserBlock : MonoBehaviour
     /// </summary>
     [SerializeField]
     protected GameObject _semiLaser;
-
-    /// <summary>
-    /// Clock leds, used to announce next shot.
-    /// </summary>
-    [SerializeField]
-    protected List<GameObject> _clockLeds;
 
     /// <summary>
     /// Which way the block is facing?
@@ -44,6 +40,15 @@ public class LaserBlock : MonoBehaviour
     [SerializeField]
     protected Transform _canon;
 
+
+    [Header("Display")]
+
+    /// <summary>
+    /// Clock leds, used to announce next shot.
+    /// </summary>
+    [SerializeField]
+    protected List<GameObject> _clockLeds;
+
     /// <summary>
     /// Particle system used in display.
     /// </summary>
@@ -55,6 +60,9 @@ public class LaserBlock : MonoBehaviour
     /// </summary>
     [SerializeField]
     protected Color _laserColor;
+
+
+    [Header("Sound")]
 
     /// <summary>
     /// Every sound available for this block.
@@ -75,10 +83,9 @@ public class LaserBlock : MonoBehaviour
 
 
     /// <summary>
-    /// Does the laser is used?
+    /// All difficulties loaded in this laser.
     /// </summary>
-    public bool Used { get; protected set; }
-
+    protected List<LevelDifficulty> _difficulties;
 
     /// <summary>
     /// Difficulty loaded in the laser.
@@ -86,12 +93,26 @@ public class LaserBlock : MonoBehaviour
     protected LevelDifficulty _difficulty;
 
 
+    /// <summary>
+    /// Shaking camera component shortcut, used at every emition.
+    /// </summary>
+    protected ShakingCamera _shakingCamera;
+
 
     /// <summary>
-    /// Awake method, used at first.
+    /// Current shot laser.
     /// </summary>
-    protected virtual void Awake()
+    protected Laser _currentLaser;
+
+
+
+    /// <summary>
+    /// Method called to initialize an emitter.
+    /// </summary>
+    /// <param name="difficulties">All level difficulties</param>
+    public virtual void Initialize(List<LevelDifficulty> difficulties)
     {
+        _shakingCamera = FindObjectOfType<ShakingCamera>();
         _light = _canon.GetComponent<Light2D>();
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = !Controller.Instance.SaveController.SaveFile.SoundMuted ? Controller.Instance.SaveController.SaveFile.Sound : 0;
@@ -99,44 +120,37 @@ public class LaserBlock : MonoBehaviour
         switch (_facing)
         {
             case 0:
-                _canon.position = transform.position + new Vector3(0, 0.09f);
-                _particleSystem.transform.position = transform.position + new Vector3(0, 0.09f);
+                _canon.localPosition = new Vector3(0, 0.09f);
                 break;
 
             case 1:
-                _canon.position = transform.position + new Vector3(-0.09f, 0);
-                _particleSystem.transform.position = transform.position + new Vector3(-0.09f, 0);
+                _canon.localPosition = new Vector3(-0.09f, 0);
                 break;
 
             case 2:
-                _canon.position = transform.position + new Vector3(0, -0.09f);
-                _particleSystem.transform.position = transform.position + new Vector3(0, -0.09f);
+                _canon.localPosition = new Vector3(0, -0.09f);
                 break;
 
             case 3:
-                _canon.position = transform.position + new Vector3(0.09f, 0);
-                _particleSystem.transform.position = transform.position + new Vector3(0.09f, 0);
+                _canon.localPosition = new Vector3(0.09f, 0);
                 break;
         }
 
-        _particleSystem.startColor = _laserColor;
-        _light.color = _laserColor;
+        _difficulties = new List<LevelDifficulty>(difficulties);
+        ResetObject();
+        StopAllCoroutines();
+
+        UpdateDifficulty(0);
     }
 
 
     /// <summary>
-    /// Method used to load a new difficulty and start the laser.
+    /// Method called to update the difficulty of this laser block.
     /// </summary>
-    /// <param name="difficulty">The difficulty wanted</param>
-    public void WarmUp(LevelDifficulty difficulty)
+    /// <param name="index">New index loaded</param>
+    public void UpdateDifficulty(int index)
     {
-        _difficulty = difficulty;
-
-        Used = true;
-        _light.enabled = true;
-        _light.intensity = 0.25f;
-
-        StartCoroutine(ChargeUpLaser());
+        _difficulty = _difficulties[index];
     }
 
 
@@ -145,6 +159,9 @@ public class LaserBlock : MonoBehaviour
     /// </summary>
     protected IEnumerator ChargeUpLaser()
     {
+        _light.enabled = true;
+        _light.intensity = 0.25f;
+
         for (int i = 0; i < _clockLeds.Count; i++)
         {
             yield return new WaitForSeconds(_difficulty.LoadTime / _clockLeds.Count);
@@ -159,26 +176,38 @@ public class LaserBlock : MonoBehaviour
     /// <summary>
     /// Coroutine used to delay next shot.
     /// </summary>
-    protected IEnumerator Shot()
+    protected virtual IEnumerator Shot()
     {
-        for (int i = 0; i < _difficulty.NumberOfShots; i ++)
+        for (int i = 0; i < _difficulty.NumberOfShots; i++)
         {
             _canon.localRotation = Quaternion.Euler(new Vector3(0, 0, ComputeAngle()));
 
-            Shot(_semiLaser, _difficulty.ReactionTime);
+            ShotProjectile(_semiLaser, _difficulty.ReactionTime);
             yield return new WaitForSeconds(_difficulty.ReactionTime);
-            Shot(_laser, _difficulty.DisplayTime);
-            FindObjectOfType<ShakingCamera>().ShakeCamera(0.01f);
 
-            _audioSource.clip = _laserSounds[Random.Range(0, _laserSounds.Count)];
-            _audioSource.Play();
-            _particleSystem.Play();
+            StartEmitting(_difficulty.DisplayTime, 0.01f);
 
             yield return new WaitForSeconds(_difficulty.DisplayTime);
             _particleSystem.Stop();
         }
 
         ResetObject();
+    }
+
+
+    /// <summary>
+    /// Method called to start the emition of a laser or projectile.
+    /// </summary>
+    /// <param name="displayTime">The time the projectile will be displayed</param>
+    /// <param name="screenShakeAmount">The amount of screen shake</param>
+    protected void StartEmitting(float displayTime, float screenShakeAmount)
+    {
+        ShotProjectile(_laser, displayTime);
+        _shakingCamera.ShakeCamera(screenShakeAmount);
+
+        _audioSource.clip = _laserSounds[Random.Range(0, _laserSounds.Count)];
+        _audioSource.Play();
+        _particleSystem.Play();
     }
 
 
@@ -208,21 +237,20 @@ public class LaserBlock : MonoBehaviour
     /// </summary>
     /// <param name="laser">What laser will be fired?</param>
     /// <param name="displayTime">How much time the laser will be rendered?</param>
-    protected void Shot(GameObject laser, float displayTime)
+    protected void ShotProjectile(GameObject laser, float displayTime)
     {
-        GameObject buffer = Controller.Instance.PoolController.Out(laser);
-        buffer.GetComponent<Laser>().Initialize(displayTime, _laserColor);
-        buffer.transform.SetParent(_canon);
+        _currentLaser = Controller.Instance.PoolController.Out(laser).GetComponent<Laser>();
+
+        _currentLaser.transform.SetParent(_canon);
+        _currentLaser.Initialize(displayTime, _laserColor);
     }
 
 
     /// <summary>
     /// Method called to reset the object back to its original state.
     /// </summary>
-    public void ResetObject()
+    public virtual void ResetObject()
     {
-        StopAllCoroutines();
-        Used = false;
         _light.enabled = false;
 
         for (int i = 0; i < _clockLeds.Count; i++)

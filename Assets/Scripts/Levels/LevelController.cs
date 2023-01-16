@@ -50,11 +50,11 @@ public class LevelController : MonoBehaviour
             _tutorialScreen.SetActive(true);
         else
         {
-            _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
-            _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);
-
             _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
             _level.Initialize();
+
+            _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
+            _player.Initialize(_level.PlayerPostion, Controller.Instance.SaveController.Hard);
         }
     }
 
@@ -76,6 +76,8 @@ public class LevelController : MonoBehaviour
 
             if (_deathInARow >= 10)
                 Controller.Instance.AchievementController.TriggerAchievement("A-2");
+
+            Controller.Instance.SaveController.SaveAchievementProgress("A-15", 1, true);
 
             if (_level.NeededTime - _level.TimeElapsed <= 1 && Controller.Instance.SaveController.Hard)
                 Controller.Instance.AchievementController.TriggerAchievement("A-9");
@@ -130,7 +132,7 @@ public class LevelController : MonoBehaviour
         bool hard = Controller.Instance.SaveController.Hard;
 
         _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
-        _player.Initialize(Vector2.zero, hard);
+        _player.Initialize(_level.PlayerPostion, hard);
 
         _level.Initialize();
     }

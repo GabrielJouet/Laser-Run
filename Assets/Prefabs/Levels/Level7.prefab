@@ -723,6 +723,7 @@ MonoBehaviour:
   - {fileID: 8819636774474341510}
   - {fileID: 7673848559669240102}
   - {fileID: 8416822421916695440}
+  _additionnalBlocks: []
   _difficulties:
   - _activationTime: 4
     _activationNumber: 1
@@ -732,6 +733,14 @@ MonoBehaviour:
     _displayTime: 0.85
     _dispersionMin: 3
     _dispersionMax: 10
+    _speed: 0.1
+    _timeBeforeDirectionChange: 0.5
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Three lasers, slow
   - _activationTime: 3
@@ -742,6 +751,14 @@ MonoBehaviour:
     _displayTime: 0.8
     _dispersionMin: 2
     _dispersionMax: 8
+    _speed: 0.08
+    _timeBeforeDirectionChange: 0.45
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 2.8
@@ -752,6 +769,14 @@ MonoBehaviour:
     _displayTime: 0.75
     _dispersionMin: 1
     _dispersionMax: 5
+    _speed: 0.07
+    _timeBeforeDirectionChange: 0.35
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
   - _activationTime: 2.5
@@ -762,6 +787,14 @@ MonoBehaviour:
     _displayTime: 0.8
     _dispersionMin: 0
     _dispersionMax: 3
+    _speed: 0.1
+    _timeBeforeDirectionChange: 0.25
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Fours lasers
   _hardDifficultyBonus:
@@ -773,6 +806,14 @@ MonoBehaviour:
     _displayTime: 0.5
     _dispersionMin: 0
     _dispersionMax: 1
+    _speed: 0.2
+    _timeBeforeDirectionChange: 0.2
+    _rotationSpeed: 0
+    _minusShiftAngle: 0
+    _positiveShiftAngle: 0
+    _timeBeforeRotationChange: 0
+    _stopWhenNotMoving: 0
+    _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Five lasers
   _timeToLive: 65
@@ -790,6 +831,7 @@ MonoBehaviour:
   - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
   - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  _playerPosition: {x: 0, y: 0}
 --- !u!1 &2629893778646583845
 GameObject:
   m_ObjectHideFlags: 0
@@ -2235,6 +2277,30 @@ PrefabInstance:
       propertyPath: _minPosition.y
       value: -0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _hardDifficulty
+      value: 
+      objectReference: {fileID: 11400000, guid: c91b1007cc74e594bbc532eeb2241472, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 49e0c4bbe08c4e448bb6ddf4ea99f586, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2fcfa38d181307d4380906f4be671060, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3113dd590b1710942bff029602575342, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: c22968cf347ce6644a681c17bc9b2520, type: 2}
     - target: {fileID: 8809634551697773556, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -2332,6 +2398,30 @@ PrefabInstance:
       propertyPath: _minPosition.y
       value: -0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _hardDifficulty
+      value: 
+      objectReference: {fileID: 11400000, guid: c91b1007cc74e594bbc532eeb2241472, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 49e0c4bbe08c4e448bb6ddf4ea99f586, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2fcfa38d181307d4380906f4be671060, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3113dd590b1710942bff029602575342, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: c22968cf347ce6644a681c17bc9b2520, type: 2}
     - target: {fileID: 8809634551697773556, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2429,6 +2519,30 @@ PrefabInstance:
       propertyPath: _minPosition.y
       value: 0.878
       objectReference: {fileID: 0}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _hardDifficulty
+      value: 
+      objectReference: {fileID: 11400000, guid: c91b1007cc74e594bbc532eeb2241472, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 49e0c4bbe08c4e448bb6ddf4ea99f586, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2fcfa38d181307d4380906f4be671060, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3113dd590b1710942bff029602575342, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: c22968cf347ce6644a681c17bc9b2520, type: 2}
     - target: {fileID: 8809634551697773556, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2526,6 +2640,30 @@ PrefabInstance:
       propertyPath: _minPosition.y
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _hardDifficulty
+      value: 
+      objectReference: {fileID: 11400000, guid: c91b1007cc74e594bbc532eeb2241472, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 49e0c4bbe08c4e448bb6ddf4ea99f586, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2fcfa38d181307d4380906f4be671060, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3113dd590b1710942bff029602575342, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: c22968cf347ce6644a681c17bc9b2520, type: 2}
     - target: {fileID: 8809634551697773556, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2623,6 +2761,30 @@ PrefabInstance:
       propertyPath: _minPosition.y
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _hardDifficulty
+      value: 
+      objectReference: {fileID: 11400000, guid: c91b1007cc74e594bbc532eeb2241472, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 49e0c4bbe08c4e448bb6ddf4ea99f586, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2fcfa38d181307d4380906f4be671060, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3113dd590b1710942bff029602575342, type: 2}
+    - target: {fileID: 3552954910767729001, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
+      propertyPath: _difficulties.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: c22968cf347ce6644a681c17bc9b2520, type: 2}
     - target: {fileID: 8809634551697773556, guid: 7e2df0c9bb897784c86aca662f86f30d, type: 3}
       propertyPath: m_RootOrder
       value: 1

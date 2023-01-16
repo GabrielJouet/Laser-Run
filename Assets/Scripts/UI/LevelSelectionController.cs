@@ -43,14 +43,21 @@ public class LevelSelectionController : MonoBehaviour
         List<LevelSave> saves = Controller.Instance.SaveController.SaveFile.LevelsProgression;
         List<Level> levels = Controller.Instance.SaveController.Levels;
 
+        bool locked = false;
         int spawnedLevels = 0;
         for (int i = 0; i < levels.Count; i ++)
         {
-            spawnedLevels += (saves[i].State != LevelState.LOCKED ? 1 : 0);
+            if (locked)
+                break;
+
+            spawnedLevels += 1;
             Instantiate(_levelMenuPrefab, _levelPanel).Initialize(saves[i], levels[i].Name, this, i, levels[i].Category);
+
+            if (saves[i].State == LevelState.LOCKED)
+                locked = true;
         }
 
-        _maxLevelPanelSize = levels.Count * 300 + (levels.Count - 1) * 35 + 125 - Screen.width;
+        _maxLevelPanelSize = levels.Count * 300 + (spawnedLevels - 1) * 35 + 125 - Screen.width;
 
         _slider.gameObject.SetActive(spawnedLevels > 5);
     }

@@ -4333,7 +4333,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 344, y: 105}
+  m_CellSize: {x: 344, y: 176.25}
   m_Spacing: {x: 25, y: 25}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -4372,8 +4372,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 53.5, y: 30.499985}
-  m_SizeDelta: {x: -145, y: -90}
+  m_AnchoredPosition: {x: 53.5, y: 25}
+  m_SizeDelta: {x: -145, y: -80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1008577083
 CanvasRenderer:
@@ -4430,8 +4430,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 24.5
+  m_fontSizeBase: 24.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4777,7 +4777,15 @@ MonoBehaviour:
   - {fileID: 1193579216381159111, guid: 9dbba6466adee6c41a3bcdb09cf72857, type: 3}
   - {fileID: 1193579216381159111, guid: 60e576325acb12b4c9bce5cf8d8a29cf, type: 3}
   - {fileID: 1193579216381159111, guid: 7c24205e76f259546b7ecf6c50daf158, type: 3}
+  - {fileID: 1193579216381159111, guid: 9279326a66556c04693d4f7ea1a46121, type: 3}
   - {fileID: 1193579216381159111, guid: 40de8067637662941a22c5c708f791b2, type: 3}
+  - {fileID: 1193579216381159111, guid: 06f322e070e668f42a6b8bdcdd9ee4f2, type: 3}
+  - {fileID: 1193579216381159111, guid: c6df62a6710fd4f41a397f7a93503cfe, type: 3}
+  - {fileID: 1193579216381159111, guid: 156c96d8ed0c0da45ac59a99be72f066, type: 3}
+  - {fileID: 1193579216381159111, guid: b740cfe6ddfebad4f9854593d3ac9406, type: 3}
+  - {fileID: 1193579216381159111, guid: 20e82f1dd07bbfc4c86a16c4f6d1d700, type: 3}
+  - {fileID: 1193579216381159111, guid: 8edca49964ab9854c894d09ddd3d2349, type: 3}
+  - {fileID: 1193579216381159111, guid: 2e21dbb14de85ac42b011d0d2c9cd6fc, type: 3}
 --- !u!114 &1042877330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4792,18 +4800,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _achievementPopup: {fileID: 1932226828}
   _achievements:
+  - {fileID: 11400000, guid: 5dd8ea82a5b573e49813a90450456021, type: 2}
   - {fileID: 11400000, guid: 3cdf6149f90f3a14eb1bb760b1205e3e, type: 2}
-  - {fileID: 11400000, guid: b34fb135b64307d4785683a3fa747814, type: 2}
   - {fileID: 11400000, guid: 12eea7eff6bf7da4b84329fc3385ec46, type: 2}
+  - {fileID: 11400000, guid: b34fb135b64307d4785683a3fa747814, type: 2}
   - {fileID: 11400000, guid: 1e2f0a61acc7edb46ab2ca94dd07798b, type: 2}
+  - {fileID: 11400000, guid: abf8257a1553b8a44936ae34b3695fbd, type: 2}
+  - {fileID: 11400000, guid: 58ca712517ed8c14f9aa89c4d81b76ca, type: 2}
   - {fileID: 11400000, guid: 608ebad3fde6a8b429ffc41862d23e34, type: 2}
-  - {fileID: 11400000, guid: 496640ca9b01e0b40bd41d251218544f, type: 2}
-  - {fileID: 11400000, guid: d575c1067e8448048a419632ae03a553, type: 2}
   - {fileID: 11400000, guid: bda642875a5958649af8c5a1d7e2b2b3, type: 2}
+  - {fileID: 11400000, guid: 6e1d155f495dd184481fca98d67e66f7, type: 2}
   - {fileID: 11400000, guid: 5a8e74c5296f073489e39406b471342b, type: 2}
+  - {fileID: 11400000, guid: d575c1067e8448048a419632ae03a553, type: 2}
   - {fileID: 11400000, guid: a0810939da1b3474dacf50d7b7bc1405, type: 2}
   - {fileID: 11400000, guid: 3dfaba39e475a744d98bc0968c8ec176, type: 2}
-  - {fileID: 11400000, guid: 5dd8ea82a5b573e49813a90450456021, type: 2}
+  - {fileID: 11400000, guid: 496640ca9b01e0b40bd41d251218544f, type: 2}
 --- !u!1 &1052905727
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,7 +38,13 @@ public class Level : MonoBehaviour
     /// Available laser blocks in this level.
     /// </summary>
     [SerializeField]
-    private List<LaserBlock> _blocks;
+    private List<Emitter> _blocks;
+
+    /// <summary>
+    /// Additionnal laser blocks in this level.
+    /// </summary>
+    [SerializeField]
+    private List<Emitter> _additionnalBlocks;
 
     /// <summary>
     /// All difficulties in the level.
@@ -77,6 +83,18 @@ public class Level : MonoBehaviour
 
 
     /// <summary>
+    /// Player position when spawning.
+    /// </summary>
+    [SerializeField]
+    private Vector2 _playerPosition;
+
+    /// <summary>
+    /// Player position when spawning.
+    /// </summary>
+    public Vector2 PlayerPostion { get => _playerPosition; }
+
+
+    /// <summary>
     /// Current difficulty loaded.
     /// </summary>
     private LevelDifficulty _loadedDifficulty;
@@ -96,6 +114,11 @@ public class Level : MonoBehaviour
     /// </summary>
     private UIController _uiController;
 
+    /// <summary>
+    /// All blocks in this level.
+    /// </summary>
+    private readonly List<Emitter> _allBlocks = new List<Emitter>();
+
 
 
     /// <summary>
@@ -103,23 +126,28 @@ public class Level : MonoBehaviour
     /// </summary>
     public void Initialize()
     {
-        foreach (LaserBlock block in _blocks)
-            block.ResetObject();
+        _allBlocks.AddRange(_blocks);
+        _allBlocks.AddRange(_additionnalBlocks);
 
-        _uiController = Controller.Instance.UIController;
+        bool hard = Controller.Instance.SaveController.Hard;
 
-        if (Controller.Instance.SaveController.Hard)
+        if (hard)
             _difficulties.Add(_hardDifficultyBonus);
 
-        LoadDifficulty(_difficulties[0]);
+        foreach (Emitter block in _allBlocks)
+            block.Initialize(_difficulties);
+
+        _uiController = Controller.Instance.UIController;
 
         _index = 0;
         TimeElapsed = 0;
 
-        for (int i = 0; i < Random.Range(3, 15) * (Controller.Instance.SaveController.Hard ? 3 : 1); i++)
+        LoadDifficulty();
+
+        for (int i = 0; i < Random.Range(3, 15) * (hard ? 3 : 1); i++)
         {
             GameObject thingBuffer = Controller.Instance.PoolController.Out(_thingPrefab);
-            thingBuffer.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+            thingBuffer.transform.Rotate(Vector3.forward * Random.Range(0, 360));
             thingBuffer.transform.localPosition = new Vector2(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f));
             thingBuffer.GetComponent<SpriteRenderer>().sprite = _thingSprites[Random.Range(0, _thingSprites.Count)];
         }
@@ -147,7 +175,7 @@ public class Level : MonoBehaviour
         while (true)
         {
             for(int i = 0; i < _loadedDifficulty.ActivationCount; i ++)
-                FindOneBlock()?.WarmUp(_loadedDifficulty);
+                FindOneBlock()?.WarmUp();
 
             yield return new WaitForSeconds(_loadedDifficulty.ActivationTime);
         }
@@ -188,7 +216,7 @@ public class Level : MonoBehaviour
             _index++;
 
             if (_index < _difficulties.Count)
-                LoadDifficulty(_difficulties[_index]);
+                LoadDifficulty();
         }
 
         Controller.Instance.LevelController.FinishLevel(true);
@@ -198,11 +226,13 @@ public class Level : MonoBehaviour
     /// <summary>
     /// Method used to load a new difficulty into the level.
     /// </summary>
-    /// <param name="level">The new difficulty</param>
-    private void LoadDifficulty(LevelDifficulty level)
+    private void LoadDifficulty()
     {
-        _loadedDifficulty = level;
+        _loadedDifficulty = _difficulties[_index];
         _uiController.UpdateThreatLevel(_loadedDifficulty.ThreatDescription, _loadedDifficulty.Warning);
+
+        foreach (Emitter emitter in _allBlocks)
+            emitter.UpdateDifficulty(_index);
     }
 
 
