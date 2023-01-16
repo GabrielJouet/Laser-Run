@@ -121,22 +121,18 @@ public abstract class Emitter : MonoBehaviour
         {
             case 0:
                 _canon.localPosition = new Vector3(0, 0.09f);
-                _particleSystem.transform.localPosition = new Vector3(0, 0.09f);
                 break;
 
             case 1:
                 _canon.localPosition = new Vector3(-0.09f, 0);
-                _particleSystem.transform.localPosition = new Vector3(-0.09f, 0);
                 break;
 
             case 2:
                 _canon.localPosition = new Vector3(0, -0.09f);
-                _particleSystem.transform.localPosition = new Vector3(0, -0.09f);
                 break;
 
             case 3:
                 _canon.localPosition = new Vector3(0.09f, 0);
-                _particleSystem.transform.localPosition = new Vector3(0.09f, 0);
                 break;
         }
 
