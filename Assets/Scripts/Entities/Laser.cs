@@ -75,17 +75,20 @@ public class Laser : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        _nearestHit = NearestHit();
-
-        _lineRenderer.SetPosition(0, transform.parent.position);
-        _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * _nearestHit.distance * (!_fake ? 1 : 0.5f)));
-
-        if (!_fake && _lineRenderer.enabled)
+        if (_lineRenderer.enabled)
         {
-            _hitLight.transform.position = _lineRenderer.GetPosition(1);
+            _nearestHit = NearestHit();
 
-            if (_nearestHit.collider.TryGetComponent(out Player player) && !player.Invicible)
-                player.GetHit();
+            _lineRenderer.SetPosition(0, transform.parent.position);
+            _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * _nearestHit.distance * (!_fake ? 1 : 0.5f)));
+
+            if (!_fake)
+            {
+                _hitLight.transform.position = _lineRenderer.GetPosition(1);
+
+                if (_nearestHit.collider.TryGetComponent(out Player player) && !player.Invicible)
+                    player.GetHit();
+            }
         }
     }
 
@@ -139,6 +142,7 @@ public class Laser : MonoBehaviour
     /// </summary>
     public void StopLaser()
     {
+        _lineRenderer.enabled = false;
         _particleSystem.Stop();
 
         _lineRenderer.SetPosition(0, Vector3.zero);
