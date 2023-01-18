@@ -41,21 +41,10 @@ public class EndlessLevel : BaseLevel
         {
             yield return new WaitForSeconds(Random.Range(8f, 15f));
 
-            int proba = Random.Range(0, 10);
-            
-            if (proba < 8)
-            {
-                SelectAttributeToModify(1);
-                SelectAttributeToModify(1);
+            SelectAttributeToModify();
+            SelectAttributeToModify();
 
-                _endlessController.UpdateThreatLevel("Harder", false);
-            }
-            else
-            {
-                SelectAttributeToModify(-1);
-
-                _endlessController.UpdateThreatLevel("Easier", false);
-            }
+            _endlessController.UpdateThreatLevel("Harder", false);
 
             foreach (Emitter emitter in _allBlocks)
                 emitter.UpdateDifficulty(_loadedDifficulty);
@@ -63,52 +52,52 @@ public class EndlessLevel : BaseLevel
     }
 
 
-    protected void SelectAttributeToModify(int factor)
+    protected void SelectAttributeToModify()
     {
-        int attribute = Random.Range(0, 5);
+        int attribute = Random.Range(0, 4);
 
         float change = 0;
         float attributeChange;
         switch (attribute)
         {
             case 0:
-                attributeChange = Random.Range(0.05f, 0.15f) * factor;
+                attributeChange = Random.Range(0.05f, 0.15f);
                 change += attributeChange * 1.5f;
 
                 _loadedDifficulty.ActivationTime = Mathf.Clamp(_loadedDifficulty.ActivationTime + attributeChange, 0.5f, 2.5f);
 
 
-                attributeChange = Random.Range(0.05f, 0.1f) * factor;
+                attributeChange = Random.Range(0.05f, 0.1f);
                 change += attributeChange * 1.75f;
 
                 _loadedDifficulty.LoadTime = Mathf.Clamp(_loadedDifficulty.LoadTime + attributeChange, 0.5f, 1.5f);
 
 
-                attributeChange = (factor > 0 ? (Random.Range(0, 10) * factor > 8 ? 1 : 0) : (Random.Range(0, 10) > 5 ? -1 : 0));
+                attributeChange = Random.Range(0, 10) > 6 ? 1 : 0;
                 change += attributeChange * 15;
 
                 _loadedDifficulty.ActivationCount = Mathf.Clamp(_loadedDifficulty.ActivationCount + Mathf.FloorToInt(attributeChange), 1, 4);
                 break;
 
             case 1:
-                attributeChange = Random.Range(0.02f, 0.05f) * factor;
+                attributeChange = Random.Range(0.02f, 0.05f);
                 change += attributeChange * 2.5f;
 
                 _loadedDifficulty.ReactionTime = Mathf.Clamp(_loadedDifficulty.ReactionTime + attributeChange, 0.15f, 0.8f);
 
 
-                attributeChange = Random.Range(0.1f, 0.25f) * factor;
+                attributeChange = Random.Range(0.1f, 0.25f);
                 change += attributeChange * 2.75f;
                 _loadedDifficulty.DisplayTime = Mathf.Clamp(_loadedDifficulty.DisplayTime + attributeChange, 0.1f, 2.5f);
 
 
-                attributeChange = (factor > 0 ? (Random.Range(0, 10) * factor > 10 ? 1 : 0) : (Random.Range(0, 10) > 5 ? -1 : 0));
+                attributeChange = Random.Range(0, 10) > 5 ? 1 : 0;
                 change += attributeChange * 20;
                 _loadedDifficulty.NumberOfShots = Mathf.Clamp(_loadedDifficulty.NumberOfShots + Mathf.FloorToInt(attributeChange), 1, 6);
                 break;
 
             case 2:
-                attributeChange = Random.Range(0.5f, 2) * factor;
+                attributeChange = Random.Range(0.5f, 2);
                 change += attributeChange;
 
                 _loadedDifficulty.MinDispersion = Mathf.Clamp(_loadedDifficulty.MinDispersion + attributeChange, 0, 45);
@@ -116,44 +105,42 @@ public class EndlessLevel : BaseLevel
                 break;
 
             case 3:
-                attributeChange = Random.Range(0.02f, 0.1f) * factor;
+                attributeChange = Random.Range(0.02f, 0.1f);
                 change += attributeChange * 1.5f;
 
                 _loadedDifficulty.Speed = Mathf.Clamp(_loadedDifficulty.Speed + attributeChange, 0, 0.35f);
 
 
-                attributeChange = Random.Range(0.02f, 0.1f) * factor;
+                attributeChange = Random.Range(0.02f, 0.1f);
                 change += attributeChange;
                 _loadedDifficulty.TimeBeforeDirectionChange = Mathf.Clamp(_loadedDifficulty.TimeBeforeDirectionChange + attributeChange, 0, 0.5f);
                 break;
 
             case 4:
-                attributeChange = Random.Range(0.5f, 1f) * factor;
+                attributeChange = Random.Range(0.5f, 1f);
                 change += attributeChange * 2.5f;
 
                 _loadedDifficulty.RotationSpeed = Mathf.Clamp(_loadedDifficulty.RotationSpeed + attributeChange, 0.5f, 15f);
 
 
-                attributeChange = Random.Range(0.5f, 0.75f) * factor;
+                attributeChange = Random.Range(0.5f, 0.75f);
                 change += attributeChange;
 
                 _loadedDifficulty.TimeBeforeRotationChange = Mathf.Clamp(_loadedDifficulty.TimeBeforeRotationChange + attributeChange, 0, 5);
 
 
-                attributeChange = Random.Range(0.5f, 5) * factor;
+                attributeChange = Random.Range(0.5f, 5);
                 change += attributeChange * 1.5f;
                 _loadedDifficulty.MinusAngle = Mathf.Clamp(_loadedDifficulty.MinusAngle + attributeChange, -85, 0);
                 _loadedDifficulty.PositiveAngle = Mathf.Clamp(_loadedDifficulty.PositiveAngle + 25, -60, 10);
-                break;
 
-            case 5:
-                attributeChange = Random.Range(0.5f, 0.75f) * factor;
+                attributeChange = Random.Range(0.5f, 0.75f);
                 change += attributeChange * 2.5f;
 
                 _loadedDifficulty.BlockRotationSpeed = Mathf.Clamp(_loadedDifficulty.BlockRotationSpeed + attributeChange, 0.5f, 5);
                 break;
         }
 
-        _endlessController.UpdateFactor(change * factor);
+        _endlessController.UpdateFactor(change);
     }
 }
