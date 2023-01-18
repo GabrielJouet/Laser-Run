@@ -654,14 +654,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd30504cec2aa7e4d8caf893729b3f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Missing spaces
-  _category: 1
   _blocks:
   - {fileID: 4825043281033273986}
   - {fileID: 8733210227180298676}
   - {fileID: 8819636774474341510}
   - {fileID: 7673848559669240102}
   _additionnalBlocks: []
+  _thingPrefab: {fileID: 6541510516018691726, guid: 4cb8a664546710c429080b0f6c0723cb, type: 3}
+  _thingSprites:
+  - {fileID: -5425943794297490157, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: -5294178002952207976, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 8665134196411419756, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: -9222459223486235064, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 6260191411142346326, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 3658347772343308625, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 2166339870440278549, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 5878090103876915966, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 4165376735020460750, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  _playerPosition: {x: 0, y: 0}
+  _name: Missing spaces
+  _category: 1
   _difficulties:
   - _activationTime: 4
     _activationNumber: 1
@@ -717,7 +732,7 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
-  - _activationTime: 2.5
+  - _activationTime: 3.2
     _activationNumber: 1
     _loadTime: 1.4
     _shots: 4
@@ -736,7 +751,7 @@ MonoBehaviour:
     _warning: 1
     _threatDescription: Fours lasers
   _hardDifficultyBonus:
-    _activationTime: 2.5
+    _activationTime: 3.7
     _activationNumber: 1
     _loadTime: 1.5
     _shots: 5
@@ -754,22 +769,7 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Five lasers
-  _timeToLive: 65
-  _thingPrefab: {fileID: 6541510516018691726, guid: 4cb8a664546710c429080b0f6c0723cb, type: 3}
-  _thingSprites:
-  - {fileID: -5425943794297490157, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: -5294178002952207976, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 8665134196411419756, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: -9222459223486235064, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 6260191411142346326, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 3658347772343308625, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 2166339870440278549, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 5878090103876915966, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 4165376735020460750, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  _playerPosition: {x: 0, y: 0}
+  _timeToLive: 55
 --- !u!1 &2629893778646583845
 GameObject:
   m_ObjectHideFlags: 0
