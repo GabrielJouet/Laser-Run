@@ -44,6 +44,8 @@ public class EndlessController : UIController
     /// </summary>
     private EndlessLevel _level;
 
+    private bool _counting = false;
+
 
 
     /// <summary>
@@ -58,6 +60,7 @@ public class EndlessController : UIController
 
         _previousScore.text = Controller.Instance.SaveController.SaveFile.EndlessScore + " pts";
 
+        _counting = true;
         _level = Instantiate(_endlessLevel);
         _level.Initialize(Random.Range(5, 15));
     }
@@ -68,8 +71,11 @@ public class EndlessController : UIController
     /// </summary>
     private void Update()
     {
-        _score += Time.deltaTime * _factor;
-        _timeLeft.text = Mathf.FloorToInt(_score) + " pts";
+        if (_counting)
+        {
+            _score += Time.deltaTime * _factor;
+            _timeLeft.text = Mathf.FloorToInt(_score) + " pts";
+        }
     }
 
 
@@ -80,6 +86,7 @@ public class EndlessController : UIController
     {
         _player.BecameInvicible();
         _level.StopLevel();
+        _counting = false;
 
         bool highScore = _score >= Controller.Instance.SaveController.SaveFile.EndlessScore;
 
@@ -144,6 +151,7 @@ public class EndlessController : UIController
         _factor = 0.5f;
         _score = 0;
         _previousScore.text = Controller.Instance.SaveController.SaveFile.EndlessScore + " pts";
+        _counting = true;
     }
 
 
