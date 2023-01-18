@@ -57,7 +57,7 @@ public class LevelSelectionController : MonoBehaviour
                 locked = true;
         }
 
-        _maxLevelPanelSize = levels.Count * 300 + (spawnedLevels - 1) * 35 + 125 - Screen.width;
+        _maxLevelPanelSize = spawnedLevels * 300 + (spawnedLevels - 1) * 35 + 125 - Screen.width;
 
         _slider.gameObject.SetActive(spawnedLevels > 5);
     }

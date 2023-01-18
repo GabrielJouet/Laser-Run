@@ -286,9 +286,9 @@ public class SaveController : MonoBehaviour
 			else if (savedLevel.State == LevelState.WON && Hard)
 				savedLevel.State = LevelState.WONHARD;
 
-			if (LevelIndex == 5 && !Hard)
+			if (LevelIndex == 4 && !Hard)
 				Controller.Instance.AchievementController.TriggerAchievement("A-4");
-			else if (LevelIndex == 8 && !Hard)
+			else if (LevelIndex == 9 && !Hard)
 				Controller.Instance.AchievementController.TriggerAchievement("A-13");
 			else if (LevelIndex == 13 && !Hard)
 				Controller.Instance.AchievementController.TriggerAchievement("A-14");
