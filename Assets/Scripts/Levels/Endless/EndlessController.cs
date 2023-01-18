@@ -90,11 +90,11 @@ public class EndlessController : UIController
 
         bool highScore = _score >= Controller.Instance.SaveController.SaveFile.EndlessScore;
 
-        if (_score > 10000)
+        if (_score > 1000)
         {
             Controller.Instance.AchievementController.TriggerAchievement("A-17");
 
-            if (_score > 25000)
+            if (_score > 2500)
                 Controller.Instance.AchievementController.TriggerAchievement("A-18");
         }
 
