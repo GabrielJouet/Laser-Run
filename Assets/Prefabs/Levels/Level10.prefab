@@ -716,15 +716,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd30504cec2aa7e4d8caf893729b3f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Taking space
-  _category: 2
   _blocks:
   - {fileID: 2479391846771186827}
   - {fileID: 1487353141786576980}
   - {fileID: 6806195507485323790}
   - {fileID: 3615394416123455570}
+  - {fileID: 5215611821452456017}
   _additionnalBlocks:
   - {fileID: 4592925958183314615}
+  _thingPrefab: {fileID: 6541510516018691726, guid: 4cb8a664546710c429080b0f6c0723cb, type: 3}
+  _thingSprites:
+  - {fileID: -5425943794297490157, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: -5294178002952207976, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 8665134196411419756, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: -9222459223486235064, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 6260191411142346326, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 3658347772343308625, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 2166339870440278549, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 5878090103876915966, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 4165376735020460750, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  _playerPosition: {x: 0, y: 0}
+  _name: Taking space
+  _category: 2
   _difficulties:
   - _activationTime: 1
     _activationNumber: 1
@@ -836,21 +852,6 @@ MonoBehaviour:
     _warning: 1
     _threatDescription: Four together!
   _timeToLive: 65
-  _thingPrefab: {fileID: 6541510516018691726, guid: 4cb8a664546710c429080b0f6c0723cb, type: 3}
-  _thingSprites:
-  - {fileID: -5425943794297490157, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: -5294178002952207976, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 8665134196411419756, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: -9222459223486235064, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 6260191411142346326, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 3658347772343308625, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 2166339870440278549, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 5878090103876915966, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 4165376735020460750, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  _playerPosition: {x: 0, y: 0}
 --- !u!1 &2629893778646583845
 GameObject:
   m_ObjectHideFlags: 0
@@ -2872,3 +2873,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8809634551697773556, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
   m_PrefabInstance: {fileID: 8310794204840975117}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5215611821452456017 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+  m_PrefabInstance: {fileID: 8310794204840975117}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace0a46c8f1633448a2362fd2b3bcd80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
