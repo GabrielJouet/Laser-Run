@@ -83,6 +83,16 @@ public class EndlessController : UIController
 
         bool highScore = _score >= Controller.Instance.SaveController.SaveFile.EndlessScore;
 
+        if (_score > 10000)
+        {
+            Controller.Instance.AchievementController.TriggerAchievement("A-17");
+
+            if (_score > 25000)
+                Controller.Instance.AchievementController.TriggerAchievement("A-18");
+        }
+
+        Controller.Instance.SaveController.SaveAchievementProgress("A-16", 1, true);
+
         Controller.Instance.SaveController.SaveEndlessModeScore(Mathf.FloorToInt(_score));
 
         if (highScore)
