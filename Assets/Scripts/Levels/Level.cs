@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Class that will handle every level information.
 /// </summary>
-public class Level : MonoBehaviour
+public class Level : BaseLevel
 {
     [Header("Level Data")]
 
@@ -34,23 +34,12 @@ public class Level : MonoBehaviour
 
 
     [Header("Level complexity")]
-    /// <summary>
-    /// Available laser blocks in this level.
-    /// </summary>
-    [SerializeField]
-    private List<Emitter> _blocks;
-
-    /// <summary>
-    /// Additionnal laser blocks in this level.
-    /// </summary>
-    [SerializeField]
-    private List<Emitter> _additionnalBlocks;
 
     /// <summary>
     /// All difficulties in the level.
     /// </summary>
     [SerializeField]
-    private List<LevelDifficulty> _difficulties;
+    protected List<LevelDifficulty> _difficulties;
 
     /// <summary>
     /// Last level, only accessible on hard mode.
@@ -65,39 +54,6 @@ public class Level : MonoBehaviour
     [Range(25f, 500f)]
     private float _timeToLive;
     public float NeededTime { get => _timeToLive; }
-
-
-    [Header("Misc")]
-
-    /// <summary>
-    /// Detritus prefab.
-    /// </summary>
-    [SerializeField]
-    private GameObject _thingPrefab;
-
-    /// <summary>
-    /// All detritus sprites available.
-    /// </summary>
-    [SerializeField]
-    private List<Sprite> _thingSprites;
-
-
-    /// <summary>
-    /// Player position when spawning.
-    /// </summary>
-    [SerializeField]
-    private Vector2 _playerPosition;
-
-    /// <summary>
-    /// Player position when spawning.
-    /// </summary>
-    public Vector2 PlayerPostion { get => _playerPosition; }
-
-
-    /// <summary>
-    /// Current difficulty loaded.
-    /// </summary>
-    private LevelDifficulty _loadedDifficulty;
 
     /// <summary>
     /// Difficulty index.
@@ -114,22 +70,16 @@ public class Level : MonoBehaviour
     /// </summary>
     private UIController _uiController;
 
-    /// <summary>
-    /// All blocks in this level.
-    /// </summary>
-    private readonly List<Emitter> _allBlocks = new List<Emitter>();
-
 
 
     /// <summary>
     /// Method called to initialize the object.
     /// </summary>
-    public void Initialize()
+    public override void Initialize(int detritusCount)
     {
-        _allBlocks.AddRange(_blocks);
-        _allBlocks.AddRange(_additionnalBlocks);
-
         bool hard = Controller.Instance.SaveController.Hard;
+
+        base.Initialize(detritusCount * (hard ? 3 : 1));
 
         if (hard)
             _difficulties.Add(_hardDifficultyBonus);
@@ -142,18 +92,11 @@ public class Level : MonoBehaviour
         _index = 0;
         TimeElapsed = 0;
 
+        StartCoroutine(LevelCountDown());
+
         LoadDifficulty();
 
-        for (int i = 0; i < Random.Range(3, 15) * (hard ? 3 : 1); i++)
-        {
-            GameObject thingBuffer = Controller.Instance.PoolController.Out(_thingPrefab);
-            thingBuffer.transform.Rotate(Vector3.forward * Random.Range(0, 360));
-            thingBuffer.transform.localPosition = new Vector2(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f));
-            thingBuffer.GetComponent<SpriteRenderer>().sprite = _thingSprites[Random.Range(0, _thingSprites.Count)];
-        }
-
         StartCoroutine(LoadTraps());
-        StartCoroutine(LevelCountDown());
     }
 
 
@@ -164,43 +107,6 @@ public class Level : MonoBehaviour
     {
         TimeElapsed += Time.deltaTime;
         _uiController.UpdateTimeLeft(_timeToLive - TimeElapsed >= 0 ? _timeToLive - TimeElapsed : 0);
-    }
-
-
-    /// <summary>
-    /// Coroutine used to start and warm up laser blocks.
-    /// </summary>
-    private IEnumerator LoadTraps()
-    {
-        while (true)
-        {
-            for(int i = 0; i < _loadedDifficulty.ActivationCount; i ++)
-                FindOneBlock()?.WarmUp();
-
-            yield return new WaitForSeconds(_loadedDifficulty.ActivationTime);
-        }
-    }
-
-
-    /// <summary>
-    /// Method ysed to find an available block.
-    /// </summary>
-    /// <returns>A non-used block</returns>
-    private LaserBlock FindOneBlock()
-    {
-        _blocks.Shuffle();
-
-        LaserBlock found = null;
-        foreach(LaserBlock block in _blocks)
-        {
-            if (!block.Used)
-            {
-                found = block;
-                break;
-            }
-        }
-
-        return found;
     }
 
 
@@ -226,21 +132,12 @@ public class Level : MonoBehaviour
     /// <summary>
     /// Method used to load a new difficulty into the level.
     /// </summary>
-    private void LoadDifficulty()
+    protected void LoadDifficulty()
     {
         _loadedDifficulty = _difficulties[_index];
         _uiController.UpdateThreatLevel(_loadedDifficulty.ThreatDescription, _loadedDifficulty.Warning);
 
         foreach (Emitter emitter in _allBlocks)
             emitter.UpdateDifficulty(_index);
-    }
-
-
-    /// <summary>
-    /// Method called when the level stops.
-    /// </summary>
-    public void StopLevel()
-    {
-        StopAllCoroutines();
     }
 }

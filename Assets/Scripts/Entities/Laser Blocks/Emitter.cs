@@ -144,6 +144,22 @@ public abstract class Emitter : MonoBehaviour
     }
 
 
+
+    /// <summary>
+    /// Method called to initialize an emitter.
+    /// </summary>
+    /// <param name="difficulty">One level difficulty</param>
+    public void Initialize(LevelDifficulty difficulty)
+    {
+        _difficulties = new List<LevelDifficulty>
+        {
+            difficulty
+        };
+
+        Initialize(_difficulties);
+    }
+
+
     /// <summary>
     /// Method called to update the difficulty of this laser block.
     /// </summary>
@@ -151,6 +167,16 @@ public abstract class Emitter : MonoBehaviour
     public void UpdateDifficulty(int index)
     {
         _difficulty = _difficulties[index];
+    }
+
+
+    /// <summary>
+    /// Method called to update the difficulty of this laser block.
+    /// </summary>
+    /// <param name="difficulty">New difficulty loaded</param>
+    public void UpdateDifficulty(LevelDifficulty difficulty)
+    {
+        _difficulty = difficulty;
     }
 
 

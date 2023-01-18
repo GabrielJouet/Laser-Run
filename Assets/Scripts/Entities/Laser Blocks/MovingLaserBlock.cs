@@ -48,6 +48,18 @@ public class MovingLaserBlock : LaserBlock
 
 
     /// <summary>
+    /// Method called to change and set max and min positions.
+    /// </summary>
+    /// <param name="maxPosition">Maximum position of this laser block</param>
+    /// <param name="minPosition">Minimum position of this laser block</param>
+    public void SetPositions(Vector2 maxPosition, Vector2 minPosition)
+    {
+        _minPosition = minPosition;
+        _maxPosition = maxPosition;
+    }
+
+
+    /// <summary>
     /// Awake method, called at initialization.
     /// </summary>
     protected void Awake()

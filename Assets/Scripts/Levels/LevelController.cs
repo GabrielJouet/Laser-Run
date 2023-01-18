@@ -51,7 +51,7 @@ public class LevelController : MonoBehaviour
         else
         {
             _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
-            _level.Initialize();
+            _level.Initialize(Random.Range(5, 15));
 
             _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
             _player.Initialize(_level.PlayerPostion, Controller.Instance.SaveController.Hard);
@@ -117,7 +117,7 @@ public class LevelController : MonoBehaviour
         _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);
 
         _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
-        _level.Initialize();
+        _level.Initialize(Random.Range(5, 15));
     }
 
 
@@ -134,6 +134,6 @@ public class LevelController : MonoBehaviour
         _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
         _player.Initialize(_level.PlayerPostion, hard);
 
-        _level.Initialize();
+        _level.Initialize(Random.Range(5, 15));
     }
 }
