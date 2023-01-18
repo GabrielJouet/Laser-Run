@@ -26,6 +26,12 @@ public class MainMenuController : MonoBehaviour
     [SerializeField]
     private GameObject _title;
 
+    /// <summary>
+    /// Button that allows to access endless mode.
+    /// </summary>
+    [SerializeField]
+    private GameObject _endlessModeButton;
+
 
     [Header("Confirmation")]
 
@@ -128,6 +134,8 @@ public class MainMenuController : MonoBehaviour
         _saveController = Controller.Instance.SaveController;
         yield return new WaitUntil(() => _saveController.Initialized);
 
+        _endlessModeButton.SetActive(_saveController.SaveFile.EndlessUnlocked);
+
         Screen.fullScreen = _saveController.SaveFile.FullScreen;
 
         _chromaticStatus.sprite = _saveController.SaveFile.ChromaticAberration ? _yes : _no;
@@ -150,6 +158,16 @@ public class MainMenuController : MonoBehaviour
     public void LoadLevelSelection()
     {
         SceneManager.LoadScene("LevelSelection");
+    }
+
+
+    /// <summary>
+    /// Method called to open endless mode screen.
+    /// </summary>
+    public void LoadEndlessMode()
+    {
+        Controller.Instance.MusicController.LoadPlay();
+        SceneManager.LoadScene("EndlessMode");
     }
 
 

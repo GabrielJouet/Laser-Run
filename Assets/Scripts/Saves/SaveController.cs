@@ -240,6 +240,32 @@ public class SaveController : MonoBehaviour
 
 
 	/// <summary>
+	/// Method called to save if the endless mode is unlocked.
+	/// </summary>
+	public void SaveEndlessMode()
+	{
+		SaveFile.EndlessUnlocked = true;
+
+		SaveData();
+	}
+
+
+	/// <summary>
+	/// Method called to save the endless mode new high score.
+	/// </summary>
+	/// <param name="score">The score reached</param>
+	public void SaveEndlessModeScore(int score)
+	{
+		if (SaveFile.EndlessScore < score)
+		{
+			SaveFile.EndlessScore = score;
+
+			SaveData();
+		}
+	}
+
+
+	/// <summary>
 	/// Method used to save a level data.
 	/// </summary>
 	/// <param name="timeSurvived">Time survived in this level</param>
@@ -267,7 +293,10 @@ public class SaveController : MonoBehaviour
 			else if (LevelIndex == 13 && !Hard)
 				Controller.Instance.AchievementController.TriggerAchievement("A-14");
 			else if (LevelIndex == 16 && !Hard)
+			{
 				Controller.Instance.AchievementController.TriggerAchievement("A-5");
+				SaveEndlessMode();
+			}
 
 			if (Hard)
 			{

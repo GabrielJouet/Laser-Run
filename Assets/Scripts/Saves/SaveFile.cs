@@ -54,6 +54,16 @@ public class SaveFile
     /// </summary>
     public bool Tutorial { get; set; }
 
+    /// <summary>
+    /// Does the endless mode is unlocked?
+    /// </summary>
+    public bool EndlessUnlocked { get; set; }
+
+    /// <summary>
+    /// Maximum endless mode score.
+    /// </summary>
+    public int EndlessScore { get; set; }
+
 
     /// <summary>
     /// Level progression.
@@ -101,6 +111,8 @@ public class SaveFile
         Bloom = true;
         ChromaticAberration = true;
 
+        EndlessUnlocked = false;
         FullScreen = true;
+        EndlessScore = 0;
     }
 }

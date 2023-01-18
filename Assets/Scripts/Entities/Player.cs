@@ -187,9 +187,6 @@ public class Player : MonoBehaviour
     {
         FindObjectOfType<ShakingCamera>().ShakeCamera(0.05f);
 
-        Controller.Instance.SaveController.SaveAchievementProgress("A-11", Mathf.FloorToInt(_timeRunned), true);
-        Controller.Instance.SaveController.SaveAchievementProgress("A-10", Mathf.FloorToInt(_distanceRunned) * 10, true);
-
         PoolController poolController = Controller.Instance.PoolController;
 
         for (int i = 0; i < Random.Range(3, 8); i++)
@@ -201,7 +198,11 @@ public class Player : MonoBehaviour
             buffer.GetComponent<SpriteRenderer>().sprite = _destroyedParts[Random.Range(0, _destroyedParts.Count)];
         }
 
-        Controller.Instance.LevelController.FinishLevel(false);
+        EndlessController endlessController = FindObjectOfType<EndlessController>();
+        if (FindObjectOfType<EndlessController>())
+            endlessController.FinishLevel();
+        else
+            Controller.Instance.LevelController.FinishLevel(false);
 
         SwitchState(false);
     }
