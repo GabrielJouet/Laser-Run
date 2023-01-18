@@ -728,8 +728,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd30504cec2aa7e4d8caf893729b3f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Caged
-  _category: 2
   _blocks:
   - {fileID: 5818816498232621434}
   - {fileID: 8579207499046584052}
@@ -740,6 +738,23 @@ MonoBehaviour:
   - {fileID: 8386266714955103760}
   - {fileID: 2903923108862243457}
   - {fileID: 6663237152078989263}
+  _thingPrefab: {fileID: 6541510516018691726, guid: 4cb8a664546710c429080b0f6c0723cb, type: 3}
+  _thingSprites:
+  - {fileID: -5425943794297490157, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: -5294178002952207976, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 8665134196411419756, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: -9222459223486235064, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 6260191411142346326, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 3658347772343308625, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 2166339870440278549, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 5878090103876915966, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 4165376735020460750, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
+  _playerPosition: {x: 0.5, y: 0.5}
+  _name: Caged
+  _category: 2
   _difficulties:
   - _activationTime: 2.5
     _activationNumber: 1
@@ -833,21 +848,6 @@ MonoBehaviour:
     _warning: 1
     _threatDescription: Even faster!
   _timeToLive: 65
-  _thingPrefab: {fileID: 6541510516018691726, guid: 4cb8a664546710c429080b0f6c0723cb, type: 3}
-  _thingSprites:
-  - {fileID: -5425943794297490157, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: -5294178002952207976, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 8665134196411419756, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: -9222459223486235064, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 6260191411142346326, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 3658347772343308625, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 2166339870440278549, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 5878090103876915966, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 4165376735020460750, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: -721011699567319478, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 2028758949534592612, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  - {fileID: 8456116820849664973, guid: ce11e8c62c4a7b1429b2149cbc755f17, type: 3}
-  _playerPosition: {x: 0.5, y: 0.5}
 --- !u!1 &2629893778646583845
 GameObject:
   m_ObjectHideFlags: 0
