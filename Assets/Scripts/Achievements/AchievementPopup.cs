@@ -40,7 +40,8 @@ public class AchievementPopup : MonoBehaviour
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
-        _animator = GetComponent<Animator>();    
+        _animator = GetComponent<Animator>();
+        _audioSource.volume = !Controller.Instance.SaveController.SaveFile.SoundMuted ? Controller.Instance.SaveController.SaveFile.Sound : 0;
     }
 
 
