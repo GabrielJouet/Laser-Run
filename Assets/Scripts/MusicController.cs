@@ -48,6 +48,7 @@ public class MusicController : MonoBehaviour
     /// </summary>
     public void LoadTitle()
     {
+        StopAllCoroutines();
         StartCoroutine(ChangeMusic(true));
     }
 
@@ -57,6 +58,7 @@ public class MusicController : MonoBehaviour
     /// </summary>
     public void LoadPlay()
     {
+        StopAllCoroutines();
         StartCoroutine(ChangeMusic(false));
     }
 
