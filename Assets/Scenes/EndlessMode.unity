@@ -1159,7 +1159,7 @@ MonoBehaviour:
   _cautionText: {fileID: 82081645}
   _gameOverScreen: {fileID: 1017885695}
   _gameOverText: {fileID: 238333143}
-  _deathCutOut: {fileID: 0}
+  _deathCutOut: {fileID: 163764475}
   _previousScore: {fileID: 2020825289}
   _playerPrefab: {fileID: 6042790724714602022, guid: b603f22efec00fb49a8707b226f0265a, type: 3}
   _endlessLevel: {fileID: 610224768265941646, guid: 36198d9094622c449b4da99369ff3a1e, type: 3}
