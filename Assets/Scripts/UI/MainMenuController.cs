@@ -32,6 +32,12 @@ public class MainMenuController : MonoBehaviour
     [SerializeField]
     private GameObject _endlessModeButton;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [SerializeField]
+    private GameObject _startButton;
+
 
     [Header("Confirmation")]
 
@@ -133,6 +139,9 @@ public class MainMenuController : MonoBehaviour
         _postProcessingVolume = GetComponent<Volume>();
         _saveController = Controller.Instance.SaveController;
         yield return new WaitUntil(() => _saveController.Initialized);
+
+        if (_saveController.SaveFile.EndlessUnlocked)
+            _startButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 20);
 
         _endlessModeButton.SetActive(_saveController.SaveFile.EndlessUnlocked);
 
