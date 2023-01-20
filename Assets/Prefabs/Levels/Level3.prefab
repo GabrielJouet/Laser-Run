@@ -742,8 +742,6 @@ MonoBehaviour:
     _shots: 1
     _reactionTime: 0.4
     _displayTime: 0.25
-    _dispersionMin: 0
-    _dispersionMax: 15
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 0
@@ -760,8 +758,6 @@ MonoBehaviour:
     _shots: 1
     _reactionTime: 0.35
     _displayTime: 0.25
-    _dispersionMin: 0
-    _dispersionMax: 13
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 0
@@ -778,8 +774,6 @@ MonoBehaviour:
     _shots: 1
     _reactionTime: 0.4
     _displayTime: 0.25
-    _dispersionMin: 0
-    _dispersionMax: 5
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 0
@@ -789,15 +783,13 @@ MonoBehaviour:
     _stopWhenNotMoving: 0
     _blockRotationSpeed: 0
     _warning: 0
-    _threatDescription: Aiming activated
+    _threatDescription: Faster
   - _activationTime: 0.89
     _activationNumber: 1
     _loadTime: 0.55
     _shots: 1
     _reactionTime: 0.4
     _displayTime: 0.25
-    _dispersionMin: 0
-    _dispersionMax: 1
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 0
@@ -815,8 +807,6 @@ MonoBehaviour:
     _shots: 1
     _reactionTime: 0.35
     _displayTime: 0.25
-    _dispersionMin: 0
-    _dispersionMax: 1
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 0

@@ -243,10 +243,9 @@ public abstract class Emitter : MonoBehaviour
     /// <returns>The angle found</returns>
     protected float ComputeAngle()
     {
-        float angle = (Controller.Instance.SaveController.Hard ? 0 : Random.Range(_difficulty.MinDispersion, _difficulty.MaxDispersion)) * (Random.Range(0, 2) == 1 ? -1 : 1);
-
         Player player = FindObjectOfType<Player>();
-
+        float angle = 0;
+        
         if (player != null)
         {
             Transform buffer = player.transform;
