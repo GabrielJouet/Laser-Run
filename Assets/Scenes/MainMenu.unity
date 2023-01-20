@@ -5275,7 +5275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 20}
+  m_AnchoredPosition: {x: 0, y: -130}
   m_SizeDelta: {x: 450, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1116283392
@@ -8799,6 +8799,7 @@ MonoBehaviour:
   _menuObject: {fileID: 321595977}
   _title: {fileID: 306650002}
   _endlessModeButton: {fileID: 420347621}
+  _startButton: {fileID: 0}
   _confirmationText: {fileID: 1593059686}
   _confirmationButton: {fileID: 1052905730}
   _bloomStatus: {fileID: 144193965}
