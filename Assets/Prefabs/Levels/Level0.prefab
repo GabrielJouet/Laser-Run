@@ -125,7 +125,7 @@ MonoBehaviour:
     _activationNumber: 1
     _loadTime: 1.1
     _shots: 1
-    _reactionTime: 0.51
+    _reactionTime: 0.55
     _displayTime: 0.8
     _speed: 0.01
     _timeBeforeDirectionChange: 0

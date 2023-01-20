@@ -64,7 +64,7 @@ public class LevelDifficulty
     /// <summary>
     /// Time before and after each laser is fired.
     /// </summary>
-    [SerializeField, Range(0.05f, 0.75f), Tooltip("Time between showing and firing")]
+    [SerializeField, Range(0.5f, 1f), Tooltip("Time between showing and firing")]
     private float _reactionTime;
 
     /// <summary>
