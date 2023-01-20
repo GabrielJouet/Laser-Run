@@ -59,6 +59,11 @@ public abstract class BaseLevel : MonoBehaviour
     /// </summary>
     protected readonly List<Emitter> _allBlocks = new List<Emitter>();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    protected List<GameObject> _detritus = new List<GameObject>();
+
 
 
     /// <summary>
@@ -66,12 +71,15 @@ public abstract class BaseLevel : MonoBehaviour
     /// </summary>
     public virtual void Initialize(int detritusCount)
     {
+        _detritus = new List<GameObject>();
+
         _allBlocks.AddRange(_blocks);
         _allBlocks.AddRange(_additionnalBlocks);
 
         for (int i = 0; i < detritusCount; i++)
         {
-            GameObject thingBuffer = Controller.Instance.PoolController.Out(_thingPrefab);
+            GameObject thingBuffer = Instantiate(_thingPrefab);
+            _detritus.Add(thingBuffer);
             thingBuffer.transform.Rotate(Vector3.forward * Random.Range(0, 360));
             thingBuffer.transform.localPosition = new Vector2(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f));
             thingBuffer.GetComponent<SpriteRenderer>().sprite = _thingSprites[Random.Range(0, _thingSprites.Count)];
@@ -123,5 +131,18 @@ public abstract class BaseLevel : MonoBehaviour
     public void StopLevel()
     {
         StopAllCoroutines();
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void CleanUpLevel()
+    {
+        foreach (Emitter block in _allBlocks)
+            block.ResetObject();
+
+        foreach (GameObject detritus in _detritus)
+            Destroy(detritus);
     }
 }

@@ -49,13 +49,23 @@ public class LevelController : MonoBehaviour
         if (!Controller.Instance.SaveController.SaveFile.Tutorial)
             _tutorialScreen.SetActive(true);
         else
-        {
-            _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
-            _level.Initialize(Random.Range(5, 15));
+            StartLevel(false);
+    }
 
-            _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
-            _player.Initialize(_level.PlayerPostion, Controller.Instance.SaveController.Hard);
-        }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="alreadySpawned"></param>
+    private void StartLevel(bool alreadySpawned)
+    {
+        _player = Instantiate(_playerPrefab).GetComponent<Player>();
+        _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);
+
+        if (!alreadySpawned)
+            _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
+
+        _level.Initialize(Random.Range(5, 15));
     }
 
 
@@ -98,7 +108,6 @@ public class LevelController : MonoBehaviour
     /// </summary>
     public void GoBackToSelection()
     {
-        Controller.Instance.PoolController.RetrieveAllPools();
         Controller.Instance.MusicController.LoadTitle();
         SceneManager.LoadScene("LevelSelection");
     }
@@ -113,11 +122,7 @@ public class LevelController : MonoBehaviour
         Controller.Instance.SaveController.SaveTutorial();
         Controller.Instance.AchievementController.TriggerAchievement("A-12");
 
-        _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
-        _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);
-
-        _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
-        _level.Initialize(Random.Range(5, 15));
+        StartLevel(false);
     }
 
 
@@ -126,14 +131,13 @@ public class LevelController : MonoBehaviour
     /// </summary>
     private IEnumerator RestartLoadedLevel()
     {
-        yield return new WaitForSeconds(0.7f);
-        Controller.Instance.PoolController.RetrieveAllPools();
+        yield return new WaitForSeconds(0.25f);
+
+        _level.CleanUpLevel();
+
+        yield return new WaitForSeconds(0.45f);
         Controller.Instance.UIController.HideGameOverScreen();
-        bool hard = Controller.Instance.SaveController.Hard;
 
-        _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
-        _player.Initialize(_level.PlayerPostion, hard);
-
-        _level.Initialize(Random.Range(5, 15));
+        StartLevel(true);
     }
 }

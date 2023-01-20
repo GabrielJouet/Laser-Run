@@ -265,7 +265,7 @@ public abstract class Emitter : MonoBehaviour
     /// <param name="displayTime">How much time the laser will be rendered?</param>
     protected void ShotProjectile(GameObject laser, float displayTime)
     {
-        _currentLaser = Controller.Instance.PoolController.Out(laser).GetComponent<Laser>();
+        _currentLaser = Instantiate(laser).GetComponent<Laser>();
 
         _currentLaser.transform.SetParent(_canon);
         _currentLaser.Initialize(displayTime, _laserColor);
@@ -283,5 +283,8 @@ public abstract class Emitter : MonoBehaviour
             _clockLeds[i].SetActive(false);
 
         _particleSystem.Stop();
+
+        if (_currentLaser)
+            Destroy(_currentLaser.gameObject);
     }
 }

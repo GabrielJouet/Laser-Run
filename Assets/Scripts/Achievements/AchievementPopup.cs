@@ -37,10 +37,13 @@ public class AchievementPopup : MonoBehaviour
     /// <summary>
     /// Awake method, called at initialization before Start.
     /// </summary>
-    private void Awake()
+    private IEnumerator Start()
     {
+        yield return new WaitUntil(() => Controller.Instance);
+
         _audioSource = GetComponent<AudioSource>();
-        _animator = GetComponent<Animator>();    
+        _animator = GetComponent<Animator>();
+        _audioSource.volume = !Controller.Instance.SaveController.SaveFile.SoundMuted ? Controller.Instance.SaveController.SaveFile.Sound : 0;
     }
 
 

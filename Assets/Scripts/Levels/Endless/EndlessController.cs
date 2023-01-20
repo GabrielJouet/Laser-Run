@@ -20,6 +20,9 @@ public class EndlessController : UIController
     [SerializeField]
     private GameObject _playerPrefab;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [SerializeField]
     private EndlessLevel _endlessLevel;
 
@@ -44,6 +47,9 @@ public class EndlessController : UIController
     /// </summary>
     private EndlessLevel _level;
 
+    /// <summary>
+    /// 
+    /// </summary>
     private bool _counting = false;
 
 
@@ -53,7 +59,7 @@ public class EndlessController : UIController
     /// </summary>
     private IEnumerator Start()
     {
-        _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
+        _player = Instantiate(_playerPrefab).GetComponent<Player>();
         _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);
 
         yield return new WaitUntil(() => Controller.Instance);
@@ -117,7 +123,6 @@ public class EndlessController : UIController
     /// </summary>
     public void GoBackToSelection()
     {
-        Controller.Instance.PoolController.RetrieveAllPools();
         Controller.Instance.MusicController.LoadTitle();
         SceneManager.LoadScene("MainMenu");
     }
@@ -139,19 +144,22 @@ public class EndlessController : UIController
     /// </summary>
     private IEnumerator RestartLoadedLevel(bool skip)
     {
-        if (!skip)
-            yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.25f);
 
-        Controller.Instance.PoolController.RetrieveAllPools();
+        if (skip)
+            _deathCutOut.SetTrigger("die");
 
-        _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
-        _player.Initialize(Vector2.zero, false);
+        _endlessLevel.CleanUpLevel();
+
+        yield return new WaitForSeconds(skip ? 0.7f : 0.45f);
+
+        _player = Instantiate(_playerPrefab).GetComponent<Player>();
+        _player.Initialize(_level.PlayerPostion, false);
 
         _level.Initialize(Random.Range(5, 15));
-        _factor = 0.5f;
-        _score = 0;
-        _previousScore.text = Controller.Instance.SaveController.SaveFile.EndlessScore + " pts";
         _counting = true;
+        _score = 0;
+        _factor = 0.5f;
     }
 
 
