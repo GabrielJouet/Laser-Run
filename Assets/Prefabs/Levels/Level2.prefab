@@ -746,10 +746,8 @@ MonoBehaviour:
     _activationNumber: 1
     _loadTime: 1.5
     _shots: 2
-    _reactionTime: 0.3
+    _reactionTime: 0.55
     _displayTime: 0.44
-    _dispersionMin: 1
-    _dispersionMax: 3
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 0
@@ -764,10 +762,8 @@ MonoBehaviour:
     _activationNumber: 1
     _loadTime: 1.4
     _shots: 2
-    _reactionTime: 0.28
+    _reactionTime: 0.54
     _displayTime: 0.45
-    _dispersionMin: 0
-    _dispersionMax: 1
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 0
@@ -782,10 +778,8 @@ MonoBehaviour:
     _activationNumber: 1
     _loadTime: 1.35
     _shots: 2
-    _reactionTime: 0.26
+    _reactionTime: 0.53
     _displayTime: 0.47
-    _dispersionMin: 0
-    _dispersionMax: 1
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 0
@@ -800,10 +794,8 @@ MonoBehaviour:
     _activationNumber: 1
     _loadTime: 2
     _shots: 3
-    _reactionTime: 0.45
+    _reactionTime: 0.52
     _displayTime: 0.5
-    _dispersionMin: 4
-    _dispersionMax: 7
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 0
@@ -818,10 +810,8 @@ MonoBehaviour:
     _activationNumber: 1
     _loadTime: 1.7
     _shots: 3
-    _reactionTime: 0.44
+    _reactionTime: 0.51
     _displayTime: 0.55
-    _dispersionMin: 2
-    _dispersionMax: 4
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 0
@@ -837,10 +827,8 @@ MonoBehaviour:
     _activationNumber: 1
     _loadTime: 1.2
     _shots: 4
-    _reactionTime: 0.4
+    _reactionTime: 0.5
     _displayTime: 0.55
-    _dispersionMin: 0
-    _dispersionMax: 1
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 0

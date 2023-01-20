@@ -64,7 +64,7 @@ public class LevelDifficulty
     /// <summary>
     /// Time before and after each laser is fired.
     /// </summary>
-    [SerializeField, Range(0.05f, 0.75f), Tooltip("Time between showing and firing")]
+    [SerializeField, Range(0.5f, 1f), Tooltip("Time between showing and firing")]
     private float _reactionTime;
 
     /// <summary>
@@ -83,32 +83,6 @@ public class LevelDifficulty
     /// Amount of time the laser goes.
     /// </summary>
     public float DisplayTime { get => _displayTime; set => _displayTime = value; }
-
-
-    [Header("Acurracy")]
-
-    /// <summary>
-    /// Minimum dispersion of laser.
-    /// </summary>
-    [SerializeField, Range(0f, 45f), Tooltip("Minimum dispersion angle")]
-    private float _dispersionMin;
-
-    /// <summary>
-    /// Minimum dispersion of laser.
-    /// </summary>
-    public float MinDispersion { get => _dispersionMin; set => _dispersionMin = value; }
-
-
-    /// <summary>
-    /// Maximum dispersion of laser.
-    /// </summary>
-    [SerializeField, Range(0f, 45f), Tooltip("Maximum dispersion angle")]
-    private float _dispersionMax;
-
-    /// <summary>
-    /// Maximum dispersion of laser.
-    /// </summary>
-    public float MaxDispersion { get => _dispersionMax; set => _dispersionMax = value; }
 
 
     [Header("Moving related")]
@@ -253,9 +227,6 @@ public class LevelDifficulty
 
         _reactionTime = 0.65f;
         _displayTime = 0.85f;
-
-        _dispersionMin = 0;
-        _dispersionMax = 15;
 
         _speed = 0.25f;
         _timeBeforeDirectionChange = 0.25f;

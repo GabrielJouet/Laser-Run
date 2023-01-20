@@ -54,7 +54,7 @@ public class EndlessLevel : BaseLevel
 
     protected void SelectAttributeToModify()
     {
-        int attribute = Random.Range(0, 4);
+        int attribute = Random.Range(0, 3);
 
         float change = 0;
         float attributeChange;
@@ -83,7 +83,7 @@ public class EndlessLevel : BaseLevel
                 attributeChange = Random.Range(0.02f, 0.05f);
                 change += attributeChange * 2.5f;
 
-                _loadedDifficulty.ReactionTime = Mathf.Clamp(_loadedDifficulty.ReactionTime + attributeChange, 0.15f, 0.8f);
+                _loadedDifficulty.ReactionTime = Mathf.Clamp(_loadedDifficulty.ReactionTime + attributeChange, 0.5f, 1f);
 
 
                 attributeChange = Random.Range(0.1f, 0.25f);
@@ -97,14 +97,6 @@ public class EndlessLevel : BaseLevel
                 break;
 
             case 2:
-                attributeChange = Random.Range(0.5f, 2);
-                change += attributeChange;
-
-                _loadedDifficulty.MinDispersion = Mathf.Clamp(_loadedDifficulty.MinDispersion + attributeChange, 0, 45);
-                _loadedDifficulty.MaxDispersion = Mathf.Clamp(_loadedDifficulty.MaxDispersion + attributeChange, 0, 45);
-                break;
-
-            case 3:
                 attributeChange = Random.Range(0.02f, 0.1f);
                 change += attributeChange * 1.5f;
 
@@ -116,7 +108,7 @@ public class EndlessLevel : BaseLevel
                 _loadedDifficulty.TimeBeforeDirectionChange = Mathf.Clamp(_loadedDifficulty.TimeBeforeDirectionChange + attributeChange, 0, 0.5f);
                 break;
 
-            case 4:
+            case 3:
                 attributeChange = Random.Range(0.5f, 1f);
                 change += attributeChange * 2.5f;
 
