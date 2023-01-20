@@ -83,7 +83,7 @@ public class EndlessLevel : BaseLevel
                 attributeChange = Random.Range(0.02f, 0.05f);
                 change += attributeChange * 2.5f;
 
-                _loadedDifficulty.ReactionTime = Mathf.Clamp(_loadedDifficulty.ReactionTime + attributeChange, 0.15f, 0.8f);
+                _loadedDifficulty.ReactionTime = Mathf.Clamp(_loadedDifficulty.ReactionTime + attributeChange, 0.5f, 1f);
 
 
                 attributeChange = Random.Range(0.1f, 0.25f);
