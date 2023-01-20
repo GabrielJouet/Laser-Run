@@ -81,7 +81,7 @@ public class Level : BaseLevel
 
         base.Initialize(detritusCount * (hard ? 3 : 1));
 
-        if (hard)
+        if (hard && !_difficulties.Contains(_hardDifficultyBonus))
             _difficulties.Add(_hardDifficultyBonus);
 
         foreach (Emitter block in _allBlocks)
