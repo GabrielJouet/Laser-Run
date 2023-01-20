@@ -32,9 +32,6 @@ public class ForeverLaserBlock : Emitter
     {
         base.Initialize(difficulties);
 
-        if (_currentLaser)
-            Destroy(_currentLaser.gameObject);
-
         _isEmitting = false;
         _side = true;
 

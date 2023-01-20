@@ -59,7 +59,10 @@ public abstract class BaseLevel : MonoBehaviour
     /// </summary>
     protected readonly List<Emitter> _allBlocks = new List<Emitter>();
 
-    private List<GameObject> _detritus = new List<GameObject>();
+    /// <summary>
+    /// 
+    /// </summary>
+    protected List<GameObject> _detritus = new List<GameObject>();
 
 
 
@@ -68,9 +71,6 @@ public abstract class BaseLevel : MonoBehaviour
     /// </summary>
     public virtual void Initialize(int detritusCount)
     {
-        foreach (GameObject detritus in _detritus)
-            Destroy(detritus);
-
         _detritus = new List<GameObject>();
 
         _allBlocks.AddRange(_blocks);
@@ -131,5 +131,18 @@ public abstract class BaseLevel : MonoBehaviour
     public void StopLevel()
     {
         StopAllCoroutines();
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void CleanUpLevel()
+    {
+        foreach (Emitter block in _allBlocks)
+            block.ResetObject();
+
+        foreach (GameObject detritus in _detritus)
+            Destroy(detritus);
     }
 }

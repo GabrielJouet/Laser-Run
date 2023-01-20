@@ -283,5 +283,8 @@ public abstract class Emitter : MonoBehaviour
             _clockLeds[i].SetActive(false);
 
         _particleSystem.Stop();
+
+        if (_currentLaser)
+            Destroy(_currentLaser.gameObject);
     }
 }

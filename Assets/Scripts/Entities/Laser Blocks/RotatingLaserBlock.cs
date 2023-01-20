@@ -27,9 +27,6 @@ public class RotatingLaserBlock : Emitter
 
         transform.localEulerAngles = Vector3.zero;
 
-        if (_currentLaser)
-            Destroy(_currentLaser.gameObject);
-
         StartCoroutine(ChargeUpLaser());
     }
 
