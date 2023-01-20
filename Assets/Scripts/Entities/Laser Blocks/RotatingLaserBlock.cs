@@ -25,6 +25,11 @@ public class RotatingLaserBlock : Emitter
     {
         base.Initialize(difficulties);
 
+        transform.localEulerAngles = Vector3.zero;
+
+        if (_currentLaser)
+            Destroy(_currentLaser.gameObject);
+
         StartCoroutine(ChargeUpLaser());
     }
 

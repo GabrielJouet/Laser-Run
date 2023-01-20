@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -71,16 +72,11 @@ public class Player : MonoBehaviour
     /// </summary>
     protected Vector2 _inputs;
 
-    /// <summary>
-    /// Does the player is dead?
-    /// </summary>
-    public bool Dead { get; private set; }
-
 
     /// <summary>
     /// Does the player is invicible?
     /// </summary>
-    public bool Invicible { get; private set; }
+    public bool Invicible { get; private set; } = false;
 
 
     /// <summary>
@@ -114,18 +110,11 @@ public class Player : MonoBehaviour
     /// <param name="newPosition">The new position of the player</param>
     public void Initialize(Vector2 newPosition, bool hard)
     {
-        _timeRunned = 0;
-        _distanceRunned = 0;
         GetComponent<Light2D>().color = Controller.Instance.SaveController.Hard ? _hardColor : _normalColor;
-
-        Dead = false;
-        Invicible = false;
 
         transform.position = newPosition;
 
         _speed = (hard ? 0.55f : 1) * _speedMax;
-
-        SwitchState(true);
     }
 
 
@@ -167,44 +156,48 @@ public class Player : MonoBehaviour
 
 
     /// <summary>
-    /// Method called when we want to change the state of the player.
-    /// </summary>
-    /// <param name="activated">Does the player is activated or not?</param>
-    private void SwitchState(bool activated)
-    {
-        enabled = activated;
-        _spriteRenderer.enabled = activated;
-        _shadowSpriteRenderer.enabled = activated;
-
-        Dead = !activated;
-    }
-
-
-    /// <summary>
     /// Method called when an entity gets hit.
     /// </summary>
     public void GetHit()
     {
         FindObjectOfType<ShakingCamera>().ShakeCamera(0.05f);
 
-        PoolController poolController = Controller.Instance.PoolController;
+        EndlessController endlessController = FindObjectOfType<EndlessController>();
+        if (endlessController)
+            endlessController.FinishLevel();
+        else
+            Controller.Instance.LevelController.FinishLevel(false);
 
+        enabled = false;
+        _spriteRenderer.enabled = false;
+        _shadowSpriteRenderer.enabled = false;
+
+        StartCoroutine(Clean());
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private IEnumerator Clean()
+    {
+        List<GameObject> detritus = new List<GameObject>();
         for (int i = 0; i < Random.Range(3, 8); i++)
         {
-            GameObject buffer = poolController.Out(_destroyedPartPrefab);
+            GameObject buffer = Instantiate(_destroyedPartPrefab);
             buffer.transform.position = transform.position;
+            detritus.Add(buffer);
 
             buffer.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 25);
             buffer.GetComponent<SpriteRenderer>().sprite = _destroyedParts[Random.Range(0, _destroyedParts.Count)];
         }
 
-        EndlessController endlessController = FindObjectOfType<EndlessController>();
-        if (FindObjectOfType<EndlessController>())
-            endlessController.FinishLevel();
-        else
-            Controller.Instance.LevelController.FinishLevel(false);
+        yield return new WaitForSeconds(0.5f);
 
-        SwitchState(false);
+        foreach (GameObject detritut in detritus)
+            Destroy(detritut);
+
+        Destroy(gameObject);
     }
 
 

@@ -142,13 +142,6 @@ public class Laser : MonoBehaviour
     /// </summary>
     public void StopLaser()
     {
-        _lineRenderer.enabled = false;
-        _particleSystem.Stop();
-
-        _lineRenderer.SetPosition(0, Vector3.zero);
-        _lineRenderer.SetPosition(1, Vector3.zero);
-        _hitLight.transform.position = Vector3.one * 10;
-
-        Controller.Instance.PoolController.In(gameObject);
+        Destroy(gameObject);
     }
 }

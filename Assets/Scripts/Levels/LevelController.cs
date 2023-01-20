@@ -53,7 +53,7 @@ public class LevelController : MonoBehaviour
             _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
             _level.Initialize(Random.Range(5, 15));
 
-            _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
+            _player = Instantiate(_playerPrefab).GetComponent<Player>();
             _player.Initialize(_level.PlayerPostion, Controller.Instance.SaveController.Hard);
         }
     }
@@ -98,7 +98,6 @@ public class LevelController : MonoBehaviour
     /// </summary>
     public void GoBackToSelection()
     {
-        Controller.Instance.PoolController.RetrieveAllPools();
         Controller.Instance.MusicController.LoadTitle();
         SceneManager.LoadScene("LevelSelection");
     }
@@ -113,7 +112,7 @@ public class LevelController : MonoBehaviour
         Controller.Instance.SaveController.SaveTutorial();
         Controller.Instance.AchievementController.TriggerAchievement("A-12");
 
-        _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
+        _player = Instantiate(_playerPrefab).GetComponent<Player>();
         _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);
 
         _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
@@ -127,11 +126,10 @@ public class LevelController : MonoBehaviour
     private IEnumerator RestartLoadedLevel()
     {
         yield return new WaitForSeconds(0.7f);
-        Controller.Instance.PoolController.RetrieveAllPools();
         Controller.Instance.UIController.HideGameOverScreen();
         bool hard = Controller.Instance.SaveController.Hard;
 
-        _player = Controller.Instance.PoolController.Out(_playerPrefab).GetComponent<Player>();
+        _player = Instantiate(_playerPrefab).GetComponent<Player>();
         _player.Initialize(_level.PlayerPostion, hard);
 
         _level.Initialize(Random.Range(5, 15));
