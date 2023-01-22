@@ -12,19 +12,14 @@ public class LevelSave
     public float Time;
 
     /// <summary>
-    /// Does this level is locked?
+    /// Reached time of this level in hard mode.
     /// </summary>
-    public bool Locked;
+    public float HardTime;
 
     /// <summary>
-    /// Does this level is finished in hard mode?
+    /// State of this level.
     /// </summary>
-    public bool Hard;
-
-    /// <summary>
-    /// Does this level is finished?
-    /// </summary>
-    public bool Win;
+    public LevelState State;
 
 
 
@@ -35,8 +30,7 @@ public class LevelSave
     public LevelSave(bool locked)
     {
         Time = 0;
-        Locked = locked;
-        Hard = false;
-        Win = false;
+        HardTime = 0;
+        State = locked ? LevelState.LOCKED : LevelState.OPENED;
     }
 }

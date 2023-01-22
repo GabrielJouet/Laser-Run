@@ -1,6 +1,6 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Class that will handle every UI interaction in game.
@@ -11,38 +11,37 @@ public class UIController : MonoBehaviour
     /// How much time is left text component?
     /// </summary>
     [SerializeField]
-    private Text _timeLeft;
+    protected TextMeshProUGUI _timeLeft;
 
     /// <summary>
     /// Threat description text component?
     /// </summary>
     [SerializeField]
-    private Text _threatDescription;
+    private TextMeshProUGUI _threatDescription;
 
     /// <summary>
     /// Caution text component?
     /// </summary>
     [SerializeField]
-    private Text _cautionText;
+    private TextMeshProUGUI _cautionText;
 
     /// <summary>
     /// Game over screen that will be displayed at the end of the level.
     /// </summary>
     [SerializeField]
-    private GameObject _gameOverScreen;
+    protected GameObject _gameOverScreen;
 
     /// <summary>
     /// Game over text component.
     /// </summary>
     [SerializeField]
-    private Text _gameOverText;
+    protected TextMeshProUGUI _gameOverText;
 
     /// <summary>
-    /// How much time between activation and display.
+    /// Animator component used to display cut out and fade.
     /// </summary>
     [SerializeField]
-    private float _screenDelayTime;
-    public float ScreenDelayTime { get => _screenDelayTime; }
+    protected Animator _deathCutOut;
 
 
 
@@ -50,9 +49,9 @@ public class UIController : MonoBehaviour
     /// Method called to update the slider and text component.
     /// </summary>
     /// <param name="timeLeft">The time left</param>
-    public void UpdateTimeLeft(float timeLeft)
+    public virtual void UpdateTimeLeft(float timeLeft)
     {
-        _timeLeft.text = string.Format("{0:#.00 sec}", timeLeft);
+        _timeLeft.text = (timeLeft < 1 ? "0" : "") + string.Format("{0:#.00 sec}", timeLeft);
     }
 
 
@@ -98,16 +97,19 @@ public class UIController : MonoBehaviour
     /// Method used to display game over screen.
     /// </summary>
     /// <param name="win">Does the player wins the game?</param>
-    public void DisplayGameOverScreen(bool win)
+    public virtual void DisplayGameOverScreen(bool win)
     {
-        StartCoroutine(DelayScreenDisplay(win ? "Laser won't stop you this time!" : "You've stopped running..."));
+        if (win)
+            StartCoroutine(DelayScreenDisplay("Laser won't stop you this time!"));
+        else
+            _deathCutOut.SetTrigger("die");
     }
 
 
     /// <summary>
     /// Method used to hide the game over screen.
     /// </summary>
-    public void HideGameOverScreen()
+    public virtual void HideGameOverScreen()
     {
         _gameOverScreen.SetActive(false);
     }
@@ -117,9 +119,9 @@ public class UIController : MonoBehaviour
     /// Coroutine used to delay the game over screen displays.
     /// </summary>
     /// <param name="displayText">The text to display</param>
-    private IEnumerator DelayScreenDisplay(string displayText)
+    protected IEnumerator DelayScreenDisplay(string displayText)
     {
-        yield return new WaitForSeconds(ScreenDelayTime);
+        yield return new WaitForSeconds(0.7f);
         _gameOverScreen.SetActive(true);
         _gameOverText.text = displayText;
     }

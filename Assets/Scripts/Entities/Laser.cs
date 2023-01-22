@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Rendering.Universal;
 
 /// <summary>
 /// Class used to emulates a laser behavior.
@@ -33,10 +33,11 @@ public class Laser : MonoBehaviour
     /// </summary>
     private LineRenderer _lineRenderer;
 
+
     /// <summary>
-    /// Parent laser block.
+    /// Nearest hit stored.
     /// </summary>
-    private LaserBlock _laserBlockParent;
+    private RaycastHit2D _nearestHit;
 
 
 
@@ -53,12 +54,9 @@ public class Laser : MonoBehaviour
     /// Initialize method, called when restarting the entity.
     /// </summary>
     /// <param name="renderTime">The render time of this laser</param>
-    /// <param name="parent">The parent laser block used</param>
     /// <param name="newColor">The new color of this laser</param>
-    public void Initialize(float renderTime, LaserBlock parent, Color newColor)
+    public void Initialize(float renderTime, Color newColor)
     {
-        _laserBlockParent = parent;
-
         if (!_fake)
         {
             _lineRenderer.startColor = newColor;
@@ -77,12 +75,21 @@ public class Laser : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        _lineRenderer.SetPosition(0, transform.parent.position);
-        _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * CheckDistance()));
-        _hitLight.transform.position = _lineRenderer.GetPosition(1);
+        if (_lineRenderer.enabled)
+        {
+            _nearestHit = NearestHit();
 
-        if (!_fake && Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10)[0].collider.TryGetComponent(out Player player) && !player.Invicible)
-            player.GetHit();
+            _lineRenderer.SetPosition(0, transform.parent.position);
+            _lineRenderer.SetPosition(1, transform.parent.position + (transform.parent.up * _nearestHit.distance * (!_fake ? 1 : 0.5f)));
+
+            if (!_fake)
+            {
+                _hitLight.transform.position = _lineRenderer.GetPosition(1);
+
+                if (_nearestHit.collider.TryGetComponent(out Player player) && !player.Invicible)
+                    player.GetHit();
+            }
+        }
     }
 
 
@@ -92,41 +99,49 @@ public class Laser : MonoBehaviour
     /// <param name="renderTime">The render time of this laser</param>
     private IEnumerator ShootLaser(float renderTime)
     {
-        yield return new WaitForFixedUpdate();
-
         _lineRenderer.enabled = true;
 
         if (!_fake)
         {
             _hitLight.enabled = true;
 
-            _hitLight.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.parent.localRotation.eulerAngles.z + 180));
+            _hitLight.transform.localEulerAngles = Vector3.forward * (transform.parent.localEulerAngles.z + 180);
             _particleSystem.Play();
-
-            yield return new WaitForSeconds(renderTime);
-
-            _particleSystem.Stop();
-            _hitLight.enabled = false;
-
-            _laserBlockParent.ActiveLaser = false;
         }
-        else 
-            yield return new WaitForSeconds(renderTime);
 
-        _lineRenderer.enabled = false;
-
-        Controller.Instance.PoolController.RetrieveObject(gameObject);
+        yield return new WaitForSeconds(renderTime);
+        StopLaser();
     }
 
 
     /// <summary>
-    /// Method used to compute the distance from the impact.
+    /// Method called to find the nearest hittable object.
     /// </summary>
-    /// <returns>The distance from the object</returns>
-    private float CheckDistance()
+    /// <returns>The nearest hittable object</returns>
+    private RaycastHit2D NearestHit()
     {
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.parent.position, transform.parent.up, 10);
+        float nearestDistance = Mathf.Infinity;
+        RaycastHit2D nearestHit = new RaycastHit2D();
 
-        return hits[hits.Length - 1].distance * (!_fake ? 1 : 0.5f);
+        foreach(RaycastHit2D hit in hits)
+        {
+            if (hit.distance < nearestDistance)
+            {
+                nearestDistance = hit.distance;
+                nearestHit = hit;
+            }
+        }
+
+        return nearestHit;
+    }
+
+
+    /// <summary>
+    /// Method called when we need to stop the laser earlier.
+    /// </summary>
+    public void StopLaser()
+    {
+        Destroy(gameObject);
     }
 }

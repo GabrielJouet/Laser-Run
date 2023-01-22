@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Class that will handle level selection inputs.
@@ -14,17 +15,51 @@ public class LevelSelectionController : MonoBehaviour
     private Transform _levelPanel;
 
 
+    /// <summary>
+    /// Level menu prefab used to display available levels.
+    /// </summary>
+    [SerializeField]
+    private LevelMenu _levelMenuPrefab;
+
+    /// <summary>
+    /// Slider used to move levels.
+    /// </summary>
+    [SerializeField]
+    private Slider _slider;
+
+
+    /// <summary>
+    /// What is the maximum size of the panel?
+    /// </summary>
+    private int _maxLevelPanelSize;
+
+
 
     /// <summary>
     /// Start method, used after Awake.
     /// </summary>
     private void Start()
     {
-        LevelMenu[] levels = _levelPanel.GetComponentsInChildren<LevelMenu>();
         List<LevelSave> saves = Controller.Instance.SaveController.SaveFile.LevelsProgression;
+        List<Level> levels = Controller.Instance.SaveController.Levels;
 
-        for(int i = 0; i < levels.Length; i ++)
-            levels[i].Initialize(saves[i].Locked, saves[i].Time, saves[i].Hard, saves[i].Win);
+        bool locked = false;
+        int spawnedLevels = 0;
+        for (int i = 0; i < levels.Count; i ++)
+        {
+            if (locked)
+                break;
+
+            spawnedLevels += 1;
+            Instantiate(_levelMenuPrefab, _levelPanel).Initialize(saves[i], levels[i].Name, this, i, levels[i].Category);
+
+            if (saves[i].State == LevelState.LOCKED)
+                locked = true;
+        }
+
+        _maxLevelPanelSize = spawnedLevels * 300 + (spawnedLevels - 1) * 35 + 125 - Screen.width;
+
+        _slider.gameObject.SetActive(spawnedLevels > 5);
     }
 
 
@@ -60,5 +95,14 @@ public class LevelSelectionController : MonoBehaviour
     public void GoBackMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+
+    /// <summary>
+    /// Method called when a change is made to the slider.
+    /// </summary>
+    public void MoveSlider()
+    {
+        _levelPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(_maxLevelPanelSize * -_slider.value, 0);
     }
 }

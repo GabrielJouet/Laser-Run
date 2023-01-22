@@ -49,11 +49,38 @@ public class SaveFile
     /// </summary>
     public bool FullScreen { get; set; }
 
+    /// <summary>
+    /// Does the tutorial has been completed?
+    /// </summary>
+    public bool Tutorial { get; set; }
+
+    /// <summary>
+    /// Does the endless mode is unlocked?
+    /// </summary>
+    public bool EndlessUnlocked { get; set; }
+
+    /// <summary>
+    /// Maximum endless mode score.
+    /// </summary>
+    public int EndlessScore { get; set; }
+
 
     /// <summary>
     /// Level progression.
     /// </summary>
     public List<LevelSave> LevelsProgression { get; private set; }
+
+
+    /// <summary>
+    /// All achievements in progress.
+    /// </summary>
+    public List<AchievementProgress> AchievementsProgress { get; private set; }
+
+    /// <summary>
+    /// All achievements unlocked.
+    /// </summary>
+    public List<string> AchievementsUnlocked { get; private set; }
+
 
 
     /// <summary>
@@ -64,6 +91,9 @@ public class SaveFile
     /// <param name="numberOfLevels">How much levels in the game</param>
     public SaveFile(float soundLevel, float musicLevel, int numberOfLevels)
     {
+        AchievementsProgress = new List<AchievementProgress>();
+        AchievementsUnlocked = new List<string>();
+
         LevelsProgression = new List<LevelSave> { new LevelSave(false) };
 
         for (int i = 0; i < numberOfLevels - 1; i++)
@@ -72,6 +102,8 @@ public class SaveFile
         Sound = soundLevel;
         SoundMuted = false;
 
+        Tutorial = false;
+
         Music = musicLevel;
         MusicMuted = false;
 
@@ -79,6 +111,8 @@ public class SaveFile
         Bloom = true;
         ChromaticAberration = true;
 
+        EndlessUnlocked = false;
         FullScreen = true;
+        EndlessScore = 0;
     }
 }

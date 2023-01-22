@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,16 +15,10 @@ public class LevelController : MonoBehaviour
     private GameObject _playerPrefab;
 
     /// <summary>
-    /// Detritus prefab.
+    /// Tutorial screen, used the first time.
     /// </summary>
     [SerializeField]
-    private GameObject _thingPrefab;
-
-    /// <summary>
-    /// All detritus sprites available.
-    /// </summary>
-    [SerializeField]
-    private List<Sprite> _thingSprites;
+    private GameObject _tutorialScreen;
 
 
     /// <summary>
@@ -38,6 +32,12 @@ public class LevelController : MonoBehaviour
     private Level _level;
 
 
+    /// <summary>
+    /// How much time the player dies in a row?
+    /// </summary>
+    private int _deathInARow = 0;
+
+
 
     /// <summary>
     /// Start method, called after Awake.
@@ -46,20 +46,26 @@ public class LevelController : MonoBehaviour
     {
         Controller.Instance.AddReferencesWhenLoaded(this, GetComponent<UIController>());
 
-        _player = Controller.Instance.PoolController.GiveObject(_playerPrefab).GetComponent<Player>();
+        if (!Controller.Instance.SaveController.SaveFile.Tutorial)
+            _tutorialScreen.SetActive(true);
+        else
+            StartLevel(false);
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="alreadySpawned"></param>
+    private void StartLevel(bool alreadySpawned)
+    {
+        _player = Instantiate(_playerPrefab).GetComponent<Player>();
         _player.Initialize(Vector2.zero, Controller.Instance.SaveController.Hard);
 
-        _level = Instantiate(Controller.Instance.SaveController.CurrentLevel).GetComponent<Level>();
+        if (!alreadySpawned)
+            _level = Instantiate(Controller.Instance.SaveController.CurrentLevel);
 
-        for(int i = 0; i < Random.Range(3, 15); i ++)
-        {
-            GameObject thingBuffer = Controller.Instance.PoolController.GiveObject(_thingPrefab);
-            thingBuffer.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
-            thingBuffer.transform.localPosition = new Vector2(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f));
-            thingBuffer.GetComponent<SpriteRenderer>().sprite = _thingSprites[Random.Range(0, _thingSprites.Count)];
-        }
-
-        _level.Initialize();
+        _level.Initialize(Random.Range(5, 15));
     }
 
 
@@ -74,9 +80,26 @@ public class LevelController : MonoBehaviour
 
         if (_level.TimeElapsed >= _level.NeededTime)
             win = true;
+        else
+        {
+            _deathInARow++;
+
+            if (_deathInARow >= 10)
+                Controller.Instance.AchievementController.TriggerAchievement("A-2");
+
+            Controller.Instance.SaveController.SaveAchievementProgress("A-15", 1, true);
+
+            if (_level.NeededTime - _level.TimeElapsed <= 1 && Controller.Instance.SaveController.Hard)
+                Controller.Instance.AchievementController.TriggerAchievement("A-9");
+            else if (_level.NeededTime - _level.TimeElapsed <= 3 && !Controller.Instance.SaveController.Hard)
+                Controller.Instance.AchievementController.TriggerAchievement("A-8");
+        }
 
         Controller.Instance.SaveController.SaveLevelData(win ? _level.NeededTime : _level.TimeElapsed, win);
         Controller.Instance.UIController.DisplayGameOverScreen(win);
+
+        if (!win)
+            StartCoroutine(RestartLoadedLevel());
     }
 
 
@@ -85,32 +108,36 @@ public class LevelController : MonoBehaviour
     /// </summary>
     public void GoBackToSelection()
     {
-        Controller.Instance.PoolController.RetrieveAllPools();
         Controller.Instance.MusicController.LoadTitle();
         SceneManager.LoadScene("LevelSelection");
     }
 
 
     /// <summary>
+    /// Method called when the tutorial is set to done.
+    /// </summary>
+    public void SetTutorialDone()
+    {
+        _tutorialScreen.SetActive(false);
+        Controller.Instance.SaveController.SaveTutorial();
+        Controller.Instance.AchievementController.TriggerAchievement("A-12");
+
+        StartLevel(false);
+    }
+
+
+    /// <summary>
     /// Method called when we want to restart a level.
     /// </summary>
-    public void RestartLoadedLevel()
+    private IEnumerator RestartLoadedLevel()
     {
-        Controller.Instance.PoolController.RetrieveAllPools();
+        yield return new WaitForSeconds(0.25f);
+
+        _level.CleanUpLevel();
+
+        yield return new WaitForSeconds(0.45f);
         Controller.Instance.UIController.HideGameOverScreen();
-        bool hard = Controller.Instance.SaveController.Hard;
 
-        _player = Controller.Instance.PoolController.GiveObject(_playerPrefab).GetComponent<Player>();
-        _player.Initialize(Vector2.zero, hard);
-
-        for (int i = 0; i < Random.Range(3, 15); i++)
-        {
-            GameObject thingBuffer = Controller.Instance.PoolController.GiveObject(_thingPrefab);
-            thingBuffer.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
-            thingBuffer.transform.localPosition = new Vector2(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f));
-            thingBuffer.GetComponent<SpriteRenderer>().sprite = _thingSprites[Random.Range(0, _thingSprites.Count)];
-        }
-
-        _level.Initialize();
+        StartLevel(true);
     }
 }

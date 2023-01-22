@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 /// <summary>
 /// Class used to handle player behavior.
@@ -38,6 +40,19 @@ public class Player : MonoBehaviour
 
 
     /// <summary>
+    /// Color used when in normal difficulty.
+    /// </summary>
+    [SerializeField]
+    private Color _normalColor;
+
+    /// <summary>
+    /// Color used when in hard difficulty.
+    /// </summary>
+    [SerializeField]
+    private Color _hardColor;
+
+
+    /// <summary>
     /// The animator component that will be updated.
     /// </summary>
     protected Animator _animator;
@@ -57,16 +72,22 @@ public class Player : MonoBehaviour
     /// </summary>
     protected Vector2 _inputs;
 
-    /// <summary>
-    /// Does the player is dead?
-    /// </summary>
-    public bool Dead { get; private set; }
-
 
     /// <summary>
     /// Does the player is invicible?
     /// </summary>
-    public bool Invicible { get; private set; }
+    public bool Invicible { get; private set; } = false;
+
+
+    /// <summary>
+    /// Total distance runned this time.
+    /// </summary>
+    private float _distanceRunned = 0;
+
+    /// <summary>
+    /// Total time runned this time.
+    /// </summary>
+    private float _timeRunned = 0;
 
 
 
@@ -89,14 +110,11 @@ public class Player : MonoBehaviour
     /// <param name="newPosition">The new position of the player</param>
     public void Initialize(Vector2 newPosition, bool hard)
     {
-        Dead = false;
-        Invicible = false;
+        GetComponent<Light2D>().color = Controller.Instance.SaveController.Hard ? _hardColor : _normalColor;
 
         transform.position = newPosition;
 
         _speed = (hard ? 0.55f : 1) * _speedMax;
-
-        SwitchState(true);
     }
 
 
@@ -114,55 +132,26 @@ public class Player : MonoBehaviour
     /// </summary>
     protected void FixedUpdate()
     {
-        Move(_inputs);
-    }
+        if (_inputs.magnitude > 1)
+            _inputs = _inputs.normalized;
 
+        _animator.SetBool("move", _inputs.x != 0 || _inputs.y != 0);
 
-    /// <summary>
-    /// Method used to move the entity.
-    /// </summary>
-    /// <param name="inputs">Player inputs</param>
-    protected void Move(Vector2 inputs)
-    {
-        if (inputs.magnitude > 1)
-            inputs = inputs.normalized;
+        if (_inputs.y != 0)
+            _animator.SetBool("back", _inputs.y > 0);
 
-        ChangeAnimation("move", inputs.x != 0 || inputs.y != 0);
+        if (_inputs.x != 0)
+            _spriteRenderer.flipX = _inputs.x < 0;
 
-        if (inputs.y != 0)
-            ChangeAnimation("back", inputs.y > 0);
-            
-        if (inputs.x != 0)
-            _spriteRenderer.flipX = inputs.x < 0;
+        if (_inputs.x != 0 || _inputs.y != 0)
+        {
+            _timeRunned += Time.fixedDeltaTime;
+            _distanceRunned += _inputs.magnitude * Time.fixedDeltaTime;
+        }
 
-        _rigidBody.MovePosition(_rigidBody.position + inputs * Time.deltaTime * _speed);
+        _rigidBody.MovePosition(_rigidBody.position + _inputs * Time.fixedDeltaTime * _speed);
         _spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(transform.position).y * -1;
         _shadowSpriteRenderer.sortingOrder = _spriteRenderer.sortingOrder - 1;
-    }
-
-
-    /// <summary>
-    /// Method called when we want to change the state of the player.
-    /// </summary>
-    /// <param name="activated">Does the player is activated or not?</param>
-    private void SwitchState(bool activated)
-    {
-        enabled = activated;
-        _spriteRenderer.enabled = activated;
-        _shadowSpriteRenderer.enabled = activated;
-
-        Dead = !activated;
-    }
-
-
-    /// <summary>
-    /// Method used to change animation based on status.
-    /// </summary>
-    /// <param name="name">Name of the animation</param>
-    /// <param name="status">The new status of this animation</param>
-    protected void ChangeAnimation(string name, bool status)
-    {
-        _animator.SetBool(name, status);
     }
 
 
@@ -171,10 +160,44 @@ public class Player : MonoBehaviour
     /// </summary>
     public void GetHit()
     {
-        ExplodeIntoPieces();
-        Controller.Instance.LevelController.FinishLevel(false);
+        FindObjectOfType<ShakingCamera>().ShakeCamera(0.05f);
 
-        SwitchState(false);
+        EndlessController endlessController = FindObjectOfType<EndlessController>();
+        if (endlessController)
+            endlessController.FinishLevel();
+        else
+            Controller.Instance.LevelController.FinishLevel(false);
+
+        enabled = false;
+        _spriteRenderer.enabled = false;
+        _shadowSpriteRenderer.enabled = false;
+
+        StartCoroutine(Clean());
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private IEnumerator Clean()
+    {
+        List<GameObject> detritus = new List<GameObject>();
+        for (int i = 0; i < Random.Range(3, 8); i++)
+        {
+            GameObject buffer = Instantiate(_destroyedPartPrefab);
+            buffer.transform.position = transform.position;
+            detritus.Add(buffer);
+
+            buffer.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 25);
+            buffer.GetComponent<SpriteRenderer>().sprite = _destroyedParts[Random.Range(0, _destroyedParts.Count)];
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        foreach (GameObject detritut in detritus)
+            Destroy(detritut);
+
+        Destroy(gameObject);
     }
 
 
@@ -184,23 +207,8 @@ public class Player : MonoBehaviour
     public void BecameInvicible()
     {
         Invicible = true;
-    }
 
-
-    /// <summary>
-    /// Method called when the player dies, it then explodes in a random number of pieces.
-    /// </summary>
-    private void ExplodeIntoPieces()
-    {
-        PoolController poolController = Controller.Instance.PoolController;
-
-        for (int i = 0; i < Random.Range(3, 8); i++)
-        {
-            Vector2 directions = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 25;
-            GameObject buffer = poolController.GiveObject(_destroyedPartPrefab);
-            buffer.transform.position = transform.position;
-            buffer.GetComponent<Rigidbody2D>().AddForce(directions);
-            buffer.GetComponent<SpriteRenderer>().sprite = _destroyedParts[Random.Range(0, _destroyedParts.Count)];
-        }
+        Controller.Instance.SaveController.SaveAchievementProgress("A-11", Mathf.FloorToInt(_timeRunned), true);
+        Controller.Instance.SaveController.SaveAchievementProgress("A-10", Mathf.FloorToInt(_distanceRunned) * 10, true);
     }
 }

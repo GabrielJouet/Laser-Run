@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -25,6 +26,18 @@ public class MainMenuController : MonoBehaviour
     [SerializeField]
     private GameObject _title;
 
+    /// <summary>
+    /// Button that allows to access endless mode.
+    /// </summary>
+    [SerializeField]
+    private GameObject _endlessModeButton;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [SerializeField]
+    private GameObject _startButton;
+
 
     [Header("Confirmation")]
 
@@ -32,7 +45,7 @@ public class MainMenuController : MonoBehaviour
     /// Confirmation game object.
     /// </summary>
     [SerializeField]
-    private Text _confirmationText;
+    private TextMeshProUGUI _confirmationText;
 
     /// <summary>
     /// Confirmation button object.
@@ -127,6 +140,11 @@ public class MainMenuController : MonoBehaviour
         _saveController = Controller.Instance.SaveController;
         yield return new WaitUntil(() => _saveController.Initialized);
 
+        if (_saveController.SaveFile.EndlessUnlocked)
+            _startButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 20);
+
+        _endlessModeButton.SetActive(_saveController.SaveFile.EndlessUnlocked);
+
         Screen.fullScreen = _saveController.SaveFile.FullScreen;
 
         _chromaticStatus.sprite = _saveController.SaveFile.ChromaticAberration ? _yes : _no;
@@ -149,6 +167,16 @@ public class MainMenuController : MonoBehaviour
     public void LoadLevelSelection()
     {
         SceneManager.LoadScene("LevelSelection");
+    }
+
+
+    /// <summary>
+    /// Method called to open endless mode screen.
+    /// </summary>
+    public void LoadEndlessMode()
+    {
+        Controller.Instance.MusicController.LoadPlay();
+        SceneManager.LoadScene("EndlessMode");
     }
 
 
@@ -307,6 +335,9 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void ResetSave()
     {
+        if (Controller.Instance.SaveController.SaveFile.AchievementsUnlocked != null && Controller.Instance.SaveController.SaveFile.AchievementsUnlocked.Count == 29)
+            Controller.Instance.AchievementController.TriggerAchievement("A-6");
+
         Controller.Instance.SaveController.ResetData();
         _confirmationText.text = "Done";
         _confirmationButton.enabled = false;

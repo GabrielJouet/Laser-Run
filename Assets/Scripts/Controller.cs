@@ -3,20 +3,15 @@ using UnityEngine;
 /// <summary>
 /// Class that will handle every other controllers.
 /// </summary>
-[RequireComponent(typeof(PoolController))]
 [RequireComponent(typeof(SaveController))]
 [RequireComponent(typeof(MusicController))]
+[RequireComponent(typeof(AchievementController))]
 public class Controller : MonoBehaviour
 {
     /// <summary>
     /// Instance of itself.
     /// </summary>
     public static Controller Instance { get; private set; } = null;
-
-    /// <summary>
-    /// Pool Controller component.
-    /// </summary>
-    public PoolController PoolController { get; private set; }
 
     /// <summary>
     /// UI Controller component.
@@ -37,6 +32,11 @@ public class Controller : MonoBehaviour
     /// Music Controller component.
     /// </summary>
     public MusicController MusicController { get; private set; }
+
+    /// <summary>
+    /// Achievement Controller component.
+    /// </summary>
+    public AchievementController AchievementController { get; private set; }
 
 
 
@@ -60,8 +60,8 @@ public class Controller : MonoBehaviour
         Instance = this;
 
         MusicController = GetComponent<MusicController>();
-        PoolController = GetComponent<PoolController>();
         SaveController = GetComponent<SaveController>();
+        AchievementController = GetComponent<AchievementController>();
     }
 
 

@@ -5,19 +5,47 @@ using UnityEngine;
 /// <summary>
 /// Class that will handle every level information.
 /// </summary>
-public class Level : MonoBehaviour
+public class Level : BaseLevel
 {
+    [Header("Level Data")]
+
     /// <summary>
-    /// Available laser blocks in this level.
+    /// Name of this level.
     /// </summary>
     [SerializeField]
-    private List<LaserBlock> _blocks;
+    private string _name;
+
+    /// <summary>
+    /// Name of this level, accessor.
+    /// </summary>
+    public string Name { get => _name; }
+
+
+    /// <summary>
+    /// Which category is this level?
+    /// </summary>
+    [SerializeField]
+    private LevelCategory _category;
+
+    /// <summary>
+    /// Which category is this level? Accesor.
+    /// </summary>
+    public LevelCategory Category { get => _category; }
+
+
+    [Header("Level complexity")]
 
     /// <summary>
     /// All difficulties in the level.
     /// </summary>
     [SerializeField]
-    private List<LevelDifficulty> _difficulties;
+    protected List<LevelDifficulty> _difficulties;
+
+    /// <summary>
+    /// Last level, only accessible on hard mode.
+    /// </summary>
+    [SerializeField]
+    private LevelDifficulty _hardDifficultyBonus;
 
     /// <summary>
     /// Level goal time.
@@ -26,12 +54,6 @@ public class Level : MonoBehaviour
     [Range(25f, 500f)]
     private float _timeToLive;
     public float NeededTime { get => _timeToLive; }
-
-
-    /// <summary>
-    /// Current difficulty loaded.
-    /// </summary>
-    private LevelDifficulty _loadedDifficulty;
 
     /// <summary>
     /// Difficulty index.
@@ -53,22 +75,28 @@ public class Level : MonoBehaviour
     /// <summary>
     /// Method called to initialize the object.
     /// </summary>
-    public void Initialize()
+    public override void Initialize(int detritusCount)
     {
-        foreach (LaserBlock block in _blocks)
-            block.ResetObject();
+        bool hard = Controller.Instance.SaveController.Hard;
 
-        enabled = true;
+        base.Initialize(detritusCount * (hard ? 3 : 1));
+
+        if (hard && !_difficulties.Contains(_hardDifficultyBonus))
+            _difficulties.Add(_hardDifficultyBonus);
+
+        foreach (Emitter block in _allBlocks)
+            block.Initialize(_difficulties);
 
         _uiController = Controller.Instance.UIController;
 
-        LoadDifficulty(_difficulties[0]);
-
-         _index = 0;
+        _index = 0;
         TimeElapsed = 0;
 
-        StartCoroutine(LoadTraps());
         StartCoroutine(LevelCountDown());
+
+        LoadDifficulty();
+
+        StartCoroutine(LoadTraps());
     }
 
 
@@ -79,48 +107,6 @@ public class Level : MonoBehaviour
     {
         TimeElapsed += Time.deltaTime;
         _uiController.UpdateTimeLeft(_timeToLive - TimeElapsed >= 0 ? _timeToLive - TimeElapsed : 0);
-    }
-
-
-    /// <summary>
-    /// Coroutine used to start and warm up laser blocks.
-    /// </summary>
-    private IEnumerator LoadTraps()
-    {
-        while (true)
-        {
-            for(int i = 0; i < _loadedDifficulty.ActivationCount; i ++)
-            {
-                LaserBlock block = FindOneBlock();
-
-                if (block != null)
-                    block.WarmUp(_loadedDifficulty);
-            }
-
-            yield return new WaitForSeconds(_loadedDifficulty.ActivationTime);
-        }
-    }
-
-
-    /// <summary>
-    /// Method ysed to find an available block.
-    /// </summary>
-    /// <returns>A non-used block</returns>
-    private LaserBlock FindOneBlock()
-    {
-        _blocks.Shuffle();
-
-        LaserBlock found = null;
-        foreach(LaserBlock block in _blocks)
-        {
-            if (!block.Used)
-            {
-                found = block;
-                break;
-            }
-        }
-
-        return found;
     }
 
 
@@ -136,7 +122,7 @@ public class Level : MonoBehaviour
             _index++;
 
             if (_index < _difficulties.Count)
-                LoadDifficulty(_difficulties[_index]);
+                LoadDifficulty();
         }
 
         Controller.Instance.LevelController.FinishLevel(true);
@@ -146,21 +132,12 @@ public class Level : MonoBehaviour
     /// <summary>
     /// Method used to load a new difficulty into the level.
     /// </summary>
-    /// <param name="level">The new difficulty</param>
-    private void LoadDifficulty(LevelDifficulty level)
+    protected void LoadDifficulty()
     {
-        _loadedDifficulty = level;
+        _loadedDifficulty = _difficulties[_index];
         _uiController.UpdateThreatLevel(_loadedDifficulty.ThreatDescription, _loadedDifficulty.Warning);
-    }
 
-
-    /// <summary>
-    /// Method called when the level stops.
-    /// </summary>
-    public void StopLevel()
-    {
-        StopAllCoroutines();
-
-        enabled = false;
+        foreach (Emitter emitter in _allBlocks)
+            emitter.UpdateDifficulty(_index);
     }
 }
