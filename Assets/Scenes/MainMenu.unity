@@ -8799,7 +8799,7 @@ MonoBehaviour:
   _menuObject: {fileID: 321595977}
   _title: {fileID: 306650002}
   _endlessModeButton: {fileID: 420347621}
-  _startButton: {fileID: 0}
+  _startButton: {fileID: 1116283390}
   _confirmationText: {fileID: 1593059686}
   _confirmationButton: {fileID: 1052905730}
   _bloomStatus: {fileID: 144193965}
