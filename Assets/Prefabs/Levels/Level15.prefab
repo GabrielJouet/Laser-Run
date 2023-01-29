@@ -839,7 +839,7 @@ MonoBehaviour:
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
-    _activationTime: 2.2
+    _activationTime: 2.4
     _activationNumber: 2
     _loadTime: 1.4
     _shots: 1
@@ -852,7 +852,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
-    _blockRotationSpeed: 0.8
+    _blockRotationSpeed: 0.77
     _warning: 1
     _threatDescription: Even faster!
   _timeToLive: 80

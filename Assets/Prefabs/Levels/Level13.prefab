@@ -835,13 +835,13 @@ MonoBehaviour:
     _activationNumber: 1
     _loadTime: 1.45
     _shots: 3
-    _reactionTime: 0.65
-    _displayTime: 0.95
+    _reactionTime: 0.6
+    _displayTime: 0.8
     _speed: 0.01
     _timeBeforeDirectionChange: 0
     _rotationSpeed: 8.5
-    _minusShiftAngle: 0
-    _positiveShiftAngle: 25
+    _minusShiftAngle: -15
+    _positiveShiftAngle: 20
     _timeBeforeRotationChange: 0.05
     _stopWhenNotMoving: 0
     _blockRotationSpeed: 0

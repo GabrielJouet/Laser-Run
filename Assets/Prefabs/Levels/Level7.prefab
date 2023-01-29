@@ -805,13 +805,13 @@ MonoBehaviour:
     _warning: 1
     _threatDescription: Fours lasers
   _hardDifficultyBonus:
-    _activationTime: 2.5
+    _activationTime: 2.95
     _activationNumber: 1
-    _loadTime: 1.5
-    _shots: 5
+    _loadTime: 1.35
+    _shots: 4
     _reactionTime: 0.7
-    _displayTime: 0.5
-    _speed: 0.2
+    _displayTime: 0.8
+    _speed: 0.15
     _timeBeforeDirectionChange: 0.2
     _rotationSpeed: 0
     _minusShiftAngle: 0
@@ -820,7 +820,7 @@ MonoBehaviour:
     _stopWhenNotMoving: 0
     _blockRotationSpeed: 0
     _warning: 1
-    _threatDescription: Five lasers
+    _threatDescription: Even faster!
   _timeToLive: 65
 --- !u!1 &2629893778646583845
 GameObject:

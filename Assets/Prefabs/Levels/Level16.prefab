@@ -861,12 +861,12 @@ MonoBehaviour:
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
-    _activationTime: 2.2
+    _activationTime: 2.25
     _activationNumber: 1
-    _loadTime: 0.8
+    _loadTime: 1.05
     _shots: 2
-    _reactionTime: 0.55
-    _displayTime: 0.85
+    _reactionTime: 0.6
+    _displayTime: 0.8
     _speed: 0.3
     _timeBeforeDirectionChange: 0.1
     _rotationSpeed: 3.5
