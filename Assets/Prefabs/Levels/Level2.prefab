@@ -742,9 +742,9 @@ MonoBehaviour:
   _name: Heating things up
   _category: 0
   _difficulties:
-  - _activationTime: 2.9
+  - _activationTime: 3
     _activationNumber: 1
-    _loadTime: 1.5
+    _loadTime: 1.55
     _shots: 2
     _reactionTime: 0.55
     _displayTime: 0.44
@@ -758,9 +758,9 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Two lasers, quick
-  - _activationTime: 2.7
+  - _activationTime: 2.9
     _activationNumber: 1
-    _loadTime: 1.4
+    _loadTime: 1.45
     _shots: 2
     _reactionTime: 0.54
     _displayTime: 0.45
@@ -774,9 +774,9 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
-  - _activationTime: 2.4
+  - _activationTime: 2.8
     _activationNumber: 1
-    _loadTime: 1.35
+    _loadTime: 1.38
     _shots: 2
     _reactionTime: 0.53
     _displayTime: 0.47
@@ -790,7 +790,7 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
-  - _activationTime: 3.1
+  - _activationTime: 3
     _activationNumber: 1
     _loadTime: 2
     _shots: 3
@@ -808,7 +808,7 @@ MonoBehaviour:
     _threatDescription: Three lasers
   - _activationTime: 2.8
     _activationNumber: 1
-    _loadTime: 1.7
+    _loadTime: 1.73
     _shots: 3
     _reactionTime: 0.51
     _displayTime: 0.55
@@ -823,9 +823,9 @@ MonoBehaviour:
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
-    _activationTime: 2.4
+    _activationTime: 2.6
     _activationNumber: 1
-    _loadTime: 1.2
+    _loadTime: 1.25
     _shots: 4
     _reactionTime: 0.5
     _displayTime: 0.55

@@ -750,7 +750,7 @@ MonoBehaviour:
   _name: Drawing shapes
   _category: 2
   _difficulties:
-  - _activationTime: 2
+  - _activationTime: 2.5
     _activationNumber: 1
     _loadTime: 1.45
     _shots: 2
@@ -766,7 +766,7 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Two lasers
-  - _activationTime: 1.95
+  - _activationTime: 2.35
     _activationNumber: 1
     _loadTime: 1.45
     _shots: 2
@@ -782,7 +782,7 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Longer
-  - _activationTime: 1.8
+  - _activationTime: 2.15
     _activationNumber: 1
     _loadTime: 1.45
     _shots: 2
@@ -798,7 +798,7 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Longer
-  - _activationTime: 2.3
+  - _activationTime: 2.55
     _activationNumber: 1
     _loadTime: 1.45
     _shots: 3
@@ -814,7 +814,7 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Three lasers
-  - _activationTime: 2.2
+  - _activationTime: 2.4
     _activationNumber: 1
     _loadTime: 1.45
     _shots: 3
@@ -831,7 +831,7 @@ MonoBehaviour:
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
-    _activationTime: 2.5
+    _activationTime: 2.7
     _activationNumber: 1
     _loadTime: 1.45
     _shots: 3

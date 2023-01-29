@@ -741,7 +741,7 @@ MonoBehaviour:
   _name: Still rotating
   _category: 2
   _difficulties:
-  - _activationTime: 1.8
+  - _activationTime: 2.1
     _activationNumber: 1
     _loadTime: 0.6
     _shots: 1
@@ -757,7 +757,7 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Lengthy, quick
-  - _activationTime: 1.7
+  - _activationTime: 1.95
     _activationNumber: 1
     _loadTime: 0.55
     _shots: 1
@@ -773,7 +773,7 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
-  - _activationTime: 2
+  - _activationTime: 2.2
     _activationNumber: 1
     _loadTime: 0.7
     _shots: 2
@@ -789,7 +789,7 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Two lasers
-  - _activationTime: 1.8
+  - _activationTime: 2
     _activationNumber: 1
     _loadTime: 0.65
     _shots: 2
@@ -805,7 +805,7 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
-  - _activationTime: 1.5
+  - _activationTime: 4.75
     _activationNumber: 1
     _loadTime: 0.6
     _shots: 2
@@ -821,7 +821,7 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
-  - _activationTime: 1.8
+  - _activationTime: 2
     _activationNumber: 1
     _loadTime: 0.75
     _shots: 3
@@ -838,7 +838,7 @@ MonoBehaviour:
     _warning: 1
     _threatDescription: Three lasers
   _hardDifficultyBonus:
-    _activationTime: 2.5
+    _activationTime: 2.75
     _activationNumber: 1
     _loadTime: 1.5
     _shots: 5

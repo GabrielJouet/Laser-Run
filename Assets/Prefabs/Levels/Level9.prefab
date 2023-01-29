@@ -682,7 +682,7 @@ MonoBehaviour:
     _activationNumber: 1
     _loadTime: 1
     _shots: 3
-    _reactionTime: 0.65
+    _reactionTime: 0.8
     _displayTime: 0.85
     _speed: 0.15
     _timeBeforeDirectionChange: 0.1
@@ -694,11 +694,11 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Three lasers, slow
-  - _activationTime: 3
+  - _activationTime: 3.7
     _activationNumber: 1
     _loadTime: 0.8
     _shots: 3
-    _reactionTime: 0.64
+    _reactionTime: 0.8
     _displayTime: 0.8
     _speed: 0.17
     _timeBeforeDirectionChange: 0.08
@@ -710,11 +710,11 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
-  - _activationTime: 2.8
+  - _activationTime: 3.4
     _activationNumber: 1
     _loadTime: 0.7
     _shots: 3
-    _reactionTime: 0.62
+    _reactionTime: 0.8
     _displayTime: 0.75
     _speed: 0.19
     _timeBeforeDirectionChange: 0.06
@@ -726,11 +726,11 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
-  - _activationTime: 3.2
+  - _activationTime: 3.4
     _activationNumber: 1
     _loadTime: 1.4
     _shots: 4
-    _reactionTime: 0.6
+    _reactionTime: 0.75
     _displayTime: 0.8
     _speed: 0.21
     _timeBeforeDirectionChange: 0.04
@@ -743,11 +743,11 @@ MonoBehaviour:
     _warning: 1
     _threatDescription: Fours lasers
   _hardDifficultyBonus:
-    _activationTime: 3.7
+    _activationTime: 4.2
     _activationNumber: 1
     _loadTime: 1.5
     _shots: 5
-    _reactionTime: 0.7
+    _reactionTime: 0.75
     _displayTime: 0.5
     _speed: 0.25
     _timeBeforeDirectionChange: 0.01

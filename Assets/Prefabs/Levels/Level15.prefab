@@ -835,7 +835,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
-    _blockRotationSpeed: 0.85
+    _blockRotationSpeed: 0.75
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
@@ -852,7 +852,7 @@ MonoBehaviour:
     _positiveShiftAngle: 0
     _timeBeforeRotationChange: 0
     _stopWhenNotMoving: 0
-    _blockRotationSpeed: 0.9
+    _blockRotationSpeed: 0.8
     _warning: 1
     _threatDescription: Even faster!
   _timeToLive: 80

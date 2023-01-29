@@ -125,7 +125,7 @@ MonoBehaviour:
     _threatDescription: Faster
   - _activationTime: 2.8
     _activationNumber: 1
-    _loadTime: 1.1
+    _loadTime: 1.25
     _shots: 2
     _reactionTime: 0.55
     _displayTime: 0.8
@@ -141,7 +141,7 @@ MonoBehaviour:
     _threatDescription: Two lasers
   - _activationTime: 2
     _activationNumber: 1
-    _loadTime: 0.8
+    _loadTime: 1.15
     _shots: 2
     _reactionTime: 0.55
     _displayTime: 0.8
@@ -157,7 +157,7 @@ MonoBehaviour:
     _threatDescription: Faster
   - _activationTime: 2
     _activationNumber: 1
-    _loadTime: 0.9
+    _loadTime: 1.05
     _shots: 2
     _reactionTime: 0.6
     _displayTime: 0.8

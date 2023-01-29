@@ -806,11 +806,11 @@ MonoBehaviour:
   _name: Walls?
   _category: 1
   _difficulties:
-  - _activationTime: 2
+  - _activationTime: 2.15
     _activationNumber: 2
     _loadTime: 1.1
     _shots: 1
-    _reactionTime: 0.6
+    _reactionTime: 0.8
     _displayTime: 0.9
     _speed: 0.25
     _timeBeforeDirectionChange: 0.1
@@ -822,11 +822,11 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Two together
-  - _activationTime: 1.8
+  - _activationTime: 1.95
     _activationNumber: 2
     _loadTime: 1.05
     _shots: 1
-    _reactionTime: 0.65
+    _reactionTime: 0.78
     _displayTime: 0.8
     _speed: 0.3
     _timeBeforeDirectionChange: 0.1
@@ -838,11 +838,11 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 0
     _threatDescription: Faster
-  - _activationTime: 2.4
+  - _activationTime: 2.55
     _activationNumber: 3
     _loadTime: 1.2
     _shots: 1
-    _reactionTime: 0.65
+    _reactionTime: 0.76
     _displayTime: 0.8
     _speed: 0.3
     _timeBeforeDirectionChange: 0.1
@@ -854,11 +854,11 @@ MonoBehaviour:
     _blockRotationSpeed: 0
     _warning: 1
     _threatDescription: Three together
-  - _activationTime: 2.3
+  - _activationTime: 2.45
     _activationNumber: 3
     _loadTime: 1.15
     _shots: 1
-    _reactionTime: 0.65
+    _reactionTime: 0.75
     _displayTime: 0.8
     _speed: 0.35
     _timeBeforeDirectionChange: 0.1
@@ -871,11 +871,11 @@ MonoBehaviour:
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
-    _activationTime: 2.5
+    _activationTime: 2.6
     _activationNumber: 2
     _loadTime: 1.2
     _shots: 2
-    _reactionTime: 0.5
+    _reactionTime: 0.73
     _displayTime: 0.9
     _speed: 0.35
     _timeBeforeDirectionChange: 0.15
