@@ -34,6 +34,7 @@ public class ForeverLaserBlock : Emitter
 
         _isEmitting = false;
         _side = true;
+        _audioSource.volume = (!Controller.Instance.SaveController.SaveFile.SoundMuted ? Controller.Instance.SaveController.SaveFile.Sound : 0) * 0.5f;
 
         StartCoroutine(ChargeUpLaser());
     }
