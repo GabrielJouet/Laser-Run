@@ -720,6 +720,7 @@ MonoBehaviour:
   - {fileID: 2479391846771186827}
   - {fileID: 1487353141786576980}
   - {fileID: 6806195507485323790}
+  - {fileID: 6251651300554746855}
   _additionnalBlocks:
   - {fileID: 4592925958183314615}
   - {fileID: 8386266714955103760}
@@ -2988,3 +2989,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8809634551697773556, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
   m_PrefabInstance: {fileID: 7923555395346825403}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6251651300554746855 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+  m_PrefabInstance: {fileID: 7923555395346825403}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace0a46c8f1633448a2362fd2b3bcd80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
