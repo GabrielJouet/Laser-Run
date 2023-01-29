@@ -335,7 +335,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void ResetSave()
     {
-        if (Controller.Instance.SaveController.SaveFile.AchievementsUnlocked != null && Controller.Instance.SaveController.SaveFile.AchievementsUnlocked.Count == 29)
+        if (Controller.Instance.SaveController.SaveFile.AchievementsUnlocked != null && Controller.Instance.SaveController.SaveFile.AchievementsUnlocked.Count == Controller.Instance.AchievementController.Achievements.Count)
             Controller.Instance.AchievementController.TriggerAchievement("A-6");
 
         Controller.Instance.SaveController.ResetData();
