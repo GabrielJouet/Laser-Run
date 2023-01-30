@@ -823,11 +823,11 @@ MonoBehaviour:
     _warning: 1
     _threatDescription: Three together
   _hardDifficultyBonus:
-    _activationTime: 1.85
+    _activationTime: 4
     _activationNumber: 4
-    _loadTime: 1.6
+    _loadTime: 1.7
     _shots: 1
-    _reactionTime: 0.55
+    _reactionTime: 1
     _displayTime: 0.25
     _speed: 0.01
     _timeBeforeDirectionChange: 0

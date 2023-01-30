@@ -79,7 +79,7 @@ MonoBehaviour:
     _activationNumber: 1
     _loadTime: 0.7
     _shots: 2
-    _reactionTime: 0.6
+    _reactionTime: 0.65
     _displayTime: 0.8
     _speed: 0.1
     _timeBeforeDirectionChange: 0.25
@@ -95,7 +95,7 @@ MonoBehaviour:
     _activationNumber: 1
     _loadTime: 0.65
     _shots: 2
-    _reactionTime: 0.55
+    _reactionTime: 0.58
     _displayTime: 0.8
     _speed: 0.15
     _timeBeforeDirectionChange: 0.22
@@ -109,7 +109,7 @@ MonoBehaviour:
     _threatDescription: Faster
   - _activationTime: 3
     _activationNumber: 1
-    _loadTime: 0.65
+    _loadTime: 0.7
     _shots: 3
     _reactionTime: 0.55
     _displayTime: 0.65
@@ -125,7 +125,7 @@ MonoBehaviour:
     _threatDescription: Three lasers
   - _activationTime: 2.8
     _activationNumber: 1
-    _loadTime: 0.6
+    _loadTime: 0.72
     _shots: 3
     _reactionTime: 0.55
     _displayTime: 0.6
@@ -141,7 +141,7 @@ MonoBehaviour:
     _threatDescription: Faster
   - _activationTime: 2.65
     _activationNumber: 1
-    _loadTime: 0.55
+    _loadTime: 0.58
     _shots: 3
     _reactionTime: 0.55
     _displayTime: 0.6
@@ -156,12 +156,12 @@ MonoBehaviour:
     _warning: 0
     _threatDescription: Faster
   _hardDifficultyBonus:
-    _activationTime: 3
+    _activationTime: 3.25
     _activationNumber: 2
-    _loadTime: 0.55
+    _loadTime: 1.2
     _shots: 3
     _reactionTime: 0.65
-    _displayTime: 0.5
+    _displayTime: 0.25
     _speed: 0.35
     _timeBeforeDirectionChange: 0.05
     _rotationSpeed: 0
