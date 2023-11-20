@@ -2676,6 +2676,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9000405307343215314, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
   m_PrefabInstance: {fileID: 4432875674907808371}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &5134789879046808430 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8846983643835576605, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+  m_PrefabInstance: {fileID: 4432875674907808371}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5172004856204722567 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8809634551697773556, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
@@ -2721,6 +2726,10 @@ PrefabInstance:
       propertyPath: _hardDifficulty
       value: 
       objectReference: {fileID: 11400000, guid: 438bf0c7f29ee7f48aa30a6e6377a9de, type: 2}
+    - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
+      propertyPath: _particleSystem
+      value: 
+      objectReference: {fileID: 5134789879046808430}
     - target: {fileID: 4266118423943818076, guid: 7a446ebcf6c00bf48b5b71b3c6691f48, type: 3}
       propertyPath: _difficulties.Array.size
       value: 6
