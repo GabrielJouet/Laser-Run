@@ -62,6 +62,7 @@ public class SaveController : MonoBehaviour
 		_gameSavePath = Application.persistentDataPath + "/player.dat";
 		_binaryFormatter = new BinaryFormatter();
 
+#if !UNITY_WEBGL
 		if (File.Exists(_gameSavePath))
 		{
 			try
@@ -80,6 +81,9 @@ public class SaveController : MonoBehaviour
 		}
 		else
 			CreateSave();
+#else
+		SaveFile = new SaveFile(4);
+#endif
 
 		Initialized = true;
 	}
@@ -334,6 +338,7 @@ public class SaveController : MonoBehaviour
 	/// </summary>
 	private void SaveData()
 	{
+#if !UNITY_WEBGL
 		try
 		{
 			FileStream file = File.OpenWrite(_gameSavePath);
@@ -345,6 +350,7 @@ public class SaveController : MonoBehaviour
 		{
 			//Display error
 		}
+#endif
 	}
 
 
@@ -353,8 +359,10 @@ public class SaveController : MonoBehaviour
 	/// </summary>
 	public void ResetData()
 	{
+#if !UNITY_WEBGL
 		if (File.Exists(_gameSavePath))
 			File.Delete(_gameSavePath);
+#endif
 
 		CreateSave();
 	}

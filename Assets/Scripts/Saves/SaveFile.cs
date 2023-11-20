@@ -115,4 +115,37 @@ public class SaveFile
         FullScreen = true;
         EndlessScore = 0;
     }
+
+
+
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="numberOfLevels">How much levels in the game</param>
+    public SaveFile(int numberOfLevels)
+    {
+        AchievementsProgress = new List<AchievementProgress>();
+        AchievementsUnlocked = new List<string>();
+
+        LevelsProgression = new List<LevelSave> { new LevelSave(false) };
+
+        for (int i = 0; i < numberOfLevels - 1; i++)
+            LevelsProgression.Add(new LevelSave(true));
+
+        Sound = 1;
+        SoundMuted = false;
+
+        Tutorial = false;
+
+        Music = 1;
+        MusicMuted = false;
+
+        FilmGrain = true;
+        Bloom = true;
+        ChromaticAberration = true;
+
+        EndlessUnlocked = false;
+        FullScreen = true;
+        EndlessScore = 0;
+    }
 }

@@ -76,20 +76,35 @@ public class LevelMenu : MonoBehaviour
     {
         bool won = save.State == LevelState.WON;
         bool harded = save.State == LevelState.WONHARD;
+        
+#if UNITY_WEBGL
+        won = true;
+        harded = false;
+#endif
 
         GetComponent<Image>().color = _bordersColors[(int)category];
         _nameLevel.text = levelName;
 
         _timeText.text = (save.Time < 1 ? "0" : "") + string.Format("{0:#.00 sec}", save.Time);
         _hardTimeText.text = (save.HardTime < 1 ? "0" : "") + string.Format("{0:#.00 sec}", save.HardTime);
-
+        
+#if !UNITY_WEBGL
         _lockedImage.SetActive(save.State == LevelState.LOCKED);
-
         _finishedImage.SetActive(won || harded);
         _finishedHardImage.SetActive(harded);
+#else 
+        _lockedImage.SetActive(false);
+        _finishedImage.SetActive(false);
+        _finishedHardImage.SetActive(false);
+#endif
 
         _hardButton.gameObject.SetActive(won || harded);
         _hardTimeText.gameObject.SetActive(won || harded);
+        
+#if UNITY_WEBGL
+        _timeText.gameObject.SetActive(false);
+        _hardTimeText.gameObject.SetActive(false);
+#endif
 
         _normalButton.onClick.AddListener(() => controller.LoadLevel(index));
         _hardButton.onClick.AddListener(() => controller.LoadHardLevel(index));
