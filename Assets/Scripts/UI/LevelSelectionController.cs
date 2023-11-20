@@ -53,8 +53,10 @@ public class LevelSelectionController : MonoBehaviour
             spawnedLevels += 1;
             Instantiate(_levelMenuPrefab, _levelPanel).Initialize(saves[i], levels[i].Name, this, i, levels[i].Category);
 
+#if !UNITY_WEBGL
             if (saves[i].State == LevelState.LOCKED)
                 locked = true;
+#endif
         }
 
         _maxLevelPanelSize = spawnedLevels * 300 + (spawnedLevels - 1) * 35 + 125 - Screen.width;
